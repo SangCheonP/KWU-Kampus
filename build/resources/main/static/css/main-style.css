@@ -1,0 +1,121 @@
+/*
+    hover-: 애니메이션 효과를 넣을 때 사용
+    hover-layer: 각 이미지 별 설정
+    popupB: 건물 이미지 위에 마우스를 올렸을 때 뜨는 팝업창 설정
+    popupB-text: 건물 팝업창 디자인
+    popupF: 카테고리의 시설 클릭 시 뜨는 팝업창 설정
+*/
+
+.hover-container {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    background-color: rgb(229, 237, 244);
+}
+
+.popupB {
+    position: absolute;
+}
+
+.popupB .popupB-text {
+	display: none;
+	text-align: left;
+	background-color: #1E2021;
+	padding: 20px;
+	width: 300px;
+	position: relative;
+
+	border-radius: 3px;
+	box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+	color: #FFF;
+	line-height: 1.4;
+
+    z-index: 1;
+
+    transform: translate(160px, -110px);
+}
+.popupB-text>h4 {font-size: 16px;}
+.popupB-text>h3 {font-size: 20px;}
+.popupB-text>p  {font-size: 13px;}
+
+.popupB .popupB-text:before {
+	position: absolute;
+	content: '';
+	width:0;
+	height: 0;
+	border:6px solid transparent;
+	border-bottom-color:#1E2021;
+}
+
+.popupB:hover .popupB-text {
+	display:block;
+	transform-origin: 0% 0%;
+    margin-top: 5px;
+
+	-webkit-animation: fadeIn 0.3s ease-in-out;
+	animation: fadeIn 0.3s ease-in-out;
+}
+
+.popupB .popupB-triR:before {
+    transform:rotate(-90deg);
+    left:-12px;
+    top:10px;
+}
+
+.popupB .popupB-triL:before {
+    transform:rotate(90deg);
+    right:-12px;
+    top:10px;
+}
+
+.popupB:before .hover-layer {
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display:block;
+    position: relative;
+}
+
+.hover-layer:nth-child(1) {
+    height: 100%;
+    width: 100%;
+    background-repeat:no-repeat;
+    display:none;
+}
+.hover-layer:nth-child(2) { top: 200px; left: 200px; }
+.hover-layer:nth-child(3) { top: 200px; left: 600px; }
+.hover-layer:nth-child(4) { top: 200px; left: 1000px; }
+.hover-layer:nth-child(5) { top: 400px; left: 200px; }
+.hover-layer:nth-child(6) { top: 400px; left: 600px; }
+.hover-layer:nth-child(7) { top: 400px; left: 1000px; }
+.hover-layer:nth-child(8) { top: 600px; left: 200px; }
+.hover-layer:nth-child(9) { top: 600px; left: 600px; }
+.hover-layer:nth-child(10) { top: 600px; left: 1000px; }
+
+.popupF {
+    display: none;
+	text-align: left;
+	background-color: #1E2021;
+	padding: 20px;
+	width: 300px;
+	position: relative;
+
+	border-radius: 3px;
+	box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+	color: #FFF;
+	line-height: 1.4;
+
+    z-index: 1;
+
+    transform: translate(160px, -110px);
+}
+.popupF>h4 {font-size: 16px;}
+.popupF>h3 {font-size: 20px;}
+.popupF>p  {font-size: 13px;}
+
+.popupF.on {
+    display: block;
+}
+

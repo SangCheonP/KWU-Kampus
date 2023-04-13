@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.kwmap.mapper.SampleMapper">
+
+    <resultMap id="mainpage" type="com.example.kwmap.model.mainPageModel">
+        <result column="id" property="id"/>
+        <result column="bd_name" property="bd_name"/>
+        <result column="floor" property="floor"/>
+        <result column="fc_name" property="fc_name"/>
+    </resultMap>
+
+    <select id="selectId" resultType="Integer">
+        select id
+        from member
+        where id=3;
+    </select>
+
+<!--    <select id="showAllDataInMainPage" resultMap="mainpage">-->
+<!--        select *-->
+<!--        from main_page;-->
+<!--    </select>-->
+    <select id="showAllDataInMainPage" resultMap="mainpage">
+        select *
+        from main_page;
+    </select>
+</mapper>
