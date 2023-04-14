@@ -18,8 +18,8 @@ public class SampleService {
     }
     // testMethod
 
-    public List<mainPageModel> showAllData(){
-        return SampleMapper.showAllDataInMainPage();
-    }
+//    public List<mainPageModel> showAllData(){
+//        return SampleMapper.showAllDataInMainPage();
+//    }
     // mainpage에 모든 data 가져오기
 }

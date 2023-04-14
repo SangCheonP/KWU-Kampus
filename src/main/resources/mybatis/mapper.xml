@@ -20,8 +20,8 @@
 <!--        select *-->
 <!--        from main_page;-->
 <!--    </select>-->
-    <select id="showAllDataInMainPage" resultMap="mainpage">
-        select *
-        from main_page;
-    </select>
+<!--    <select id="showAllDataInMainPage" resultMap="mainpage">-->
+<!--        select *-->
+<!--        from main_page;-->
+<!--    </select>-->
 </mapper>

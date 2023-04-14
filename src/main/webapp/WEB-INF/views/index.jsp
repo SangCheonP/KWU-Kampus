@@ -81,6 +81,9 @@
                 <h4>주요시설</h4>
                 <p>2층: -- / -- / --</p>
                 <p>1층: -- / -- / --</p>
+                <div>
+                  ${arr}
+                </div>
               </div>
               <div id="popupF_참빛101" class="popupF">
                 <h3>시설명</h3>
@@ -189,7 +192,6 @@
             </div>
         </div>
       </div>
-
       <script src="../js/main-map.js"></script>
     </main>
   </div>
