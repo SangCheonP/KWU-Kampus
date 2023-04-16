@@ -30,20 +30,20 @@
         <div id="sideMenu">
           <div class="category">
             <div class="text">
-              <span>카테고리 1</span>
+              <span>건물</span>
               <i class='bx bxs-chevron-down'></i>
             </div>
             <ul class="sub-categories">
-              <li><a href="#popupF_참빛101" class="popupF_btn">참빛관 101호</a></li>
-              <li><a href="#popupF_참빛102" class="popupF_btn">참빛관 102호</a></li>
-              <li><a href="#popupF_참빛103" class="popupF_btn">참빛관 103호</a></li>
-              <li><a href="#popupF_새빛101" class="popupF_btn">새빛관 101호</a></li>
-              <li><a href="#popupF_비마101" class="popupF_btn">비마관 101호</a></li>
+              <li><a href="#popupF_참빛101" class="popupF_btn">참빛관</a></li>
+              <li><a href="#popupF_새빛101" class="popupF_btn">새빛관</a></li>
+              <li><a href="#popupF_비마101" class="popupF_btn">비마관</a></li>
+              <li><a href="#popupF_참빛102" class="popupF_btn">복지관</a></li>
+              <li><a href="#popupF_참빛103" class="popupF_btn">한울관</a></li>
             </ul>
           </div>
           <div class="category">
             <div class="text">
-              <span>카테고리 2</span>
+              <span>스터디</span>
               <i class='bx bxs-chevron-down'></i>
             </div>
             <ul class="sub-categories">
@@ -54,7 +54,7 @@
           </div>
           <div class="category">
             <div class="text">
-              <span>카테고리 3</span>
+              <span>학적</span>
               <i class='bx bxs-chevron-down'></i>
             </div>
             <ul class="sub-categories">
