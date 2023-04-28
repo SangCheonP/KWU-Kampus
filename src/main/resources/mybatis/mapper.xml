@@ -10,9 +10,9 @@
         <result column="fc_name" property="fc_name"/>
     </resultMap>
 
-    <select id="selectId" resultType="Integer">
-        select id
-        from member
+    <select id="selectId" resultType="String">
+        select name
+        from test
         where id=3;
     </select>
 

@@ -8,7 +8,7 @@ import java.util.List;
 @Mapper
 public interface SampleMapper {
     //@Select("SELECT id FROM member where id = 1")
-    public Integer selectId();
+    public String selectId();
     // testMethod
 
    public List<mainPageModel> showAllDataInMainPage();

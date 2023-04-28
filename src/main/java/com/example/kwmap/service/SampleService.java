@@ -13,7 +13,7 @@ public class SampleService {
     @Autowired
     private SampleMapper SampleMapper;
 
-    public Integer selectTest() {
+    public String selectTest() {
         return SampleMapper.selectId();
     }
     // testMethod
