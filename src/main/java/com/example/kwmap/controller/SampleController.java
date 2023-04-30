@@ -1,10 +1,13 @@
 package com.example.kwmap.controller;
 
+import com.example.kwmap.model.mainPageBuildingsModel;
 import com.example.kwmap.service.SampleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 @Controller
 public class SampleController {
@@ -15,8 +18,9 @@ public class SampleController {
     @RequestMapping("/")
     public String showRoot(Model model) {
         System.out.println("@RequestMapping(\"/main\")");
-        System.out.println(sampleService.selectTest());
-        model.addAttribute("arr",sampleService.selectTest());
+        //System.out.println(sampleService.selectTest());
+        //model.addAttribute("arr",sampleService.selectTest());
+        model.addAttribute("buildings",sampleService.selectBuildingsList());
         return "index";
     }
 

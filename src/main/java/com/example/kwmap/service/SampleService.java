@@ -1,7 +1,7 @@
 package com.example.kwmap.service;
 
 import com.example.kwmap.mapper.SampleMapper;
-import com.example.kwmap.model.mainPageModel;
+import com.example.kwmap.model.mainPageBuildingsModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,10 +16,8 @@ public class SampleService {
     public String selectTest() {
         return SampleMapper.selectId();
     }
-    // testMethod
 
-//    public List<mainPageModel> showAllData(){
-//        return SampleMapper.showAllDataInMainPage();
-//    }
-    // mainpage에 모든 data 가져오기
+    public List<mainPageBuildingsModel> selectBuildingsList(){
+        return SampleMapper.selectBuildingsList();
+    }
 }

@@ -3,17 +3,15 @@
 
 <mapper namespace="com.example.kwmap.mapper.SampleMapper">
 
-    <resultMap id="mainpage" type="com.example.kwmap.model.mainPageModel">
-        <result column="id" property="id"/>
-        <result column="bd_name" property="bd_name"/>
-        <result column="floor" property="floor"/>
-        <result column="fc_name" property="fc_name"/>
-    </resultMap>
-
-    <select id="selectId" resultType="Integer">
-        select id
-        from member
+    <select id="selectId" resultType="String">
+        select name
+        from test
         where id=3;
+    </select>
+
+    <select id="selectBuildingsList" resultType="com.example.kwmap.model.mainPageBuildingsModel">
+        select *
+        from buildings;
     </select>
 
 <!--    <select id="showAllDataInMainPage" resultMap="mainpage">-->

@@ -79,11 +79,27 @@
               <div class="popupB-text popupB-triR" >
                 <h3>참빛관</h3>
                 <h4>주요시설</h4>
-                <p>2층: -- / -- / --</p>
-                <p>1층: -- / -- / --</p>
                 <div>
-                  name
-                  ${arr}
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>건물명       </th>
+                        <th>건물 전화번호 </th>
+                        <th>관리팀       </th>
+                        <th>관리팀 전화번호</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <c:forEach items="${buildings}" var="buildings">
+                        <tr>
+                          <td>${buildings.building} |</td>
+                          <td>${buildings.building_phone_num} |</td>
+                          <td>${buildings.management_team} |</td>
+                          <td>${buildings.management_team_phone_num}</td>
+                        </tr>
+                      </c:forEach>
+                    </tbody>
+                  </table>
                 </div>
               </div>
               <div id="popupF_참빛101" class="popupF">
