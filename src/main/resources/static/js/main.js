@@ -5,6 +5,7 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { FontLoader } from 'three/addons/loaders/FontLoader.js';
 
 let camera, controls, scene, renderer;
+const receivedBuildings = [];
 const buildings = [];
 const modals = [];
 
@@ -97,14 +98,17 @@ function init() {
     myBoolean: false,
     myString: 'Test String',
     myNumber: 512,
-    자세히보기: function() { alert( 'hi' ) } // onclick callback
+    myFunction: function() { alert( 'hi' ) }, // onclick callback
+    openSaeBit: function() {  }, // onclick saebit here (test button)
+    openHwaDo: function() {  }, // onclick hwado here (test button)
   }
   
   gui.add( obj, 'myBoolean' ); 	// checkbox
   gui.add( obj, 'myString' ); 	// text field
   gui.add( obj, 'myNumber' ); 	// number field
-  gui.add( obj, '자세히보기' ); 	// button
-
+  gui.add( obj, 'myFunction' ).name( '테스트 링크' ); 	// button
+  gui.add( obj, 'openSaeBit' ).name( '새빛관 onClick test' );
+  gui.add( obj, 'openHwaDo' ).name( '화도관 onClick test' );
 }
 
 function onWindowResize() {
