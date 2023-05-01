@@ -99,16 +99,16 @@ function init() {
     myString: 'Test String',
     myNumber: 512,
     myFunction: function() { alert( 'hi' ) }, // onclick callback
-    openSaeBit: function() {  }, // onclick saebit here (test button)
-    openHwaDo: function() {  }, // onclick hwado here (test button)
+    onClickSaeBit: function() {  }, // onclick saebit here (test button)
+    onClickHwaDo: function() {  }, // onclick hwado here (test button)
   }
   
   gui.add( obj, 'myBoolean' ); 	// checkbox
   gui.add( obj, 'myString' ); 	// text field
   gui.add( obj, 'myNumber' ); 	// number field
   gui.add( obj, 'myFunction' ).name( '테스트 링크' ); 	// button
-  gui.add( obj, 'openSaeBit' ).name( '새빛관 onClick test' );
-  gui.add( obj, 'openHwaDo' ).name( '화도관 onClick test' );
+  gui.add( obj, 'onClickSaeBit' ).name( '새빛관 onClick test' );
+  gui.add( obj, 'onClickHwaDo' ).name( '화도관 onClick test' );
 }
 
 function onWindowResize() {
