@@ -99,8 +99,8 @@ function init() {
     myString: 'Test String',
     myNumber: 512,
     myFunction: function() { alert( 'hi' ) }, // onclick callback
-    onClickSaeBit: function() {  }, // onclick saebit here (test button)
-    onClickHwaDo: function() {  }, // onclick hwado here (test button)
+    onClickSaeBit: function() { gui.controllers[ 1 ].setValue( '새빛관 테스트 버튼 clicked' ); gui.controllers[ 2 ].setValue( 9 ); }, // onclick saebit here (test button)
+    onClickHwaDo: function() { gui.controllers[ 1 ].setValue( '화도관 테스트 버튼 clicked' ); gui.controllers[ 2 ].setValue( 6 ); }, // onclick hwado here (test button)
   }
   
   gui.add( obj, 'myBoolean' ); 	// checkbox
