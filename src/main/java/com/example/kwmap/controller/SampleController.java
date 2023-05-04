@@ -5,7 +5,7 @@ import com.example.kwmap.service.SampleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -15,21 +15,29 @@ public class SampleController {
     @Autowired
     SampleService sampleService;
 
-    @RequestMapping("/")
-    public String showRoot(Model model) {
-        System.out.println("@RequestMapping(\"/main\")");
-        //System.out.println(sampleService.selectTest());
-        //model.addAttribute("arr",sampleService.selectTest());
-        model.addAttribute("buildings",sampleService.selectBuildingsList());
+    // main 페이지
+    @GetMapping("/main")
+    public String showMain() {
+        System.out.println("@GetMapping(\"/main\")");
         return "index";
     }
 
-    @RequestMapping("/main")
-    public String showMain(Model model) {
-        System.out.println("@RequestMapping(\"/main\")");
-        //System.out.println(sampleService.showAllData());
-        //model.addAttribute("arr",sampleService.showAllData());
-        return "main";
+    // 전체 건물에 대한 정보를 리스트로 리턴
+    @ResponseBody
+    @GetMapping("/buildings")
+    public List<mainPageBuildingsModel> getBuildings() {
+        System.out.println("@GetMapping(\"/main\")");
+        List<mainPageBuildingsModel> buildings = sampleService.selectBuildingsList();
+        return buildings;
+    }
+
+    // 해당 건물에 대한 정보를 리턴
+    @ResponseBody
+    @GetMapping("/{building}")
+    public mainPageBuildingsModel getRoot2(@PathVariable("building") String building) {
+        System.out.println("@GetMapping(\"/{building}\")");
+        mainPageBuildingsModel info = sampleService.selectBuildingShortInfo(building);
+        return info;
     }
 
     @RequestMapping("/detail")
@@ -38,13 +46,5 @@ public class SampleController {
         //System.out.println(sampleService.selectTest());
         //model.addAttribute("arr",sampleService.selectTest());
         return "detail";
-    }
-
-    @RequestMapping("/test")
-    public String sampleView(Model model) {
-        System.out.println("@RequestMapping(\"/test\")");
-        //System.out.println(sampleService.selectTest());
-        model.addAttribute("arr",sampleService.selectTest());
-        return "test";
     }
 }

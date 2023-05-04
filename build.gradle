@@ -37,6 +37,9 @@ dependencies {
 
     // log4jdbc
     implementation 'org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16'
+
+    // json
+    implementation 'com.google.code.gson:gson:2.9.0'
 }
 
 tasks.named('test') {

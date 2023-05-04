@@ -20,4 +20,8 @@ public class SampleService {
     public List<mainPageBuildingsModel> selectBuildingsList(){
         return SampleMapper.selectBuildingsList();
     }
+    public mainPageBuildingsModel selectBuildingShortInfo(String building){
+        return SampleMapper.selectBuildingShortInfo(building);
+    }
+    // 메인 화면에서 건물 클릭시 간략한 정보 가져오는 기능
 }

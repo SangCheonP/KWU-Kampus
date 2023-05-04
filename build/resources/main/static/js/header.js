@@ -7,11 +7,17 @@ menuBtn.addEventListener('click', () => {
   sideMenu.classList.toggle('on');
 });
 
-// let prevOnCategory;
-
 for (const category of categories) {
-  category.addEventListener('click', (e) => {
-    const textHeight = category.querySelector('.text').clientHeight;
+  const text = category.querySelector('.text');
+  
+  // masking text 자동화
+  const textSpan = category.querySelector('.text span');
+  const maskSpan = category.querySelector('.mask span');
+  maskSpan.textContent = textSpan.textContent;
+
+  // 카테고리 제목 클릭 이벤트
+  text.addEventListener('click', (e) => {
+    const textHeight = text.clientHeight;
     const subCategoriesHeight = category.querySelector('.sub-categories').clientHeight;
 
     if (category.classList.contains('on')) {
@@ -20,14 +26,8 @@ for (const category of categories) {
       return;
     }
 
-    // if (prevOnCategory) {
-    //   prevOnCategory.classList.remove('on');
-    //   prevOnCategory.style.height = prevOnCategory.querySelector('.text').clientHeight + 'px';
-    // }
-
     category.classList.add('on');
     category.style.height = category.clientHeight + subCategoriesHeight + 'px';
-    // prevOnCategory = category;
     return;
   });
 };

@@ -4,9 +4,24 @@ import { MapControls } from 'three/addons/controls/MapControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { FontLoader } from 'three/addons/loaders/FontLoader.js';
 
-// basic javascripts
+//basic javascripts
 
-const receivedData = [];
+function getBuildings(){
+  $.ajax({
+    url : "http://localhost:8080/buildings",
+    type : "GET",
+    success : function (res){
+      if(res){
+        alert(JSON.stringify(res));
+      }
+      else{
+        alert("실패");
+      }
+    }
+  });
+}
+const receivedData = getBuildings();
+
 const exampleSaeBit = {
   name: 'SaeBit',
   floors: 9,
@@ -139,15 +154,17 @@ function init() {
 
   gui = new GUI( { container: document.getElementById( 'guiContainer' ), title: 'Information' } );
   let obj = {
-    myBoolean: false,
-    name: '',
-    floors: 0,
+    building: '',
+    building_phone_num: '',
+    management_team: '',
+    management_team_phone_num: '',
     myFunction: function() { alert( 'hi' ) }, // onclick callback
   }
   
-  gui.add( obj, 'myBoolean' ); 	// checkbox
-  gui.add( obj, 'name' ).name( '건물명' ); 	// text field
-  gui.add( obj, 'floors' ).name( '층 수' ); 	// number field
+  gui.add( obj, 'building' ); 	// checkbox
+  gui.add( obj, 'building_phone_num' ).name( '전화번호' ); 	// text field
+  gui.add( obj, 'management_team' ).name( '관리팀' ); 	// number field
+  gui.add( obj, 'management_team_phone_num' ).name( '관리팀 전화번호' ); 	// number field
   gui.add( obj, 'myFunction' ).name( 'alert hi' ); 	// button
 
   window.addEventListener( 'resize', onWindowResize );
@@ -257,14 +274,26 @@ function createModel ( loader, building ) {
 
         }
       },
-
       onClick: function() {
-
         console.log( model.name + ' clicked!' );
         gui.open();
-        gui.controllers[ 1 ].setValue( model.name );
-        gui.controllers[ 2 ].setValue( model.userData.floors );
 
+        $.ajax({
+          url : "http://localhost:8080/새빛관",
+          type : "GET",
+          success : function (res){
+            if(res){
+              //alert(JSON.stringify(res));
+              gui.controllers[0].setValue(res.building);
+              gui.controllers[1].setValue(res.building_phone_num);
+              gui.controllers[2].setValue(res.management_team);
+              gui.controllers[3].setValue(res.management_team_phone_num);
+            }
+            else{
+              alert("실패");
+            }
+          }
+        });
       }
     }
     

@@ -12,4 +12,6 @@ public interface SampleMapper {
     // testMethod
 
    public List<mainPageBuildingsModel> selectBuildingsList();
+
+   public mainPageBuildingsModel selectBuildingShortInfo(String building);
 }

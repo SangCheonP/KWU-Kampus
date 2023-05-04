@@ -1,3 +1,4 @@
+<%@ page import="com.google.gson.Gson" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -7,18 +8,23 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Building-detail-example</title>
-  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-  <link rel="stylesheet" href="../css/reset.css">
-  <link rel="stylesheet" href="../css/layout.css">
-  <link rel="stylesheet" href="../css/main-style.css">
+  <title>KWU Kampus</title>
+  <link rel="stylesheet" href="./css/reset.css">
+  <link rel="stylesheet" href="./css/layout.css">
 </head>
 
 <body>
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
   <div class="page">
     <header>
       <div class="inner">
-        <h1>광운대학교<a href="">KWU Kampus</a></h1>
+        <h1>광운대학교<a href="./index.jsp">(logo)</a></h1>
+        <!-- Temporary Links List -->
+        <ul class="temp-links">
+          <li>Temporary Links</li>
+          <li><a href="./pages/detail_example.html">Detail Example</a></li>
+        </ul>
+        <!-- Temporary Links List end -->
         <div id="menuBtn">
           <!-- <i class='bx bx-search' ></i> -->
           <div class="center">
@@ -28,190 +34,121 @@
           </div>
         </div>
         <div id="sideMenu">
+          <c:forEach items="buildings" var="buildings">
+            ${buildings}
+          </c:forEach>
           <div class="category">
             <div class="text">
-              <span>건물</span>
-              <i class='bx bxs-chevron-down'></i>
+              <span>카테고리 1</span>
+              <img src="./images/icon-chevron-down.svg" alt="">
+              <div class="mask">
+                <span></span>
+                <img src="./images/icon-chevron-down.svg" alt="">
+              </div>
             </div>
             <ul class="sub-categories">
-              <li><a href="#popupF_참빛101" class="popupF_btn">참빛관</a></li>
-              <li><a href="#popupF_새빛101" class="popupF_btn">새빛관</a></li>
-              <li><a href="#popupF_비마101" class="popupF_btn">비마관</a></li>
-              <li><a href="#popupF_참빛102" class="popupF_btn">복지관</a></li>
-              <li><a href="#popupF_참빛103" class="popupF_btn">한울관</a></li>
+              <li><a href="">세부 카테고리 1</a></li>
+              <li><a href="">세부 카테고리 2</a></li>
+              <li><a href="">세부 카테고리 3</a></li>
+              <li><a href="">세부 카테고리 4</a></li>
             </ul>
           </div>
           <div class="category">
             <div class="text">
-              <span>스터디</span>
-              <i class='bx bxs-chevron-down'></i>
+              <span>카테고리 2</span>
+              <img src="./images/icon-chevron-down.svg" alt="">
+              <div class="mask">
+                <span></span>
+                <img src="./images/icon-chevron-down.svg" alt="">
+              </div>
             </div>
             <ul class="sub-categories">
-              <li><a href="#popupF_복지101" class="popupF_btn">복지관 101호</a></li>
-              <li><a href="#popupF_한울101" class="popupF_btn">한울관 101호</a></li>
-              <li><a href="#popupF_화도101" class="popupF_btn">화도관 101호</a></li>
+              <li><a href="">세부 카테고리 1</a></li>
+              <li><a href="">세부 카테고리 2</a></li>
+              <li><a href="">세부 카테고리 3</a></li>
+              <li><a href="">세부 카테고리 4</a></li>
+              <li><a href="">세부 카테고리 5</a></li>
+              <li><a href="">세부 카테고리 6</a></li>
+              <li><a href="">세부 카테고리 7</a></li>
             </ul>
           </div>
           <div class="category">
             <div class="text">
-              <span>학적</span>
-              <i class='bx bxs-chevron-down'></i>
+              <span>카테고리 3</span>
+              <img src="./images/icon-chevron-down.svg" alt="">
+              <div class="mask">
+                <span></span>
+                <img src="./images/icon-chevron-down.svg" alt="">
+              </div>
             </div>
             <ul class="sub-categories">
-              <li><a href="#popupF_80주년" class="popupF_btn">80주년 기념관</a></li>
-              <li><a href="#popupF_중도" class="popupF_btn">중앙도서관</a></li>
-              <li><a href="#popupF_아이스" class="popupF_btn">아이스링크</a></li>
+              <li><a href="">세부 카테고리 1</a></li>
+              <li><a href="">세부 카테고리 2</a></li>
+              <li><a href="">세부 카테고리 3</a></li>
             </ul>
           </div>
         </div>
       </div>
-      <script src="../js/header.js"></script>
+      <script src="./js/header.js"></script>
     </header>
 
     <main class="main">
-      <div class="hover-container">
-        <div class="popupB hover-layer">
-            <img src="../images/background.png">
-        </div>
-        <div class="popupB hover-layer">
-            <a href="/detail"><img src="../images/참빛관.png"></a>
-            <!-- <div style="transform: translate(160px, -110px);"> -->
-              <div class="popupB-text popupB-triR" >
-                <h3>참빛관</h3>
-                <h4>주요시설</h4>
-                <div>
-                  <table>
-                    <thead>
-                      <tr>
-                        <th>건물명       </th>
-                        <th>건물 전화번호 </th>
-                        <th>관리팀       </th>
-                        <th>관리팀 전화번호</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <c:forEach items="${buildings}" var="buildings">
-                        <tr>
-                          <td>${buildings.building} |</td>
-                          <td>${buildings.building_phone_num} |</td>
-                          <td>${buildings.management_team} |</td>
-                          <td>${buildings.management_team_phone_num}</td>
-                        </tr>
-                      </c:forEach>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-              <div id="popupF_참빛101" class="popupF">
-                <h3>시설명</h3>
-                <h4>참빛관 101호</h4>
-                <p>관련 사이트 링크 / 02-0000-0000</p>
-                <p><br>요약 설명</p>
-              </div>
-              <div id="popupF_참빛102" class="popupF">
-                <h3>시설명</h3>
-                <h4>참빛관 102호</h4>
-              </div>
-              <div id="popupF_참빛103" class="popupF">
-                <h3>시설명</h3>
-                <h4>참빛관 103호</h4>
-              </div>
-            <!-- </div> -->
-        </div>
-        <div class="popupB hover-layer">
-            <img src="../images/새빛관.png">
-              <div class="popupB-text popupB-triR" >
-                <h3>새빛관</h3>
-                <h4>주요시설</h4>
-                <p>2층: -- / -- / --</p>
-                <p>1층: -- / -- / --</p>
-              </div>
-              <div id="popupF_새빛101" class="popupF">
-                <h3>시설명</h3>
-                <h4>새빛관 101호</h4>
-                <p>관련 사이트 링크 / 02-0000-0000</p>
-                <p><br>요약 설명</p>
-              </div>
-        </div>
-        <div class="popupB hover-layer">
-            <img src="../images/비마관.png">
-              <div class="popupB-text popupB-triR" >
-                <h3>비마관</h3>
-                <h4>주요시설</h4>
-                <p>2층: -- / -- / --</p>
-                <p>1층: -- / -- / --</p>
-              </div>
-              <div id="popupF_비마101" class="popupF">
-                <h3>시설명</h3>
-                <h4>비마관 101호</h4>
-                <p>관련 사이트 링크 / 02-0000-0000</p>
-                <p><br>요약 설명</p>
-              </div>
-        </div>
-        <div class="popupB hover-layer">
-          <img src="../images/복지관.png">
-            <div class="popupB-text popupB-triR" >
-              <h3>복지관</h3>
-            </div>
-            <div id="popupF_복지101" class="popupF">
-              <h3>시설명</h3>
-              <h4>복지관 101호</h4>
-            </div>
-        </div>
-        <div class="popupB hover-layer">
-          <img src="../images/한울관.png">
-            <div class="popupB-text popupB-triR" >
-              <h3>한울관</h3>
-            </div>
-            <div id="popupF_한울101" class="popupF">
-              <h3>시설명</h3>
-              <h4>한울관 101호</h4>
-            </div>
-        </div>
-        <div class="popupB hover-layer">
-          <img src="../images/화도관.png">
-            <div class="popupB-text popupB-triR" >
-              <h3>화도관</h3>
-            </div>
-            <div id="popupF_화도101" class="popupF">
-              <h3>시설명</h3>
-              <h4>화도관 101호</h4>
-            </div>
-        </div>
-        <div class="popupB hover-layer">
-          <img src="../images/80주년기념관.png">
-            <div class="popupB-text popupB-triR" >
-              <h3>80주년 기념관</h3>
-            </div>
-            <div id="popupF_80주년" class="popupF">
-              <h3>시설명</h3>
-              <h4>80주년 기념관</h4>
-            </div>
-        </div>
-        <div class="popupB hover-layer">
-          <img src="../images/중앙도서관.png">
-            <div class="popupB-text popupB-triR" >
-              <h3>중앙도서관</h3>
-            </div>
-            <div id="popupF_중도" class="popupF">
-              <h3>시설명</h3>
-              <h4>중앙도서관</h4>
-            </div>
-        </div>
-        <div class="popupB hover-layer">
-          <img src="../images/아이스링크.png">
-            <div class="popupB-text popupB-triR" >
-              <h3>아이스링크</h3>
-            </div>
-            <div id="popupF_아이스" class="popupF">
-              <h3>시설명</h3>
-              <h4>아이스링크</h4>
-            </div>
-        </div>
+      <div>
       </div>
-      <script src="../js/main-map.js"></script>
+      <div id="guiContainer">
+<%--          <div class="lil-gui allow-touch-styles root">--%>
+<%--            <div class="title" role="button" aria-expanded="true" tabindex="0">건물 정보</div>--%>
+<%--            <div class="children">--%>
+<%--              <div class="controller string1">--%>
+<%--                <div class="name" id="lil_gui_building">건물</div>--%>
+<%--                <div class="widget">--%>
+<%--                  <input type="text" aria-labelledby="lil_gui_building" value="${buildings[0].building}">--%>
+<%--                </div>--%>
+<%--              </div>--%>
+<%--              <div class="controller string2">--%>
+<%--                <div class="name" id="building_phone_num">전화번호</div>--%>
+<%--                <div class="widget">--%>
+<%--                  <input type="text" aria-labelledby="lil_gui_building_phone_num" value="${buildings[0].building_phone_num}">--%>
+<%--                </div>--%>
+<%--              </div>--%>
+<%--              <button onclick="javascript:showMainInfo()"> 버튼 </button>--%>
+<%--            </div>--%>
+<%--          </div>--%>
+      </div>
+      <script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
+      <script type="importmap">
+        {
+          "imports": {
+            "three": "https://unpkg.com/three@0.151.3/build/three.module.js",
+            "three/addons/": "https://unpkg.com/three@0.151.3/examples/jsm/"
+          }
+        }
+      </script>
+      <script type="module" src="./js/main.js"></script>
+
+      <div id="fixedHelp">
+        <img class="help-icon" src="./images/icon-help-round.svg" alt="to see how to use, click here">
+        <ul>
+          <li>
+            <img src="./images/icon-move.svg" alt="">
+            <img class="for-mobile" src="./images/gui-gesture-one-finger-touch.svg" alt="">
+            <img class="for-pc" src="./images/icon-mouse-left-button.svg" alt="">
+          </li>
+          <li>
+            <img src="./images/icon-3d-rotate.svg" alt="">
+            <img class="for-mobile" src="./images/gui-gesture-two-finger-touch.svg" alt="">
+            <img class="for-pc" src="./images/icon-mouse-right-button.svg" alt="">
+          </li>
+          <li>
+            <img src="./images/icon-zoom-out.svg" alt="">
+            <img src="./images/icon-zoom-in.svg" alt="">
+            <img class="for-mobile" src="./images/gui-gesture-pinch-open.svg" alt="">
+            <img class="for-mobile" src="./images/gui-gesture-pinch-close.svg" alt="">
+            <img class="for-pc" src="./images/icon-mouse-scroll-wheel.svg" alt="">
+          </li>
+        </ul>
+      </div>
     </main>
   </div>
 </body>
-
 </html>
