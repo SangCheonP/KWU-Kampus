@@ -7,6 +7,26 @@ import { FontLoader } from 'three/addons/loaders/FontLoader.js';
 // basic javascripts
 
 const receivedData = [];
+const exampleSaeBit = {
+  name: 'SaeBit',
+  floors: 9,
+  modelPath: './models/SaeBit.glb',
+  position: { x: 112, y: 0, z: -460 },
+  angle: -106,
+  scale: 2,
+  others: '',
+}
+const exampleHwaDo = {
+  name: 'HwaDo',
+  floors: 6,
+  modelPath: './models/HwaDo.glb',
+  position: { x: -30, y: 0, z: -210 },
+  angle: -118,
+  scale: 2,
+  others: '',
+}
+receivedData.push(exampleSaeBit);
+receivedData.push(exampleHwaDo);
 
 const fixedHelp = document.getElementById( 'fixedHelp' );
 fixedHelp.addEventListener( 'click', () => {
@@ -82,8 +102,9 @@ function init() {
   // GLTF Loader
 
   const gltfLoader = new GLTFLoader();
-  createModel( gltfLoader, './models/SaeBit.glb', new THREE.Vector3( 112, 0, -460 ), 'SaeBit', -106, 2 );
-  createModel( gltfLoader, './models/HwaDo.glb', new THREE.Vector3( -30, 0, -210 ), 'HwaDo', -118, 2 );
+  receivedData.forEach( (building) => {
+    createModel( gltfLoader, building );
+  } );
 
   // world floor
 
@@ -119,23 +140,22 @@ function init() {
   gui = new GUI( { container: document.getElementById( 'guiContainer' ), title: 'Information' } );
   let obj = {
     myBoolean: false,
-    Name: 'stringName',
-    myNumber: 512,
+    name: '',
+    floors: 0,
     myFunction: function() { alert( 'hi' ) }, // onclick callback
   }
   
   gui.add( obj, 'myBoolean' ); 	// checkbox
-  gui.add( obj, 'Name' ); 	// text field
-  gui.add( obj, 'myNumber' ); 	// number field
+  gui.add( obj, 'name' ).name( '건물명' ); 	// text field
+  gui.add( obj, 'floors' ).name( '층 수' ); 	// number field
   gui.add( obj, 'myFunction' ).name( 'alert hi' ); 	// button
 
   window.addEventListener( 'resize', onWindowResize );
   window.addEventListener( 'pointermove', onPointerMove );
   window.addEventListener( 'click', onClick );
-  window.addEventListener( 'dblclick', ( event ) => { // dev
-    // 더블 클릭시 카메라의 위치에서 카메라 방향으로 
+  window.addEventListener( 'dblclick', ( event ) => { // dev, 더블 클릭시 카메라의 위치에서 카메라 방향으로 
     console.log( event );
-    const arrow = new THREE.ArrowHelper( camera.getWorldDirection( new THREE.Vector3 ), camera.getWorldPosition( new THREE.Vector3 ), 100, 0xff0000 );
+    const arrow = new THREE.ArrowHelper( camera.getWorldDirection( new THREE.Vector3 ), camera.getWorldPosition( new THREE.Vector3 ), 15, 0xff0000 );
     scene.add( arrow );
     arrows.push( arrow );
   } );
@@ -160,6 +180,8 @@ function onPointerMove( event ) {
 }
 
 function onClick( event ) {
+
+  onPointerMove(event);
 
   if ( INTERSECTED ) {
 
@@ -197,30 +219,28 @@ function render() {
 /**
  * 건물의 모델링을 불러와 `scene`에 추가합니다.
  * 
- * `loader` 를 사용해 `modelPath` 에 있는 모델을 불러옵니다.   
+ * `loader` 를 사용해 `building.modelPath` 에 있는 모델을 불러옵니다.   
  * 모델의 위치, 회전시킬 각도, 크기 조정을 위한 스케일을 설정하여 `scene` 및 `buildings` 리스트에 추가하고, `createModal()` 에 `position` 을 전달합니다.
  * @param { GLTFLoader } loader `GLTFLoader` used in this file.
- * @param { string } modelPath string path url of target `*.glb` file.
- * @param { THREE.Vector3 } position a position where this model will be placed.
- * @param { string } name name of this model.
- * @param { number } angle rotation angle applied to `rotateY`.
- * @param { number } scale recommended value is 2.
+ * @param { object } building Item stored in `receivedData` list, an object containing informations of each buildings.
  */
-function createModel ( loader, modelPath, position, name = '', angle = 0, scale = 2 ) {
+function createModel ( loader, building ) {
 
-  if ( modelPath === '' ) { console.error( 'modelPath not found' ); return; }
-  loader.load( modelPath, async ( gltf ) => {
+  if ( building.modelPath === '' ) { console.error( 'modelPath not found' ); return; }
+  loader.load( building.modelPath, async ( gltf ) => {
 
     const model = await gltf.scene;
-    model.name = name;
-    model.position.copy( position );
-    model.rotateY( Math.PI / 180 * angle );
-    model.scale.setScalar( scale );
+    model.name = building.name;
+    model.position.set( building.position.x, building.position.y, building.position.z );
+    model.rotateY( Math.PI / 180 * building.angle );
+    model.scale.setScalar( building.scale );
 
-    // add events to this model via userData
     model.userData = {
-      isActive: false,
-
+      // isActive: false, // not used
+      floors: building.floors,
+      others: building.others,
+      
+      // add events to this model via userData
       onPointerOver: function() {
         for ( let child of model.children ) {
 
@@ -243,11 +263,12 @@ function createModel ( loader, modelPath, position, name = '', angle = 0, scale 
         console.log( model.name + ' clicked!' );
         gui.open();
         gui.controllers[ 1 ].setValue( model.name );
+        gui.controllers[ 2 ].setValue( model.userData.floors );
 
       }
     }
     
-    createFont( model.position, name );
+    createFont( model.position, model.name );
     buildings.push( model );
     scene.add( model );
 
@@ -268,7 +289,7 @@ function createModel ( loader, modelPath, position, name = '', angle = 0, scale 
  * `position` 에 해당하는 위치에서 `THREE.Line` 과 `THREE.Mesh (text)` 을 갖는 `THREE.Group` 을 생성합니다.
  * @param { THREE.Vector3 } position position of the target model
  * @param { string } name name of the target building
- * @notice 현재 사용하는 폰트는 한글이 지원되지 않습니다. `name` 의 값이 한글일 경우, 물음표로 표시됩니다.
+ * @notice 현재 사용하는 폰트는 한글을 지원하지 않습니다. `name` 의 값이 한글일 경우, 물음표로 표시됩니다.
  */
 function createFont( position, name ) {
   // Drawing Lines:
