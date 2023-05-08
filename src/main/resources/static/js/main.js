@@ -20,7 +20,8 @@ function getBuildings(){
     }
   });
 }
-const receivedData = getBuildings();
+//const receivedData = getBuildings();
+const receivedData = [];
 
 const exampleSaeBit = {
   name: 'SaeBit',
