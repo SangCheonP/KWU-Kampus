@@ -8,6 +8,22 @@ import { FontLoader } from 'three/addons/loaders/FontLoader.js';
 
 const exampleDatas = [];
 
+function getBuildings(){
+  $.ajax({
+    url : "http://localhost:8080/buildings",
+    type : "GET",
+    success : function (res){
+      if(res){
+        alert(JSON.stringify(res));
+      }
+      else{
+        alert("실패");
+      }
+    }
+  });
+}
+//const receivedData = getBuildings();
+
 const exampleSaeBit = {
   name: '새빛관',
   id: 0,

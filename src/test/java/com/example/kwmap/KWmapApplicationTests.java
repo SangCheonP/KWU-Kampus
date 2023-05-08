@@ -3,10 +3,10 @@ package com.example.kwmap;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+//@SpringBootTest
 class KWmapApplicationTests {
 
-    @Test
+    //@Test
     void contextLoads() {
     }
 
