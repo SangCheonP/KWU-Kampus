@@ -4,44 +4,30 @@ import { MapControls } from 'three/addons/controls/MapControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { FontLoader } from 'three/addons/loaders/FontLoader.js';
 
-//basic javascripts
+// basic javascripts
 
-function getBuildings(){
-  $.ajax({
-    url : "http://localhost:8080/buildings",
-    type : "GET",
-    success : function (res){
-      if(res){
-        alert(JSON.stringify(res));
-      }
-      else{
-        alert("실패");
-      }
-    }
-  });
-}
-const receivedData = getBuildings();
+const exampleDatas = [];
 
 const exampleSaeBit = {
-  name: 'SaeBit',
-  floors: 9,
+  name: '새빛관',
+  id: 0,
   modelPath: './models/SaeBit.glb',
-  position: { x: 112, y: 0, z: -460 },
-  angle: -106,
-  scale: 2,
+  position: { x: 55, y: 0, z: -229 }, // { x: 118, y: 0, z: -458 },
+  angle: 74.5,
+  scale: 1, // 2,
   others: '',
 }
 const exampleHwaDo = {
-  name: 'HwaDo',
-  floors: 6,
+  name: '화도관',
+  id: 1,
   modelPath: './models/HwaDo.glb',
-  position: { x: -30, y: 0, z: -210 },
+  position: { x: -16, y: 0, z: -106 }, // { x: -32, y: 0, z: -212 },
   angle: -118,
-  scale: 2,
+  scale: 1, // 2,
   others: '',
 }
-receivedData.push(exampleSaeBit);
-receivedData.push(exampleHwaDo);
+exampleDatas.push( exampleSaeBit );
+exampleDatas.push( exampleHwaDo );
 
 const fixedHelp = document.getElementById( 'fixedHelp' );
 fixedHelp.addEventListener( 'click', () => {
@@ -70,8 +56,8 @@ let intersects = []; // list to find which building is selected
 let INTERSECTED = undefined; // stores which building is selected
 
 const buildings = [];
-const modals = [];
-const arrows = [];
+const fonts = [];
+// const arrows = [];
 
 init();
 animate();
@@ -81,22 +67,21 @@ function init() {
   // variables
 
   width = window.innerWidth;
-  height = window.innerHeight - 1; // prevent generating scroll bar
+  height = window.innerHeight;
 
   scene = new THREE.Scene();
   scene.background = new THREE.Color( 0xcccccc );
-  scene.fog = new THREE.FogExp2( 0xcccccc, 0.002 );
+  scene.fog = new THREE.FogExp2( 0xcccccc, 0.003 );
 
   raycaster = new THREE.Raycaster(); // for mouse(pointer) tracking
 
   renderer = new THREE.WebGLRenderer( { antialias: true } );
   renderer.setPixelRatio( window.devicePixelRatio );
   renderer.setSize( width, height );
-  // where to append
-  document.querySelector( 'main' ).appendChild( renderer.domElement );
+  document.querySelector( 'main' ).appendChild( renderer.domElement ); // where to append
 
-  camera = new THREE.PerspectiveCamera( 60, width / height, 1, 1000 );
-  camera.position.set( 400, 200, 0 );
+  camera = new THREE.PerspectiveCamera( 60, width / height, 1, 700 );// 1000 );
+  camera.position.set( 200, 100, 0 ); // ( 400, 200, 0 );
 
   // controls
 
@@ -110,29 +95,29 @@ function init() {
   controls.screenSpacePanning = false;
 
   controls.minDistance = 100;
-  controls.maxDistance = 700;
+  controls.maxDistance = 500;
 
   controls.maxPolarAngle = Math.PI / 2;
 
-  // GLTF Loader
+  // GLTF Loader, load models
 
   const gltfLoader = new GLTFLoader();
-  receivedData.forEach( (building) => {
-    createModel( gltfLoader, building );
+  exampleDatas.forEach( ( data ) => {
+    createModel( gltfLoader, data );
   } );
 
   // world floor
 
-  const planeSize = 2000;
+  const planeSize = 1000; // 2000;
   const planeTexture = new THREE.TextureLoader().load( './images/KakaoMap_KWU.png' );
   const worldFloor = new THREE.Mesh(
     new THREE.PlaneGeometry( planeSize, planeSize, 8, 8 ),
     new THREE.MeshBasicMaterial( { side: THREE.FrontSide, map: planeTexture } )
   );
-  worldFloor.rotateX( Math.PI / (-2) );
+  worldFloor.rotateX( Math.PI / ( -2 ) );
   worldFloor.rotateZ( Math.PI / 2 );
   worldFloor.name = 'worldFloor';
-  scene.add(worldFloor);
+  scene.add( worldFloor );
 
   // lights
 
@@ -154,28 +139,28 @@ function init() {
 
   gui = new GUI( { container: document.getElementById( 'guiContainer' ), title: 'Information' } );
   let obj = {
-    building: '',
-    building_phone_num: '',
-    management_team: '',
-    management_team_phone_num: '',
+    myBoolean: false,
+    name: '',
+    id: 0,
     myFunction: function() { alert( 'hi' ) }, // onclick callback
   }
   
-  gui.add( obj, 'building' ); 	// checkbox
-  gui.add( obj, 'building_phone_num' ).name( '전화번호' ); 	// text field
-  gui.add( obj, 'management_team' ).name( '관리팀' ); 	// number field
-  gui.add( obj, 'management_team_phone_num' ).name( '관리팀 전화번호' ); 	// number field
+  gui.add( obj, 'myBoolean' ); 	// checkbox
+  gui.add( obj, 'name' ).name( '건물명' ); 	// text field
+  gui.add( obj, 'id' ).name( 'Building ID' ); 	// number field
   gui.add( obj, 'myFunction' ).name( 'alert hi' ); 	// button
+  gui.controllers[1].$input.readOnly = true;
+  gui.controllers[2].$input.readOnly = true;
 
   window.addEventListener( 'resize', onWindowResize );
   window.addEventListener( 'pointermove', onPointerMove );
   window.addEventListener( 'click', onClick );
-  window.addEventListener( 'dblclick', ( event ) => { // dev, 더블 클릭시 카메라의 위치에서 카메라 방향으로 
-    console.log( event );
-    const arrow = new THREE.ArrowHelper( camera.getWorldDirection( new THREE.Vector3 ), camera.getWorldPosition( new THREE.Vector3 ), 15, 0xff0000 );
-    scene.add( arrow );
-    arrows.push( arrow );
-  } );
+  // window.addEventListener( 'dblclick', ( event ) => { // dev, 더블 클릭시 카메라의 위치에서 카메라 방향으로 
+  //   console.log( event );
+  //   const arrow = new THREE.ArrowHelper( camera.getWorldDirection( new THREE.Vector3 ), camera.getWorldPosition( new THREE.Vector3 ), 15, 0xff0000 );
+  //   scene.add( arrow );
+  //   arrows.push( arrow );
+  // } );
 
 }
 
@@ -198,8 +183,7 @@ function onPointerMove( event ) {
 
 function onClick( event ) {
 
-  onPointerMove(event);
-
+  onPointerMove(event); // get pointer position
   if ( INTERSECTED ) {
 
     INTERSECTED.userData.onClick();
@@ -214,10 +198,10 @@ function animate() {
 
   window.requestAnimationFrame( animate );
 
-  // Let the groups generated from `createFont()` to face camera all the time
-  modals.forEach( ( modal ) => {
+  // Let the groups generated from `createFont()` to face the camera all the time
+  fonts.forEach( ( font ) => {
 
-    modal.quaternion.copy( camera.quaternion );
+    font.quaternion.copy( camera.quaternion );
 
   });
   controls.update(); // only required if controls.enableDamping = true, or if controls.autoRotate = true
@@ -231,22 +215,25 @@ function render() {
 
 }
 
-// customed functions
+// custom functions
 
 /**
  * 건물의 모델링을 불러와 `scene`에 추가합니다.
  * 
  * `loader` 를 사용해 `building.modelPath` 에 있는 모델을 불러옵니다.   
- * 모델의 위치, 회전시킬 각도, 크기 조정을 위한 스케일을 설정하여 `scene` 및 `buildings` 리스트에 추가하고, `createModal()` 에 `position` 을 전달합니다.
+ * 모델의 위치, 회전시킬 각도, 크기 조정을 위한 스케일을 설정하여 `scene` 및 `buildings` 리스트에 추가하고, `createFont()` 에 `position` 을 전달합니다.
  * @param { GLTFLoader } loader `GLTFLoader` used in this file.
  * @param { object } building Item stored in `receivedData` list, an object containing informations of each buildings.
  */
 function createModel ( loader, building ) {
 
-  if ( building.modelPath === '' ) { console.error( 'modelPath not found' ); return; }
+  if ( building.modelPath === '' ) { console.error( 'modelPath not found' ); }
   loader.load( building.modelPath, async ( gltf ) => {
 
     const model = await gltf.scene;
+    if ( !model ) {
+      // error handling
+    }
     model.name = building.name;
     model.position.set( building.position.x, building.position.y, building.position.z );
     model.rotateY( Math.PI / 180 * building.angle );
@@ -254,7 +241,7 @@ function createModel ( loader, building ) {
 
     model.userData = {
       // isActive: false, // not used
-      floors: building.floors,
+      id: building.id,
       others: building.others,
       
       // add events to this model via userData
@@ -274,26 +261,14 @@ function createModel ( loader, building ) {
 
         }
       },
+
       onClick: function() {
+
         console.log( model.name + ' clicked!' );
         gui.open();
+        gui.controllers[ 1 ].setValue( model.name );
+        gui.controllers[ 2 ].setValue( model.userData.id );
 
-        $.ajax({
-          url : "http://localhost:8080/새빛관",
-          type : "GET",
-          success : function (res){
-            if(res){
-              //alert(JSON.stringify(res));
-              gui.controllers[0].setValue(res.building);
-              gui.controllers[1].setValue(res.building_phone_num);
-              gui.controllers[2].setValue(res.management_team);
-              gui.controllers[3].setValue(res.management_team_phone_num);
-            }
-            else{
-              alert("실패");
-            }
-          }
-        });
       }
     }
     
@@ -314,17 +289,16 @@ function createModel ( loader, building ) {
 }
 
 /**
- * 건물 이름 표시를 위한 3D 모달 생성 함수입니다.   
+ * 건물 이름 표시를 위한 3D 폰트 생성 함수입니다.   
  * `position` 에 해당하는 위치에서 `THREE.Line` 과 `THREE.Mesh (text)` 을 갖는 `THREE.Group` 을 생성합니다.
  * @param { THREE.Vector3 } position position of the target model
  * @param { string } name name of the target building
- * @notice 현재 사용하는 폰트는 한글을 지원하지 않습니다. `name` 의 값이 한글일 경우, 물음표로 표시됩니다.
  */
-function createFont( position, name ) {
+async function createFont( position, name ) {
   // Drawing Lines:
   const points = [];
   points.push( new THREE.Vector3( 0, 0, 0 ) );
-  points.push( new THREE.Vector3( 50, 50, 50 ) );
+  points.push( new THREE.Vector3( 25, 25, 25 ) ); // ( 50, 50, 50 ) );
 
   const line = new THREE.Line(
     new THREE.BufferGeometry().setFromPoints( points ),
@@ -335,7 +309,7 @@ function createFont( position, name ) {
 
   // font loading function
   const loader = new FontLoader();
-  loader.load( './fonts/helvetiker_bold.typeface.json', function ( font ) {
+  await loader.load( './fonts/NanumSquareRound.json', function ( font ) {
 
     const material = new THREE.MeshBasicMaterial( {
       color: 0x000000,
@@ -344,12 +318,12 @@ function createFont( position, name ) {
     } );
 
     const message = name;
-    const shapes = font.generateShapes( message, 10 );
+    const shapes = font.generateShapes( message, 5 ); // 10 );
     const geometry = new THREE.ShapeGeometry( shapes );
 
     // make shape ( N.B. edge view not visible )
     const text = new THREE.Mesh( geometry, material );
-    text.position.set( 50, 50, 50 );
+    text.position.set( 25, 25, 25 );// ( 50, 50, 50 );
     text.material.depthTest = false; // for renderOrder
     group.add( text );
 
@@ -360,9 +334,9 @@ function createFont( position, name ) {
   group.add( line );
   // group.add( plane );
   group.position.copy( position );
-  modals.push( group );
+  fonts.push( group );
   group.renderOrder = 1; // renderOrder (z-index)
-  group.name = name + ' Modal';
+  group.name = name + ' Font';
   scene.add( group );
 
 }
