@@ -10,7 +10,7 @@ const exampleDatas = [];
 
 function getBuildings(){
   $.ajax({
-    url : "http://localhost:8080/buildings",
+    url : "http://localhost:8090/buildings",
     type : "GET",
     success : function (res){
       if(res){
@@ -155,16 +155,18 @@ function init() {
 
   gui = new GUI( { container: document.getElementById( 'guiContainer' ), title: 'Information' } );
   let obj = {
-    myBoolean: false,
-    name: '',
-    id: 0,
+    building: '',
+    building_phone_num: '',
+    management_team: '',
+    management_team_phone_num: '',
     myFunction: function() { alert( 'hi' ) }, // onclick callback
   }
-  
-  gui.add( obj, 'myBoolean' ); 	// checkbox
-  gui.add( obj, 'name' ).name( '건물명' ); 	// text field
-  gui.add( obj, 'id' ).name( 'Building ID' ); 	// number field
-  gui.add( obj, 'myFunction' ).name( 'alert hi' ); 	// button
+
+  gui.add( obj, 'building' ).name( '건물명' ); 	// text field
+  gui.add( obj, 'building_phone_num' ).name( '전화번호' ); 	// number field
+  gui.add( obj, 'management_team' ).name( '시설관리팀' );
+  gui.add( obj, 'management_team_phone_num' ).name( '시설관리팀 전화번호' );
+  gui.add( obj, 'myFunction' ).name( '세부정보' ); 	// button
   gui.controllers[1].$input.readOnly = true;
   gui.controllers[2].$input.readOnly = true;
 
@@ -282,9 +284,22 @@ function createModel ( loader, building ) {
 
         console.log( model.name + ' clicked!' );
         gui.open();
-        gui.controllers[ 1 ].setValue( model.name );
-        gui.controllers[ 2 ].setValue( model.userData.id );
-
+        $.ajax({
+          url : "http://localhost:8090/" + model.name,
+          type : "GET",
+          success : function (res){
+            if(res){
+              //alert(JSON.stringify(res));
+              gui.controllers[0].setValue(res.building);
+              gui.controllers[1].setValue(res.building_phone_num);
+              gui.controllers[2].setValue(res.management_team);
+              gui.controllers[3].setValue(res.management_team_phone_num);
+            }
+            else{
+              alert("실패");
+            }
+          }
+        });
       }
     }
     

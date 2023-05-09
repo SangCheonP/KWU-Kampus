@@ -34,12 +34,9 @@
           </div>
         </div>
         <div id="sideMenu">
-          <c:forEach items="buildings" var="buildings">
-            ${buildings}
-          </c:forEach>
           <div class="category">
             <div class="text">
-              <span>카테고리 1</span>
+              <span>건물</span>
               <img src="./images/icon-chevron-down.svg" alt="">
               <div class="mask">
                 <span></span>
@@ -47,15 +44,15 @@
               </div>
             </div>
             <ul class="sub-categories">
-              <li><a href="">세부 카테고리 1</a></li>
-              <li><a href="">세부 카테고리 2</a></li>
-              <li><a href="">세부 카테고리 3</a></li>
-              <li><a href="">세부 카테고리 4</a></li>
+              <li><a href="">새빛관</a></li>
+              <li><a href="">비마관</a></li>
+              <li><a href="">한울관</a></li>
+              <li><a href="">옥의관</a></li>
             </ul>
           </div>
           <div class="category">
             <div class="text">
-              <span>카테고리 2</span>
+              <span>스터디</span>
               <img src="./images/icon-chevron-down.svg" alt="">
               <div class="mask">
                 <span></span>
@@ -63,18 +60,16 @@
               </div>
             </div>
             <ul class="sub-categories">
-              <li><a href="">세부 카테고리 1</a></li>
-              <li><a href="">세부 카테고리 2</a></li>
-              <li><a href="">세부 카테고리 3</a></li>
-              <li><a href="">세부 카테고리 4</a></li>
-              <li><a href="">세부 카테고리 5</a></li>
-              <li><a href="">세부 카테고리 6</a></li>
-              <li><a href="">세부 카테고리 7</a></li>
+              <li><a href="">중앙 도서관</a></li>
+              <li><a href="">한울관 열람실</a></li>
+              <li><a href="">비마관 열람실</a></li>
+              <li><a href="">새빛관 로비</a></li>
+              <li><a href="">중앙도서관</a></li>
             </ul>
           </div>
           <div class="category">
             <div class="text">
-              <span>카테고리 3</span>
+              <span>학적</span>
               <img src="./images/icon-chevron-down.svg" alt="">
               <div class="mask">
                 <span></span>
@@ -82,9 +77,92 @@
               </div>
             </div>
             <ul class="sub-categories">
-              <li><a href="">세부 카테고리 1</a></li>
-              <li><a href="">세부 카테고리 2</a></li>
-              <li><a href="">세부 카테고리 3</a></li>
+              <li><a href="">증명서</a></li>
+              <li><a href="">비마관 창구</a></li>
+            </ul>
+          </div>
+          <div class="category">
+            <div class="text">
+              <span>은행/ATM/우체국</span>
+              <img src="./images/icon-chevron-down.svg" alt="">
+              <div class="mask">
+                <span></span>
+                <img src="./images/icon-chevron-down.svg" alt="">
+              </div>
+            </div>
+            <ul class="sub-categories">
+              <li><a href="">은행</a></li>
+              <li><a href="">ATM</a></li>
+              <li><a href="">우체국</a></li>
+            </ul>
+          </div>
+          <div class="category">
+            <div class="text">
+              <span>휴게실</span>
+              <img src="./images/icon-chevron-down.svg" alt="">
+              <div class="mask">
+                <span></span>
+                <img src="./images/icon-chevron-down.svg" alt="">
+              </div>
+            </div>
+            <ul class="sub-categories">
+              <li><a href="">한울관 휴게실</a></li>
+              <li><a href="">한울관 여자 휴게실</a></li>
+              <li><a href="">비마관 휴게실</a></li>
+            </ul>
+          </div>
+          <div class="category">
+            <div class="text">
+              <span>흡연장</span>
+              <img src="./images/icon-chevron-down.svg" alt="">
+              <div class="mask">
+                <span></span>
+                <img src="./images/icon-chevron-down.svg" alt="">
+              </div>
+            </div>
+            <ul class="sub-categories">
+              <li><a href="">한울관 흡연장</a></li>
+              <li><a href="">비마관 흡연장</a></li>
+              <li><a href="">참빛관 흡연장</a></li>
+            </ul>
+          </div>
+          <div class="category">
+            <div class="text">
+              <span>행정기관</span>
+              <img src="./images/icon-chevron-down.svg" alt="">
+              <div class="mask">
+                <span></span>
+                <img src="./images/icon-chevron-down.svg" alt="">
+              </div>
+            </div>
+            <ul class="sub-categories">
+              <li><a href="">교육지원팀</a></li>
+            </ul>
+          </div>
+          <div class="category">
+            <div class="text">
+              <span>장애인 지원 시설</span>
+              <img src="./images/icon-chevron-down.svg" alt="">
+              <div class="mask">
+                <span></span>
+                <img src="./images/icon-chevron-down.svg" alt="">
+              </div>
+            </div>
+            <ul class="sub-categories">
+              <li><a href="">~~~</a></li>
+            </ul>
+          </div>
+          <div class="category">
+            <div class="text">
+              <span>기타 시설</span>
+              <img src="./images/icon-chevron-down.svg" alt="">
+              <div class="mask">
+                <span></span>
+                <img src="./images/icon-chevron-down.svg" alt="">
+              </div>
+            </div>
+            <ul class="sub-categories">
+              <li><a href="">자동제세동기</a></li>
             </ul>
           </div>
         </div>
