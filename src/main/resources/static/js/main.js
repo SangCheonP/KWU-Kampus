@@ -43,6 +43,36 @@ const HwaDo = {
   scale: 1,
   others: '',
 }
+const BiMa = {
+  id: '03',
+  building: '비마관',
+  building_phone_num: '',
+  management_team: '',
+  management_team_phone_num: '',
+  modelPath: './models/BiMa.glb',
+  position: { x: 79, y: 0, z: -148 },
+  angle: 23,
+  scale: 1,
+  others: '',
+}
+const SaeBit = {
+  id: '04',
+  building: '새빛관',
+  building_phone_num: '',
+  management_team: '',
+  management_team_phone_num: '',
+const HwaDo = {
+  id: '01',
+  building: '화도관',
+  building_phone_num: '',
+  management_team: '',
+  management_team_phone_num: '',
+  modelPath: './models/HwaDo.glb',
+  position: { x: -16, y: 0, z: -106 },
+  angle: -118,
+  scale: 1,
+  others: '',
+}
 const OkUi = {
   id: '02',
   building: '옥의관',
