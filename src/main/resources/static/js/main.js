@@ -7,43 +7,135 @@ import { FontLoader } from 'three/addons/loaders/FontLoader.js';
 // basic javascripts
 
 const exampleDatas = [];
+let receivedData = [];
 
-function getBuildings(){
-  $.ajax({
-    url : "http://localhost:8080/buildings",
+function getBuildings() {
+  $.ajax( {
+
+    url : "http://localhost:8090/buildings",
     type : "GET",
-    success : function (res){
-      if(res){
-        alert(JSON.stringify(res));
-      }
-      else{
-        alert("실패");
-      }
-    }
-  });
-}
-//const receivedData = getBuildings();
+    success : function ( res ) {
 
-const exampleSaeBit = {
-  name: '새빛관',
-  id: 0,
-  modelPath: './models/SaeBit.glb',
-  position: { x: 55, y: 0, z: -229 }, // { x: 118, y: 0, z: -458 },
-  angle: 74.5,
-  scale: 1, // 2,
-  others: '',
+      if ( res ) {
+        receivedData = res;
+        console.log( res );
+        console.log( receivedData );
+      } else {
+        alert( "실패" );
+      }
+
+    }
+
+  } );
 }
-const exampleHwaDo = {
-  name: '화도관',
-  id: 1,
+// const receivedData = getBuildings();
+// getBuildings();
+
+const HwaDo = {
+  id: '01',
+  building: '화도관',
+  building_phone_num: '',
+  management_team: '',
+  management_team_phone_num: '',
   modelPath: './models/HwaDo.glb',
-  position: { x: -16, y: 0, z: -106 }, // { x: -32, y: 0, z: -212 },
+  position: { x: -16, y: 0, z: -106 },
   angle: -118,
-  scale: 1, // 2,
+  scale: 1,
   others: '',
 }
-exampleDatas.push( exampleSaeBit );
-exampleDatas.push( exampleHwaDo );
+const OkUi = {
+  id: '02',
+  building: '옥의관',
+  building_phone_num: '',
+  management_team: '',
+  management_team_phone_num: '',
+  modelPath: './models/OkUi.glb',
+  position: { x: 162, y: 0, z: -72 },
+  angle: 212,
+  scale: 1,
+  others: '',
+}
+const BiMa = {
+  id: '03',
+  building: '비마관',
+  building_phone_num: '',
+  management_team: '',
+  management_team_phone_num: '',
+  modelPath: './models/BiMa.glb',
+  position: { x: 79, y: 0, z: -148 },
+  angle: 23,
+  scale: 1,
+  others: '',
+}
+const SaeBit = {
+  id: '04',
+  building: '새빛관',
+  building_phone_num: '',
+  management_team: '',
+  management_team_phone_num: '',
+  modelPath: './models/SaeBit.glb',
+  position: { x: 55, y: 0, z: -229 },
+  angle: 74.5,
+  scale: 1,
+  others: '',
+}
+const BokJi = {
+  id: '05',
+  building: '복지관',
+  building_phone_num: '',
+  management_team: '',
+  management_team_phone_num: '',
+  modelPath: './models/BokJi.glb',
+  position: { x: 120, y: 0, z: 5 },
+  angle: -28,
+  scale: 1,
+  others: '',
+}
+const DaSan = {
+  id: '07',
+  building: '다산재',
+  building_phone_num: '',
+  management_team: '',
+  management_team_phone_num: '',
+  modelPath: './models/DaSan.glb',
+  position: { x: 131, y: 0, z: -156 },
+  angle: 42,
+  scale: 1,
+  others: '',
+}
+const ChamBit = {
+  id: '09',
+  building: '참빛관',
+  building_phone_num: '',
+  management_team: '',
+  management_team_phone_num: '',
+  modelPath: './models/ChamBit.glb',
+  position: { x: 128, y: 0, z: -235 },
+  angle: -70,
+  scale: 1,
+  others: '',
+}
+const KWSquare = {
+  id: '16',
+  building: '광운스퀘어&80주년기념관',
+  building_phone_num: '',
+  management_team: '',
+  management_team_phone_num: '',
+  modelPath: './models/KWSquare.glb',
+  position: { x: 42, y: 0, z: -70 },
+  angle: -119,
+  scale: 1,
+  others: '',
+}
+
+exampleDatas.push( HwaDo );
+exampleDatas.push( BiMa );
+exampleDatas.push( SaeBit );
+exampleDatas.push( ChamBit );
+exampleDatas.push( KWSquare );
+exampleDatas.push( OkUi );
+exampleDatas.push( BokJi );
+exampleDatas.push( DaSan );
 
 const fixedHelp = document.getElementById( 'fixedHelp' );
 fixedHelp.addEventListener( 'click', () => {
@@ -118,6 +210,8 @@ function init() {
   // GLTF Loader, load models
 
   const gltfLoader = new GLTFLoader();
+  // Fetch Server here
+
   exampleDatas.forEach( ( data ) => {
     createModel( gltfLoader, data );
   } );
@@ -155,16 +249,18 @@ function init() {
 
   gui = new GUI( { container: document.getElementById( 'guiContainer' ), title: 'Information' } );
   let obj = {
-    myBoolean: false,
-    name: '',
-    id: 0,
+    building: '',
+    building_phone_num: '',
+    management_team: '',
+    management_team_phone_num: '',
     myFunction: function() { alert( 'hi' ) }, // onclick callback
   }
-  
-  gui.add( obj, 'myBoolean' ); 	// checkbox
-  gui.add( obj, 'name' ).name( '건물명' ); 	// text field
-  gui.add( obj, 'id' ).name( 'Building ID' ); 	// number field
-  gui.add( obj, 'myFunction' ).name( 'alert hi' ); 	// button
+
+  gui.add( obj, 'building' ).name( '건물명' ); 	// text field
+  gui.add( obj, 'building_phone_num' ).name( '전화번호' ); 	// number field
+  gui.add( obj, 'management_team' ).name( '시설관리팀' );
+  gui.add( obj, 'management_team_phone_num' ).name( '시설관리팀 전화번호' );
+  gui.add( obj, 'myFunction' ).name( '세부정보' ); 	// button
   gui.controllers[1].$input.readOnly = true;
   gui.controllers[2].$input.readOnly = true;
 
@@ -241,24 +337,28 @@ function render() {
  * @param { GLTFLoader } loader `GLTFLoader` used in this file.
  * @param { object } building Item stored in `receivedData` list, an object containing informations of each buildings.
  */
-function createModel ( loader, building ) {
+function createModel ( loader, data ) {
 
-  if ( building.modelPath === '' ) { console.error( 'modelPath not found' ); }
-  loader.load( building.modelPath, async ( gltf ) => {
+  if ( data.modelPath === '' ) { console.error( 'modelPath not found' ); }
+  loader.load( data.modelPath, async ( gltf ) => {
 
     const model = await gltf.scene;
     if ( !model ) {
       // error handling
     }
-    model.name = building.name;
-    model.position.set( building.position.x, building.position.y, building.position.z );
-    model.rotateY( Math.PI / 180 * building.angle );
-    model.scale.setScalar( building.scale );
+    model.name = data.building;
+    model.position.set( data.position.x, data.position.y, data.position.z );
+    model.rotateY( Math.PI / 180 * data.angle );
+    model.scale.setScalar( data.scale );
 
     model.userData = {
       // isActive: false, // not used
-      id: building.id,
-      others: building.others,
+      id: data.id,
+      building_phone_num: data.building_phone_num,
+      management_team: data.management_team,
+      management_team_phone_num: data.management_team_phone_num,
+      viewPosition: data.viewPosition,
+      others: data.others,
       
       // add events to this model via userData
       onPointerOver: function() {
@@ -282,8 +382,11 @@ function createModel ( loader, building ) {
 
         console.log( model.name + ' clicked!' );
         gui.open();
-        gui.controllers[ 1 ].setValue( model.name );
-        gui.controllers[ 2 ].setValue( model.userData.id );
+        gui.controllers[ 0 ].setValue( model.name );
+        gui.controllers[ 1 ].setValue( model.userData.building_phone_num );
+        gui.controllers[ 2 ].setValue( model.userData.management_team );
+        gui.controllers[ 3 ].setValue( model.userData.management_team_phone_num );
+        gui.controllers[ 4 ].setValue( model.userData.id );
 
       }
     }
