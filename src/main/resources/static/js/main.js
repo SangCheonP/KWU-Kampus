@@ -61,9 +61,75 @@ const SaeBit = {
   building_phone_num: '',
   management_team: '',
   management_team_phone_num: '',
+const HwaDo = {
+  id: '01',
+  building: '화도관',
+  building_phone_num: '',
+  management_team: '',
+  management_team_phone_num: '',
+  modelPath: './models/HwaDo.glb',
+  position: { x: -16, y: 0, z: -106 },
+  angle: -118,
+  scale: 1,
+  others: '',
+}
+const OkUi = {
+  id: '02',
+  building: '옥의관',
+  building_phone_num: '',
+  management_team: '',
+  management_team_phone_num: '',
+  modelPath: './models/OkUi.glb',
+  position: { x: 162, y: 0, z: -72 },
+  angle: 212,
+  scale: 1,
+  others: '',
+}
+const BiMa = {
+  id: '03',
+  building: '비마관',
+  building_phone_num: '',
+  management_team: '',
+  management_team_phone_num: '',
+  modelPath: './models/BiMa.glb',
+  position: { x: 79, y: 0, z: -148 },
+  angle: 23,
+  scale: 1,
+  others: '',
+}
+const SaeBit = {
+  id: '04',
+  building: '새빛관',
+  building_phone_num: '',
+  management_team: '',
+  management_team_phone_num: '',
   modelPath: './models/SaeBit.glb',
   position: { x: 55, y: 0, z: -229 },
   angle: 74.5,
+  scale: 1,
+  others: '',
+}
+const BokJi = {
+  id: '05',
+  building: '복지관',
+  building_phone_num: '',
+  management_team: '',
+  management_team_phone_num: '',
+  modelPath: './models/BokJi.glb',
+  position: { x: 120, y: 0, z: 5 },
+  angle: -28,
+  scale: 1,
+  others: '',
+}
+const DaSan = {
+  id: '07',
+  building: '다산재',
+  building_phone_num: '',
+  management_team: '',
+  management_team_phone_num: '',
+  modelPath: './models/DaSan.glb',
+  position: { x: 131, y: 0, z: -156 },
+  angle: 42,
   scale: 1,
   others: '',
 }
@@ -91,18 +157,6 @@ const KWSquare = {
   scale: 1,
   others: '',
 }
-const OkUi = {
-  id: '02',
-  building: '옥의관',
-  building_phone_num: '',
-  management_team: '',
-  management_team_phone_num: '',
-  modelPath: './models/OkUi.glb',
-  position: { x: 162, y: 0, z: -72 },
-  angle: 212,
-  scale: 1,
-  others: '',
-}
 
 exampleDatas.push( HwaDo );
 exampleDatas.push( BiMa );
@@ -110,6 +164,8 @@ exampleDatas.push( SaeBit );
 exampleDatas.push( ChamBit );
 exampleDatas.push( KWSquare );
 exampleDatas.push( OkUi );
+exampleDatas.push( BokJi );
+exampleDatas.push( DaSan );
 
 const fixedHelp = document.getElementById( 'fixedHelp' );
 fixedHelp.addEventListener( 'click', () => {
