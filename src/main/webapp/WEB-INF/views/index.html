@@ -32,11 +32,12 @@
             <div class="bar bar03"></div>
           </div>
         </div>
+        
         <div id="sideMenu">
 
           <div class="category">
             <div class="text">
-              <span>카테고리 1</span>
+              <span>건물</span>
               <img src="./images/icon-chevron-down.svg" alt="">
               <div class="mask">
                 <span></span>
@@ -44,10 +45,14 @@
               </div>
             </div>
             <ul class="sub-categories">
-              <li><a href="">세부 카테고리 1</a></li>
-              <li><a href="">세부 카테고리 2</a></li>
-              <li><a href="">세부 카테고리 3</a></li>
-              <li><a href="">세부 카테고리 4</a></li>
+              <li><a href="" data-id="01">화도관</a></li>
+              <li><a href="" data-id="02">옥의관</a></li>
+              <li><a href="" data-id="03">비마관</a></li>
+              <li><a href="" data-id="04">새빛관</a></li>
+              <li><a href="" data-id="05">복지관</a></li>
+              <li><a href="" data-id="07">다산재</a></li>
+              <li><a href="" data-id="09">참빛관</a></li>
+              <li><a href="" data-id="16">광운스퀘어 & 80주년 기념관</a></li>
             </ul>
           </div>
 
@@ -90,8 +95,6 @@
 
       </div>
 
-      <script src="./js/header.js"></script>
-
     </header>
 
     <main class="main">
@@ -110,18 +113,9 @@
           </div>
         -->
       </div>
-      <script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
-      <script type="importmap">
-        {
-          "imports": {
-            "three": "https://unpkg.com/three@0.151.3/build/three.module.js",
-            "three/addons/": "https://unpkg.com/three@0.151.3/examples/jsm/"
-          }
-        }
-      </script>
-      <script type="module" src="./js/main.js"></script>
 
       <div id="fixedHelp">
+
         <img class="help-icon" src="./images/icon-help-round.svg" alt="to see how to use, click here">
         <ul>
 
@@ -146,11 +140,24 @@
           </li>
 
         </ul>
+
       </div>
 
     </main>
 
   </div>
+
+  <script src="./js/header.js"></script>
+  <script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.151.3/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.151.3/examples/jsm/"
+      }
+    }
+  </script>
+  <script type="module" src="./js/main.js"></script>
   
 </body>
 

@@ -6,7 +6,7 @@ import { FontLoader } from 'three/addons/loaders/FontLoader.js';
 
 // basic javascripts
 
-const exampleDatas = [];
+const datas = [];
 let receivedData = [];
 
 function getBuildings() {
@@ -43,6 +43,18 @@ const HwaDo = {
   scale: 1,
   others: '',
 }
+const OkUi = {
+  id: '02',
+  building: '옥의관',
+  building_phone_num: '',
+  management_team: '',
+  management_team_phone_num: '',
+  modelPath: './models/OkUi.glb',
+  position: { x: 162, y: 0, z: -72 },
+  angle: 212,
+  scale: 1,
+  others: '',
+}
 const BiMa = {
   id: '03',
   building: '비마관',
@@ -64,6 +76,30 @@ const SaeBit = {
   modelPath: './models/SaeBit.glb',
   position: { x: 55, y: 0, z: -229 },
   angle: 74.5,
+  scale: 1,
+  others: '',
+}
+const BokJi = {
+  id: '05',
+  building: '복지관',
+  building_phone_num: '',
+  management_team: '',
+  management_team_phone_num: '',
+  modelPath: './models/BokJi.glb',
+  position: { x: 120, y: 0, z: 5 },
+  angle: -28,
+  scale: 1,
+  others: '',
+}
+const DaSan = {
+  id: '07',
+  building: '다산재',
+  building_phone_num: '',
+  management_team: '',
+  management_team_phone_num: '',
+  modelPath: './models/DaSan.glb',
+  position: { x: 131, y: 0, z: -156 },
+  angle: 42,
   scale: 1,
   others: '',
 }
@@ -91,25 +127,15 @@ const KWSquare = {
   scale: 1,
   others: '',
 }
-const OkUi = {
-  id: '02',
-  building: '옥의관',
-  building_phone_num: '',
-  management_team: '',
-  management_team_phone_num: '',
-  modelPath: './models/OkUi.glb',
-  position: { x: 162, y: 0, z: -72 },
-  angle: 212,
-  scale: 1,
-  others: '',
-}
 
-exampleDatas.push( HwaDo );
-exampleDatas.push( BiMa );
-exampleDatas.push( SaeBit );
-exampleDatas.push( ChamBit );
-exampleDatas.push( KWSquare );
-exampleDatas.push( OkUi );
+datas.push( HwaDo );
+datas.push( OkUi );
+datas.push( BiMa ); 
+datas.push( SaeBit );
+datas.push( BokJi );
+datas.push( DaSan );
+datas.push( ChamBit );
+datas.push( KWSquare );
 
 const fixedHelp = document.getElementById( 'fixedHelp' );
 fixedHelp.addEventListener( 'click', () => {
@@ -126,6 +152,9 @@ fixedHelp.addEventListener( 'click', () => {
   fixedHelp.style.height = fixedHelp.querySelector( 'ul' ).clientHeight + 40 + 'px';
 
 } );
+
+const subCategories = document.querySelectorAll( 'ul.sub-categories li a' );
+const main = document.querySelector( 'main' );
 
 ///////////////////////////////
 ///// THREE.js from here: /////
@@ -160,7 +189,7 @@ function init() {
   renderer = new THREE.WebGLRenderer( { antialias: true } );
   renderer.setPixelRatio( window.devicePixelRatio );
   renderer.setSize( width, height );
-  document.querySelector( 'main' ).appendChild( renderer.domElement ); // where to append
+  main.appendChild( renderer.domElement ); // where to append
 
   camera = new THREE.PerspectiveCamera( 60, width / height, 1, 700 );// 1000 );
   camera.position.set( 200, 100, 0 ); // ( 400, 200, 0 );
@@ -184,9 +213,7 @@ function init() {
   // GLTF Loader, load models
 
   const gltfLoader = new GLTFLoader();
-  // Fetch Server here
-
-  exampleDatas.forEach( ( data ) => {
+  datas.forEach( ( data ) => {
     createModel( gltfLoader, data );
   } );
 
@@ -227,25 +254,36 @@ function init() {
     building_phone_num: '',
     management_team: '',
     management_team_phone_num: '',
+    id: '',
     myFunction: function() { alert( 'hi' ) }, // onclick callback
   }
-
-  gui.add( obj, 'building' ).name( '건물명' ); 	// text field
-  gui.add( obj, 'building_phone_num' ).name( '전화번호' ); 	// number field
+  
+  gui.add( obj, 'building' ).name( '건물명' );
+  gui.add( obj, 'building_phone_num' ).name( '전화번호' );
   gui.add( obj, 'management_team' ).name( '시설관리팀' );
   gui.add( obj, 'management_team_phone_num' ).name( '시설관리팀 전화번호' );
-  gui.add( obj, 'myFunction' ).name( '세부정보' ); 	// button
+  gui.add( obj, 'id' ).name( 'Building ID' );
+  gui.add( obj, 'myFunction' ).name( 'alert hi' ); 	// button
+  gui.controllers[0].$input.readOnly = true;
   gui.controllers[1].$input.readOnly = true;
   gui.controllers[2].$input.readOnly = true;
+  gui.controllers[3].$input.readOnly = true;
+  gui.open( false );
+
+  // // Grid Helper
+  // const gridHelper = new THREE.GridHelper( 1000, 100 );
+  // scene.add( gridHelper );
 
   window.addEventListener( 'resize', onWindowResize );
-  window.addEventListener( 'pointermove', onPointerMove );
-  window.addEventListener( 'click', onClick );
+  main.addEventListener( 'pointermove', onPointerMove );
+  main.addEventListener( 'click', onClick );
   // window.addEventListener( 'dblclick', ( event ) => { // dev, 더블 클릭시 카메라의 위치에서 카메라 방향으로 
-  //   console.log( event );
-  //   const arrow = new THREE.ArrowHelper( camera.getWorldDirection( new THREE.Vector3 ), camera.getWorldPosition( new THREE.Vector3 ), 15, 0xff0000 );
+  //   let worldDirection = new THREE.Vector3;
+  //   let worldPosition = new THREE.Vector3;
+  //   const arrow = new THREE.ArrowHelper( camera.getWorldDirection( worldDirection ), camera.getWorldPosition( worldPosition ), 15, 0xff0000 );
   //   scene.add( arrow );
-  //   arrows.push( arrow );
+  //   console.log( worldDirection );
+  //   console.log( worldPosition );
   // } );
 
 }
@@ -269,7 +307,7 @@ function onPointerMove( event ) {
 
 function onClick( event ) {
 
-  onPointerMove(event); // get pointer position
+  onPointerMove( event ); // get pointer position
   if ( INTERSECTED ) {
 
     INTERSECTED.userData.onClick();
@@ -289,7 +327,7 @@ function animate() {
 
     font.quaternion.copy( camera.quaternion );
 
-  });
+  } );
   controls.update(); // only required if controls.enableDamping = true, or if controls.autoRotate = true
   render();
 
@@ -304,12 +342,12 @@ function render() {
 // custom functions
 
 /**
- * 건물의 모델링을 불러와 `scene`에 추가합니다.
+ * 건물의 모델링을 불러와 `scene`에 추가하고, `buildings` 리스트에 저장 및 `subCategories`의 이벤트 리스너를 설정합니다.
  * 
  * `loader` 를 사용해 `building.modelPath` 에 있는 모델을 불러옵니다.   
  * 모델의 위치, 회전시킬 각도, 크기 조정을 위한 스케일을 설정하여 `scene` 및 `buildings` 리스트에 추가하고, `createFont()` 에 `position` 을 전달합니다.
  * @param { GLTFLoader } loader `GLTFLoader` used in this file.
- * @param { object } building Item stored in `receivedData` list, an object containing informations of each buildings.
+ * @param { object } data Item stored in `receivedData` list, an object containing informations of each buildings.
  */
 function createModel ( loader, data ) {
 
@@ -333,8 +371,7 @@ function createModel ( loader, data ) {
       management_team_phone_num: data.management_team_phone_num,
       viewPosition: data.viewPosition,
       others: data.others,
-      
-      // add events to this model via userData
+
       onPointerOver: function() {
         for ( let child of model.children ) {
 
@@ -354,13 +391,16 @@ function createModel ( loader, data ) {
 
       onClick: function() {
 
-        console.log( model.name + ' clicked!' );
-        gui.open();
+        camera.position.setY( 100 );
+        controls.target.copy( model.position );
+        controls.update();
+        console.log( model.name + ' clicked' );
         gui.controllers[ 0 ].setValue( model.name );
         gui.controllers[ 1 ].setValue( model.userData.building_phone_num );
         gui.controllers[ 2 ].setValue( model.userData.management_team );
         gui.controllers[ 3 ].setValue( model.userData.management_team_phone_num );
         gui.controllers[ 4 ].setValue( model.userData.id );
+        // gui.open();
 
       }
     }
@@ -368,6 +408,33 @@ function createModel ( loader, data ) {
     createFont( model.position, model.name );
     buildings.push( model );
     scene.add( model );
+
+    // subCategories Event Listener
+    subCategories.forEach( ( subCategory ) => {
+
+      const subId = subCategory.getAttribute( 'data-id' );
+      if ( subId === model.userData.id ) {
+
+        const target = model;
+
+        // hover event
+        subCategory.addEventListener( 'mouseover', () => {
+          target.userData.onPointerOver();
+        } );
+        subCategory.addEventListener( 'mouseout', () => {
+          target.userData.onPointerOut();
+        } );
+
+        // click event
+        subCategory.addEventListener( 'click', ( e ) => {
+      
+          e.preventDefault();
+          target.userData.onClick();
+      
+        } );
+
+        }
+    } );
 
   }, ( progress ) => {
 
@@ -437,8 +504,8 @@ async function createFont( position, name ) {
 /**
  * `pointer` 에서 `camera` 가 바라보는 방향으로 `raycaster` 를 생성해 교차하는 아이템을 가져옵니다.   
  * 
- * `buildings` 목록에서 `raycaster` 와 교차하는 아이템을 확인하여 가장 앞에 있는 것을 `INTERSECTED`로 설정한 후 `onPointerOver()` 를 수행합니다.   
- * 교차하는 아이템이 바뀌거나 사라졌을 때는 기존 아이템의 `onPointerOut()`를 수행합니다.
+ * `buildings[]` 에서 `raycaster` 와 교차하는 아이템을 확인하여 가장 앞에 있는 것을 `INTERSECTED`로 설정한 후 `highlight()` 를 수행합니다.   
+ * 교차하는 아이템이 바뀌거나 사라졌을 때는 기존 아이템의 `lowlight()`를 수행합니다.
  */
 function getIntersects() {
 
