@@ -44,10 +44,14 @@
               </div>
             </div>
             <ul class="sub-categories">
-              <li><a href="">새빛관</a></li>
-              <li><a href="">비마관</a></li>
-              <li><a href="">한울관</a></li>
-              <li><a href="">옥의관</a></li>
+              <li><a href="" data-id="01">화도관</a></li>
+              <li><a href="" data-id="02">옥의관</a></li>
+              <li><a href="" data-id="03">비마관</a></li>
+              <li><a href="" data-id="04">새빛관</a></li>
+              <li><a href="" data-id="05">복지관</a></li>
+              <li><a href="" data-id="07">다산재</a></li>
+              <li><a href="" data-id="09">참빛관</a></li>
+              <li><a href="" data-id="16">광운스퀘어 & 80주년 기념관</a></li>
             </ul>
           </div>
           <div class="category">
