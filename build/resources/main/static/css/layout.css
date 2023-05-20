@@ -125,6 +125,7 @@ header #menuBtn {
   padding: 0; 
   overflow: hidden;
   background: var( --main-color ); 
+  border-radius: 10px;
   transition: width 0.3s 0.3s ease-in-out;
   white-space: nowrap;
 }
