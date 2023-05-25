@@ -49,9 +49,15 @@
               <li><a href="" data-id="03">비마관</a></li>
               <li><a href="" data-id="04">새빛관</a></li>
               <li><a href="" data-id="05">복지관</a></li>
+              <li><a href="" data-id="06">연구문화관</a></li>
+              <li><a href="" data-id="06-1">아이스링크</a></li>
               <li><a href="" data-id="07">다산재</a></li>
               <li><a href="" data-id="09">참빛관</a></li>
+              <li><a href="" data-id="10">한울관</a></li>
+              <li><a href="" data-id="11">한천재</a></li>
               <li><a href="" data-id="16">광운스퀘어 & 80주년 기념관</a></li>
+              <li><a href="" data-id="17">빛솔재 A동</a></li>
+              <li><a href="" data-id="18">빛솔재 B동</a></li>
             </ul>
           </div>
           <div class="category">
