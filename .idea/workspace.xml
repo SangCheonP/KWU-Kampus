@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="a1763ece-2013-4e26-99e8-83801edfd65b" name="Changes" comment="05/27 평면도 수정" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="set_infomation" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="recentNewPullRequestHead">
+      <RepoCoordinatesHolder>
+        <option name="owner" value="SangCheonP" />
+        <option name="repository" value="KWU-Kampus" />
+      </RepoCoordinatesHolder>
+    </option>
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="58036467-cacc-4463-abca-027c4682508c" />
+        <option name="url" value="https://github.com/SangCheonP/KWU-Kampus.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2OMygDXRf11w2siLKSj2nw7CJLs" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/ho/IdeaProjects/KWU-Kampus/src/main/resources/static/floor-img&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;76ca2ca3402e7f4d0454e7e6b54cb3b0&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;ChangesTree.GroupingKeys&quot;: [
+      &quot;directory&quot;,
+      &quot;module&quot;
+    ]
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\ho\IdeaProjects\KWU-Kampus\src\main\resources\static\floor-img" />
+      <recent name="C:\Users\ho\IdeaProjects\KWU-Kampus\src\main\resources\static" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.KWmapApplication (2)">
+    <configuration name="KWmapApplication (2)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <envs>
+        <env name="server.port" value="8081" />
+      </envs>
+      <option name="MAIN_CLASS_NAME" value="com.example.kwmap.KWmapApplication" />
+      <module name="KWU_Campus.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.kwmap.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="KWmapApplication" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="$PROJECT_DIR$/../../../../Program Files/Java/jdk-16.0.1" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <envs>
+        <env name="server.port" value="8081" />
+      </envs>
+      <option name="MAIN_CLASS_NAME" value="com.example.kwmap.KWmapApplication" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.kwmap.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="KWU-Kampus" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="KWU-Kampus" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="KWmapApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="KWU_Campus.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.kwmap.KWmapApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="model" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="KWU_Campus" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.kwmap.model" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.KWmapApplication" />
+      <item itemvalue="Application.KWmapApplication (2)" />
+      <item itemvalue="Spring Boot.KWmapApplication" />
+      <item itemvalue="Spring Boot.model" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.KWmapApplication (2)" />
+        <item itemvalue="Application.KWmapApplication (2)" />
+        <item itemvalue="Application.KWmapApplication (2)" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a1763ece-2013-4e26-99e8-83801edfd65b" name="Changes" comment="" />
+      <created>1681384854521</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1681384854521</updated>
+      <workItem from="1681384856056" duration="372000" />
+      <workItem from="1681656893776" duration="727000" />
+      <workItem from="1682682363015" duration="35000" />
+      <workItem from="1682682406631" duration="26000" />
+      <workItem from="1682682707956" duration="2312000" />
+      <workItem from="1682685209904" duration="471000" />
+      <workItem from="1682764343293" duration="23000" />
+      <workItem from="1682858293024" duration="1068000" />
+      <workItem from="1683451996586" duration="118000" />
+      <workItem from="1683452128680" duration="259000" />
+      <workItem from="1683452395455" duration="574000" />
+      <workItem from="1683452976829" duration="145000" />
+      <workItem from="1683456394435" duration="389000" />
+      <workItem from="1683456935720" duration="1298000" />
+      <workItem from="1683461156370" duration="63000" />
+      <workItem from="1684030551869" duration="376000" />
+      <workItem from="1684225712866" duration="606000" />
+      <workItem from="1684229559040" duration="1457000" />
+      <workItem from="1684332865054" duration="671000" />
+      <workItem from="1685040229533" duration="329000" />
+      <workItem from="1685058015428" duration="2725000" />
+      <workItem from="1685127599524" duration="408000" />
+    </task>
+    <task id="LOCAL-00001" summary="화도관 평면도 추가">
+      <created>1682685614063</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1682685614063</updated>
+    </task>
+    <task id="LOCAL-00002" summary="새빛관 평면도 추가&#10;화도관 평면도 수정">
+      <created>1682858663737</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1682858663737</updated>
+    </task>
+    <task id="LOCAL-00003" summary="메인 카테고리 값 받아오기">
+      <created>1685060769415</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1685060769416</updated>
+    </task>
+    <task id="LOCAL-00004" summary="05/27 평면도 수정">
+      <created>1685127832443</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1685127832443</updated>
+    </task>
+    <task id="LOCAL-00005" summary="05/27 평면도 수정">
+      <created>1685127922733</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1685127922733</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="화도관 평면도 추가" />
+    <MESSAGE value="새빛관 평면도 추가&#10;화도관 평면도 수정" />
+    <MESSAGE value="메인 카테고리 값 받아오기" />
+    <MESSAGE value="05/27 평면도 수정" />
+    <option name="LAST_COMMIT_MESSAGE" value="05/27 평면도 수정" />
+  </component>
+</project>
