@@ -91,6 +91,30 @@ const BokJi = {
   scale: 1,
   others: '',
 }
+const DongHae = {
+  id: '06',
+  building: '연구문화관',
+  building_phone_num: '',
+  management_team: '',
+  management_team_phone_num: '',
+  modelPath: './models/DongHae.glb',
+  position: { x: 50, y: 0, z: 65 },
+  angle: 159,
+  scale: 1,
+  others: '',
+}
+const IceRink = {
+  id: '06-1',
+  building: '아이스링크',
+  building_phone_num: '',
+  management_team: '',
+  management_team_phone_num: '',
+  modelPath: './models/IceRink.glb',
+  position: { x: 0, y: 0, z: 97 },
+  angle: 123,
+  scale: 1,
+  others: '',
+}
 const DaSan = {
   id: '07',
   building: '다산재',
@@ -115,6 +139,30 @@ const ChamBit = {
   scale: 1,
   others: '',
 }
+const HanUl = {
+  id: '10',
+  building: '한울관',
+  building_phone_num: '',
+  management_team: '',
+  management_team_phone_num: '',
+  modelPath: './models/HanUl.glb',
+  position: { x: -37, y: 0, z: 104 },
+  angle: -76,
+  scale: 1,
+  others: '',
+}
+const HanCheon = {
+  id: '11',
+  building: '한천재',
+  building_phone_num: '',
+  management_team: '',
+  management_team_phone_num: '',
+  modelPath: './models/HanCheon.glb',
+  position: { x: 8, y: 0, z: 65 },
+  angle: -20,
+  scale: 1,
+  others: '',
+}
 const KWSquare = {
   id: '16',
   building: '광운스퀘어&80주년기념관',
@@ -127,15 +175,45 @@ const KWSquare = {
   scale: 1,
   others: '',
 }
+const BitSolA = {
+  id: '17',
+  building: '빛솔재A동',
+  building_phone_num: '',
+  management_team: '',
+  management_team_phone_num: '',
+  modelPath: './models/BitSolA.glb',
+  position: { x: -118, y: 0, z: 180 },
+  angle: 15,
+  scale: 1,
+  others: '',
+}
+const BitSolB = {
+  id: '18',
+  building: '빛솔재B동',
+  building_phone_num: '',
+  management_team: '',
+  management_team_phone_num: '',
+  modelPath: './models/BitSolB.glb',
+  position: { x: -107, y: 0, z: 129 },
+  angle: 15,
+  scale: 1,
+  others: '',
+}
 
 datas.push( HwaDo );
 datas.push( OkUi );
 datas.push( BiMa ); 
 datas.push( SaeBit );
 datas.push( BokJi );
+datas.push( DongHae );
+datas.push( IceRink );
 datas.push( DaSan );
 datas.push( ChamBit );
+datas.push( HanUl );
+datas.push( HanCheon );
 datas.push( KWSquare );
+datas.push( BitSolA );
+datas.push( BitSolB );
 
 const fixedHelp = document.getElementById( 'fixedHelp' );
 fixedHelp.addEventListener( 'click', () => {
@@ -160,7 +238,7 @@ const main = document.querySelector( 'main' );
 ///// THREE.js from here: /////
 ///////////////////////////////
 
-let width, height, camera, controls, scene, renderer, raycaster, gui;
+let width, height, camera, controls, scene, renderer, raycaster, gui, gui_category;
 
 const pointer = new THREE.Vector2(); // mouse cursor position tracking
 let intersects = []; // list to find which building is selected
@@ -264,11 +342,31 @@ function init() {
   gui.add( obj, 'management_team_phone_num' ).name( '시설관리팀 전화번호' );
   gui.add( obj, 'id' ).name( 'Building ID' );
   gui.add( obj, 'myFunction' ).name( 'alert hi' ); 	// button
-  gui.controllers[0].$input.readOnly = true;
-  gui.controllers[1].$input.readOnly = true;
-  gui.controllers[2].$input.readOnly = true;
-  gui.controllers[3].$input.readOnly = true;
+  for(var i = 0; i < gui.length; i++)
+    gui.controllers[i].$input.readOnly = true;
   gui.open( false );
+
+  gui_category = new GUI( { container: document.getElementById( 'guiContainer' ), title: 'Information' } );
+  let obj_category = {
+    category_name: '',
+    category_id: '',
+    building_code: '',
+    room_number: '',
+    sub_number: '',
+    myFunction: function() {
+      window.location.href = "./pages/detail_example.html"; }, // onclick callback
+  }
+
+
+  gui_category.add( obj_category, 'category_name' ).name( '카테고리명' );
+  gui_category.add( obj_category, 'category_id' ).name( 'ID' );
+  gui_category.add( obj_category, 'building_code' ).name( '건물 번호' );
+  gui_category.add( obj_category, 'room_number' ).name( '호수' );
+  gui_category.add( obj_category, 'sub_number' ).name( '기타 번호' );
+  gui_category.add( obj_category, 'myFunction' ).name( '디테일 페이지' ); 	// button
+  for(var i = 0; i < gui_category.length; i++)
+    gui_category.controllers[i].$input.readOnly = true;
+  gui_category.open( false );
 
   // // Grid Helper
   // const gridHelper = new THREE.GridHelper( 1000, 100 );
@@ -340,6 +438,21 @@ function render() {
 }
 
 // custom functions
+
+subCategories.forEach( ( subCategory ) => {
+  subCategory.addEventListener( 'click', function() {
+    var c_id = this.getAttribute('category-id');
+
+    // 01-0101-0 건물 - 방 번호 - 기본0
+    gui_category.controllers[ 0 ].setValue( this.text );          // category_name
+    gui_category.controllers[ 1 ].setValue( c_id );               // category_id
+    gui_category.controllers[ 2 ].setValue( c_id.substr(0, 2) );  // building_code
+    gui_category.controllers[ 3 ].setValue( c_id.substr(3, 4) );  //room_number
+    gui_category.controllers[ 4 ].setValue( c_id.substr(8, 1) ); //sub_number
+
+    // console.log(gui_category.controllers[1].getValue());
+  });
+});
 
 /**
  * 건물의 모델링을 불러와 `scene`에 추가하고, `buildings` 리스트에 저장 및 `subCategories`의 이벤트 리스너를 설정합니다.
@@ -465,7 +578,7 @@ async function createFont( position, name ) {
     new THREE.LineBasicMaterial( { color: 0x000000, linewidth: 5 } )
   );
   line.position.set( 0, 0, 0 );
-  line.material.depthTest = false; // for renderOrder
+  // line.material.depthTest = false; // for renderOrder
 
   // font loading function
   const loader = new FontLoader();
@@ -504,8 +617,8 @@ async function createFont( position, name ) {
 /**
  * `pointer` 에서 `camera` 가 바라보는 방향으로 `raycaster` 를 생성해 교차하는 아이템을 가져옵니다.   
  * 
- * `buildings[]` 에서 `raycaster` 와 교차하는 아이템을 확인하여 가장 앞에 있는 것을 `INTERSECTED`로 설정한 후 `highlight()` 를 수행합니다.   
- * 교차하는 아이템이 바뀌거나 사라졌을 때는 기존 아이템의 `lowlight()`를 수행합니다.
+ * `buildings[]` 에서 `raycaster` 와 교차하는 아이템을 확인하여 가장 앞에 있는 것을 `INTERSECTED`로 설정한 후 `onPointerOver()` 를 수행합니다.
+ * 교차하는 아이템이 바뀌거나 사라졌을 때는 기존 아이템의 `onPointerOut()`를 수행합니다.
  */
 function getIntersects() {
 
