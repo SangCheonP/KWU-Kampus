@@ -44,9 +44,9 @@
               </div>
             </div>
             <ul class="sub-categories">
-              <li><a href="" data-id="01">화도관</a></li>
-              <li><a href="" data-id="02">옥의관</a></li>
-              <li><a href="" data-id="03">비마관</a></li>
+              <li><a href="" data-id="01" category-id="01-0101-0">화도관</a></li>
+              <li><a href="" data-id="02" category-id="02-0102-0">옥의관</a></li>
+              <li><a href="" data-id="03" category-id="03-0201-0">비마관</a></li>
               <li><a href="" data-id="04">새빛관</a></li>
               <li><a href="" data-id="05">복지관</a></li>
               <li><a href="" data-id="06">연구문화관</a></li>

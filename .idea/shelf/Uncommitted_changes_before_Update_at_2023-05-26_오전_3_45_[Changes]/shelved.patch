@@ -1,0 +1,27 @@
+Index: build/resources/main/static/js/detail-example.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>const floorList = document.getElementById('floors');\r\nconst roomNums = document.querySelectorAll('#detail .img-wrap .roomNum');\r\n\r\nconst receivedFloorCount = 4;\r\nconst receivedRoomCount = 4;\r\n\r\nconst receivedFloorList = [\r\n    [101, 102, 103, 104],\r\n    [201, 202, 203, 204],\r\n    [301, 302, 303, 304],\r\n    [401, 402, 403, 404],\r\n];\r\nconst receivedBgUrl = \"../images/details-example.jpg\";\r\n\r\nlet rooms = undefined;\r\nlet prevElement = undefined;\r\nlet prevDesc = undefined;\r\nlet floors = undefined;\r\n\r\ninit();\r\n\r\nfunction init() {\r\n    \r\n    createFloors(receivedFloorCount, receivedRoomCount);\r\n    setFloorBg(receivedBgUrl);\r\n\r\n    floors = document.querySelectorAll( '#floors>li' );\r\n    floors.forEach( ( floor, i ) => {\r\n        // 1층을 Default로 보여주기 위한 설정\r\n        if (i === 0) { activateFloor( floor, i ); }\r\n    \r\n        const floorTitle = floor.querySelector( '.floor-title' );\r\n        floorTitle.addEventListener( 'click', ( e ) => {\r\n    \r\n            e.preventDefault();\r\n            // 한 층만 표시하기 위해서 활성화되었던 element를 저장하고,\r\n            // 다른 element 클릭 시 저장한 이전 element를 비활성화\r\n            if ( prevDesc ) { prevDesc.classList.remove( 'active' ); }\r\n            if ( prevElement ) { prevElement.classList.remove( 'active' ); }\r\n    \r\n            // 선택한 층에 따라 표시되는 호수(방 번호) 변경\r\n            activateFloor( floor, i );\r\n    \r\n        } );\r\n    \r\n    } );\r\n\r\n}\r\n\r\n/**\r\n * 건물에 대한 정보 중 총 층(floor)수와 호(room)수를 받아와서\r\n * detail_example.html에 Floor List를 구성하는 새 element 들을 생성합니다.\r\n * \r\n * @param { number } floorCount the integer number of floors\r\n * @param { number } roomCount the integer number of rooms in each floors\r\n * @result Create new elements under `ul#floors`\r\n */\r\nfunction createFloors( floorCount = 0, roomCount = 0 ) {\r\n\r\n    for ( let i = 0; i < floorCount; ++i ) {\r\n\r\n        const liFloor = document.createElement( 'li' );\r\n        const div = document.createElement( 'div' );\r\n        const span = document.createElement( 'span' );\r\n\r\n        div.className = 'text'; // div.text\r\n        span.className = 'floor-title'; // span.floor-title\r\n        span.innerText = `${ i + 1 }F`;\r\n\r\n        div.appendChild( span ); // div > span\r\n        liFloor.appendChild( div ); // li > div > span\r\n\r\n        const ul = document.createElement( 'ul' );\r\n        ul.setAttribute( 'id', 'rooms' ); // ul#rooms\r\n\r\n        for ( let j = 0; j < roomCount; j++ ) {\r\n\r\n            const liRoom = document.createElement( 'li' );\r\n            liRoom.innerText = `${ i + 1 }0${ j + 1 }`; // 임의로 i0j, 10호 넘어가면 못 씀\r\n            ul.appendChild( liRoom ); // ul > li\r\n\r\n        }\r\n\r\n        liFloor.appendChild(ul); // li > div + ul\r\n        floorList.appendChild(liFloor);\r\n\r\n    }\r\n\r\n}\r\n\r\n/**\r\n * `main#detail > div.img-wrap > div.imgBg` 의 background url을 `bgUrl`로 설정합니다.\r\n * @param { string } bgUrl url string of the background image\r\n */\r\nfunction setFloorBg ( bgUrl = \"\" ) {\r\n\r\n    const target = document.querySelector( '#detail .img-wrap .imgBg' );\r\n    target.style.background = `url(${ bgUrl }) no-repeat center center / contain`;\r\n\r\n}\r\n\r\n/**\r\n * `ul#floors` element 아래의 `li` element 들 중에서, i 번째 요소를 활성화합니다.  \r\n *  \r\n * 활성화는 다음과 같은 작업을 포함합니다.\r\n * \r\n * * `roomNums` 요소 내의 `span`(방 번호)과 `.desc p`(해당 방 설명)의 innerText 변경\r\n * * `rooms` 에 클릭 이벤트 설정\r\n * * `prevElement`에 현재 선택된 `floor` 저장\r\n * @param {Element} floor `li` element in floors list\r\n * @param {number} i index value of the element\r\n */\r\nfunction activateFloor ( floor, i ) {\r\n\r\n    floor.classList.add( 'active' ); \r\n    const fl = receivedFloorList[ i ];\r\n    roomNums.forEach( ( rn, j ) => {\r\n\r\n        rn.querySelector( 'span' ).innerText = `${ fl[ j ] }`;\r\n        rn.querySelector( '.desc p' ).innerText = `${ fl[ j ] } description`;\r\n\r\n    });\r\n    \r\n    rooms = floor.querySelectorAll( '#rooms li' );\r\n    rooms.forEach( ( room, idx ) => {\r\n        room.addEventListener( 'click', () => {\r\n\r\n            if ( prevDesc ) { prevDesc.classList.remove( 'active' ); }\r\n            const desc = roomNums[ idx ].querySelector( '.desc' );\r\n            desc.classList.add( 'active' );\r\n            prevDesc = desc;\r\n\r\n        })\r\n    });\r\n\r\n    prevElement = floor;\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/build/resources/main/static/js/detail-example.js b/build/resources/main/static/js/detail-example.js
+--- a/build/resources/main/static/js/detail-example.js	(revision 2ef29b3be64fb162ef685d381de829fa31f36604)
++++ b/build/resources/main/static/js/detail-example.js	(date 1684226224188)
+@@ -17,6 +17,8 @@
+ let prevDesc = undefined;
+ let floors = undefined;
+ 
++import { test } from './main.js';
++
+ init();
+ 
+ function init() {
+@@ -134,5 +136,5 @@
+     });
+ 
+     prevElement = floor;
+-
++    console.log("!");
+ }
+\ No newline at end of file

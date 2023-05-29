@@ -277,7 +277,7 @@ const main = document.querySelector( 'main' );
 ///// THREE.js from here: /////
 ///////////////////////////////
 
-let width, height, camera, controls, scene, renderer, raycaster, gui;
+let width, height, camera, controls, scene, renderer, raycaster, gui, gui_category;
 
 const pointer = new THREE.Vector2(); // mouse cursor position tracking
 let intersects = []; // list to find which building is selected
@@ -381,11 +381,31 @@ function init() {
   gui.add( obj, 'management_team_phone_num' ).name( '시설관리팀 전화번호' );
   gui.add( obj, 'id' ).name( 'Building ID' );
   gui.add( obj, 'myFunction' ).name( 'alert hi' ); 	// button
-  gui.controllers[0].$input.readOnly = true;
-  gui.controllers[1].$input.readOnly = true;
-  gui.controllers[2].$input.readOnly = true;
-  gui.controllers[3].$input.readOnly = true;
+  for(var i = 0; i < gui.length; i++)
+    gui.controllers[i].$input.readOnly = true;
   gui.open( false );
+
+  gui_category = new GUI( { container: document.getElementById( 'guiContainer' ), title: 'Information' } );
+  let obj_category = {
+    category_name: '',
+    category_id: '',
+    building_code: '',
+    room_number: '',
+    sub_number: '',
+    myFunction: function() {
+      window.location.href = "./pages/detail_example.html"; }, // onclick callback
+  }
+
+
+  gui_category.add( obj_category, 'category_name' ).name( '카테고리명' );
+  gui_category.add( obj_category, 'category_id' ).name( 'ID' );
+  gui_category.add( obj_category, 'building_code' ).name( '건물 번호' );
+  gui_category.add( obj_category, 'room_number' ).name( '호수' );
+  gui_category.add( obj_category, 'sub_number' ).name( '기타 번호' );
+  gui_category.add( obj_category, 'myFunction' ).name( '디테일 페이지' ); 	// button
+  for(var i = 0; i < gui_category.length; i++)
+    gui_category.controllers[i].$input.readOnly = true;
+  gui_category.open( false );
 
   // // Grid Helper
   // const gridHelper = new THREE.GridHelper( 1000, 100 );
@@ -457,6 +477,21 @@ function render() {
 }
 
 // custom functions
+
+subCategories.forEach( ( subCategory ) => {
+  subCategory.addEventListener( 'click', function() {
+    var c_id = this.getAttribute('category-id');
+
+    // 01-0101-0 건물 - 방 번호 - 기본0
+    gui_category.controllers[ 0 ].setValue( this.text );          // category_name
+    gui_category.controllers[ 1 ].setValue( c_id );               // category_id
+    gui_category.controllers[ 2 ].setValue( c_id.substr(0, 2) );  // building_code
+    gui_category.controllers[ 3 ].setValue( c_id.substr(3, 4) );  //room_number
+    gui_category.controllers[ 4 ].setValue( c_id.substr(8, 1) ); //sub_number
+
+    // console.log(gui_category.controllers[1].getValue());
+  });
+});
 
 /**
  * 건물의 모델링을 불러와 `scene`에 추가하고, `buildings` 리스트에 저장 및 `subCategories`의 이벤트 리스너를 설정합니다.

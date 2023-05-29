@@ -1,0 +1,34 @@
+<changelist name="Uncommitted_changes_before_Update_at_2023-05-26_오전_3_45_[Changes]" date="1685040303780" recycled="false" toDelete="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2023-05-26_오전_3_45_[Changes]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Update at 2023-05-26 오전 3:45 [Changes]" />
+  <binary>
+    <option name="BEFORE_PATH" value="build/classes/java/main/com/example/kwmap/mapper/SampleMapper.class" />
+    <option name="AFTER_PATH" value="build/classes/java/main/com/example/kwmap/mapper/SampleMapper.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2023-05-26_오전_3_45_[Changes]/SampleMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="build/classes/java/main/com/example/kwmap/model/SampleModel.class" />
+    <option name="AFTER_PATH" value="build/classes/java/main/com/example/kwmap/model/SampleModel.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2023-05-26_오전_3_45_[Changes]/SampleModel.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="build/tmp/compileJava/previous-compilation-data.bin" />
+    <option name="AFTER_PATH" value="build/tmp/compileJava/previous-compilation-data.bin" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2023-05-26_오전_3_45_[Changes]/previous-compilation-data.bin" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="build/classes/java/main/com/example/kwmap/KWmapApplication.class" />
+    <option name="AFTER_PATH" value="build/classes/java/main/com/example/kwmap/KWmapApplication.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2023-05-26_오전_3_45_[Changes]/KWmapApplication.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="build/classes/java/main/com/example/kwmap/controller/SampleController.class" />
+    <option name="AFTER_PATH" value="build/classes/java/main/com/example/kwmap/controller/SampleController.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2023-05-26_오전_3_45_[Changes]/SampleController.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="build/classes/java/main/com/example/kwmap/service/SampleService.class" />
+    <option name="AFTER_PATH" value="build/classes/java/main/com/example/kwmap/service/SampleService.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2023-05-26_오전_3_45_[Changes]/SampleService.class" />
+  </binary>
+</changelist>

@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="org.bgee.log4jdbc-log4j2" artifactId="log4jdbc-log4j2-jdbc4.1" version="1.16" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.bgee.log4jdbc-log4j2/log4jdbc-log4j2-jdbc4.1/1.16/ce7cd831b2e3e5d428e659a6fdae0fb6b89f3cc7/log4jdbc-log4j2-jdbc4.1-1.16.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.bgee.log4jdbc-log4j2/log4jdbc-log4j2-jdbc4.1/1.16/430003bd1ae4891390cfb1c7cfcd7908f63f5931/log4jdbc-log4j2-jdbc4.1-1.16-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
