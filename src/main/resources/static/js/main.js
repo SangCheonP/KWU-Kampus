@@ -127,18 +127,6 @@ const DaSan = {
   scale: 1,
   others: '',
 }
-const YeonChon = {
-  id: '08',
-  building: '연촌재',
-  building_phone_num: '',
-  management_team: '',
-  management_team_phone_num: '',
-  modelPath: './models/YeonChon.glb',
-  position: { x: -175, y: 0, z: 146 },
-  angle: 144,
-  scale: 1,
-  others: '',
-}
 const ChamBit = {
   id: '09',
   building: '참빛관',
@@ -172,30 +160,6 @@ const HanCheon = {
   modelPath: './models/HanCheon.glb',
   position: { x: 8, y: 0, z: 65 },
   angle: -20,
-  scale: 1,
-  others: '',
-}
-const InternationalHouse = {
-  id: '13',
-  building: '국제기숙사',
-  building_phone_num: '',
-  management_team: '',
-  management_team_phone_num: '',
-  modelPath: './models/InternationalHouse.glb',
-  position: { x: -204, y: 0, z: 165 },
-  angle: 100,
-  scale: 1,
-  others: '',
-}
-const NuRi = {
-  id: '14',
-  building: '누리관',
-  building_phone_num: '',
-  management_team: '',
-  management_team_phone_num: '',
-  modelPath: './models/NuRi.glb',
-  position: { x: -2, y: 0, z: 290 },
-  angle: -27,
   scale: 1,
   others: '',
 }
@@ -238,18 +202,15 @@ const BitSolB = {
 
 datas.push( HwaDo );
 datas.push( OkUi );
-datas.push( BiMa );
+datas.push( BiMa ); 
 datas.push( SaeBit );
 datas.push( BokJi );
 datas.push( DongHae );
 datas.push( IceRink );
 datas.push( DaSan );
-datas.push( YeonChon );
 datas.push( ChamBit );
 datas.push( HanUl );
 datas.push( HanCheon );
-datas.push( InternationalHouse );
-datas.push( NuRi );
 datas.push( KWSquare );
 datas.push( BitSolA );
 datas.push( BitSolB );
@@ -372,7 +333,7 @@ function init() {
     management_team: '',
     management_team_phone_num: '',
     id: '',
-    myFunction: function() { window.location.href = "/detail"; }, // onclick callback
+    myFunction: function() { alert( 'hi' ) }, // onclick callback
   }
   
   gui.add( obj, 'building' ).name( '건물명' );
@@ -380,7 +341,7 @@ function init() {
   gui.add( obj, 'management_team' ).name( '시설관리팀' );
   gui.add( obj, 'management_team_phone_num' ).name( '시설관리팀 전화번호' );
   gui.add( obj, 'id' ).name( 'Building ID' );
-  gui.add( obj, 'myFunction' ).name( '디테일 페이지 링크' ); 	// button
+  gui.add( obj, 'myFunction' ).name( 'alert hi' ); 	// button
   for(var i = 0; i < gui.length; i++)
     gui.controllers[i].$input.readOnly = true;
   gui.open( false );
@@ -393,7 +354,7 @@ function init() {
     room_number: '',
     sub_number: '',
     myFunction: function() {
-      window.location.href = "/detail"; }, // onclick callback
+      window.location.href = "./pages/detail_example.html"; }, // onclick callback
   }
 
 
@@ -413,7 +374,7 @@ function init() {
 
   window.addEventListener( 'resize', onWindowResize );
   main.addEventListener( 'pointermove', onPointerMove );
-  main.addEventListener( 'mousedown', onClick );
+  main.addEventListener( 'click', onClick );
   // window.addEventListener( 'dblclick', ( event ) => { // dev, 더블 클릭시 카메라의 위치에서 카메라 방향으로 
   //   let worldDirection = new THREE.Vector3;
   //   let worldPosition = new THREE.Vector3;
