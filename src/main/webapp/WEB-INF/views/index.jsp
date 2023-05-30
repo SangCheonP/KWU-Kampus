@@ -18,11 +18,11 @@
   <div class="page">
     <header>
       <div class="inner">
-        <h1>광운대학교<a href="./index.jsp">(logo)</a></h1>
+        <h1>광운대학교<a href="/">(logo)</a></h1>
         <!-- Temporary Links List -->
         <ul class="temp-links">
           <li>Temporary Links</li>
-          <li><a href="./pages/detail_example.html">Detail Example</a></li>
+          <li><a href="/detail">Detail Example</a></li>
         </ul>
         <!-- Temporary Links List end -->
         <div id="menuBtn">
@@ -180,7 +180,6 @@
           </div>
         </div>
       </div>
-      <script src="./js/header.js"></script>
     </header>
 
     <main class="main">
@@ -206,16 +205,6 @@
 <%--            </div>--%>
 <%--          </div>--%>
       </div>
-      <script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
-      <script type="importmap">
-        {
-          "imports": {
-            "three": "https://unpkg.com/three@0.151.3/build/three.module.js",
-            "three/addons/": "https://unpkg.com/three@0.151.3/examples/jsm/"
-          }
-        }
-      </script>
-      <script type="module" src="./js/main.js"></script>
 
       <div id="fixedHelp">
         <img class="help-icon" src="./images/icon-help-round.svg" alt="to see how to use, click here">
@@ -241,5 +230,18 @@
       </div>
     </main>
   </div>
+
+  <script src="./js/header.js"></script>
+  <script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.151.3/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.151.3/examples/jsm/"
+      }
+    }
+  </script>
+  <script type="module" src="./js/main.js"></script>
+
 </body>
 </html>

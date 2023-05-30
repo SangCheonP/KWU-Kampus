@@ -372,7 +372,7 @@ function init() {
     management_team: '',
     management_team_phone_num: '',
     id: '',
-    myFunction: function() { alert( 'hi' ) }, // onclick callback
+    myFunction: function() { window.location.href = "/detail"; }, // onclick callback
   }
   
   gui.add( obj, 'building' ).name( '건물명' );
@@ -380,7 +380,7 @@ function init() {
   gui.add( obj, 'management_team' ).name( '시설관리팀' );
   gui.add( obj, 'management_team_phone_num' ).name( '시설관리팀 전화번호' );
   gui.add( obj, 'id' ).name( 'Building ID' );
-  gui.add( obj, 'myFunction' ).name( 'alert hi' ); 	// button
+  gui.add( obj, 'myFunction' ).name( '디테일 페이지 링크' ); 	// button
   for(var i = 0; i < gui.length; i++)
     gui.controllers[i].$input.readOnly = true;
   gui.open( false );
@@ -393,7 +393,7 @@ function init() {
     room_number: '',
     sub_number: '',
     myFunction: function() {
-      window.location.href = "./pages/detail_example.html"; }, // onclick callback
+      window.location.href = "/detail"; }, // onclick callback
   }
 
 
@@ -413,7 +413,7 @@ function init() {
 
   window.addEventListener( 'resize', onWindowResize );
   main.addEventListener( 'pointermove', onPointerMove );
-  main.addEventListener( 'click', onClick );
+  main.addEventListener( 'mousedown', onClick );
   // window.addEventListener( 'dblclick', ( event ) => { // dev, 더블 클릭시 카메라의 위치에서 카메라 방향으로 
   //   let worldDirection = new THREE.Vector3;
   //   let worldPosition = new THREE.Vector3;
