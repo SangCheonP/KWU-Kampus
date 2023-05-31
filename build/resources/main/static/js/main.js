@@ -12,7 +12,7 @@ let receivedData = [];
 function getBuildings() {
   $.ajax( {
 
-    url : "http://localhost:8090/buildings",
+    url : "http://localhost:8090/buildings/info",
     type : "GET",
     success : function ( res ) {
 
