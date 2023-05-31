@@ -9,15 +9,14 @@ import java.util.List;
 
 @Mapper
 public interface SampleMapper {
-    //@Select("SELECT id FROM member where id = 1")
-    public String selectId();
-    // testMethod
 
+   // 모든 건물에 대한 각각의 모든 정보를 리스트 형태로 리턴
    public List<mainPageBuildingsModel> selectBuildingsList();
 
-   public mainPageBuildingsModel selectBuildingShortInfo(String building);
+   // 해당 건물에 대한 모든 정보를 리턴
+   public mainPageBuildingsModel selectBuildingShortInfo(String building_code);
 
-   public detailRoomInfoModel selectDetailRoomInfo(String building, String room_code);
+   public detailRoomInfoModel selectDetailRoomInfo(String building_code, String room_code);
 
-   public List<detailBuildingAllRoomsInfoModel> selectDetailBuildingAllRoomsInfo(String building);
+   public List<detailBuildingAllRoomsInfoModel> selectDetailBuildingAllRoomsInfo(String building_code);
 }

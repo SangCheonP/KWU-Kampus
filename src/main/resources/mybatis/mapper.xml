@@ -3,12 +3,6 @@
 
 <mapper namespace="com.example.kwmap.mapper.SampleMapper">
 
-    <select id="selectId" resultType="String">
-        select name
-        from test
-        where id=3;
-    </select>
-
     <select id="selectBuildingsList" resultType="com.example.kwmap.model.mainPageBuildingsModel">
         select *
         from buildings;
@@ -17,20 +11,20 @@
     <select id="selectBuildingShortInfo" resultType="com.example.kwmap.model.mainPageBuildingsModel">
         select *
         from buildings
-        where building=#{building};
+        where building_code=#{building_code};
     </select>
 
     <select id="selectDetailRoomInfo" resultType="com.example.kwmap.model.detailRoomInfoModel">
         select *
         from rooms
-        where building=#{building} AND room_code=#{room_code};
+        where building_code=#{building_code} AND room_code=#{room_code};
     </select>
 
     <select id="selectDetailBuildingAllRoomsInfo" resultType="com.example.kwmap.model.detailBuildingAllRoomsInfoModel">
         select b.building, b.building_code, b.building_phone_num,
                r.floor, r.room_no, r.room_code, r.facilities, r.category, r.importance
         from buildings as b, rooms as r
-        where b.building=#{building};
+        where b.building_code=#{building_code};
     </select>
 
 <!--    <select id="showAllDataInMainPage" resultMap="mainpage">-->

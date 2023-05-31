@@ -4,26 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a1763ece-2013-4e26-99e8-83801edfd65b" name="Changes" comment="05/27 평면도 수정">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/kwmap/model/detailBuildingAllRoomsInfoModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/kwmap/model/detailRoomInfoModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/KWU_Campus.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/KWU_Campus.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2023-05-26__3_45__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2023-05-26__3_45__Changes_.xml" afterDir="false" />
+    <list default="true" id="a1763ece-2013-4e26-99e8-83801edfd65b" name="Changes" comment="05/30 Detail Page API 추가&#10;&#10; - Detail Page API 추가 및 쿼리 작성">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/kwmap/KWmapApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/kwmap/KWmapApplication.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/kwmap/controller/SampleController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/kwmap/controller/SampleController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/kwmap/mapper/SampleMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/kwmap/mapper/SampleMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/kwmap/model/SampleModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/kwmap/model/SampleModel.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/kwmap/service/SampleService.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/kwmap/service/SampleService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/resources/main/mybatis/mapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/mybatis/mapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/static/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/static/js/main.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/kwmap/controller/SampleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/kwmap/controller/SampleController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/kwmap/mapper/SampleMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/kwmap/mapper/SampleMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/kwmap/model/mainPageBuildingsModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/kwmap/model/mainPageBuildingsModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/kwmap/service/SampleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/kwmap/service/SampleService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/mapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/mapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/main.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -213,6 +205,8 @@
       <workItem from="1685058015428" duration="2725000" />
       <workItem from="1685127599524" duration="408000" />
       <workItem from="1685420425214" duration="4809000" />
+      <workItem from="1685433214281" duration="943000" />
+      <workItem from="1685534718147" duration="2308000" />
     </task>
     <task id="LOCAL-00001" summary="화도관 평면도 추가">
       <created>1682685614063</created>
@@ -249,7 +243,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685127922733</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="05/30 Detail Page API 추가&#10;&#10; - Detail Page API 추가 및 쿼리 작성">
+      <created>1685433544985</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1685433544985</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -271,6 +272,7 @@
     <MESSAGE value="새빛관 평면도 추가&#10;화도관 평면도 수정" />
     <MESSAGE value="메인 카테고리 값 받아오기" />
     <MESSAGE value="05/27 평면도 수정" />
-    <option name="LAST_COMMIT_MESSAGE" value="05/27 평면도 수정" />
+    <MESSAGE value="05/30 Detail Page API 추가&#10;&#10; - Detail Page API 추가 및 쿼리 작성" />
+    <option name="LAST_COMMIT_MESSAGE" value="05/30 Detail Page API 추가&#10;&#10; - Detail Page API 추가 및 쿼리 작성" />
   </component>
 </project>
