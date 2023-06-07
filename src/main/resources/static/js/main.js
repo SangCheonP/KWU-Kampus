@@ -6,192 +6,6 @@ import { FontLoader } from 'three/addons/loaders/FontLoader.js';
 
 // basic javascripts
 
-const datas = [];
-
-const HwaDo = {
-  id: '01',
-  building: '화도관',
-  building_phone_num: '',
-  management_team: '',
-  management_team_phone_num: '',
-  modelPath: './models/HwaDo.glb',
-  position: { x: -16, y: 0, z: -106 },
-  angle: -118,
-  scale: 1,
-  others: '',
-}
-const OkUi = {
-  id: '02',
-  building: '옥의관',
-  building_phone_num: '',
-  management_team: '',
-  management_team_phone_num: '',
-  modelPath: './models/OkUi.glb',
-  position: { x: 162, y: 0, z: -72 },
-  angle: 212,
-  scale: 1,
-  others: '',
-}
-const BiMa = {
-  id: '03',
-  building: '비마관',
-  building_phone_num: '',
-  management_team: '',
-  management_team_phone_num: '',
-  modelPath: './models/BiMa.glb',
-  position: { x: 79, y: 0, z: -148 },
-  angle: 23,
-  scale: 1,
-  others: '',
-}
-const SaeBit = {
-  id: '04',
-  building: '새빛관',
-  building_phone_num: '',
-  management_team: '',
-  management_team_phone_num: '',
-  modelPath: './models/SaeBit.glb',
-  position: { x: 55, y: 0, z: -229 },
-  angle: 74.5,
-  scale: 1,
-  others: '',
-}
-const BokJi = {
-  id: '05',
-  building: '복지관',
-  building_phone_num: '',
-  management_team: '',
-  management_team_phone_num: '',
-  modelPath: './models/BokJi.glb',
-  position: { x: 120, y: 0, z: 5 },
-  angle: -28,
-  scale: 1,
-  others: '',
-}
-const DongHae = {
-  id: '06',
-  building: '연구문화관',
-  building_phone_num: '',
-  management_team: '',
-  management_team_phone_num: '',
-  modelPath: './models/DongHae.glb',
-  position: { x: 50, y: 0, z: 65 },
-  angle: 159,
-  scale: 1,
-  others: '',
-}
-const IceRink = {
-  id: '06-1',
-  building: '아이스링크',
-  building_phone_num: '',
-  management_team: '',
-  management_team_phone_num: '',
-  modelPath: './models/IceRink.glb',
-  position: { x: 0, y: 0, z: 97 },
-  angle: 123,
-  scale: 1,
-  others: '',
-}
-const DaSan = {
-  id: '07',
-  building: '다산재',
-  building_phone_num: '',
-  management_team: '',
-  management_team_phone_num: '',
-  modelPath: './models/DaSan.glb',
-  position: { x: 131, y: 0, z: -156 },
-  angle: 42,
-  scale: 1,
-  others: '',
-}
-const ChamBit = {
-  id: '09',
-  building: '참빛관',
-  building_phone_num: '',
-  management_team: '',
-  management_team_phone_num: '',
-  modelPath: './models/ChamBit.glb',
-  position: { x: 128, y: 0, z: -235 },
-  angle: -70,
-  scale: 1,
-  others: '',
-}
-const HanUl = {
-  id: '10',
-  building: '한울관',
-  building_phone_num: '',
-  management_team: '',
-  management_team_phone_num: '',
-  modelPath: './models/HanUl.glb',
-  position: { x: -37, y: 0, z: 104 },
-  angle: -76,
-  scale: 1,
-  others: '',
-}
-const HanCheon = {
-  id: '11',
-  building: '한천재',
-  building_phone_num: '',
-  management_team: '',
-  management_team_phone_num: '',
-  modelPath: './models/HanCheon.glb',
-  position: { x: 8, y: 0, z: 65 },
-  angle: -20,
-  scale: 1,
-  others: '',
-}
-const KWSquare = {
-  id: '16',
-  building: '광운스퀘어&80주년기념관',
-  building_phone_num: '',
-  management_team: '',
-  management_team_phone_num: '',
-  modelPath: './models/KWSquare.glb',
-  position: { x: 42, y: 0, z: -70 },
-  angle: -119,
-  scale: 1,
-  others: '',
-}
-const BitSolA = {
-  id: '17',
-  building: '빛솔재A동',
-  building_phone_num: '',
-  management_team: '',
-  management_team_phone_num: '',
-  modelPath: './models/BitSolA.glb',
-  position: { x: -118, y: 0, z: 180 },
-  angle: 15,
-  scale: 1,
-  others: '',
-}
-const BitSolB = {
-  id: '18',
-  building: '빛솔재B동',
-  building_phone_num: '',
-  management_team: '',
-  management_team_phone_num: '',
-  modelPath: './models/BitSolB.glb',
-  position: { x: -107, y: 0, z: 129 },
-  angle: 15,
-  scale: 1,
-  others: '',
-}
-
-datas.push( HwaDo );
-datas.push( OkUi );
-datas.push( BiMa ); 
-datas.push( SaeBit );
-datas.push( BokJi );
-datas.push( DongHae );
-datas.push( IceRink );
-datas.push( DaSan );
-datas.push( ChamBit );
-datas.push( HanUl );
-datas.push( HanCheon );
-datas.push( KWSquare );
-datas.push( BitSolA );
-datas.push( BitSolB );
-
 const fixedHelp = document.getElementById( 'fixedHelp' );
 fixedHelp.addEventListener( 'click', () => {
 
@@ -273,19 +87,20 @@ function init() {
   } )
   .then( res => res.json() )
   .then( res => {
-    receivedData = res;
-    console.log( receivedData );
-    receivedData.forEach( ( data ) => {
+    const datas = res;
+    console.log( datas );
+    datas.forEach( ( data ) => {
+
       if ( !data.model_path ) {
+
         console.error( data.building, "model_path not found!");
         return;
+
       }
+
       createModel( gltfLoader, data );
     } );
   } );
-  //datas.forEach( ( data ) => {
-  //  createModel( gltfLoader, data );
-  //} );
 
   // world floor
 
