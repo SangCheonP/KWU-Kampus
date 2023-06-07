@@ -44,23 +44,23 @@
               </div>
             </div>
             <ul class="sub-categories">
-              <li><a href="" data-id="01" category-id="01-0101-0">화도관</a></li>
-              <li><a href="" data-id="02" category-id="02-0102-0">옥의관</a></li>
-              <li><a href="" data-id="03" category-id="03-0201-0">비마관</a></li>
-              <li><a href="" data-id="04">새빛관</a></li>
-              <li><a href="" data-id="05">복지관</a></li>
-              <li><a href="" data-id="06">연구문화관</a></li>
-              <li><a href="" data-id="06-1">아이스링크</a></li>
-              <li><a href="" data-id="07">다산재</a></li>
-              <li><a href="" data-id="08">연촌재</a></li>
-              <li><a href="" data-id="09">참빛관</a></li>
-              <li><a href="" data-id="10">한울관</a></li>
-              <li><a href="" data-id="11">한천재</a></li>
-              <li><a href="" data-id="13">국제기숙사</a></li>
-              <li><a href="" data-id="14">누리관</a></li>
-              <li><a href="" data-id="16">광운스퀘어 & 80주년 기념관</a></li>
-              <li><a href="" data-id="17">빛솔재 A동</a></li>
-              <li><a href="" data-id="18">빛솔재 B동</a></li>
+              <li><a href="" data-id="01">80주년 기념관 & 광운 스퀘어</a></li>
+              <li><a href="" data-id="17" category-id="01-0101-0">화도관</a></li>
+              <li><a href="" data-id="12" category-id="02-0102-0">옥의관</a></li>
+              <li><a href="" data-id="05" category-id="03-0201-0">비마관</a></li>
+              <li><a href="" data-id="08">새빛관</a></li>
+              <li><a href="" data-id="04">복지관</a></li>
+              <li><a href="" data-id="10">연구문화관</a></li>
+              <li><a href="" data-id="09">아이스링크</a></li>
+              <li><a href="" data-id="03">다산재</a></li>
+              <li><a href="" data-id="11">연촌재</a></li>
+              <li><a href="" data-id="14">참빛관</a></li>
+              <li><a href="" data-id="15">한울관</a></li>
+              <li><a href="" data-id="16">한천재</a></li>
+              <li><a href="" data-id="13">인터내셔널 하우스</a></li>
+              <li><a href="" data-id="02">누리관</a></li>
+              <li><a href="" data-id="06">빛솔재 A동</a></li>
+              <li><a href="" data-id="07">빛솔재 B동</a></li>
             </ul>
           </div>
           <div class="category">
