@@ -7,29 +7,6 @@ import { FontLoader } from 'three/addons/loaders/FontLoader.js';
 // basic javascripts
 
 const datas = [];
-let receivedData = [];
-
-function getBuildings() {
-  $.ajax( {
-
-    url : "http://localhost:8090/buildings/info",
-    type : "GET",
-    success : function ( res ) {
-
-      if ( res ) {
-        receivedData = res;
-        console.log( res );
-        console.log( receivedData );
-      } else {
-        alert( "실패" );
-      }
-
-    }
-
-  } );
-}
-// const receivedData = getBuildings();
-// getBuildings();
 
 const HwaDo = {
   id: '01',
@@ -291,9 +268,24 @@ function init() {
   // GLTF Loader, load models
 
   const gltfLoader = new GLTFLoader();
-  datas.forEach( ( data ) => {
-    createModel( gltfLoader, data );
+  fetch( "http://localhost:8090/buildings/info", {
+    method: "GET"
+  } )
+  .then( res => res.json() )
+  .then( res => {
+    receivedData = res;
+    console.log( receivedData );
+    receivedData.forEach( ( data ) => {
+      if ( !data.model_path ) {
+        console.error( data.building, "model_path not found!");
+        return;
+      }
+      createModel( gltfLoader, data );
+    } );
   } );
+  //datas.forEach( ( data ) => {
+  //  createModel( gltfLoader, data );
+  //} );
 
   // world floor
 
@@ -465,20 +457,20 @@ subCategories.forEach( ( subCategory ) => {
 function createModel ( loader, data ) {
 
   if ( data.modelPath === '' ) { console.error( 'modelPath not found' ); }
-  loader.load( data.modelPath, async ( gltf ) => {
+  loader.load( data.model_path, async ( gltf ) => {
 
     const model = await gltf.scene;
     if ( !model ) {
       // error handling
     }
     model.name = data.building;
-    model.position.set( data.position.x, data.position.y, data.position.z );
+    model.position.set( data.position_x, data.position_y, data.position_z );
     model.rotateY( Math.PI / 180 * data.angle );
     model.scale.setScalar( data.scale );
 
     model.userData = {
       // isActive: false, // not used
-      id: data.id,
+      id: data.building_code,
       building_phone_num: data.building_phone_num,
       management_team: data.management_team,
       management_team_phone_num: data.management_team_phone_num,
@@ -518,7 +510,7 @@ function createModel ( loader, data ) {
       }
     }
     
-    createFont( model.position, model.name );
+    createFont( model.position, model.name.replace( /\s+/g, '' ) );
     buildings.push( model );
     scene.add( model );
 
