@@ -143,24 +143,93 @@ header #menuBtn {
 .sub-categories>li { width: 100%; padding: 0.5em 1em; }
 .sub-categories>li>a { font-size: 16px; }
 .sub-categories>li>a:hover { text-decoration: underline; }
-/* header end */
 
 /* fixed information modal */
-#guiContainer {
+#infoTag {
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+.infoPageTag {
   position: absolute;
-  left: 20px; top: 100px;
-}
-#guiContainer .lil-gui.root {
-  width: 400px;
-  padding: 5px;
-  border-radius: 10px;
-  background: var( --main-dark );
-}
-#guiContainer .title {
+  top: 100px;
+  width: 40px; height: 40px;
   background: var( --main-color );
+}
+.infoPageTag-bottom {
+  position: absolute;
+  top: 100px; left: 40px;
+  border: 20px solid var(--main-color);
+  border-top: 20px solid transparent;
+  border-right: 20px solid transparent;
+}
+.infoPageTag-top {
+  position: absolute;
+  top: 100px; left: 40px;
+  border: 20px solid var(--main-color);
+  border-bottom: 20px solid transparent;
+  border-right: 20px solid transparent;
+}
+
+#infoPage {
+  position: absolute;
+  left: -300px; top: 100px;
+  width: 300px; height: 400px;
+  background: #fff;
+  border-bottom: 2px solid var( --main-color );
+  padding: 20px;
+  transition: 0.3s ease;
+  overflow-y: scroll;
+}
+#infoPage::-webkit-scrollbar {
+  width: 10px;
+}
+#infoPage::-webkit-scrollbar-thumb {
+  background-clip: padding-box;
+  border: 3px solid transparent;
+  background-color: rgb(173, 173, 173);
+  border-radius: 20px;
+}
+
+#infoPage.on { transform: translateX( 100% );}
+#infoTag.on { transform: translate( 300px, -50px ); }
+
+.infoTitle {
+  font-size: 20px;
+  font-weight: 600;
+  color:#222;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin: 5px;
+  border-bottom: 1px solid #aaa;
+}
+
+.infoContent {
+  font-size: 15px;
+  padding-left: 16px;
+  padding-right: 16px;
+  margin-bottom: 20px;
+}
+
+.infoButton {
+  width: 250px; height: 30px;
+  margin-top: 20px;
+  margin-bottom: 5px;
+  font-size: 20px;
+  font-weight: 600;
+  color:#222;
+  border-width: 1px;
   border-radius: 10px;
+  cursor: pointer;
+}
+
+.infoButton:hover {
+  transition: 0.3s ease-in-out;
+  border-color: var(--main-color);
+  background-color: var(--main-color);
+  color: #fff;
 }
 /* fixed information modal end */
+/* header end */
 
 /* fixed-how-to-use */
 #fixedHelp {

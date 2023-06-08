@@ -24,6 +24,11 @@ public class SampleController {
         return "index";
     }
 
+    @GetMapping("/detail")
+    public String showDetail() {
+        return "detail";
+    }
+
     // 모든 건물에 대한 각각의 모든 정보를 리스트 형태로 리턴
     @ResponseBody
     @GetMapping("/buildings/info")

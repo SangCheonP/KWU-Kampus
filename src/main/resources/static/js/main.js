@@ -29,7 +29,9 @@ const main = document.querySelector( 'main' );
 ///// THREE.js from here: /////
 ///////////////////////////////
 
-let width, height, camera, controls, scene, renderer, raycaster, gui, gui_category;
+let width, height, camera, controls, scene, renderer, raycaster;
+let textTitle, textContent, building_content, categoty_content, info_building, info_category;
+let infoTag, infoPage, infoButton;
 
 const pointer = new THREE.Vector2(); // mouse cursor position tracking
 let intersects = []; // list to find which building is selected
@@ -131,49 +133,21 @@ function init() {
   ambientLight.name = 'ambientLight';
   scene.add( ambientLight );
 
-  // Create GUI Pannel
+  // Create Info Pannel
+  textTitle = document.getElementsByClassName("infoTitle");
+  textContent = document.getElementsByClassName("infoContent");
 
-  gui = new GUI( { container: document.getElementById( 'guiContainer' ), title: 'Information' } );
-  let obj = {
-    building: '',
-    building_phone_num: '',
-    management_team: '',
-    management_team_phone_num: '',
-    id: '',
-    myFunction: function() { alert( 'hi' ) }, // onclick callback
-  }
-  
-  gui.add( obj, 'building' ).name( '건물명' );
-  gui.add( obj, 'building_phone_num' ).name( '전화번호' );
-  gui.add( obj, 'management_team' ).name( '시설관리팀' );
-  gui.add( obj, 'management_team_phone_num' ).name( '시설관리팀 전화번호' );
-  gui.add( obj, 'id' ).name( 'Building ID' );
-  gui.add( obj, 'myFunction' ).name( 'alert hi' ); 	// button
-  for(var i = 0; i < gui.length; i++)
-    gui.controllers[i].$input.readOnly = true;
-  gui.open( false );
+  info_building = new Array('건물명', '전화번호', '시설관리팀', '시설관리팀 전화번호', 'Building ID');
+  info_category = new Array('카테고리명', 'ID', '건물번호', '호수', '기타번호');
 
-  gui_category = new GUI( { container: document.getElementById( 'guiContainer' ), title: 'Information' } );
-  let obj_category = {
-    category_name: '',
-    category_id: '',
-    building_code: '',
-    room_number: '',
-    sub_number: '',
-    myFunction: function() {
-      window.location.href = "./pages/detail_example.html"; }, // onclick callback
-  }
+  building_content = new Array(5);
+  categoty_content = new Array(5);
 
+  infoTag = document.getElementById('infoTag');
+  infoPage = document.getElementById('infoPage');
+  infoButton = document.getElementsByClassName('infoButton');
 
-  gui_category.add( obj_category, 'category_name' ).name( '카테고리명' );
-  gui_category.add( obj_category, 'category_id' ).name( 'ID' );
-  gui_category.add( obj_category, 'building_code' ).name( '건물 번호' );
-  gui_category.add( obj_category, 'room_number' ).name( '호수' );
-  gui_category.add( obj_category, 'sub_number' ).name( '기타 번호' );
-  gui_category.add( obj_category, 'myFunction' ).name( '디테일 페이지' ); 	// button
-  for(var i = 0; i < gui_category.length; i++)
-    gui_category.controllers[i].$input.readOnly = true;
-  gui_category.open( false );
+  resetInfo();
 
   // // Grid Helper
   // const gridHelper = new THREE.GridHelper( 1000, 100 );
@@ -246,18 +220,20 @@ function render() {
 
 // custom functions
 
+/**
+ * 카테고리 클릭 시 배열에 관련 정보 세팅
+ */
 subCategories.forEach( ( subCategory ) => {
   subCategory.addEventListener( 'click', function() {
+    // 00-0000-0: 건물번호-호실-추가번호
     var c_id = this.getAttribute('category-id');
+    categoty_content[0] = this.text;
+    categoty_content[1] = c_id;
+    categoty_content[2] = c_id.substr(0, 2);
+    categoty_content[3] = c_id.substr(3, 4);
+    categoty_content[4] = c_id.substr(8, 1);
 
-    // 01-0101-0 건물 - 방 번호 - 기본0
-    gui_category.controllers[ 0 ].setValue( this.text );          // category_name
-    gui_category.controllers[ 1 ].setValue( c_id );               // category_id
-    gui_category.controllers[ 2 ].setValue( c_id.substr(0, 2) );  // building_code
-    gui_category.controllers[ 3 ].setValue( c_id.substr(3, 4) );  //room_number
-    gui_category.controllers[ 4 ].setValue( c_id.substr(8, 1) ); //sub_number
-
-    // console.log(gui_category.controllers[1].getValue());
+    setCategoryInfo();
   });
 });
 
@@ -315,12 +291,15 @@ function createModel ( loader, data ) {
         controls.target.copy( model.position );
         controls.update();
         console.log( model.name + ' clicked' );
-        gui.controllers[ 0 ].setValue( model.name );
-        gui.controllers[ 1 ].setValue( model.userData.building_phone_num );
-        gui.controllers[ 2 ].setValue( model.userData.management_team );
-        gui.controllers[ 3 ].setValue( model.userData.management_team_phone_num );
-        gui.controllers[ 4 ].setValue( model.userData.id );
-        // gui.open();
+        
+        // 빌딩 클릭 시 배열에 관련 정보 세팅
+        building_content[0] = model.name;
+        building_content[1] = model.userData.building_phone_num;
+        building_content[2] = model.userData.management_team;
+        building_content[3] = model.userData.management_team_phone_num;
+        building_content[4] = model.userData.id;
+
+        setBuildingInfo();
 
       }
     }
@@ -350,6 +329,8 @@ function createModel ( loader, data ) {
       
           e.preventDefault();
           target.userData.onClick();
+
+          setCategoryInfo();
       
         } );
 
@@ -444,4 +425,70 @@ function getIntersects() {
   
   }
 
+}
+
+/**
+ * 정보 요약창 생성
+ * resetInfo(): 정보 요약창 내용 Reset, 사이트 도움말 세팅
+ * setBuildingInfo(): 건물 클릭 시, 건물 관련 정보 세팅
+ * setCategoryInfo(): 카테고리 클릭 시, 카테고리 관련 정보 세팅
+ */
+function resetInfo() {
+  infoButton[0].style.display = 'none';
+
+  for(var i = 0; i < textTitle.length; i++) {
+    textTitle[i].style.display = 'none';
+    textContent[i].style.display = 'none';
+  }
+
+  textTitle[0].style.display = 'block';
+  textContent[0].style.display = 'block';
+  textTitle[0].textContent = '도움말';
+  textContent[0].textContent = '건물 또는 카테고리를 클릭해보세요';
+}
+
+infoTag.addEventListener('click', function() {
+  if(!infoPage.classList.contains('on')) {
+    infoPage.classList.toggle('on');
+    infoTag.classList.toggle('on');
+  }
+  else {
+    infoPage.classList.remove('on');
+    infoTag.classList.remove('on');
+    resetInfo();
+  }
+});
+
+function setBuildingInfo() {
+  infoButton[0].style.display = 'block';
+
+  for(var i = 0; i < textTitle.length; i++) {
+    textTitle[i].style.display = 'block';
+    textContent[i].style.display = 'block';
+
+    textTitle[i].textContent = info_building[i];
+    textContent[i].textContent = building_content[i];
+  }
+
+  if(!infoPage.classList.contains('on')) {
+    infoPage.classList.toggle('on');
+    infoTag.classList.toggle('on');
+  }
+}
+
+function setCategoryInfo() {
+  infoButton[0].style.display = 'block';
+
+  for(var i = 0; i < textTitle.length; i++) {
+    textTitle[i].style.display = 'block';
+    textContent[i].style.display = 'block';
+
+    textTitle[i].textContent = info_category[i];
+    textContent[i].textContent = categoty_content[i];
+  }
+
+  if(!infoPage.classList.contains('on')) {
+    infoPage.classList.toggle('on');
+    infoTag.classList.toggle('on');
+  }
 }
