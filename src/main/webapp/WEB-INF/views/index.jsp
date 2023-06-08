@@ -180,6 +180,26 @@
           </div>
         </div>
       </div>
+
+      <div id="infoPage">
+        <div class="infoTitle"></div>
+        <div class="infoContent"></div>
+        <div class="infoTitle"></div>
+        <div class="infoContent"></div>
+        <div class="infoTitle"></div>
+        <div class="infoContent"></div>
+        <div class="infoTitle"></div>
+        <div class="infoContent"></div>
+        <div class="infoTitle"></div>
+        <div class="infoContent"></div>
+        <button class="infoButton">
+          <a href="./pages/detail_example.html">상세 정보 보기</a></button>
+      </div>
+      <div id="infoTag">
+        <div class="infoPageTag"></div>
+        <div class="infoPageTag-top"></div>
+        <div class="infoPageTag-bottom"></div>
+      </div>
     </header>
 
     <main class="main">

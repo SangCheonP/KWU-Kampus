@@ -4,18 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a1763ece-2013-4e26-99e8-83801edfd65b" name="Changes" comment="05/30 Detail Page API 추가&#10;&#10; - Detail Page API 추가 및 쿼리 작성">
+    <list default="true" id="a1763ece-2013-4e26-99e8-83801edfd65b" name="Changes" comment="06/08 메인화면 정보창 틀 추가">
+      <change beforePath="$PROJECT_DIR$/.idea/modules/KWU_Campus.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/KWU_Campus.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/KWU_Campus.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/KWU_Campus.main.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2023-05-26__3_45__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2023-05-26__3_45__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/kwmap/KWmapApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/kwmap/KWmapApplication.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/kwmap/controller/SampleController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/kwmap/controller/SampleController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/kwmap/mapper/SampleMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/kwmap/mapper/SampleMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/kwmap/model/SampleModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/kwmap/model/SampleModel.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/kwmap/service/SampleService.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/kwmap/service/SampleService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/mybatis/mapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/mybatis/mapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/kwmap/controller/SampleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/kwmap/controller/SampleController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/kwmap/mapper/SampleMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/kwmap/mapper/SampleMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/kwmap/model/mainPageBuildingsModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/kwmap/model/mainPageBuildingsModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/kwmap/service/SampleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/kwmap/service/SampleService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/mapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/mapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/layout.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/layout.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/main-style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/main-map.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/index.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,7 +45,6 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -71,35 +74,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/ho/IdeaProjects/KWU-Kampus/src/main/resources/static/floor-img&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;76ca2ca3402e7f4d0454e7e6b54cb3b0&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/ho/IdeaProjects/KWU-Kampus/src/main/resources/static/floor-img",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Problems",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "settings.sync",
+    "spring.configuration.checksum": "76ca2ca3402e7f4d0454e7e6b54cb3b0",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;ChangesTree.GroupingKeys&quot;: [
-      &quot;directory&quot;,
-      &quot;module&quot;
+  "keyToStringList": {
+    "ChangesTree.GroupingKeys": [
+      "directory",
+      "module"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\ho\IdeaProjects\KWU-Kampus\src\main\resources\static\floor-img" />
@@ -154,6 +157,9 @@
       </method>
     </configuration>
     <configuration name="KWmapApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <envs>
+        <env name="server.port" value="8090" />
+      </envs>
       <module name="KWU_Campus.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.kwmap.KWmapApplication" />
       <method v="2">
@@ -168,10 +174,10 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="Application.KWmapApplication" />
+      <item itemvalue="Application.KWmapApplication (2)" />
       <item itemvalue="Spring Boot.KWmapApplication" />
       <item itemvalue="Spring Boot.model" />
-      <item itemvalue="애플리케이션.KWmapApplication" />
-      <item itemvalue="애플리케이션.KWmapApplication (2)" />
     </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -207,6 +213,12 @@
       <workItem from="1685420425214" duration="4809000" />
       <workItem from="1685433214281" duration="943000" />
       <workItem from="1685534718147" duration="2308000" />
+      <workItem from="1685880056195" duration="540000" />
+      <workItem from="1686061348253" duration="720000" />
+      <workItem from="1686150738734" duration="661000" />
+      <workItem from="1686200731857" duration="156000" />
+      <workItem from="1686200908517" duration="3043000" />
+      <workItem from="1686228179782" duration="993000" />
     </task>
     <task id="LOCAL-00001" summary="화도관 평면도 추가">
       <created>1682685614063</created>
@@ -273,6 +285,7 @@
     <MESSAGE value="메인 카테고리 값 받아오기" />
     <MESSAGE value="05/27 평면도 수정" />
     <MESSAGE value="05/30 Detail Page API 추가&#10;&#10; - Detail Page API 추가 및 쿼리 작성" />
-    <option name="LAST_COMMIT_MESSAGE" value="05/30 Detail Page API 추가&#10;&#10; - Detail Page API 추가 및 쿼리 작성" />
+    <MESSAGE value="06/08 메인화면 정보창 틀 추가" />
+    <option name="LAST_COMMIT_MESSAGE" value="06/08 메인화면 정보창 틀 추가" />
   </component>
 </project>
