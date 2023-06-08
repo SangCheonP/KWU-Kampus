@@ -57,6 +57,7 @@ header>.inner {
 
 header h1 { font-size: 0px; }
 header h1>a { font-size: 40px; color: #fff; }
+header h1>a>img { position: absolute; top: 3%; }
 
 /* Temporary Links List */
 header ul.temp-links { display: flex; gap: 20px; }
