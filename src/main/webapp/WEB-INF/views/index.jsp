@@ -18,7 +18,7 @@
   <div class="page">
     <header>
       <div class="inner">
-        <h1>광운대학교<a href="/">(logo)</a></h1>
+        <h1>광운대학교<a href="/"><img src="./././images/logo.png"></a></h1>
         <!-- Temporary Links List -->
         <ul class="temp-links">
           <li>Temporary Links</li>
