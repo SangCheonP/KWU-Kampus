@@ -30,7 +30,7 @@ const main = document.querySelector( 'main' );
 ///////////////////////////////
 
 let width, height, camera, controls, scene, renderer, raycaster;
-let textTitle, textContent, building_content, categoty_content, info_building, info_category;
+let textTitle, textContent, help_content, building_content, categoty_content, info_help, info_building, info_category;
 let infoTag, infoPage, infoButton;
 
 const pointer = new THREE.Vector2(); // mouse cursor position tracking
@@ -137,9 +137,17 @@ function init() {
   textTitle = document.getElementsByClassName("infoTitle");
   textContent = document.getElementsByClassName("infoContent");
 
+  info_help = new Array('※ 완성본이 아닌, 기능만 확인 가능한 버전입니다.', 'KWU Kampus', '조작법');
   info_building = new Array('건물명', '전화번호', '시설관리팀', '시설관리팀 전화번호', 'Building ID');
   info_category = new Array('카테고리명', 'ID', '건물번호', '호수', '기타번호');
 
+  help_content = new Array('모든 정보가 채워진 상태가 아니며, 상제 정보는 \'새빛관\'만 확인하실 수 있습니다.',
+                                 '광운대학교 시설 정보 취합 사이트 \'KWU Kampus\'입니다. 건물 또는 카테고리를 클릭해보세요. 해당 건물 및 시설에 대한 정보를 확인할 수 있습니다.',
+                                 '정보창: 해당 창의 우측 책갈피 클릭 // ' +
+                                  '카테고리 메뉴: 사이트의 우측 상단 버튼 클릭 // ' +
+                                  '지도 이동: 마우스 우 클릭 + 드래그 // ' +
+                                  '지도 회전: 마우스 좌 클릭 + 드래그 // ' +
+                                  '지도 확대/축소: 마우스 휠');
   building_content = new Array(5);
   categoty_content = new Array(5);
 
@@ -147,7 +155,12 @@ function init() {
   infoPage = document.getElementById('infoPage');
   infoButton = document.getElementsByClassName('infoButton');
 
-  resetInfo();
+  setInfo(info_help, help_content);
+  infoButton[0].textContent = '만족도 조사 하러가기';
+  // document.getElementById( 'infoButton' ).href = 'https://forms.gle/UuJ6kk4r8Gxd6ZT99';
+
+  infoPage.classList.remove('on');
+  infoTag.classList.remove('on');
 
   // // Grid Helper
   // const gridHelper = new THREE.GridHelper( 1000, 100 );
@@ -233,7 +246,7 @@ subCategories.forEach( ( subCategory ) => {
     categoty_content[3] = c_id.substr(3, 4);
     categoty_content[4] = c_id.substr(8, 1);
 
-    setCategoryInfo();
+    setInfo(info_category, categoty_content);
   });
 });
 
@@ -299,7 +312,7 @@ function createModel ( loader, data ) {
         building_content[3] = model.userData.management_team_phone_num;
         building_content[4] = model.userData.id;
 
-        setBuildingInfo();
+        setInfo(info_building, building_content);
 
       }
     }
@@ -330,7 +343,7 @@ function createModel ( loader, data ) {
           e.preventDefault();
           target.userData.onClick();
 
-          setCategoryInfo();
+          setInfo(info_category, categoty_content);
       
         } );
 
@@ -429,66 +442,40 @@ function getIntersects() {
 
 /**
  * 정보 요약창 생성
- * resetInfo(): 정보 요약창 내용 Reset, 사이트 도움말 세팅
- * setBuildingInfo(): 건물 클릭 시, 건물 관련 정보 세팅
- * setCategoryInfo(): 카테고리 클릭 시, 카테고리 관련 정보 세팅
+ * title_arr: 정보 항목
+ * content_arr: 항목별 내용
  */
-function resetInfo() {
-  infoButton[0].style.display = 'none';
 
+function setInfo(title_arr, content_arr) {
+  // 초기화
   for(var i = 0; i < textTitle.length; i++) {
     textTitle[i].style.display = 'none';
     textContent[i].style.display = 'none';
   }
 
-  textTitle[0].style.display = 'block';
-  textContent[0].style.display = 'block';
-  textTitle[0].textContent = '도움말';
-  textContent[0].textContent = '건물 또는 카테고리를 클릭해보세요';
+  for(var i = 0; i < title_arr.length; i++) {
+    textTitle[i].style.display = 'block';
+    textContent[i].style.display = 'block';
+
+    textTitle[i].textContent = title_arr[i];
+    textContent[i].textContent = content_arr[i];
+  }
+
+  if(!infoPage.classList.contains('on')) {
+    infoPage.classList.toggle('on');
+    infoTag.classList.toggle('on');
+  }
+
+  infoButton[0].textContent = '상세 정보 보기';
 }
 
 infoTag.addEventListener('click', function() {
   if(!infoPage.classList.contains('on')) {
-    infoPage.classList.toggle('on');
-    infoTag.classList.toggle('on');
+    setInfo(info_help, help_content);
+    infoButton[0].textContent = '만족도 조사 하러가기';
   }
   else {
     infoPage.classList.remove('on');
     infoTag.classList.remove('on');
-    resetInfo();
   }
 });
-
-function setBuildingInfo() {
-  infoButton[0].style.display = 'block';
-
-  for(var i = 0; i < textTitle.length; i++) {
-    textTitle[i].style.display = 'block';
-    textContent[i].style.display = 'block';
-
-    textTitle[i].textContent = info_building[i];
-    textContent[i].textContent = building_content[i];
-  }
-
-  if(!infoPage.classList.contains('on')) {
-    infoPage.classList.toggle('on');
-    infoTag.classList.toggle('on');
-  }
-}
-
-function setCategoryInfo() {
-  infoButton[0].style.display = 'block';
-
-  for(var i = 0; i < textTitle.length; i++) {
-    textTitle[i].style.display = 'block';
-    textContent[i].style.display = 'block';
-
-    textTitle[i].textContent = info_category[i];
-    textContent[i].textContent = categoty_content[i];
-  }
-
-  if(!infoPage.classList.contains('on')) {
-    infoPage.classList.toggle('on');
-    infoTag.classList.toggle('on');
-  }
-}

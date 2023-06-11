@@ -57,7 +57,9 @@ header>.inner {
 
 header h1 { font-size: 0px; }
 header h1>a { font-size: 40px; color: #fff; }
-header h1>a>img { position: absolute; top: 3%; }
+header h1>a>img {
+  position: absolute;
+  top:3%;}
 
 /* Temporary Links List */
 header ul.temp-links { display: flex; gap: 20px; }
@@ -145,6 +147,16 @@ header #menuBtn {
 .sub-categories>li>a { font-size: 16px; }
 .sub-categories>li>a:hover { text-decoration: underline; }
 
+#sideMenu::-webkit-scrollbar {
+  width: 20px;
+}
+#sideMenu::-webkit-scrollbar-thumb {
+  background-clip: padding-box;
+  border: 8px solid transparent;
+  background-color: #aaaaaa;
+  border-radius: 20px;
+}
+
 /* fixed information modal */
 #infoTag {
   cursor: pointer;
@@ -182,12 +194,12 @@ header #menuBtn {
   overflow-y: scroll;
 }
 #infoPage::-webkit-scrollbar {
-  width: 10px;
+  width: 16px;
 }
 #infoPage::-webkit-scrollbar-thumb {
   background-clip: padding-box;
-  border: 3px solid transparent;
-  background-color: rgb(173, 173, 173);
+  border: 6px solid transparent;
+  background-color: #aaaaaa;
   border-radius: 20px;
 }
 
@@ -411,6 +423,7 @@ header #menuBtn {
 
   /* header */
   header h1>a { font-size: 32px }
+  header h1>a>img { height: 95% }
 
   /* fixed information modal */
   #guiContainer { top: 80px; }
