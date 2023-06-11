@@ -193,7 +193,7 @@
         <div class="infoTitle"></div>
         <div class="infoContent"></div>
         <button class="infoButton">
-          <a href="./pages/detail_example.html">상세 정보 보기</a></button>
+          <a id="infoHref" href="./pages/detail_example.html"></a></button>
       </div>
       <div id="infoTag">
         <div class="infoPageTag"></div>
