@@ -18,7 +18,7 @@
 
         <div class="inner">
 
-          <h1>광운대학교<a href="/"><img src="./././images/logo.png"></a></h1>
+          <h1>광운대학교<a href="/"><img src="./images/logo.png"></a></h1>
 
           <div id="menuBtn">
             <!-- <i class='bx bx-search' ></i> -->

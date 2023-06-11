@@ -84,24 +84,18 @@ function init() {
   // GLTF Loader, load models
 
   const gltfLoader = new GLTFLoader();
-  fetch( "http://localhost:8090/buildings/info", {
+  fetch( "http://13.124.194.184:8080/buildings/info", {
     method: "GET"
   } )
   .then( res => res.json() )
   .then( res => {
+
     const datas = res;
     console.log( datas );
     datas.forEach( ( data ) => {
-
-      if ( !data.model_path ) {
-
-        console.error( data.building, "model_path not found!");
-        return;
-
-      }
-
       createModel( gltfLoader, data );
     } );
+
   } );
 
   // world floor
@@ -260,7 +254,7 @@ subCategories.forEach( ( subCategory ) => {
  */
 function createModel ( loader, data ) {
 
-  if ( data.modelPath === '' ) { console.error( 'modelPath not found' ); }
+  if ( !data.model_path ) { console.error( 'model_path not found' ); }
   loader.load( data.model_path, async ( gltf ) => {
 
     const model = await gltf.scene;

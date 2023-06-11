@@ -18,7 +18,7 @@
   <div class="page">
     <header>
       <div class="inner">
-        <h1>광운대학교<a href="/"><img src="./././images/logo.png"></a></h1>
+        <h1>광운대학교<a href="/"><img src="./images/logo.png"></a></h1>
         <!-- Temporary Links List -->
         <ul class="temp-links">
           <li>Temporary Links</li>
@@ -73,11 +73,10 @@
               </div>
             </div>
             <ul class="sub-categories">
-              <li><a href="">중앙 도서관</a></li>
-              <li><a href="">한울관 열람실</a></li>
-              <li><a href="">비마관 열람실</a></li>
-              <li><a href="">새빛관 로비</a></li>
-              <li><a href="">중앙도서관</a></li>
+              <li><a href="" data-id="01">중앙 도서관</a></li>
+              <li><a href="" data-id="15">한울관 열람실</a></li>
+              <li><a href="" data-id="05">비마관 열람실</a></li>
+              <li><a href="" data-id="08">새빛관 로비</a></li>
             </ul>
           </div>
           <div class="category">
