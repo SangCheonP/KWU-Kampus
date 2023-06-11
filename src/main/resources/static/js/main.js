@@ -156,7 +156,7 @@ function init() {
   infoButton = document.getElementsByClassName('infoButton');
 
   setInfo(info_help, help_content);
-  infoButton[0].textContent = '만족도 조사 하러가기';
+  infoButton[0].textContent = '만족도 조사 하기';
   // document.getElementById( 'infoButton' ).href = 'https://forms.gle/UuJ6kk4r8Gxd6ZT99';
 
   infoPage.classList.remove('on');
@@ -472,7 +472,7 @@ function setInfo(title_arr, content_arr) {
 infoTag.addEventListener('click', function() {
   if(!infoPage.classList.contains('on')) {
     setInfo(info_help, help_content);
-    infoButton[0].textContent = '만족도 조사 하러가기';
+    infoButton[0].textContent = '만족도 조사 하기';
   }
   else {
     infoPage.classList.remove('on');
