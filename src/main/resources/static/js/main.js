@@ -294,7 +294,7 @@ function createModel ( loader, data ) {
 
       onClick: function() {
 
-        camera.position.setY( 100 );
+//        camera.position.setY( 100 );
         controls.target.copy( model.position );
         controls.update();
         console.log( model.name + ' clicked' );
