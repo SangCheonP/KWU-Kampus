@@ -157,7 +157,7 @@ function init() {
 
   setInfo(info_help, help_content);
   infoButton[0].textContent = '만족도 조사 하기';
-  // document.getElementById( 'infoButton' ).href = 'https://forms.gle/UuJ6kk4r8Gxd6ZT99';
+  // document.getElementById( 'infoHref' ).href = 'https://forms.gle/UuJ6kk4r8Gxd6ZT99';
 
   infoPage.classList.remove('on');
   infoTag.classList.remove('on');
