@@ -24,7 +24,7 @@
         select b.building, b.building_code, b.building_phone_num,
                r.floor, r.room_no, r.room_code, r.facilities, r.category, r.importance
         from buildings as b, rooms as r
-        where b.building_code=#{building_code};
+        where b.building_code=#{building_code} and r.building_code=#{building_code}
     </select>
 
 <!--    <select id="showAllDataInMainPage" resultMap="mainpage">-->
