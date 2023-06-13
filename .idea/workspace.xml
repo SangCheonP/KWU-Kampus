@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a1763ece-2013-4e26-99e8-83801edfd65b" name="Changes" comment="06/09 로고 추가 (임시)">
+    <list default="true" id="a1763ece-2013-4e26-99e8-83801edfd65b" name="Changes" comment="06/13 메인 화면 수정">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/layout.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/layout.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/main.js" afterDir="false" />
@@ -30,7 +30,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="main-modify" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -172,6 +172,11 @@
       <item itemvalue="Spring Boot.KWmapApplication" />
       <item itemvalue="Spring Boot.model" />
     </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.KWmapApplication (2)" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -264,7 +269,21 @@
       <option name="project" value="LOCAL" />
       <updated>1686250307911</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="06/13 메인 화면 수정">
+      <created>1686647625247</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1686647625247</updated>
+    </task>
+    <task id="LOCAL-00009" summary="06/13 메인 화면 수정">
+      <created>1686647764952</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1686647764952</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -289,6 +308,7 @@
     <MESSAGE value="05/30 Detail Page API 추가&#10;&#10; - Detail Page API 추가 및 쿼리 작성" />
     <MESSAGE value="06/08 메인화면 정보창 틀 추가" />
     <MESSAGE value="06/09 로고 추가 (임시)" />
-    <option name="LAST_COMMIT_MESSAGE" value="06/09 로고 추가 (임시)" />
+    <MESSAGE value="06/13 메인 화면 수정" />
+    <option name="LAST_COMMIT_MESSAGE" value="06/13 메인 화면 수정" />
   </component>
 </project>

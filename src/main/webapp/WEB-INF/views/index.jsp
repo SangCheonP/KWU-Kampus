@@ -20,10 +20,10 @@
       <div class="inner">
         <h1>광운대학교<a href="/"><img src="./images/logo.png"></a></h1>
         <!-- Temporary Links List -->
-        <ul class="temp-links">
-          <li>Temporary Links</li>
-          <li><a href="/detail">Detail Example</a></li>
-        </ul>
+<%--        <ul class="temp-links">--%>
+<%--          <li>Temporary Links</li>--%>
+<%--          <li><a href="/detail">Detail Example</a></li>--%>
+<%--        </ul>--%>
         <!-- Temporary Links List end -->
         <div id="menuBtn">
           <!-- <i class='bx bx-search' ></i> -->
@@ -191,8 +191,7 @@
         <div class="infoContent"></div>
         <div class="infoTitle"></div>
         <div class="infoContent"></div>
-        <button class="infoButton">
-          <a id="infoHref" href="./pages/detail_example.html"></a></button>
+        <button class="infoButton"></button>
       </div>
       <div id="infoTag">
         <div class="infoPageTag"></div>

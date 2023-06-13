@@ -132,8 +132,8 @@ function init() {
   textContent = document.getElementsByClassName("infoContent");
 
   info_help = new Array('※ 완성본이 아닌, 기능만 확인 가능한 버전입니다.', 'KWU Kampus', '조작법');
-  info_building = new Array('건물명', '전화번호', '시설관리팀', '시설관리팀 전화번호', 'Building ID');
-  info_category = new Array('카테고리명', 'ID', '건물번호', '호수', '기타번호');
+  info_building = new Array('건물명', '전화번호', '시설관리팀', '시설관리팀 전화번호', '기타 정보');
+  info_category = new Array('시설명', '건물명', '층수', '호수', '기타 정보');
 
   help_content = new Array('모든 정보가 채워진 상태가 아니며, 상제 정보는 \'새빛관\'만 확인하실 수 있습니다.',
                                  '광운대학교 시설 정보 취합 사이트 \'KWU Kampus\'입니다. 건물 또는 카테고리를 클릭해보세요. 해당 건물 및 시설에 대한 정보를 확인할 수 있습니다.',
@@ -151,7 +151,7 @@ function init() {
 
   setInfo(info_help, help_content);
   infoButton[0].textContent = '만족도 조사 하기';
-  // document.getElementById( 'infoHref' ).href = 'https://forms.gle/UuJ6kk4r8Gxd6ZT99';
+  infoButton[0].setAttribute("onclick", "window.open('https://forms.gle/dMwa7nym85tTc79x5')");
 
   infoPage.classList.remove('on');
   infoTag.classList.remove('on');
@@ -235,7 +235,8 @@ subCategories.forEach( ( subCategory ) => {
     // 00-0000-0: 건물번호-호실-추가번호
     var c_id = this.getAttribute('category-id');
     categoty_content[0] = this.text;
-    categoty_content[1] = c_id;
+    // categoty_content[1] = c_id;
+    // 하단 수정 필요
     categoty_content[2] = c_id.substr(0, 2);
     categoty_content[3] = c_id.substr(3, 4);
     categoty_content[4] = c_id.substr(8, 1);
@@ -308,6 +309,8 @@ function createModel ( loader, data ) {
 
         setInfo(info_building, building_content);
 
+        // 임시 코드
+        categoty_content[1] = model.name;
       }
     }
     
@@ -461,12 +464,14 @@ function setInfo(title_arr, content_arr) {
   }
 
   infoButton[0].textContent = '상세 정보 보기';
+  infoButton[0].setAttribute("onclick", "location.href='/detail'");
 }
 
 infoTag.addEventListener('click', function() {
   if(!infoPage.classList.contains('on')) {
     setInfo(info_help, help_content);
     infoButton[0].textContent = '만족도 조사 하기';
+    infoButton[0].setAttribute("onclick", "window.open('https://forms.gle/dMwa7nym85tTc79x5')");
   }
   else {
     infoPage.classList.remove('on');
