@@ -198,6 +198,7 @@ function init() {
     infoPage = document.getElementById('infoPageD');
 
     setInfo();
+
     infoPage.classList.remove('on');
     infoTag.classList.remove('on');
 
