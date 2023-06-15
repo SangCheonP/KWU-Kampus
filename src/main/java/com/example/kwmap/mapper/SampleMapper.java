@@ -19,4 +19,6 @@ public interface SampleMapper {
    public detailRoomInfoModel selectDetailRoomInfo(String building_code, String room_code);
 
    public List<detailBuildingAllRoomsInfoModel> selectDetailBuildingAllRoomsInfo(String building_code);
+
+   public List<detailRoomInfoModel> selectRoomsImportanceDetail(String building_code);
 }

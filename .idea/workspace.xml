@@ -4,29 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a1763ece-2013-4e26-99e8-83801edfd65b" name="Changes" comment="06/13 메인 화면 수정">
-      <change beforePath="$PROJECT_DIR$/.idea/modules/KWU_Campus.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/KWU_Campus.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/KWU_Campus.main.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/KWU_Campus.test.iml" beforeDir="false" />
+    <list default="true" id="a1763ece-2013-4e26-99e8-83801edfd65b" name="Changes" comment="06/13 빠진 내용 추가">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/kwmap/KWmapApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/kwmap/KWmapApplication.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/kwmap/controller/SampleController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/kwmap/controller/SampleController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/kwmap/mapper/SampleMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/kwmap/mapper/SampleMapper.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/kwmap/model/SampleModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/kwmap/model/SampleModel.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/kwmap/service/SampleService.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/kwmap/service/SampleService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/static/css/layout.css" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/static/css/layout.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/static/css/main-style.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/static/js/detail-example.js" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/static/js/detail-example.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/static/js/main-map.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/static/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/static/js/main.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/layout.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/layout.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/floor-img/04-01.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/floor-img/04-02.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/floor-img/04-02.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/detail-example.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/detail-example.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/detail.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/detail.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/kwmap/controller/SampleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/kwmap/controller/SampleController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/kwmap/mapper/SampleMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/kwmap/mapper/SampleMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/kwmap/service/SampleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/kwmap/service/SampleService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,8 +103,8 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Problems&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;프로젝트&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;settings.sync&quot;,
     &quot;spring.configuration.checksum&quot;: &quot;76ca2ca3402e7f4d0454e7e6b54cb3b0&quot;,
@@ -146,7 +134,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Application.KWmapApplication">
+  <component name="RunManager" selected="Spring Boot.new">
     <configuration name="KWmapApplication (2)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <envs>
         <env name="server.port" value="8081" />
@@ -194,8 +182,19 @@
       </method>
     </configuration>
     <configuration name="model" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="ACTIVE_PROFILES" />
       <module name="KWU_Campus" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.kwmap.model" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="new" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <option name="ACTIVE_PROFILES" />
+      <option name="ALTERNATIVE_JRE_PATH" value="11" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <module name="KWU_Campus.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.kwmap.KWmapApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -203,13 +202,9 @@
     <list>
       <item itemvalue="Application.KWmapApplication" />
       <item itemvalue="Application.KWmapApplication (2)" />
+      <item itemvalue="Spring Boot.new" />
       <item itemvalue="Spring Boot.model" />
     </list>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.KWmapApplication (2)" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -255,6 +250,8 @@
       <workItem from="1686651862635" duration="283000" />
       <workItem from="1686652224298" duration="156000" />
       <workItem from="1686805406988" duration="30148000" />
+      <workItem from="1686871952936" duration="241000" />
+      <workItem from="1686872223943" duration="514000" />
     </task>
     <task id="LOCAL-00001" summary="화도관 평면도 추가">
       <created>1682685614063</created>

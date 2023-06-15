@@ -65,4 +65,13 @@ public class SampleController {
         detailRoomInfoModel info = sampleService.selectDetailRoomInfo(building_code, room_code);
         return info;
     }
+
+    // 메인화면에서 중요하다 체크된 시설들을 리스트로 가져오는 함수
+    @ResponseBody
+    @RequestMapping("/building/importanceRooms/info/{building_code}")
+    public List<detailRoomInfoModel> showRoomsImportanceDetail(@PathVariable("building_code") String building_code, Model model) {
+        System.out.println("\"/building/info/importance/{building_code}\"");
+        List<detailRoomInfoModel> info = sampleService.selectRoomsImportanceDetail(building_code);
+        return info;
+    }
 }

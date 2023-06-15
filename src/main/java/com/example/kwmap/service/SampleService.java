@@ -33,4 +33,8 @@ public class SampleService {
     public List<detailBuildingAllRoomsInfoModel> selectDetailBuildingAllRoomsInfo(String building_code){
         return SampleMapper.selectDetailBuildingAllRoomsInfo(building_code);
     }
+
+    public List<detailRoomInfoModel> selectRoomsImportanceDetail(String building_code){
+        return SampleMapper.selectRoomsImportanceDetail(building_code);
+    }
 }

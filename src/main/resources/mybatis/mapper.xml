@@ -27,6 +27,12 @@
         where b.building_code=#{building_code} and r.building_code=#{building_code}
     </select>
 
+    <select id="selectRoomsImportanceDetail" resultType="com.example.kwmap.model.detailRoomInfoModel">
+        select *
+        from rooms
+        where building_code=#{building_code} AND importance=TRUE;
+    </select>
+
 <!--    <select id="showAllDataInMainPage" resultMap="mainpage">-->
 <!--        select *-->
 <!--        from main_page;-->
