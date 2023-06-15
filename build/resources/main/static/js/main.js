@@ -6,215 +6,6 @@ import { FontLoader } from 'three/addons/loaders/FontLoader.js';
 
 // basic javascripts
 
-const datas = [];
-let receivedData = [];
-
-function getBuildings() {
-  $.ajax( {
-
-    url : "http://localhost:8090/buildings/info",
-    type : "GET",
-    success : function ( res ) {
-
-      if ( res ) {
-        receivedData = res;
-        console.log( res );
-        console.log( receivedData );
-      } else {
-        alert( "실패" );
-      }
-
-    }
-
-  } );
-}
-// const receivedData = getBuildings();
-// getBuildings();
-
-const HwaDo = {
-  id: '01',
-  building: '화도관',
-  building_phone_num: '',
-  management_team: '',
-  management_team_phone_num: '',
-  modelPath: './models/HwaDo.glb',
-  position: { x: -16, y: 0, z: -106 },
-  angle: -118,
-  scale: 1,
-  others: '',
-}
-const OkUi = {
-  id: '02',
-  building: '옥의관',
-  building_phone_num: '',
-  management_team: '',
-  management_team_phone_num: '',
-  modelPath: './models/OkUi.glb',
-  position: { x: 162, y: 0, z: -72 },
-  angle: 212,
-  scale: 1,
-  others: '',
-}
-const BiMa = {
-  id: '03',
-  building: '비마관',
-  building_phone_num: '',
-  management_team: '',
-  management_team_phone_num: '',
-  modelPath: './models/BiMa.glb',
-  position: { x: 79, y: 0, z: -148 },
-  angle: 23,
-  scale: 1,
-  others: '',
-}
-const SaeBit = {
-  id: '04',
-  building: '새빛관',
-  building_phone_num: '',
-  management_team: '',
-  management_team_phone_num: '',
-  modelPath: './models/SaeBit.glb',
-  position: { x: 55, y: 0, z: -229 },
-  angle: 74.5,
-  scale: 1,
-  others: '',
-}
-const BokJi = {
-  id: '05',
-  building: '복지관',
-  building_phone_num: '',
-  management_team: '',
-  management_team_phone_num: '',
-  modelPath: './models/BokJi.glb',
-  position: { x: 120, y: 0, z: 5 },
-  angle: -28,
-  scale: 1,
-  others: '',
-}
-const DongHae = {
-  id: '06',
-  building: '연구문화관',
-  building_phone_num: '',
-  management_team: '',
-  management_team_phone_num: '',
-  modelPath: './models/DongHae.glb',
-  position: { x: 50, y: 0, z: 65 },
-  angle: 159,
-  scale: 1,
-  others: '',
-}
-const IceRink = {
-  id: '06-1',
-  building: '아이스링크',
-  building_phone_num: '',
-  management_team: '',
-  management_team_phone_num: '',
-  modelPath: './models/IceRink.glb',
-  position: { x: 0, y: 0, z: 97 },
-  angle: 123,
-  scale: 1,
-  others: '',
-}
-const DaSan = {
-  id: '07',
-  building: '다산재',
-  building_phone_num: '',
-  management_team: '',
-  management_team_phone_num: '',
-  modelPath: './models/DaSan.glb',
-  position: { x: 131, y: 0, z: -156 },
-  angle: 42,
-  scale: 1,
-  others: '',
-}
-const ChamBit = {
-  id: '09',
-  building: '참빛관',
-  building_phone_num: '',
-  management_team: '',
-  management_team_phone_num: '',
-  modelPath: './models/ChamBit.glb',
-  position: { x: 128, y: 0, z: -235 },
-  angle: -70,
-  scale: 1,
-  others: '',
-}
-const HanUl = {
-  id: '10',
-  building: '한울관',
-  building_phone_num: '',
-  management_team: '',
-  management_team_phone_num: '',
-  modelPath: './models/HanUl.glb',
-  position: { x: -37, y: 0, z: 104 },
-  angle: -76,
-  scale: 1,
-  others: '',
-}
-const HanCheon = {
-  id: '11',
-  building: '한천재',
-  building_phone_num: '',
-  management_team: '',
-  management_team_phone_num: '',
-  modelPath: './models/HanCheon.glb',
-  position: { x: 8, y: 0, z: 65 },
-  angle: -20,
-  scale: 1,
-  others: '',
-}
-const KWSquare = {
-  id: '16',
-  building: '광운스퀘어&80주년기념관',
-  building_phone_num: '',
-  management_team: '',
-  management_team_phone_num: '',
-  modelPath: './models/KWSquare.glb',
-  position: { x: 42, y: 0, z: -70 },
-  angle: -119,
-  scale: 1,
-  others: '',
-}
-const BitSolA = {
-  id: '17',
-  building: '빛솔재A동',
-  building_phone_num: '',
-  management_team: '',
-  management_team_phone_num: '',
-  modelPath: './models/BitSolA.glb',
-  position: { x: -118, y: 0, z: 180 },
-  angle: 15,
-  scale: 1,
-  others: '',
-}
-const BitSolB = {
-  id: '18',
-  building: '빛솔재B동',
-  building_phone_num: '',
-  management_team: '',
-  management_team_phone_num: '',
-  modelPath: './models/BitSolB.glb',
-  position: { x: -107, y: 0, z: 129 },
-  angle: 15,
-  scale: 1,
-  others: '',
-}
-
-datas.push( HwaDo );
-datas.push( OkUi );
-datas.push( BiMa ); 
-datas.push( SaeBit );
-datas.push( BokJi );
-datas.push( DongHae );
-datas.push( IceRink );
-datas.push( DaSan );
-datas.push( ChamBit );
-datas.push( HanUl );
-datas.push( HanCheon );
-datas.push( KWSquare );
-datas.push( BitSolA );
-datas.push( BitSolB );
-
 const fixedHelp = document.getElementById( 'fixedHelp' );
 fixedHelp.addEventListener( 'click', () => {
 
@@ -238,7 +29,9 @@ const main = document.querySelector( 'main' );
 ///// THREE.js from here: /////
 ///////////////////////////////
 
-let width, height, camera, controls, scene, renderer, raycaster, gui, gui_category;
+let width, height, camera, controls, scene, renderer, raycaster;
+let textTitle, textContent, help_content, building_content, categoty_content, info_help, info_building, info_category;
+let infoTag, infoPage, infoButton;
 
 const pointer = new THREE.Vector2(); // mouse cursor position tracking
 let intersects = []; // list to find which building is selected
@@ -291,8 +84,18 @@ function init() {
   // GLTF Loader, load models
 
   const gltfLoader = new GLTFLoader();
-  datas.forEach( ( data ) => {
-    createModel( gltfLoader, data );
+  fetch( "http://13.124.194.184:8080/buildings/info", {
+    method: "GET"
+  } )
+  .then( res => res.json() )
+  .then( res => {
+
+    const datas = res;
+    console.log( datas );
+    datas.forEach( ( data ) => {
+      createModel( gltfLoader, data );
+    } );
+
   } );
 
   // world floor
@@ -324,49 +127,34 @@ function init() {
   ambientLight.name = 'ambientLight';
   scene.add( ambientLight );
 
-  // Create GUI Pannel
+  // Create Info Pannel
+  textTitle = document.getElementsByClassName("infoTitle");
+  textContent = document.getElementsByClassName("infoContent");
 
-  gui = new GUI( { container: document.getElementById( 'guiContainer' ), title: 'Information' } );
-  let obj = {
-    building: '',
-    building_phone_num: '',
-    management_team: '',
-    management_team_phone_num: '',
-    id: '',
-    myFunction: function() { alert( 'hi' ) }, // onclick callback
-  }
-  
-  gui.add( obj, 'building' ).name( '건물명' );
-  gui.add( obj, 'building_phone_num' ).name( '전화번호' );
-  gui.add( obj, 'management_team' ).name( '시설관리팀' );
-  gui.add( obj, 'management_team_phone_num' ).name( '시설관리팀 전화번호' );
-  gui.add( obj, 'id' ).name( 'Building ID' );
-  gui.add( obj, 'myFunction' ).name( 'alert hi' ); 	// button
-  for(var i = 0; i < gui.length; i++)
-    gui.controllers[i].$input.readOnly = true;
-  gui.open( false );
+  info_building = new Array('건물명', '전화번호', '시설관리팀', '시설관리팀 전화번호', '기타 정보');
+  info_category = new Array('시설명', '건물명', '층수', '호수', '기타 정보');
 
-  gui_category = new GUI( { container: document.getElementById( 'guiContainer' ), title: 'Information' } );
-  let obj_category = {
-    category_name: '',
-    category_id: '',
-    building_code: '',
-    room_number: '',
-    sub_number: '',
-    myFunction: function() {
-      window.location.href = "./pages/detail_example.html"; }, // onclick callback
-  }
+  info_help = new Array('※ 화면 크기를 변경하면서 지도 로딩이 덜 되었다면 화면 새로고침을 해주세요.', '※ 완성본이 아닌, 기능만 확인할 수 있는 버전입니다.', 'KWU Kampus', '조작법');
+  help_content = new Array('', '모든 정보가 채워진 상태가 아니며, 상세 정보는 \'새빛관\'만 확인하실 수 있습니다.',
+                                 '광운대학교 시설 정보 취합 사이트 \'KWU Kampus\'입니다. 건물 또는 카테고리를 클릭해 보세요. 해당 건물 및 시설에 대한 정보를 확인할 수 있습니다.',
+                                 '정보창: 해당 창의 우측 책갈피 클릭 // ' +
+                                  '카테고리 메뉴: 사이트의 우측 상단 버튼 클릭 // ' +
+                                  '지도 이동: 마우스 우 클릭 + 드래그 // ' +
+                                  '지도 회전: 마우스 좌 클릭 + 드래그 // ' +
+                                  '지도 확대/축소: 마우스 휠');
+  building_content = new Array(5);
+  categoty_content = new Array(5);
 
+  infoTag = document.getElementById('infoTag');
+  infoPage = document.getElementById('infoPage');
+  infoButton = document.getElementsByClassName('infoButton');
 
-  gui_category.add( obj_category, 'category_name' ).name( '카테고리명' );
-  gui_category.add( obj_category, 'category_id' ).name( 'ID' );
-  gui_category.add( obj_category, 'building_code' ).name( '건물 번호' );
-  gui_category.add( obj_category, 'room_number' ).name( '호수' );
-  gui_category.add( obj_category, 'sub_number' ).name( '기타 번호' );
-  gui_category.add( obj_category, 'myFunction' ).name( '디테일 페이지' ); 	// button
-  for(var i = 0; i < gui_category.length; i++)
-    gui_category.controllers[i].$input.readOnly = true;
-  gui_category.open( false );
+  setInfo(info_help, help_content);
+  infoButton[0].textContent = '만족도 조사 하기';
+  infoButton[0].setAttribute("onclick", "window.open('https://forms.gle/dMwa7nym85tTc79x5')");
+
+  infoPage.classList.remove('on');
+  infoTag.classList.remove('on');
 
   // // Grid Helper
   // const gridHelper = new THREE.GridHelper( 1000, 100 );
@@ -439,18 +227,24 @@ function render() {
 
 // custom functions
 
+/**
+ * 카테고리 클릭 시 배열에 관련 정보 세팅
+ */
 subCategories.forEach( ( subCategory ) => {
   subCategory.addEventListener( 'click', function() {
+    // 00-0000-0: 건물번호-호실-추가번호
     var c_id = this.getAttribute('category-id');
+    categoty_content[0] = this.text;
+    // categoty_content[1] = c_id;
+    // 하단 수정 필요
+    categoty_content[2] = '';
+    categoty_content[3] = '';
+    categoty_content[4] = '';
+    // categoty_content[2] = c_id.substr(0, 2);
+    // categoty_content[3] = c_id.substr(3, 4);
+    // categoty_content[4] = c_id.substr(8, 1);
 
-    // 01-0101-0 건물 - 방 번호 - 기본0
-    gui_category.controllers[ 0 ].setValue( this.text );          // category_name
-    gui_category.controllers[ 1 ].setValue( c_id );               // category_id
-    gui_category.controllers[ 2 ].setValue( c_id.substr(0, 2) );  // building_code
-    gui_category.controllers[ 3 ].setValue( c_id.substr(3, 4) );  //room_number
-    gui_category.controllers[ 4 ].setValue( c_id.substr(8, 1) ); //sub_number
-
-    // console.log(gui_category.controllers[1].getValue());
+    setInfo(info_category, categoty_content);
   });
 });
 
@@ -464,21 +258,21 @@ subCategories.forEach( ( subCategory ) => {
  */
 function createModel ( loader, data ) {
 
-  if ( data.modelPath === '' ) { console.error( 'modelPath not found' ); }
-  loader.load( data.modelPath, async ( gltf ) => {
+  if ( !data.model_path ) { console.error( 'model_path not found' ); }
+  loader.load( data.model_path, async ( gltf ) => {
 
     const model = await gltf.scene;
     if ( !model ) {
       // error handling
     }
     model.name = data.building;
-    model.position.set( data.position.x, data.position.y, data.position.z );
+    model.position.set( data.position_x, data.position_y, data.position_z );
     model.rotateY( Math.PI / 180 * data.angle );
     model.scale.setScalar( data.scale );
 
     model.userData = {
       // isActive: false, // not used
-      id: data.id,
+      id: data.building_code,
       building_phone_num: data.building_phone_num,
       management_team: data.management_team,
       management_team_phone_num: data.management_team_phone_num,
@@ -504,21 +298,26 @@ function createModel ( loader, data ) {
 
       onClick: function() {
 
-        camera.position.setY( 100 );
+//        camera.position.setY( 100 );
         controls.target.copy( model.position );
         controls.update();
         console.log( model.name + ' clicked' );
-        gui.controllers[ 0 ].setValue( model.name );
-        gui.controllers[ 1 ].setValue( model.userData.building_phone_num );
-        gui.controllers[ 2 ].setValue( model.userData.management_team );
-        gui.controllers[ 3 ].setValue( model.userData.management_team_phone_num );
-        gui.controllers[ 4 ].setValue( model.userData.id );
-        // gui.open();
+        
+        // 빌딩 클릭 시 배열에 관련 정보 세팅
+        building_content[0] = model.name;
+        building_content[1] = model.userData.building_phone_num;
+        building_content[2] = model.userData.management_team;
+        building_content[3] = model.userData.management_team_phone_num;
+        building_content[4] = '';
 
+        setInfo(info_building, building_content);
+
+        // 임시 코드
+        categoty_content[1] = model.name;
       }
     }
     
-    createFont( model.position, model.name );
+    createFont( model.position, model.name.replace( /\s+/g, '' ) );
     buildings.push( model );
     scene.add( model );
 
@@ -543,6 +342,8 @@ function createModel ( loader, data ) {
       
           e.preventDefault();
           target.userData.onClick();
+
+          setInfo(info_category, categoty_content);
       
         } );
 
@@ -638,3 +439,49 @@ function getIntersects() {
   }
 
 }
+
+/**
+ * 정보 요약창 생성
+ * title_arr: 정보 항목
+ * content_arr: 항목별 내용
+ */
+
+function setInfo(title_arr, content_arr) {
+  // 초기화
+  for(var i = 0; i < textTitle.length; i++) {
+    textTitle[i].style.display = 'none';
+    textContent[i].style.display = 'none';
+  }
+
+  for(var i = 0; i < title_arr.length; i++) {
+    textTitle[i].style.display = 'block';
+    textContent[i].style.display = 'block';
+
+    textTitle[i].textContent = title_arr[i];
+    textContent[i].textContent = content_arr[i];
+  }
+
+  if(!infoPage.classList.contains('on')) {
+    infoPage.classList.toggle('on');
+    infoTag.classList.toggle('on');
+  }
+
+  infoButton[0].textContent = '상세 정보 보기';
+  infoButton[0].setAttribute("onclick", "location.href='/detail'");
+
+  if(content_arr[0]=='새빛관') {
+    textContent[4].textContent='주요 시설: 코딩컨설팅룸, 소융대 교학팀/학사, 소융대 학과 학생회실, 소융대 대학원 연구실 등';
+  }
+}
+
+infoTag.addEventListener('click', function() {
+  if(!infoPage.classList.contains('on')) {
+    setInfo(info_help, help_content);
+    infoButton[0].textContent = '만족도 조사 하기';
+    infoButton[0].setAttribute("onclick", "window.open('https://forms.gle/dMwa7nym85tTc79x5')");
+  }
+  else {
+    infoPage.classList.remove('on');
+    infoTag.classList.remove('on');
+  }
+});
