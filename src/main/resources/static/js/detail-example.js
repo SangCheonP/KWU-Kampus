@@ -132,11 +132,41 @@ const receivedFloorList = [
     f2
 ];
 const receivedBgUrl = "../images/details-example.jpg";
+let receivedBgUrlArr;
 
 let rooms = undefined;
 let prevElement = undefined;
 let prevDesc = undefined;
 let floors = undefined;
+
+let infoTitle, infoContent, titleText, contentText;
+let infoTag, infoPage;
+let prevIdx = 0;
+let contentArr;
+
+// 임시
+let help = new Array('도움말');
+let helpContent = new Array('목록에서 층수(ex. 1F)를 클릭하면 평면도가 업데이트됩니다. 호수(ex. 101)를 클릭하면 해당 시설의 정보가 업데이트됩니다.');
+let Left = [[70, 75, 54, 7, 7], [43, 23, 11, 23, 11], [24, 36, 48, 60, 24], [24, 23, 24, 37, 61, 61, 61, 61, 50, 61],
+    [36, 48, 61, 61, 61, 61, 61, 61, 22, 22], [21, 27, 33, 39, 44, 50, 56, 63, 61, 61, 61, 22, 22, 22, 36, 47],
+    [21, 27, 33, 39, 44, 50, 56, 63, 61, 61, 61, 22, 22, 22, 36, 47], [21, 27, 33, 39, 44, 50, 56, 63, 61, 61, 61, 22, 22, 22, 36, 47],
+    [21, 27, 33, 39, 44, 50, 56, 63, 61, 61, 61, 22, 22, 22, 36, 47]];
+let Top = [[36, 72, 76, 76, 49], [37, 64, 64, 33, 33], [37, 37, 37, 37, 64], [61, 41, 28, 36, 43, 51, 59, 66, 36, 32],
+    [35, 35, 27, 35, 43, 51, 59, 67, 35, 27], [29, 29, 29, 29, 29, 29, 29, 29, 50, 58, 66, 66, 58, 50, 48, 48],
+    [29, 29, 29, 29, 29, 29, 29, 29, 50, 58, 66, 66, 58, 50, 48, 48], [29, 29, 29, 29, 29, 29, 29, 29, 50, 58, 66, 66, 58, 50, 48, 48],
+    [29, 29, 29, 29, 29, 29, 29, 29, 50, 58, 66, 66, 58, 50, 48, 48]];
+let info = [['', '', '', '', ''], ['', '', '', '', ''], ['', '', '', '', ''], ['', '', '', '', '', '', '', '', '', ''],
+    ['', '', 'hwjung@kw.ac.kr', 'kcson@kw.ac.kr', 'ksc0226@kw.ac.kr', '', '', '', '', 'woosin.lee@kw.ac.kr'],
+    ['bjpark@kw.ac.kr', '', 'uramoon@kw.ac.kr', 'kang@kw.ac.kr', 'yhdfly@kw.ac.kr', 'whahn@kw.ac.kr', 'smlee5679@gmail.com',
+        'dhim@kw.ac.kr', '', 'korfriend@gmail.com', '', '', '', '',
+        '대학원 세미나실 대여 문의: 일반대학원 교학팀 (02-940-5082, 5083) // 신청서 작성 장소: 일반대학원 교학팀 화도관 207호',
+        '대학원 세미나실 대여 문의: 일반대학원 교학팀 (02-940-5082, 5083) // 신청서 작성 장소: 일반대학원 교학팀 화도관 207호'],
+    ['parkcheolsoo@kw.ac.k', 'mis1@kw.ac.kr', 'jaesungpark@kw.ac.kr', 'dhshin@kw.ac.kr', 'shchoi@kw.ac.kr', 'hklee@kw.ac.kr',
+        'hlee@kw.ac.kr', '', '', '', '', '', '', '', '', ''],
+    ['mgchoi@kw.ac.kr', 'mcho@kw.ac.kr', 'hyunkkim@kw.ac.kr', 'kdpark@kw.ac.kr', 'ljhar@kw.ac.kr', 'yglee96@kw.ac.kr',
+        'jinwookim@kw.ac.kr', '', '', '', '', '', '', '', '', ''],
+    ['swlee@kw.ac.kr', 'jhryu@security.re.kr', 'tskim@kw.ac.kr', 'hyhwang@kw.ac.kr', 'kihoonlee@kw.ac.kr', 'joonhwan.yi@kw.ac.kr',
+        'dgsim@kw.ac.kr', '', '', '', '', '', '', '', '', '']];
 
 init();
 
@@ -157,6 +187,21 @@ function init() {
     // createFloors( receivedFloorList );
     setFloorBg( receivedBgUrl );
 
+    infoTitle = document.getElementsByClassName("infoTitle");
+    infoContent = document.getElementsByClassName("infoContent");
+
+    titleText = new Array('시설명', '위치', '설명', '기타 정보');
+    contentText = new Array('', '', '', '');
+    contentArr = new Array('', '', '', '');
+
+    infoTag = document.getElementById('infoTagD');
+    infoPage = document.getElementById('infoPageD');
+
+    setInfo();
+    infoPage.classList.remove('on');
+    infoTag.classList.remove('on');
+
+    document.getElementById("menuBtn").style.display = 'none';
 }
 
 /**
@@ -169,6 +214,11 @@ function init() {
  * @result Create new elements under `ul#floors`
  */
 function createFloors( classifiedList ) {
+
+    //임시
+    receivedBgUrlArr = ["../floor-img/04-01.png", "../floor-img/04-02.png", "../floor-img/04-03.png",
+        "../floor-img/04-04.png", "../floor-img/04-05.png", "../floor-img/04-06.png",
+        "../floor-img/04-06.png", "../floor-img/04-06.png", "../floor-img/04-06.png"];
 
     for ( let i = 0; i < classifiedList.length; ++i ) {
 
@@ -196,6 +246,7 @@ function createFloors( classifiedList ) {
 
         liFloor.appendChild(ul); // li > div + ul
         floorList.appendChild(liFloor);
+
 
     }
 
@@ -248,29 +299,70 @@ function setFloorBg ( bgUrl = "" ) {
 function activateFloor ( floor, i, classifiedList ) {
 
     floor.classList.add( 'active' );
-    const fl = classifiedList[ i ];
+    roomNums[prevIdx].querySelector('span').style.color = '#000';
+
+    setInfo();
+    infoPage.classList.remove('on');
+    infoTag.classList.remove('on');
+
     roomNums.forEach( ( rn, j ) => {
-
-        rn.querySelector( 'span' ).innerText = fl[j].facilities;
-        rn.querySelector( '.desc p' ).innerText = `${ fl[ j ] } description`;
-
+        rn.style.display = 'none';
     });
+
+    const fl = classifiedList[ i ];
+
+    for(let num = 0; num < fl.length; num++) {
+        roomNums[num].style.display = 'block';
+        roomNums[num].style.left = Left[i][num] + '%';
+        roomNums[num].style.top = Top[i][num] + '%';
+        roomNums[num].querySelector( 'span' ).innerText = fl[num].facilities;
+        roomNums[num].querySelector( '.desc p' ).innerText = `${ fl[ num ] } description`;
+    }
 
     rooms = floor.querySelectorAll( '#rooms li' );
-//    console.log( "activated rooms: \n", rooms );
-    rooms.forEach( ( room, idx ) => {
+        rooms.forEach( ( room, idx ) => {
         room.addEventListener( 'click', () => {
+            roomNums[prevIdx].querySelector('span').style.color = '#000';
 
-            if ( prevDesc ) { prevDesc.classList.remove( 'active' ); }
-            const desc = roomNums[ idx ].querySelector( '.desc' );
-            desc.classList.add( 'active' );
-            prevDesc = desc;
+            roomNums[idx].querySelector( 'span' ).style.color = "red";
 
+            prevIdx = idx;
+
+            contentArr[0] = fl[idx].facilities;
+            contentArr[1] = "새빛관 " + room.textContent[0] + "층 " + room.textContent + "호";
+            contentArr[3] = info[i][idx];
+            if(room.textContent == 615 || room.textContent == 616)
+                contentArr[2] = '대학원 세미나실입니다. 학기별로 정해진 대학원 수업시간 이외에 대학원 세미나실 대여 신청절차 없이 사용이 불가합니다.';
+            else contentArr[2] = '';
+                setInfo2(contentArr);
+
+            console.log(room.textContent);
         })
     });
+    // const fl = classifiedList[ i ];
+    // roomNums.forEach( ( rn, j ) => {
+    //
+    //     rn.querySelector( 'span' ).innerText = fl[j].facilities;
+    //     rn.querySelector( '.desc p' ).innerText = `${ fl[ j ] } description`;
+    //
+    // });
 
+//     rooms = floor.querySelectorAll( '#rooms li' );
+// //    console.log( "activated rooms: \n", rooms );
+//     rooms.forEach( ( room, idx ) => {
+//         room.addEventListener( 'click', () => {
+//
+//             if ( prevDesc ) { prevDesc.classList.remove( 'active' ); }
+//             const desc = roomNums[ idx ].querySelector( '.desc' );
+//             desc.classList.add( 'active' );
+//             prevDesc = desc;
+//
+//         })
+//     });
+//
     prevElement = floor;
 
+    setFloorBg(receivedBgUrlArr[i]);
 }
 
 /**
@@ -304,3 +396,51 @@ function classifyList( res ) {
 
     return classifiedList;
 }
+
+function setInfo() {
+    // 초기화
+    for(var i = 0; i < infoTitle.length; i++) {
+        infoTitle[i].style.display = 'none';
+        infoContent[i].style.display = 'none';
+    }
+
+    infoTitle[0].style.display = 'block';
+    infoContent[0].style.display = 'block';
+    infoTitle[0].textContent = help[0];
+    infoContent[0].textContent = helpContent[0];
+
+    if(!infoPage.classList.contains('on')) {
+        infoPage.classList.toggle('on');
+        infoTag.classList.toggle('on');
+    }
+}
+
+function setInfo2(cArr) {
+    for(var i = 0; i < infoTitle.length; i++) {
+        infoTitle[i].style.display = 'block';
+        infoContent[i].style.display = 'block';
+    }
+
+    for(var i = 0; i < infoTitle.length; i++) {
+        infoTitle[i].textContent = titleText[i];
+        infoContent[i].textContent = cArr[i];
+    }
+
+    if(!infoPage.classList.contains('on')) {
+        infoPage.classList.toggle('on');
+        infoTag.classList.toggle('on');
+    }
+}
+
+infoTag.addEventListener('click', function() {
+    if(!infoPage.classList.contains('on')) {
+        setInfo();
+        // infoButton[0].textContent = '만족도 조사 하기';
+        // infoButton[0].setAttribute("onclick", "window.open('https://forms.gle/dMwa7nym85tTc79x5')");
+    }
+    else {
+        infoPage.classList.remove('on');
+        infoTag.classList.remove('on');
+        roomNums[prevIdx].querySelector('span').style.color = '#000';
+    }
+});

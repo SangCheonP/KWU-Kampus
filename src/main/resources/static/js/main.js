@@ -131,12 +131,12 @@ function init() {
   textTitle = document.getElementsByClassName("infoTitle");
   textContent = document.getElementsByClassName("infoContent");
 
-  info_help = new Array('※ 완성본이 아닌, 기능만 확인 가능한 버전입니다.', 'KWU Kampus', '조작법');
   info_building = new Array('건물명', '전화번호', '시설관리팀', '시설관리팀 전화번호', '기타 정보');
   info_category = new Array('시설명', '건물명', '층수', '호수', '기타 정보');
 
-  help_content = new Array('모든 정보가 채워진 상태가 아니며, 상제 정보는 \'새빛관\'만 확인하실 수 있습니다.',
-                                 '광운대학교 시설 정보 취합 사이트 \'KWU Kampus\'입니다. 건물 또는 카테고리를 클릭해보세요. 해당 건물 및 시설에 대한 정보를 확인할 수 있습니다.',
+  info_help = new Array('※ 화면 크기를 변경하면서 지도 로딩이 덜 되었다면 화면 새로고침을 해주세요.', '※ 완성본이 아닌, 기능만 확인할 수 있는 버전입니다.', 'KWU Kampus', '조작법');
+  help_content = new Array('', '모든 정보가 채워진 상태가 아니며, 상세 정보는 \'새빛관\'만 확인하실 수 있습니다.',
+                                 '광운대학교 시설 정보 취합 사이트 \'KWU Kampus\'입니다. 건물 또는 카테고리를 클릭해 보세요. 해당 건물 및 시설에 대한 정보를 확인할 수 있습니다.',
                                  '정보창: 해당 창의 우측 책갈피 클릭 // ' +
                                   '카테고리 메뉴: 사이트의 우측 상단 버튼 클릭 // ' +
                                   '지도 이동: 마우스 우 클릭 + 드래그 // ' +
@@ -237,9 +237,12 @@ subCategories.forEach( ( subCategory ) => {
     categoty_content[0] = this.text;
     // categoty_content[1] = c_id;
     // 하단 수정 필요
-    categoty_content[2] = c_id.substr(0, 2);
-    categoty_content[3] = c_id.substr(3, 4);
-    categoty_content[4] = c_id.substr(8, 1);
+    categoty_content[2] = '';
+    categoty_content[3] = '';
+    categoty_content[4] = '';
+    // categoty_content[2] = c_id.substr(0, 2);
+    // categoty_content[3] = c_id.substr(3, 4);
+    // categoty_content[4] = c_id.substr(8, 1);
 
     setInfo(info_category, categoty_content);
   });
@@ -305,7 +308,7 @@ function createModel ( loader, data ) {
         building_content[1] = model.userData.building_phone_num;
         building_content[2] = model.userData.management_team;
         building_content[3] = model.userData.management_team_phone_num;
-        building_content[4] = model.userData.id;
+        building_content[4] = '';
 
         setInfo(info_building, building_content);
 
@@ -465,6 +468,10 @@ function setInfo(title_arr, content_arr) {
 
   infoButton[0].textContent = '상세 정보 보기';
   infoButton[0].setAttribute("onclick", "location.href='/detail'");
+
+  if(content_arr[0]=='새빛관') {
+    textContent[4].textContent='주요 시설: 코딩컨설팅룸, 소융대 교학팀/학사, 소융대 학과 학생회실, 소융대 대학원 연구실 등';
+  }
 }
 
 infoTag.addEventListener('click', function() {
