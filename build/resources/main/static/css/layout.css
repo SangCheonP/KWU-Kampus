@@ -244,11 +244,14 @@ header #menuBtn {
 }
 /* fixed information modal end */
 
+
+/* 발표용 임시 코드 */
 /* detail info */
 #infoTagD {
   cursor: pointer;
   transition: 0.3s ease;
   transform: translateY( -50px );
+  display: none;
 }
 .infoPageTagD {
   position: absolute;
@@ -280,6 +283,7 @@ header #menuBtn {
   padding: 20px;
   transition: 0.3s ease;
   overflow-y: scroll;
+  display: none;
 }
 #infoPageD::-webkit-scrollbar {
   width: 16px;
@@ -293,7 +297,7 @@ header #menuBtn {
 
 #infoPageD.on { transform: translateX( 100% );}
 #infoTagD.on { transform: translate( 300px, -50px ); }
-
+/* ////// */
 /* detail info end */
 /* header end */
 

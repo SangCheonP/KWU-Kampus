@@ -144,7 +144,7 @@ let infoTag, infoPage;
 let prevIdx = 0;
 let contentArr;
 
-// 임시
+/** 발표용 임시 코드 **/
 let help = new Array('도움말');
 let helpContent = new Array('목록에서 층수(ex. 1F)를 클릭하면 평면도가 업데이트됩니다. 호수(ex. 101)를 클릭하면 해당 시설의 정보가 업데이트됩니다.');
 let Left = [[70, 75, 54, 7, 7], [43, 23, 11, 23, 11], [24, 36, 48, 60, 24], [24, 23, 24, 37, 61, 61, 61, 61, 50, 61],
@@ -167,6 +167,7 @@ let info = [['', '', '', '', ''], ['', '', '', '', ''], ['', '', '', '', ''], ['
         'jinwookim@kw.ac.kr', '', '', '', '', '', '', '', '', ''],
     ['swlee@kw.ac.kr', 'jhryu@security.re.kr', 'tskim@kw.ac.kr', 'hyhwang@kw.ac.kr', 'kihoonlee@kw.ac.kr', 'joonhwan.yi@kw.ac.kr',
         'dgsim@kw.ac.kr', '', '', '', '', '', '', '', '', '']];
+/**  **/
 
 init();
 
@@ -187,6 +188,7 @@ function init() {
     // createFloors( receivedFloorList );
     setFloorBg( receivedBgUrl );
 
+    /** 발표용 임시 코드 **/
     infoTitle = document.getElementsByClassName("infoTitle");
     infoContent = document.getElementsByClassName("infoContent");
 
@@ -202,6 +204,7 @@ function init() {
     infoTag.classList.remove('on');
 
     document.getElementById("menuBtn").style.display = 'none';
+    /**  **/
 }
 
 /**
@@ -215,10 +218,11 @@ function init() {
  */
 function createFloors( classifiedList ) {
 
-    //임시
+    /** 발표용 임시 코드 **/
     receivedBgUrlArr = ["../floor-img/04-01.png", "../floor-img/04-02.png", "../floor-img/04-03.png",
         "../floor-img/04-04.png", "../floor-img/04-05.png", "../floor-img/04-06.png",
         "../floor-img/04-06.png", "../floor-img/04-06.png", "../floor-img/04-06.png"];
+    /**  **/
 
     for ( let i = 0; i < classifiedList.length; ++i ) {
 
@@ -298,6 +302,7 @@ function setFloorBg ( bgUrl = "" ) {
  */
 function activateFloor ( floor, i, classifiedList ) {
 
+    // 발표용 임시 코드
     floor.classList.add( 'active' );
     roomNums[prevIdx].querySelector('span').style.color = '#000';
 
@@ -339,6 +344,8 @@ function activateFloor ( floor, i, classifiedList ) {
             console.log(room.textContent);
         })
     });
+    //////
+
     // const fl = classifiedList[ i ];
     // roomNums.forEach( ( rn, j ) => {
     //
@@ -362,7 +369,9 @@ function activateFloor ( floor, i, classifiedList ) {
 //
     prevElement = floor;
 
+    /** 발표용 임시 코드 **/
     setFloorBg(receivedBgUrlArr[i]);
+    /**  **/
 }
 
 /**
@@ -397,6 +406,7 @@ function classifyList( res ) {
     return classifiedList;
 }
 
+/** 발표용 임시 코드 **/
 function setInfo() {
     // 초기화
     for(var i = 0; i < infoTitle.length; i++) {
@@ -444,3 +454,4 @@ infoTag.addEventListener('click', function() {
         roomNums[prevIdx].querySelector('span').style.color = '#000';
     }
 });
+/**  **/

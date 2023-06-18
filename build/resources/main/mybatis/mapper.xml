@@ -32,6 +32,7 @@
         from rooms
         where building_code=#{building_code} AND importance=TRUE;
     </select>
+
 <!--    <select id="showAllDataInMainPage" resultMap="mainpage">-->
 <!--        select *-->
 <!--        from main_page;-->

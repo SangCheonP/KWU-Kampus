@@ -6,15 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="a1763ece-2013-4e26-99e8-83801edfd65b" name="Changes" comment="06/13 빠진 내용 추가">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/kwmap/KWmapApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/kwmap/KWmapApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/kwmap/controller/SampleController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/kwmap/controller/SampleController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/kwmap/mapper/SampleMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/kwmap/mapper/SampleMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/kwmap/model/SampleModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/kwmap/model/SampleModel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/kwmap/service/SampleService.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/kwmap/service/SampleService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/kwmap/controller/SampleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/kwmap/controller/SampleController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/kwmap/mapper/SampleMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/kwmap/mapper/SampleMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/kwmap/service/SampleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/kwmap/service/SampleService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/layout.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/layout.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/detail-example.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/detail-example.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -134,7 +127,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.new">
+  <component name="RunManager" selected="Application.KWmapApplication">
     <configuration name="KWmapApplication (2)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <envs>
         <env name="server.port" value="8081" />
