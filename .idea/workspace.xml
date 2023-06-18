@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a1763ece-2013-4e26-99e8-83801edfd65b" name="Changes" comment="06/13 빠진 내용 추가">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/layout.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/layout.css" afterDir="false" />
+    <list default="true" id="a1763ece-2013-4e26-99e8-83801edfd65b" name="Changes" comment="06/18 주석 일부 수정">
       <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/detail-example.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/detail-example.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/detail.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/detail.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -309,7 +308,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686647764952</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="06/18 주석 일부 수정">
+      <created>1687092388596</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1687092388596</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -347,6 +353,7 @@
     <MESSAGE value="06/08 메인화면 정보창 틀 추가" />
     <MESSAGE value="06/09 로고 추가 (임시)" />
     <MESSAGE value="06/13 메인 화면 수정" />
-    <option name="LAST_COMMIT_MESSAGE" value="06/13 메인 화면 수정" />
+    <MESSAGE value="06/18 주석 일부 수정" />
+    <option name="LAST_COMMIT_MESSAGE" value="06/18 주석 일부 수정" />
   </component>
 </project>

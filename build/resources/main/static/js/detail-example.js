@@ -202,8 +202,6 @@ function init() {
     setInfo();
     infoPage.classList.remove('on');
     infoTag.classList.remove('on');
-
-    document.getElementById("menuBtn").style.display = 'none';
     /**  **/
 }
 

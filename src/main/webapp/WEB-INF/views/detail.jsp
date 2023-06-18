@@ -136,7 +136,7 @@
             </div>
 
             <div class="imgBg">
-
+              <!-- 임시: 12개로 늘림 -->
               <div class="roomNum">
                 <span>101</span>
                 <div class="desc">
