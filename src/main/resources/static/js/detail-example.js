@@ -134,10 +134,7 @@ const receivedFloorList = [
 const receivedBgUrl = "../images/details-example.jpg";
 let receivedBgUrlArr;
 
-let rooms = undefined;
-let prevElement = undefined;
-let prevDesc = undefined;
-let floors = undefined;
+let rooms, prevElement, prevDesc, floors, building_code;
 
 let infoTitle, infoContent, titleText, contentText;
 let infoTag, infoPage;
@@ -173,15 +170,33 @@ init();
 
 function init() {
 
-    fetch( "http://13.124.194.184:8080/detail/info/08", {
-        method: "GET"
+    // sessionStorage 에서 클릭한 건물/시설 정보를 저장 및 불러옵니다.
+    sessionStorage.setItem( 'floor', 'B2' );
+    sessionStorage.setItem( 'building_code', "08" );
+    building_code = sessionStorage.getItem( "building_code" );
+
+    fetch( `http://13.124.194.184:8080/detail/info/${building_code}`, {
+            method: "GET"
     } )
     .then( res => res.json() )
     .then( res => {
 
         let classifiedList = classifyList( res );
-        console.log( classifiedList );
+        // console.log( classifiedList );
         createFloors( classifiedList );
+        if ( sessionStorage.getItem( 'floor' ) ) {
+
+            const floor = ( '00' + sessionStorage.getItem( 'floor' ) ).slice( -2 );
+            activateFloor( document.getElementById( floor ), 0, classifiedList );
+            sessionStorage.removeItem( 'floor' );
+
+        } else {
+            // activate 1st floor as default
+            activateFloor( document.getElementById( '01' ), 0, classifiedList );
+
+        }
+
+        sessionStorage.removeItem( 'building_code' );
 
     } )
 
@@ -241,11 +256,13 @@ function createFloors( classifiedList ) {
         for ( let j = 0; j < classifiedList[i].length; j++ ) {
 
             const liRoom = document.createElement( 'li' );
-            liRoom.innerText = classifiedList[i][j].room_no; // 임의로 i0j, 10호 넘어가면 못 씀
+            liRoom.innerText = classifiedList[i][j].room_no;
+            liRoom.setAttribute( 'id', classifiedList[i][j].room_code );
             ul.appendChild( liRoom ); // ul > li
 
         }
 
+        liFloor.setAttribute( 'id', ( '00' + classifiedList[i][0].floor ).slice( -2 ) ); // set id to its floor number
         liFloor.appendChild(ul); // li > div + ul
         floorList.appendChild(liFloor);
 
@@ -256,7 +273,7 @@ function createFloors( classifiedList ) {
 //    console.log( "Floors:\n", floors );
     floors.forEach( ( floor, i ) => {
         // 1층을 Default로 보여주기 위한 설정
-        if (i === 0) { activateFloor( floor, i, classifiedList ); }
+        // if (i === 0) { activateFloor( floor, i, classifiedList ); }
 
         const floorTitle = floor.querySelector( '.floor-title' );
         floorTitle.addEventListener( 'click', ( e ) => {
@@ -373,10 +390,10 @@ function activateFloor ( floor, i, classifiedList ) {
 }
 
 /**
- * 분류되지 않은 방 정보 리스트를 받아와서 층 별로 분류하고,
- * 방 번호를 오름차순으로 정렬하여 리턴합니다.
+ * 한 건물의 분류되지 않은 방 정보 리스트를 받아와서 층 별로 분류하고,
+ * 정보를 층 별로 분류하고, 방 번호를 오름차순으로 정렬하여 2차 Array 형태로 리턴합니다.
  *
- * *현재는 지상 층만 분류합니다.*
+ * `room_code`에 regular expression 을 적용해 검색하여 분류합니다.
  *
  * @param { Array } res raw data(floor list) received from server
  * @returns a classified floor list
@@ -387,19 +404,28 @@ function classifyList( res ) {
     let floors = res.map( room => room.floor );
     let uniqFloors = [... new Set( floors )];
     console.log( uniqFloors );
-    for ( let i = 0; i < uniqFloors.length; ++i ) {
+    uniqFloors.forEach( ( floor ) => {
 
-        const regex = new RegExp( `0-0?${i + 1}+` );
-        let floor = res.filter( data => regex.test( data.room_code ) );
-        classifiedList.push( floor.sort( function(a, b) {
+        let floorNum, regex;
+        if ( /^B+/.test( floor ) ) {
+            // if floor element starts with 'B'
+            floorNum = ( '00' + floor.substr(1, 1) ).slice( -2 );
+            regex = new RegExp( `^1-${floorNum}+` );
+        } else {
+            floorNum = ( '00' + floor ).slice( -2 );
+            regex = new RegExp( `^0-${floorNum}+` );
+        }
 
+        const classifiedFloor = res.filter( data => regex.test( data.room_code ) );
+        classifiedList.push( classifiedFloor.sort( function( a, b ) {
+            // Sort By room_no
             if ( a.room_no > b.room_no ) return 1;
             if ( a.room_no === b.room_no ) return 0;
             if ( a.room_no < b.room_no ) return -1;
 
         } ) );
 
-    }
+    } )
 
     return classifiedList;
 }
