@@ -89,21 +89,6 @@
         </div>
         <!-- div.inner end -->
 
-        <div id="infoPageD">
-          <div class="infoTitle"></div>
-          <div class="infoContent"></div>
-          <div class="infoTitle"></div>
-          <div class="infoContent"></div>
-          <div class="infoTitle"></div>
-          <div class="infoContent"></div>
-          <div class="infoTitle"></div>
-          <div class="infoContent"></div>
-        </div>
-        <div id="infoTagD">
-          <div class="infoPageTagD"></div>
-          <div class="infoPageTag-topD"></div>
-          <div class="infoPageTag-bottomD"></div>
-        </div>
       </header>
 
       <main id="detail">
@@ -129,14 +114,9 @@
 
 
           <div class="img-wrap">
-            <div class="navbar">
-              <!-- 임시 -->
-              새빛관
-              <!-- Facility Name Here -->
-            </div>
+            <div class="navbar"></div>
 
             <div class="imgBg">
-              <!-- 임시: 12개로 늘림 -->
               <div class="roomNum">
                 <span>101</span>
                 <div class="desc">
@@ -165,89 +145,6 @@
                 </div>
               </div>
 
-              <div class="roomNum">
-                <span>101</span>
-                <div class="desc">
-                  <p>Description</p>
-                </div>
-              </div>
-
-              <div class="roomNum">
-                <span>102</span>
-                <div class="desc">
-                  <p>Description</p>
-                </div>
-              </div>
-
-              <div class="roomNum">
-                <span>103</span>
-                <div class="desc">
-                  <p>Description</p>
-                </div>
-              </div>
-
-              <div class="roomNum">
-                <span>104</span>
-                <div class="desc">
-                  <p>Description</p>
-                </div>
-              </div>
-
-              <div class="roomNum">
-              <span>101</span>
-              <div class="desc">
-                <p>Description</p>
-              </div>
-            </div>
-
-              <div class="roomNum">
-                <span>102</span>
-                <div class="desc">
-                  <p>Description</p>
-                </div>
-              </div>
-
-              <div class="roomNum">
-                <span>103</span>
-                <div class="desc">
-                  <p>Description</p>
-                </div>
-              </div>
-
-              <div class="roomNum">
-                <span>104</span>
-                <div class="desc">
-                  <p>Description</p>
-                </div>
-              </div>
-
-              <div class="roomNum">
-                <span>101</span>
-                <div class="desc">
-                  <p>Description</p>
-                </div>
-              </div>
-
-              <div class="roomNum">
-                <span>102</span>
-                <div class="desc">
-                  <p>Description</p>
-                </div>
-              </div>
-
-              <div class="roomNum">
-                <span>103</span>
-                <div class="desc">
-                  <p>Description</p>
-                </div>
-              </div>
-
-              <div class="roomNum">
-                <span>104</span>
-                <div class="desc">
-                  <p>Description</p>
-                </div>
-              </div>
             </div>
             <!-- imgBg end -->
           </div>

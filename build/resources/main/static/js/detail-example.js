@@ -134,75 +134,49 @@ const receivedFloorList = [
 const receivedBgUrl = "../images/details-example.jpg";
 let receivedBgUrlArr;
 
-let rooms = undefined;
-let prevElement = undefined;
-let prevDesc = undefined;
-let floors = undefined;
+let rooms, prevElement, prevDesc, floors, building_code;
 
 let infoTitle, infoContent, titleText, contentText;
 let infoTag, infoPage;
 let prevIdx = 0;
 let contentArr;
 
-/** 발표용 임시 코드 **/
-let help = new Array('도움말');
-let helpContent = new Array('목록에서 층수(ex. 1F)를 클릭하면 평면도가 업데이트됩니다. 호수(ex. 101)를 클릭하면 해당 시설의 정보가 업데이트됩니다.');
-let Left = [[70, 75, 54, 7, 7], [43, 23, 11, 23, 11], [24, 36, 48, 60, 24], [24, 23, 24, 37, 61, 61, 61, 61, 50, 61],
-    [36, 48, 61, 61, 61, 61, 61, 61, 22, 22], [21, 27, 33, 39, 44, 50, 56, 63, 61, 61, 61, 22, 22, 22, 36, 47],
-    [21, 27, 33, 39, 44, 50, 56, 63, 61, 61, 61, 22, 22, 22, 36, 47], [21, 27, 33, 39, 44, 50, 56, 63, 61, 61, 61, 22, 22, 22, 36, 47],
-    [21, 27, 33, 39, 44, 50, 56, 63, 61, 61, 61, 22, 22, 22, 36, 47]];
-let Top = [[36, 72, 76, 76, 49], [37, 64, 64, 33, 33], [37, 37, 37, 37, 64], [61, 41, 28, 36, 43, 51, 59, 66, 36, 32],
-    [35, 35, 27, 35, 43, 51, 59, 67, 35, 27], [29, 29, 29, 29, 29, 29, 29, 29, 50, 58, 66, 66, 58, 50, 48, 48],
-    [29, 29, 29, 29, 29, 29, 29, 29, 50, 58, 66, 66, 58, 50, 48, 48], [29, 29, 29, 29, 29, 29, 29, 29, 50, 58, 66, 66, 58, 50, 48, 48],
-    [29, 29, 29, 29, 29, 29, 29, 29, 50, 58, 66, 66, 58, 50, 48, 48]];
-let info = [['', '', '', '', ''], ['', '', '', '', ''], ['', '', '', '', ''], ['', '', '', '', '', '', '', '', '', ''],
-    ['', '', 'hwjung@kw.ac.kr', 'kcson@kw.ac.kr', 'ksc0226@kw.ac.kr', '', '', '', '', 'woosin.lee@kw.ac.kr'],
-    ['bjpark@kw.ac.kr', '', 'uramoon@kw.ac.kr', 'kang@kw.ac.kr', 'yhdfly@kw.ac.kr', 'whahn@kw.ac.kr', 'smlee5679@gmail.com',
-        'dhim@kw.ac.kr', '', 'korfriend@gmail.com', '', '', '', '',
-        '대학원 세미나실 대여 문의: 일반대학원 교학팀 (02-940-5082, 5083) // 신청서 작성 장소: 일반대학원 교학팀 화도관 207호',
-        '대학원 세미나실 대여 문의: 일반대학원 교학팀 (02-940-5082, 5083) // 신청서 작성 장소: 일반대학원 교학팀 화도관 207호'],
-    ['parkcheolsoo@kw.ac.k', 'mis1@kw.ac.kr', 'jaesungpark@kw.ac.kr', 'dhshin@kw.ac.kr', 'shchoi@kw.ac.kr', 'hklee@kw.ac.kr',
-        'hlee@kw.ac.kr', '', '', '', '', '', '', '', '', ''],
-    ['mgchoi@kw.ac.kr', 'mcho@kw.ac.kr', 'hyunkkim@kw.ac.kr', 'kdpark@kw.ac.kr', 'ljhar@kw.ac.kr', 'yglee96@kw.ac.kr',
-        'jinwookim@kw.ac.kr', '', '', '', '', '', '', '', '', ''],
-    ['swlee@kw.ac.kr', 'jhryu@security.re.kr', 'tskim@kw.ac.kr', 'hyhwang@kw.ac.kr', 'kihoonlee@kw.ac.kr', 'joonhwan.yi@kw.ac.kr',
-        'dgsim@kw.ac.kr', '', '', '', '', '', '', '', '', '']];
-/**  **/
-
 init();
 
 function init() {
 
-    fetch( "http://13.124.194.184:8080/detail/info/08", {
-        method: "GET"
+    // sessionStorage 에서 클릭한 건물/시설 정보를 저장 및 불러옵니다.
+    sessionStorage.setItem( 'floor', 'B2' );
+    sessionStorage.setItem( 'building_code', "08" );
+    building_code = sessionStorage.getItem( "building_code" );
+
+    fetch( `http://13.124.194.184:8080/detail/info/${building_code}`, {
+            method: "GET"
     } )
     .then( res => res.json() )
     .then( res => {
 
         let classifiedList = classifyList( res );
-        console.log( classifiedList );
+        // console.log( classifiedList );
         createFloors( classifiedList );
+        if ( sessionStorage.getItem( 'floor' ) ) {
+
+            const floor = ( '00' + sessionStorage.getItem( 'floor' ) ).slice( -2 );
+            activateFloor( document.getElementById( floor ), 0, classifiedList );
+            sessionStorage.removeItem( 'floor' );
+
+        } else {
+            // activate 1st floor as default
+            activateFloor( document.getElementById( '01' ), 0, classifiedList );
+
+        }
+
+        sessionStorage.removeItem( 'building_code' );
 
     } )
 
     // createFloors( receivedFloorList );
     setFloorBg( receivedBgUrl );
-
-    /** 발표용 임시 코드 **/
-    infoTitle = document.getElementsByClassName("infoTitle");
-    infoContent = document.getElementsByClassName("infoContent");
-
-    titleText = new Array('시설명', '위치', '설명', '기타 정보');
-    contentText = new Array('', '', '', '');
-    contentArr = new Array('', '', '', '');
-
-    infoTag = document.getElementById('infoTagD');
-    infoPage = document.getElementById('infoPageD');
-
-    setInfo();
-    infoPage.classList.remove('on');
-    infoTag.classList.remove('on');
-    /**  **/
 }
 
 /**
@@ -215,12 +189,6 @@ function init() {
  * @result Create new elements under `ul#floors`
  */
 function createFloors( classifiedList ) {
-
-    /** 발표용 임시 코드 **/
-    receivedBgUrlArr = ["../floor-img/04-01.png", "../floor-img/04-02.png", "../floor-img/04-03.png",
-        "../floor-img/04-04.png", "../floor-img/04-05.png", "../floor-img/04-06.png",
-        "../floor-img/04-06.png", "../floor-img/04-06.png", "../floor-img/04-06.png"];
-    /**  **/
 
     for ( let i = 0; i < classifiedList.length; ++i ) {
 
@@ -241,11 +209,13 @@ function createFloors( classifiedList ) {
         for ( let j = 0; j < classifiedList[i].length; j++ ) {
 
             const liRoom = document.createElement( 'li' );
-            liRoom.innerText = classifiedList[i][j].room_no; // 임의로 i0j, 10호 넘어가면 못 씀
+            liRoom.innerText = classifiedList[i][j].room_no;
+            liRoom.setAttribute( 'id', classifiedList[i][j].room_code );
             ul.appendChild( liRoom ); // ul > li
 
         }
 
+        liFloor.setAttribute( 'id', ( '00' + classifiedList[i][0].floor ).slice( -2 ) ); // set id to its floor number
         liFloor.appendChild(ul); // li > div + ul
         floorList.appendChild(liFloor);
 
@@ -256,7 +226,7 @@ function createFloors( classifiedList ) {
 //    console.log( "Floors:\n", floors );
     floors.forEach( ( floor, i ) => {
         // 1층을 Default로 보여주기 위한 설정
-        if (i === 0) { activateFloor( floor, i, classifiedList ); }
+        // if (i === 0) { activateFloor( floor, i, classifiedList ); }
 
         const floorTitle = floor.querySelector( '.floor-title' );
         floorTitle.addEventListener( 'click', ( e ) => {
@@ -302,81 +272,36 @@ function activateFloor ( floor, i, classifiedList ) {
 
     // 발표용 임시 코드
     floor.classList.add( 'active' );
-    roomNums[prevIdx].querySelector('span').style.color = '#000';
-
-    setInfo();
-    infoPage.classList.remove('on');
-    infoTag.classList.remove('on');
-
-    roomNums.forEach( ( rn, j ) => {
-        rn.style.display = 'none';
-    });
 
     const fl = classifiedList[ i ];
+    roomNums.forEach( ( rn, j ) => {
 
-    for(let num = 0; num < fl.length; num++) {
-        roomNums[num].style.display = 'block';
-        roomNums[num].style.left = Left[i][num] + '%';
-        roomNums[num].style.top = Top[i][num] + '%';
-        roomNums[num].querySelector( 'span' ).innerText = fl[num].facilities;
-        roomNums[num].querySelector( '.desc p' ).innerText = `${ fl[ num ] } description`;
-    }
+        rn.querySelector( 'span' ).innerText = fl[j].facilities;
+        rn.querySelector( '.desc p' ).innerText = `${ fl[ j ] } description`;
+
+    });
 
     rooms = floor.querySelectorAll( '#rooms li' );
-        rooms.forEach( ( room, idx ) => {
+//    console.log( "activated rooms: \n", rooms );
+    rooms.forEach( ( room, idx ) => {
         room.addEventListener( 'click', () => {
-            roomNums[prevIdx].querySelector('span').style.color = '#000';
 
-            roomNums[idx].querySelector( 'span' ).style.color = "red";
+            if ( prevDesc ) { prevDesc.classList.remove( 'active' ); }
+            const desc = roomNums[ idx ].querySelector( '.desc' );
+            desc.classList.add( 'active' );
+            prevDesc = desc;
 
-            prevIdx = idx;
-
-            contentArr[0] = fl[idx].facilities;
-            contentArr[1] = "새빛관 " + room.textContent[0] + "층 " + room.textContent + "호";
-            contentArr[3] = info[i][idx];
-            if(room.textContent == 615 || room.textContent == 616)
-                contentArr[2] = '대학원 세미나실입니다. 학기별로 정해진 대학원 수업시간 이외에 대학원 세미나실 대여 신청절차 없이 사용이 불가합니다.';
-            else contentArr[2] = '';
-                setInfo2(contentArr);
-
-            console.log(room.textContent);
         })
     });
-    //////
 
-    // const fl = classifiedList[ i ];
-    // roomNums.forEach( ( rn, j ) => {
-    //
-    //     rn.querySelector( 'span' ).innerText = fl[j].facilities;
-    //     rn.querySelector( '.desc p' ).innerText = `${ fl[ j ] } description`;
-    //
-    // });
-
-//     rooms = floor.querySelectorAll( '#rooms li' );
-// //    console.log( "activated rooms: \n", rooms );
-//     rooms.forEach( ( room, idx ) => {
-//         room.addEventListener( 'click', () => {
-//
-//             if ( prevDesc ) { prevDesc.classList.remove( 'active' ); }
-//             const desc = roomNums[ idx ].querySelector( '.desc' );
-//             desc.classList.add( 'active' );
-//             prevDesc = desc;
-//
-//         })
-//     });
-//
     prevElement = floor;
-
-    /** 발표용 임시 코드 **/
-    setFloorBg(receivedBgUrlArr[i]);
-    /**  **/
 }
 
 /**
- * 분류되지 않은 방 정보 리스트를 받아와서 층 별로 분류하고,
- * 방 번호를 오름차순으로 정렬하여 리턴합니다.
+ * 한 건물의 분류되지 않은 방 정보 리스트를 받아와서 층 별로 분류하고,
+ * 정보를 층 별로 분류하고, 방 번호를 오름차순으로 정렬하여 2차 Array 형태로 리턴합니다.
  *
- * *현재는 지상 층만 분류합니다.*
+ * `room_code`에 regular expression 을 적용해 검색하여 분류합니다.
  *
  * @param { Array } res raw data(floor list) received from server
  * @returns a classified floor list
@@ -387,69 +312,28 @@ function classifyList( res ) {
     let floors = res.map( room => room.floor );
     let uniqFloors = [... new Set( floors )];
     console.log( uniqFloors );
-    for ( let i = 0; i < uniqFloors.length; ++i ) {
+    uniqFloors.forEach( ( floor ) => {
 
-        const regex = new RegExp( `0-0?${i + 1}+` );
-        let floor = res.filter( data => regex.test( data.room_code ) );
-        classifiedList.push( floor.sort( function(a, b) {
+        let floorNum, regex;
+        if ( /^B+/.test( floor ) ) {
+            // if floor element starts with 'B'
+            floorNum = ( '00' + floor.substr(1, 1) ).slice( -2 );
+            regex = new RegExp( `^1-${floorNum}+` );
+        } else {
+            floorNum = ( '00' + floor ).slice( -2 );
+            regex = new RegExp( `^0-${floorNum}+` );
+        }
 
+        const classifiedFloor = res.filter( data => regex.test( data.room_code ) );
+        classifiedList.push( classifiedFloor.sort( function( a, b ) {
+            // Sort By room_no
             if ( a.room_no > b.room_no ) return 1;
             if ( a.room_no === b.room_no ) return 0;
             if ( a.room_no < b.room_no ) return -1;
 
         } ) );
 
-    }
+    } )
 
     return classifiedList;
 }
-
-/** 발표용 임시 코드 **/
-function setInfo() {
-    // 초기화
-    for(var i = 0; i < infoTitle.length; i++) {
-        infoTitle[i].style.display = 'none';
-        infoContent[i].style.display = 'none';
-    }
-
-    infoTitle[0].style.display = 'block';
-    infoContent[0].style.display = 'block';
-    infoTitle[0].textContent = help[0];
-    infoContent[0].textContent = helpContent[0];
-
-    if(!infoPage.classList.contains('on')) {
-        infoPage.classList.toggle('on');
-        infoTag.classList.toggle('on');
-    }
-}
-
-function setInfo2(cArr) {
-    for(var i = 0; i < infoTitle.length; i++) {
-        infoTitle[i].style.display = 'block';
-        infoContent[i].style.display = 'block';
-    }
-
-    for(var i = 0; i < infoTitle.length; i++) {
-        infoTitle[i].textContent = titleText[i];
-        infoContent[i].textContent = cArr[i];
-    }
-
-    if(!infoPage.classList.contains('on')) {
-        infoPage.classList.toggle('on');
-        infoTag.classList.toggle('on');
-    }
-}
-
-infoTag.addEventListener('click', function() {
-    if(!infoPage.classList.contains('on')) {
-        setInfo();
-        // infoButton[0].textContent = '만족도 조사 하기';
-        // infoButton[0].setAttribute("onclick", "window.open('https://forms.gle/dMwa7nym85tTc79x5')");
-    }
-    else {
-        infoPage.classList.remove('on');
-        infoTag.classList.remove('on');
-        roomNums[prevIdx].querySelector('span').style.color = '#000';
-    }
-});
-/**  **/
