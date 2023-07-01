@@ -161,7 +161,8 @@ header #menuBtn {
 #infoTag {
   cursor: pointer;
   transition: 0.3s ease;
-  transform: translateY( -50px );
+  transform: translate( 0px, -80px );
+  transition-delay: 0.5s;
 }
 .infoPageTag {
   position: absolute;
@@ -184,6 +185,30 @@ header #menuBtn {
   border-right: 20px solid transparent;
 }
 
+#infoClose {
+  position: absolute;
+  top: 25px; right: 5px;
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0);
+  border-color: rgba(0, 0, 0, 0);
+}
+#infoClose .bar01 {
+  position: absolute;
+  top: 0px; right: 0px;
+  width: 30px; height: 2px;
+  transform: rotate(45deg);
+  background-color: var( --main-color );
+  border-radius: 4px;
+}
+#infoClose .bar02 {
+  position: absolute;
+  top: 0px; right: 0px;
+  width: 30px; height: 2px;
+  transform: rotate(-45deg);
+  background-color: var( --main-color );
+  border-radius: 4px;
+}
+
 #infoPage {
   position: absolute;
   left: -300px; top: 100px;
@@ -191,8 +216,10 @@ header #menuBtn {
   background: #fff;
   border-bottom: 2px solid var( --main-color );
   padding: 20px;
+  padding-top: 40px;
   transition: 0.3s ease;
   overflow-y: scroll;
+  transition-delay: 0s;
 }
 #infoPage::-webkit-scrollbar {
   width: 16px;
@@ -204,8 +231,13 @@ header #menuBtn {
   border-radius: 20px;
 }
 
-#infoPage.on { transform: translateX( 100% );}
-#infoTag.on { transform: translate( 300px, -50px ); }
+#infoPage.on { transform: translateX( 100% ); transition-delay: 0.5s; }
+#infoTag.on { transform: translate( -100px, -80px ); transition-delay: 0s; }
+/*#infoTag.on { transform: translate( 300px, -80px ); }*/
+/*#infoTag.on .infoPageTag-bottom { transform: scale(0%); }*/
+/*#infoTag.on .infoPageTag-top { transform: scale(0%); }*/
+/*#infoPage.on .bar01 { display: block; }*/
+/*#infoPage.on .bar02 { display: block; }*/
 
 .infoTitle {
   font-size: 20px;
@@ -242,6 +274,7 @@ header #menuBtn {
   background-color: var(--main-color);
   color: #fff;
 }
+
 /* fixed information modal end */
 /* header end */
 

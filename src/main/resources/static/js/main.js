@@ -31,7 +31,7 @@ const main = document.querySelector( 'main' );
 
 let width, height, camera, controls, scene, renderer, raycaster;
 let textTitle, textContent, help_content, building_content, categoty_content, info_help, info_building, info_category;
-let infoTag, infoPage, infoButton;
+let infoTag, infoPage, infoButton, infoClose;
 
 const pointer = new THREE.Vector2(); // mouse cursor position tracking
 let intersects = []; // list to find which building is selected
@@ -148,13 +148,12 @@ function init() {
   infoTag = document.getElementById('infoTag');
   infoPage = document.getElementById('infoPage');
   infoButton = document.getElementsByClassName('infoButton');
+  infoClose =  document.getElementById('infoClose');
 
   setInfo(info_help, help_content);
   infoButton[0].textContent = '만족도 조사 하기';
   infoButton[0].setAttribute("onclick", "window.open('https://forms.gle/dMwa7nym85tTc79x5')");
 
-  infoPage.classList.remove('on');
-  infoTag.classList.remove('on');
 
   // // Grid Helper
   // const gridHelper = new THREE.GridHelper( 1000, 100 );
@@ -308,9 +307,19 @@ function createModel ( loader, data ) {
         building_content[1] = model.userData.building_phone_num;
         building_content[2] = model.userData.management_team;
         building_content[3] = model.userData.management_team_phone_num;
-        building_content[4] = '';
 
-        setInfo(info_building, building_content);
+        fetch('http://13.124.194.184:8080/building/importanceRooms/info/'+model.userData.id)
+            .then(res => res.json())
+            .then(datas => {
+              building_content[4] = '';
+
+              for (var i = 0; i < datas.length; i++) {
+                if(i != 0) building_content[4] += ', ';
+                building_content[4] += datas[i].facilities;
+              }
+
+              setInfo(info_building, building_content);
+            });
 
         // 임시 코드
         categoty_content[1] = model.name;
@@ -462,26 +471,26 @@ function setInfo(title_arr, content_arr) {
   }
 
   if(!infoPage.classList.contains('on')) {
-    infoPage.classList.toggle('on');
     infoTag.classList.toggle('on');
+    infoPage.classList.toggle('on');
   }
 
   infoButton[0].textContent = '상세 정보 보기';
   infoButton[0].setAttribute("onclick", "location.href='/detail'");
-
-  if(content_arr[0]=='새빛관') {
-    textContent[4].textContent='주요 시설: 코딩컨설팅룸, 소융대 교학팀/학사, 소융대 학과 학생회실, 소융대 대학원 연구실 등';
-  }
 }
 
+/**
+ * info Open
+ */
 infoTag.addEventListener('click', function() {
-  if(!infoPage.classList.contains('on')) {
-    setInfo(info_help, help_content);
-    infoButton[0].textContent = '만족도 조사 하기';
-    infoButton[0].setAttribute("onclick", "window.open('https://forms.gle/dMwa7nym85tTc79x5')");
-  }
-  else {
-    infoPage.classList.remove('on');
-    infoTag.classList.remove('on');
-  }
+  setInfo(info_help, help_content);
+  infoButton[0].textContent = '만족도 조사 하기';
+  infoButton[0].setAttribute("onclick", "window.open('https://forms.gle/dMwa7nym85tTc79x5')");
+});
+/**
+ * info Close
+ */
+infoClose.addEventListener('click', function() {
+  infoPage.classList.remove('on');
+  infoTag.classList.remove('on');
 });

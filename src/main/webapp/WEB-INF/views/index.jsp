@@ -181,6 +181,10 @@
       </div>
 
       <div id="infoPage">
+        <button id="infoClose">
+          <div class="bar01"></div>
+          <div class="bar02"></div>
+        </button>
         <div class="infoTitle"></div>
         <div class="infoContent"></div>
         <div class="infoTitle"></div>
@@ -194,7 +198,9 @@
         <button class="infoButton"></button>
       </div>
       <div id="infoTag">
-        <div class="infoPageTag"></div>
+        <div class="infoPageTag">
+
+        </div>
         <div class="infoPageTag-top"></div>
         <div class="infoPageTag-bottom"></div>
       </div>
