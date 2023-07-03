@@ -41,8 +41,8 @@ jobs:
       run: |
         docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
         docker build -t app .
-        docker tag app ${{ secrets.DOCKER_USERNAME }}/sejongmate:latest
-        docker push ${{ secrets.DOCKER_USERNAME }}/sejongmate:latest
+        docker tag app ${{ secrets.DOCKER_USERNAME }}/kampus:latest
+        docker push ${{ secrets.DOCKER_USERNAME }}/kampus:latest
 
     # Docker hub에서 image pull, 이전 것 stop, docker run, 사용 중이 아닌 이미지 삭제
     - name: Deploy
