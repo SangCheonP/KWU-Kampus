@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ROOT_PATH="/home/ubuntu/spring-github-action"
-WAR="$ROOT_PATH/application.jar"
+WAR="$ROOT_PATH/kampus.war"
 STOP_LOG="$ROOT_PATH/stop.log"
 SERVICE_PID=$(pgrep -f $WAR) # 실행중인 Spring 서버의 PID
 
