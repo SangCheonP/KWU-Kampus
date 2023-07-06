@@ -17,7 +17,7 @@
   <div class="page">
     <header>
       <div class="inner">
-        <h1>광운대학교<a href="/">KWU Kampus</a></h1>
+        <h1>광운대학교<a href="/">KWU Kampus1</a></h1>
         <div id="menuBtn">
           <!-- <i class='bx bx-search' ></i> -->
           <div class="center">
