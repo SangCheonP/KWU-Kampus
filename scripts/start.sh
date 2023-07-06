@@ -1,9 +1,9 @@
 #!/bin/bash
 
 ROOT_PATH="/home/ubuntu/spring-github-action"
-WAR="$ROOT_PATH/application.war"
+WAR="$ROOT_PATH/kampus.war"
 
-APP_LOG="$ROOT_PATH/application.log"
+APP_LOG="$ROOT_PATH/kampus.log"
 ERROR_LOG="$ROOT_PATH/error.log"
 START_LOG="$ROOT_PATH/start.log"
 
