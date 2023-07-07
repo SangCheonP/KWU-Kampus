@@ -2,19 +2,19 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '2.7.10'
     id 'io.spring.dependency-management' version '1.0.15.RELEASE'
-    id 'war'
+    // id 'war'
 }
 
-bootWar.enabled = false
-war.enabled = true
+//bootWar.enabled = false
+//war.enabled = true
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
-war {
-    archiveName 'kampus.war'
-}
+//war {
+//    archiveName 'kampus.war'
+//}
 
 configurations {
     compileOnly {
@@ -34,7 +34,7 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
     // 내장 서블릿 컨테이너(내장톰캣)가 외부 서블릿컨테이너 작동에 영향을 주지 않도록 providedRuntime으로 명시
-    providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+    // providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 
     // jsp
     implementation 'javax.servlet:jstl'
@@ -53,9 +53,9 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.9.0'
 }
 
-bootWar {
-    archiveName("Campus.war")
-}
+//bootWar {
+//    archiveName("Campus.war")
+//}
 
 tasks.named('test') {
     useJUnitPlatform()
