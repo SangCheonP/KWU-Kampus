@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 ROOT_PATH="/home/ubuntu/spring-github-action"
-JAR="$ROOT_PATH/'KWU Campus-0.0.1-SNAPSHOT.jar'"
+JAR="$ROOT_PATH/kampus.jar"
 STOP_LOG="$ROOT_PATH/stop.log"
 
 # 실행중인 Spring 서버의 PID
