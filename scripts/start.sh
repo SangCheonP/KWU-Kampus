@@ -1,7 +1,7 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 ROOT_PATH="/home/ubuntu/spring-github-action"
-WAR="$ROOT_PATH/kampus.war"
+JAR="$ROOT_PATH/KWU Campus-0.0.1-SNAPSHOT.jar"
 
 APP_LOG="$ROOT_PATH/kampus.log"
 ERROR_LOG="$ROOT_PATH/error.log"
@@ -9,11 +9,13 @@ START_LOG="$ROOT_PATH/start.log"
 
 NOW=$(date +%c)
 
-echo "[$NOW] $WAR 복사" >> $START_LOG
-cp $ROOT_PATH/build/libs/kampus.war $WAR
+# build 파일 복사
+echo "[$NOW] $JAR 복사" >> $START_LOG
+cp $ROOT_PATH/build/libs/*.jar $JAR
 
-echo "[$NOW] > $WAR 실행" >> $START_LOG
-nohup java -war $WAR > $APP_LOG 2> $ERROR_LOG &
+# jar 파일 실행
+echo "[$NOW] > $JAR 실행" >> $START_LOG
+nohup java -jar $JAR > $APP_LOG 2> $ERROR_LOG &
 
-SERVICE_PID=$(pgrep -f $WAR)
+SERVICE_PID=$(pgrep -f $JAR)
 echo "[$NOW] > 서비스 PID: $SERVICE_PID" >> $START_LOG
