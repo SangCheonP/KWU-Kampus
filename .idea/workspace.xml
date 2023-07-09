@@ -5,8 +5,42 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a1763ece-2013-4e26-99e8-83801edfd65b" name="Changes" comment="07/07 -plain.jar 안 만들어지게 설정">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/floor-img/08/08.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/floor-img/08/09.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/kwmap/KWmapApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/kwmap/KWmapApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/kwmap/controller/SampleController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/kwmap/controller/SampleController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/kwmap/mapper/SampleMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/kwmap/mapper/SampleMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/kwmap/model/SampleModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/kwmap/model/SampleModel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/kwmap/service/SampleService.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/kwmap/service/SampleService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/static/css/layout.css" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/static/css/layout.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/static/js/detail-example.js" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/static/js/detail-example.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/static/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/static/js/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/static/models/BiMa.glb" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/static/models/BiMa.glb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/static/models/BokJi.glb" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/static/models/BokJi.glb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/static/models/ChamBit.glb" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/static/models/ChamBit.glb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/static/models/HwaDo.glb" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/static/models/HwaDo.glb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/static/models/KWSquare.glb" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/static/models/KWSquare.glb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/static/models/OkUi.glb" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/static/models/OkUi.glb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/static/models/SaeBit.glb" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/static/models/SaeBit.glb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/layout.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/layout.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/floor-img/04-01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/floor-img/04-02.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/floor-img/04-03.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/floor-img/08/03.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/floor-img/04-04.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/floor-img/08/04.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/floor-img/04-05.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/floor-img/08/05.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/floor-img/04-06.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/floor-img/08/06.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/floor-img/08/1.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/floor-img/08/01.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/floor-img/08/2.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/floor-img/08/02.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/floor-img/08/3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/floor-img/08/4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/floor-img/08/5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/floor-img/08/6.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/floor-img/08/07.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/detail-example.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/detail-example.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/detail.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/detail.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/index.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,9 +55,28 @@
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
         <projects_view>
           <tree_state>
-            <expand />
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="KWU Campus" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="KWU Campus" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="KWU Campus" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="application" type="c8890929:TasksNode$1" />
+              </path>
+            </expand>
             <select />
           </tree_state>
         </projects_view>
@@ -64,6 +117,9 @@
       </UrlAndAccount>
     </option>
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/main/resources/static/js/detail-example.js" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -79,35 +135,35 @@
     <option name="showMembers" value="true" />
     <option name="showVisibilityIcons" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/ho/IdeaProjects/KWU-Kampus/src/main/resources/static/images&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;프로젝트&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;settings.sync&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;76ca2ca3402e7f4d0454e7e6b54cb3b0&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/ho/IdeaProjects/KWU-Kampus/src/main/resources/static/images",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Problems",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.keymap",
+    "spring.configuration.checksum": "cd36994b5ad0c8861e102d075b6c3498",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;ChangesTree.GroupingKeys&quot;: [
-      &quot;directory&quot;,
-      &quot;module&quot;
+  "keyToStringList": {
+    "ChangesTree.GroupingKeys": [
+      "directory",
+      "module"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\ho\IdeaProjects\KWU-Kampus\src\main\resources\static\images" />
@@ -125,7 +181,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.new">
+  <component name="RunManager" selected="Gradle.KWU-Kampus [bootRun]">
     <configuration name="KWmapApplication (2)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <envs>
         <env name="server.port" value="8081" />
@@ -148,7 +204,6 @@
         <env name="server.port" value="8090" />
       </envs>
       <option name="MAIN_CLASS_NAME" value="com.example.kwmap.KWmapApplication" />
-      <module name="KWU_Campus.main" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.example.kwmap.*" />
@@ -158,6 +213,75 @@
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
+    </configuration>
+    <configuration name="KWU-Kampus [bootRun]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="env">
+          <map>
+            <entry key="server.port" value="8090" />
+          </map>
+        </option>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="bootRun" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <ForceTestExec>false</ForceTestExec>
+      <method v="2" />
+    </configuration>
+    <configuration name="KWU-Kampus [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="build" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <ForceTestExec>false</ForceTestExec>
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="GradleRunConfiguration" factoryName="Gradle">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="kampus.jar" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list />
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <ForceTestExec>false</ForceTestExec>
+      <method v="2" />
     </configuration>
     <configuration default="true" type="JetRunConfigurationType">
       <module name="KWU-Kampus" />
@@ -193,9 +317,17 @@
     <list>
       <item itemvalue="Application.KWmapApplication" />
       <item itemvalue="Application.KWmapApplication (2)" />
+      <item itemvalue="Gradle.KWU-Kampus [bootRun]" />
+      <item itemvalue="Gradle.KWU-Kampus [build]" />
       <item itemvalue="Spring Boot.new" />
       <item itemvalue="Spring Boot.model" />
     </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.KWU-Kampus [bootRun]" />
+        <item itemvalue="Gradle.KWU-Kampus [build]" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -246,6 +378,9 @@
       <workItem from="1688654055906" duration="1316000" />
       <workItem from="1688658945630" duration="420000" />
       <workItem from="1688687169288" duration="2156000" />
+      <workItem from="1688753009505" duration="248000" />
+      <workItem from="1688831946662" duration="3565000" />
+      <workItem from="1688881068400" duration="17479000" />
     </task>
     <task id="LOCAL-00001" summary="화도관 평면도 추가">
       <created>1682685614063</created>

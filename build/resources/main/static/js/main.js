@@ -32,6 +32,8 @@ const main = document.querySelector( 'main' );
 let width, height, camera, controls, scene, renderer, raycaster;
 let textTitle, textContent, help_content, building_content, categoty_content, info_help, info_building, info_category;
 let infoTag, infoPage, infoButton, infoClose;
+let mapChange, mapState, map2D, map3D;
+let container, options, map;
 
 const pointer = new THREE.Vector2(); // mouse cursor position tracking
 let intersects = []; // list to find which building is selected
@@ -53,7 +55,7 @@ function init() {
 
   scene = new THREE.Scene();
   scene.background = new THREE.Color( 0xcccccc );
-  scene.fog = new THREE.FogExp2( 0xcccccc, 0.003 );
+//  scene.fog = new THREE.FogExp2( 0xcccccc, 0.002 );
 
   raycaster = new THREE.Raycaster(); // for mouse(pointer) tracking
 
@@ -62,8 +64,8 @@ function init() {
   renderer.setSize( width, height );
   main.appendChild( renderer.domElement ); // where to append
 
-  camera = new THREE.PerspectiveCamera( 60, width / height, 1, 700 );// 1000 );
-  camera.position.set( 200, 100, 0 ); // ( 400, 200, 0 );
+  camera = new THREE.PerspectiveCamera( 60, width / height, 1, 1000 );// 1000 );
+  camera.position.set( 300, 300, 0 ); // ( 400, 200, 0 );
 
   // controls
 
@@ -118,12 +120,17 @@ function init() {
   dirLight1.name = 'dirLight1';
   scene.add( dirLight1 );
 
-  const dirLight2 = new THREE.DirectionalLight( 0x002266 );
+  const dirLight2 = new THREE.DirectionalLight( 0x222222 );
   dirLight2.position.set( -9, -12, -10 );
   dirLight2.name = 'dirLight2';
   scene.add( dirLight2 );
 
-  const ambientLight = new THREE.AmbientLight( 0x222222 );
+  const dirLight3 = new THREE.DirectionalLight( 0x666666 );
+  dirLight3.position.set( 13, 12, -10 );
+  dirLight3.name = 'dirLight3';
+  scene.add( dirLight3 );
+
+  const ambientLight = new THREE.AmbientLight( 0x666666 );
   ambientLight.name = 'ambientLight';
   scene.add( ambientLight );
 
@@ -154,6 +161,10 @@ function init() {
   infoButton[0].textContent = '만족도 조사 하기';
   infoButton[0].setAttribute("onclick", "window.open('https://forms.gle/dMwa7nym85tTc79x5')");
 
+  map2D = mapChange = document.getElementById('map');
+  // map3D = mapChange = document.getElementById('guiContainer');
+  mapChange = document.getElementById('mapChange');
+  mapState = '2D';
 
   // // Grid Helper
   // const gridHelper = new THREE.GridHelper( 1000, 100 );
@@ -227,7 +238,7 @@ function render() {
 // custom functions
 
 /**
- * 카테고리 클릭 시 배열에 관련 정보 세팅
+ * 카테고리 클릭 시 인포 창에 관련 정보를 세팅합니다.
  */
 subCategories.forEach( ( subCategory ) => {
   subCategory.addEventListener( 'click', function() {
@@ -243,7 +254,7 @@ subCategories.forEach( ( subCategory ) => {
     // categoty_content[3] = c_id.substr(3, 4);
     // categoty_content[4] = c_id.substr(8, 1);
 
-    setInfo(info_category, categoty_content);
+    setInfo( info_category, categoty_content );
   });
 });
 
@@ -308,9 +319,9 @@ function createModel ( loader, data ) {
         building_content[2] = model.userData.management_team;
         building_content[3] = model.userData.management_team_phone_num;
 
-        fetch('http://13.124.194.184:8080/building/importanceRooms/info/'+model.userData.id)
-            .then(res => res.json())
-            .then(datas => {
+        fetch( 'http://13.124.194.184:8080/building/importanceRooms/info/' + model.userData.id )
+            .then( res => res.json() )
+            .then( datas => {
               building_content[4] = '';
 
               for (var i = 0; i < datas.length; i++) {
@@ -321,7 +332,7 @@ function createModel ( loader, data ) {
               setInfo(info_building, building_content);
             });
 
-        // 임시 코드
+        // 임시
         categoty_content[1] = model.name;
       }
     }
@@ -352,7 +363,7 @@ function createModel ( loader, data ) {
           e.preventDefault();
           target.userData.onClick();
 
-          setInfo(info_category, categoty_content);
+          setInfo( info_category, categoty_content );
       
         } );
 
@@ -450,19 +461,18 @@ function getIntersects() {
 }
 
 /**
- * 정보 요약창 생성
- * title_arr: 정보 항목
- * content_arr: 항목별 내용
+ * 정보 요약창을 생성합니다.
+ * @param title_arr: 정보 항목
+ * @param content_arr: 항목별 내용
  */
-
-function setInfo(title_arr, content_arr) {
+function setInfo( title_arr, content_arr ) {
   // 초기화
-  for(var i = 0; i < textTitle.length; i++) {
+  for( var i = 0; i < textTitle.length; i++ ) {
     textTitle[i].style.display = 'none';
     textContent[i].style.display = 'none';
   }
 
-  for(var i = 0; i < title_arr.length; i++) {
+  for( var i = 0; i < title_arr.length; i++ ) {
     textTitle[i].style.display = 'block';
     textContent[i].style.display = 'block';
 
@@ -470,27 +480,61 @@ function setInfo(title_arr, content_arr) {
     textContent[i].textContent = content_arr[i];
   }
 
-  if(!infoPage.classList.contains('on')) {
-    infoTag.classList.toggle('on');
-    infoPage.classList.toggle('on');
+  if ( !infoPage.classList.contains( 'on' ) ) {
+    infoTag.classList.toggle( 'on' );
+    infoPage.classList.toggle( 'on' );
   }
 
   infoButton[0].textContent = '상세 정보 보기';
-  infoButton[0].setAttribute("onclick", "location.href='/detail'");
+  infoButton[0].setAttribute( "onclick", "location.href='/detail'" );
 }
 
 /**
  * info Open
  */
-infoTag.addEventListener('click', function() {
+infoTag.addEventListener( 'click', function() {
   setInfo(info_help, help_content);
   infoButton[0].textContent = '만족도 조사 하기';
-  infoButton[0].setAttribute("onclick", "window.open('https://forms.gle/dMwa7nym85tTc79x5')");
+  infoButton[0].setAttribute( "onclick", "window.open('https://forms.gle/dMwa7nym85tTc79x5')" );
 });
 /**
  * info Close
  */
-infoClose.addEventListener('click', function() {
-  infoPage.classList.remove('on');
-  infoTag.classList.remove('on');
+infoClose.addEventListener( 'click', function() {
+  infoPage.classList.remove( 'on' );
+  infoTag.classList.remove( 'on' );
 });
+
+/**
+ * 버튼 클릭 시, 2D <-> 3D 지도를 전환합니다.
+ * 2D 지도를 보일 땐 카카오맵을 로드하고,
+ * 3D 지도를 보일 땐 카카오맵의 display 값을 none으로 설정합니다.
+ */
+// mapChange.addEventListener( 'click', function() {
+//
+//   if( mapState == '2D' ) {
+//     map2D.style.display = 'block';
+//     // map3D.style.display = 'none';
+//     load2Dmap();
+//     mapState = '3D';
+//   }
+//   else if ( mapState == '3D' ) {
+//     // animate();
+//     map2D.style.display = 'none';
+//     // map3D.style.display = 'block';
+//     mapState = '2D';
+//   }
+// });
+
+/**
+ * 카카오맵을 load 하기 위해 값을 설정합니다.
+ */
+// function load2Dmap() {
+//   container = document.getElementById( 'map' ); //지도를 담을 영역의 DOM 레퍼런스
+//   options = { //지도를 생성할 때 필요한 기본 옵션
+//     center: new kakao.maps.LatLng( 33.450701, 126.570667 ), //지도의 중심좌표.
+//     level: 3 //지도의 레벨(확대, 축소 정도)
+//   };
+//
+//   map = new kakao.maps.Map( container, options ); //지도 생성 및 객체 리턴
+// }

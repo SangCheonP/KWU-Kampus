@@ -8,6 +8,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>KWU Kampus</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
   <link rel="stylesheet" href="./css/reset.css">
   <link rel="stylesheet" href="./css/layout.css">
 </head>
@@ -112,37 +113,42 @@
             </ul>
           </div>
 
+          <div class="text-wrap">
+            <ul id="rooms" class="accordion accordion-flush">
+            </ul>
+          </div>
+
 
           <div class="img-wrap">
             <div class="navbar"></div>
 
             <div class="imgBg">
-              <div class="roomNum">
-                <span>101</span>
-                <div class="desc">
-                  <p>Description</p>
-                </div>
-              </div>
+<%--              <div class="roomNum">--%>
+<%--                <span>101</span>--%>
+<%--                <div class="desc">--%>
+<%--                  <p>Description</p>--%>
+<%--                </div>--%>
+<%--              </div>--%>
 
-              <div class="roomNum">
-                <span>102</span>
-                <div class="desc">
-                  <p>Description</p>
-                </div>
-              </div>
+<%--              <div class="roomNum">--%>
+<%--                <span>102</span>--%>
+<%--                <div class="desc">--%>
+<%--                  <p>Description</p>--%>
+<%--                </div>--%>
+<%--              </div>--%>
 
-              <div class="roomNum">
-                <span>103</span>
-                <div class="desc">
-                  <p>Description</p>
-                </div>
-              </div>
+<%--              <div class="roomNum">--%>
+<%--                <span>103</span>--%>
+<%--                <div class="desc">--%>
+<%--                  <p>Description</p>--%>
+<%--                </div>--%>
+<%--              </div>--%>
 
-              <div class="roomNum">
-                <span>104</span>
-                <div class="desc">
-                  <p>Description</p>
-                </div>
+<%--              <div class="roomNum">--%>
+<%--                <span>104</span>--%>
+<%--                <div class="desc">--%>
+<%--                  <p>Description</p>--%>
+<%--                </div>--%>
               </div>
 
             </div>
@@ -157,6 +163,6 @@
 
     <script src="../js/header.js"></script>
     <script src="../js/detail-example.js"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
 </body>
 </html>
