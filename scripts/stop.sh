@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
 ROOT_PATH="/home/ubuntu/spring-github-action"
-JAR="$ROOT_PATH/kampus.jar"
+WAR="$ROOT_PATH/kampus.war"
 STOP_LOG="$ROOT_PATH/stop.log"
 NOW=$(date +%c)
 
 # 실행중인 Spring 서버의 PID
-SERVICE_PID=$(pgrep -f $JAR)
+SERVICE_PID=$(pgrep -f $WAR)
 
 if [ -z "$SERVICE_PID" ]; then
   echo "[$NOW] 서비스 NotFound" >> $STOP_LOG
