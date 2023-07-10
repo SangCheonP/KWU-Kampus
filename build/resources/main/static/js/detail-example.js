@@ -287,7 +287,7 @@ function setFloorBg ( bgUrl = "" ) {
  */
 function activateFloor ( floor, i, classifiedList ) {
 
-    // if문은 임의로 작성하였습니다.
+    // if문은 임의로 작성했습니다.
     // 추가 정보 필요 유무에 따라 Room List를 구성하는 element가 달라집니다.
     for ( let j = 0; j < classifiedList[i].length; j++ ) {
 
