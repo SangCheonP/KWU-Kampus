@@ -4,13 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a1763ece-2013-4e26-99e8-83801edfd65b" name="Changes" comment="07/11 kampus.war로 다시 변경">
+    <list default="true" id="a1763ece-2013-4e26-99e8-83801edfd65b" name="Changes" comment="07/11 jar -&gt; war로 변경 및 gradle 설정&#10;&#10; - 빌딩 3D 모델이 안 뜨는 오류">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/kwmap/KWmapApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/kwmap/KWmapApplication.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/start.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/start.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/stop.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/stop.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/kwmap/KWmapApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/kwmap/KWmapApplication.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -270,7 +266,7 @@
       <workItem from="1688658945630" duration="420000" />
       <workItem from="1688687169288" duration="2933000" />
       <workItem from="1689018545640" duration="4908000" />
-      <workItem from="1689023722375" duration="495000" />
+      <workItem from="1689023722375" duration="1882000" />
     </task>
     <task id="LOCAL-00001" summary="화도관 평면도 추가">
       <created>1682685614063</created>
@@ -377,7 +373,14 @@
       <option name="project" value="LOCAL" />
       <updated>1689019765571</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="07/11 jar -&gt; war로 변경 및 gradle 설정&#10;&#10; - 빌딩 3D 모델이 안 뜨는 오류">
+      <created>1689024276629</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1689024276629</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -421,6 +424,7 @@
     <MESSAGE value="07/07 -plain.jar 안 만들어지게 설정" />
     <MESSAGE value="07/07 kampus.jar로 빌드 파일 이름 설정" />
     <MESSAGE value="07/11 kampus.war로 다시 변경" />
-    <option name="LAST_COMMIT_MESSAGE" value="07/11 kampus.war로 다시 변경" />
+    <MESSAGE value="07/11 jar -&gt; war로 변경 및 gradle 설정&#10;&#10; - 빌딩 3D 모델이 안 뜨는 오류" />
+    <option name="LAST_COMMIT_MESSAGE" value="07/11 jar -&gt; war로 변경 및 gradle 설정&#10;&#10; - 빌딩 3D 모델이 안 뜨는 오류" />
   </component>
 </project>

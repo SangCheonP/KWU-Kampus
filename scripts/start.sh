@@ -11,7 +11,7 @@ NOW=$(date +%c)
 
 # build 파일 복사
 echo "[$NOW] $WAR 복사" >> $START_LOG
-cp $ROOT_PATH/build/libs/*.war $WAR
+cp $ROOT_PATH/build/libs/kampus-0.0.1-SNAPSHOT.war $WAR
 
 # war 파일 실행
 echo "[$NOW] > $WAR 실행" >> $START_LOG
