@@ -6,7 +6,7 @@ STOP_LOG="$ROOT_PATH/stop.log"
 NOW=$(date +%c)
 
 # 실행중인 Spring 서버의 PID
-SERVICE_PID=$(pgrep -f $WAR)
+SERVICE_PID=$(pgrep -f java)
 
 if [ -z "$SERVICE_PID" ]; then
   echo "[$NOW] 서비스 NotFound" >> $STOP_LOG
