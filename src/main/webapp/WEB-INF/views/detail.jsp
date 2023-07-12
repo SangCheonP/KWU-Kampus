@@ -95,9 +95,8 @@
       <main id="detail">
 
         <div class="inner">
-          <!-- <div class="testBg"></div> -->
 
-          <div class="text-wrap">
+          <div class="text-wrap" id="text-wrap-floors">
             <ul id="floors">
             <!--
               <li>
@@ -113,11 +112,10 @@
             </ul>
           </div>
 
-          <div class="text-wrap">
+          <div class="text-wrap" id="text-wrap-rooms">
             <ul id="rooms" class="accordion accordion-flush">
             </ul>
           </div>
-
 
           <div class="img-wrap">
             <div class="navbar"></div>
@@ -151,11 +149,10 @@
 <%--                </div>--%>
               </div>
 
-            </div>
-            <!-- imgBg end -->
           </div>
-          <!-- img-wrap end -->
+            <!-- imgBg end -->
         </div>
+          <!-- img-wrap end -->
 
       </main>
 

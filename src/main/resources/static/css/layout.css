@@ -330,7 +330,8 @@ header #menuBtn {
 
 /* floors */
 #detail .text-wrap {
-  width: calc( 100% - 1200px );
+  /*width: calc( 100% - 1200px );*/
+  width: 20%;
   background-color: #eee;
   border-right: 3px solid var( --main-dark );
   border-left: 3px solid var( --main-dark );
@@ -356,7 +357,7 @@ header #menuBtn {
 }
 #floors>li { 
   width: 100%; height: auto;
-  overflow: hidden; 
+  overflow: hidden;
 }
 #floors span.floor-title {
   display: block;
@@ -419,7 +420,8 @@ header #menuBtn {
 /* img-wrap */
 #detail .img-wrap {
   position: relative;
-  width: 1200px; height: 100%;
+  /*width: 1200px; height: 100%;*/
+  width: 60%; height: auto;
   border-right: 3px solid var( --main-dark );
   overflow: hidden;
 }
@@ -522,4 +524,36 @@ header #menuBtn {
   /* fixed information modal */
   #guiContainer { width: calc( 100%  - 20px); }
   #guiContainer .lil-gui.root { width: calc( 100% - 20px ); }
+
+  #detail .inner { flex-direction: column; }
+  #detail .inner .text-wrap { width: 100%; }
+
+  #text-wrap-floors {
+    width: 100%; height: auto;
+    padding-bottom: 0px;
+  }
+
+  #text-wrap-rooms {
+    width: 100%; height: 30%;
+  }
+
+  #floors {
+    flex-direction: row;
+    padding-bottom: 0px;
+  }
+  #floors>li {
+    text-align: center;
+  }
+  #floors span.floor-title {
+    margin-bottom: 0px;
+    font-size: 20px;
+    text-indent: 0em;
+    text-align: center;
+  }
+
+  #rooms { padding-top: 0px; }
+
+  #detail .img-wrap { width: 100%; height: 60%; }
+  #detail .img-wrap .navbar { height: 5%; }
+  #detail .img-wrap .imgBg { height: 100%; }
 }
