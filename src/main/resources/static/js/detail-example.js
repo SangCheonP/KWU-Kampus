@@ -148,9 +148,10 @@ init();
 function init() {
 
     // sessionStorage 에서 클릭한 건물/시설 정보를 저장 및 불러옵니다.
-    sessionStorage.setItem( 'floor', 'B2' );
-    sessionStorage.setItem( 'building_code', "08" );
+//    sessionStorage.setItem( 'floor', 'B2' );
+//    sessionStorage.setItem( 'building_code', "08" );
     building_code = sessionStorage.getItem( "building_code" );
+    if ( !building_code ) return;
 
     bgUrl = "../floor-img/" + building_code + "/";
 
@@ -198,7 +199,7 @@ function init() {
  * detail_example.html에 Floor List를 구성하는 새 element 들을 생성하고,
  * 클릭 이벤트를 설정합니다.
  *
- * @param classifiedList
+ * @param { Array } classifiedList
  * @result Create new elements under `ul#floors`
  */
 function createFloors( classifiedList ) {
