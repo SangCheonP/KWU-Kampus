@@ -138,16 +138,16 @@ function init() {
   textTitle = document.getElementsByClassName("infoTitle");
   textContent = document.getElementsByClassName("infoContent");
 
-  info_building = new Array('건물명', '전화번호', '시설관리팀', '시설관리팀 전화번호', '기타 정보');
+  info_building = new Array('건물명', '전화번호', '시설관리팀', '시설관리팀 전화번호', '주요 시설');
   info_category = new Array('시설명', '건물명', '층수', '호수', '기타 정보');
 
   info_help = new Array('※ 화면 크기를 변경하면서 지도 로딩이 덜 되었다면 화면 새로고침을 해주세요.', '※ 완성본이 아닌, 기능만 확인할 수 있는 버전입니다.', 'KWU Kampus', '조작법');
   help_content = new Array('', '모든 정보가 채워진 상태가 아니며, 상세 정보는 \'새빛관\'만 확인하실 수 있습니다.',
                                  '광운대학교 시설 정보 취합 사이트 \'KWU Kampus\'입니다. 건물 또는 카테고리를 클릭해 보세요. 해당 건물 및 시설에 대한 정보를 확인할 수 있습니다.',
-                                 '정보창: 해당 창의 우측 책갈피 클릭 // ' +
-                                  '카테고리 메뉴: 사이트의 우측 상단 버튼 클릭 // ' +
-                                  '지도 이동: 마우스 우 클릭 + 드래그 // ' +
-                                  '지도 회전: 마우스 좌 클릭 + 드래그 // ' +
+                                 '정보창: 해당 창의 우측 책갈피 클릭 \n ' +
+                                  '카테고리 메뉴: 사이트의 우측 상단 버튼 클릭 \n ' +
+                                  '지도 이동: 마우스 우 클릭 + 드래그 \n ' +
+                                  '지도 회전: 마우스 좌 클릭 + 드래그 \n ' +
                                   '지도 확대/축소: 마우스 휠');
   building_content = new Array(5);
   categoty_content = new Array(5);
@@ -280,13 +280,23 @@ function createModel ( loader, data ) {
     model.rotateY( Math.PI / 180 * data.angle );
     model.scale.setScalar( data.scale );
 
+    const facilities = await fetch( 'http://13.124.194.184:8080/building/importanceRooms/info/' + data.building_code )
+                              .then( res => res.json() )
+                              .then( datas => {
+
+                               let result = [];
+                               datas.forEach( ( data ) => { result.push( data ); } );
+                               return result;
+
+                              });
+
     model.userData = {
-      // isActive: false, // not used
+
       id: data.building_code,
       building_phone_num: data.building_phone_num,
       management_team: data.management_team,
       management_team_phone_num: data.management_team_phone_num,
-      viewPosition: data.viewPosition,
+      importance_rooms: facilities,
       others: data.others,
 
       onPointerOver: function() {
@@ -308,7 +318,6 @@ function createModel ( loader, data ) {
 
       onClick: function() {
 
-//        camera.position.setY( 100 );
         controls.target.copy( model.position );
         controls.update();
         console.log( model.name + ' clicked' );
@@ -318,25 +327,22 @@ function createModel ( loader, data ) {
         building_content[1] = model.userData.building_phone_num;
         building_content[2] = model.userData.management_team;
         building_content[3] = model.userData.management_team_phone_num;
+        let facilities = [];
+        model.userData.importance_rooms.forEach( ( data ) => {
+          facilities.push( data.facilities );
+        } )
+        building_content[4] = facilities;
 
-        fetch( 'http://13.124.194.184:8080/building/importanceRooms/info/' + model.userData.id )
-            .then( res => res.json() )
-            .then( datas => {
-              building_content[4] = '';
-
-              for (var i = 0; i < datas.length; i++) {
-                if(i != 0) building_content[4] += ', ';
-                building_content[4] += datas[i].facilities;
-              }
-
-              setInfo(info_building, building_content);
-            });
+        setInfo(info_building, building_content);
+        sessionStorage.setItem( 'building_code', model.userData.id );
 
         // 임시
         categoty_content[1] = model.name;
       }
+
     }
-    
+
+    // removing spaces from the model.name as this font does not support spaces.
     createFont( model.position, model.name.replace( /\s+/g, '' ) );
     buildings.push( model );
     scene.add( model );
