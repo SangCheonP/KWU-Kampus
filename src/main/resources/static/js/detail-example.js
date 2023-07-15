@@ -1,3 +1,5 @@
+import * as URL from './url.js'
+
 const floorList = document.getElementById('floors');
 const roomList = document.getElementById('rooms');
 const roomNums = document.querySelectorAll('#detail .img-wrap .roomNum');
@@ -155,7 +157,7 @@ function init() {
 
     bgUrl = "../floor-img/" + building_code + "/";
 
-    fetch( `http://13.124.194.184:8080/detail/info/${building_code}`, {
+    fetch( URL.detail + building_code, {
         method: "GET"
     } )
         .then( res => res.json() )
