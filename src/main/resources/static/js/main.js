@@ -3,6 +3,7 @@ import { GUI } from 'three/addons/libs/lil-gui.module.min.js';
 import { MapControls } from 'three/addons/controls/MapControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { FontLoader } from 'three/addons/loaders/FontLoader.js';
+import * as URL from './url.js'
 
 // basic javascripts
 
@@ -86,7 +87,7 @@ function init() {
   // GLTF Loader, load models
 
   const gltfLoader = new GLTFLoader();
-  fetch( "http://13.124.194.184:8080/buildings/info", {
+  fetch( URL.buildings, {
     method: "GET"
   } )
   .then( res => res.json() )
@@ -144,10 +145,10 @@ function init() {
   info_help = new Array('※ 화면 크기를 변경하면서 지도 로딩이 덜 되었다면 화면 새로고침을 해주세요.', '※ 완성본이 아닌, 기능만 확인할 수 있는 버전입니다.', 'KWU Kampus', '조작법');
   help_content = new Array('', '모든 정보가 채워진 상태가 아니며, 상세 정보는 \'새빛관\'만 확인하실 수 있습니다.',
                                  '광운대학교 시설 정보 취합 사이트 \'KWU Kampus\'입니다. 건물 또는 카테고리를 클릭해 보세요. 해당 건물 및 시설에 대한 정보를 확인할 수 있습니다.',
-                                 '정보창: 해당 창의 우측 책갈피 클릭 \n ' +
-                                  '카테고리 메뉴: 사이트의 우측 상단 버튼 클릭 \n ' +
-                                  '지도 이동: 마우스 우 클릭 + 드래그 \n ' +
-                                  '지도 회전: 마우스 좌 클릭 + 드래그 \n ' +
+                                 '정보창: 해당 창의 우측 책갈피 클릭 //\n ' +
+                                  '카테고리 메뉴: 사이트의 우측 상단 버튼 클릭 //\n ' +
+                                  '지도 이동: 마우스 우 클릭 + 드래그 //\n ' +
+                                  '지도 회전: 마우스 좌 클릭 + 드래그 //\n ' +
                                   '지도 확대/축소: 마우스 휠');
   building_content = new Array(5);
   categoty_content = new Array(5);
@@ -280,7 +281,7 @@ function createModel ( loader, data ) {
     model.rotateY( Math.PI / 180 * data.angle );
     model.scale.setScalar( data.scale );
 
-    const facilities = await fetch( 'http://13.124.194.184:8080/building/importanceRooms/info/' + data.building_code )
+    const facilities = await fetch( URL.importance + data.building_code )
                               .then( res => res.json() )
                               .then( datas => {
 
@@ -369,7 +370,7 @@ function createModel ( loader, data ) {
           e.preventDefault();
           target.userData.onClick();
 
-          setInfo( info_category, categoty_content );
+//          setInfo( info_category, categoty_content ); 중복임
       
         } );
 
