@@ -119,10 +119,8 @@
 
           <div class="img-wrap">
             <div class="navbar"></div>
-
             <div class="imgBg">
 <%--              <div class="roomNum">--%>
-<%--                <span>101</span>--%>
 <%--                <div class="desc">--%>
 <%--                  <p>Description</p>--%>
 <%--                </div>--%>
@@ -147,8 +145,7 @@
 <%--                <div class="desc">--%>
 <%--                  <p>Description</p>--%>
 <%--                </div>--%>
-              </div>
-
+            </div>
           </div>
             <!-- imgBg end -->
         </div>

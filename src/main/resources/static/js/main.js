@@ -31,7 +31,7 @@ const main = document.querySelector( 'main' );
 ///////////////////////////////
 
 let width, height, camera, controls, scene, renderer, raycaster;
-let textTitle, textContent, help_content, building_content, categoty_content, info_help, info_building, info_category;
+let textTitle, textContent, help_content, categoty_content, info_help, info_category;
 let infoTag, infoPage, infoButton, infoClose;
 let mapChange, mapState, map2D, map3D;
 let container, options, map;
@@ -139,18 +139,16 @@ function init() {
   textTitle = document.getElementsByClassName("infoTitle");
   textContent = document.getElementsByClassName("infoContent");
 
-  info_building = new Array('건물명', '전화번호', '시설관리팀', '시설관리팀 전화번호', '주요 시설');
   info_category = new Array('시설명', '건물명', '층수', '호수', '기타 정보');
 
-  info_help = new Array('※ 화면 크기를 변경하면서 지도 로딩이 덜 되었다면 화면 새로고침을 해주세요.', '※ 완성본이 아닌, 기능만 확인할 수 있는 버전입니다.', 'KWU Kampus', '조작법');
-  help_content = new Array('', '모든 정보가 채워진 상태가 아니며, 상세 정보는 \'새빛관\'만 확인하실 수 있습니다.',
+  info_help = new Array('※', 'KWU Kampus', '조작법');
+  help_content = new Array('지도 로딩이 덜 되었다면 화면 새로고침을 해주세요.',
                                  '광운대학교 시설 정보 취합 사이트 \'KWU Kampus\'입니다. 건물 또는 카테고리를 클릭해 보세요. 해당 건물 및 시설에 대한 정보를 확인할 수 있습니다.',
                                  '정보창: 해당 창의 우측 책갈피 클릭 //\n ' +
                                   '카테고리 메뉴: 사이트의 우측 상단 버튼 클릭 //\n ' +
                                   '지도 이동: 마우스 우 클릭 + 드래그 //\n ' +
                                   '지도 회전: 마우스 좌 클릭 + 드래그 //\n ' +
                                   '지도 확대/축소: 마우스 휠');
-  building_content = new Array(5);
   categoty_content = new Array(5);
 
   infoTag = document.getElementById('infoTag');
@@ -159,8 +157,8 @@ function init() {
   infoClose =  document.getElementById('infoClose');
 
   setInfo(info_help, help_content);
-  infoButton[0].textContent = '만족도 조사 하기';
-  infoButton[0].setAttribute("onclick", "window.open('https://forms.gle/dMwa7nym85tTc79x5')");
+  infoTag.classList.toggle( 'on' );
+  infoPage.classList.toggle( 'on' );
 
   map2D = mapChange = document.getElementById('map');
   // map3D = mapChange = document.getElementById('guiContainer');
@@ -255,7 +253,7 @@ subCategories.forEach( ( subCategory ) => {
     // categoty_content[3] = c_id.substr(3, 4);
     // categoty_content[4] = c_id.substr(8, 1);
 
-    setInfo( info_category, categoty_content );
+    setCategoryInfo( info_category, categoty_content );
   });
 });
 
@@ -324,17 +322,8 @@ function createModel ( loader, data ) {
         console.log( model.name + ' clicked' );
         
         // 빌딩 클릭 시 배열에 관련 정보 세팅
-        building_content[0] = model.name;
-        building_content[1] = model.userData.building_phone_num;
-        building_content[2] = model.userData.management_team;
-        building_content[3] = model.userData.management_team_phone_num;
-        let facilities = [];
-        model.userData.importance_rooms.forEach( ( data ) => {
-          facilities.push( data.facilities );
-        } )
-        building_content[4] = facilities;
+        setBuildingInfo(model);
 
-        setInfo(info_building, building_content);
         sessionStorage.setItem( 'building_code', model.userData.id );
 
         // 임시
@@ -370,7 +359,7 @@ function createModel ( loader, data ) {
           e.preventDefault();
           target.userData.onClick();
 
-//          setInfo( info_category, categoty_content ); 중복임
+          setCategoryInfo( info_category, categoty_content );
       
         } );
 
@@ -468,28 +457,53 @@ function getIntersects() {
 }
 
 /**
+ * 정보창에 새로운 값을 업데이트하기 전, 초기화합니다.
+ * @param len 정보창에 들어갈 내용 개수
+ */
+function clearInfo( len = 0 ) {
+
+  for( var i = 0; i < len; i++ ) {
+    textTitle[i].textContent = '';
+    textContent[i].textContent = '';
+
+    textTitle[i].style.display = 'block';
+    textContent[i].style.display = 'block';
+  }
+
+  for( var i = len; i < textTitle.length; i++ ) {
+    textTitle[i].style.display = 'none';
+    textContent[i].style.display = 'none';
+  }
+}
+
+/**
  * 정보 요약창을 생성합니다.
  * @param title_arr: 정보 항목
  * @param content_arr: 항목별 내용
  */
 function setInfo( title_arr, content_arr ) {
-  // 초기화
-  for( var i = 0; i < textTitle.length; i++ ) {
-    textTitle[i].style.display = 'none';
-    textContent[i].style.display = 'none';
-  }
+  clearInfo( title_arr.length );
 
   for( var i = 0; i < title_arr.length; i++ ) {
-    textTitle[i].style.display = 'block';
-    textContent[i].style.display = 'block';
-
     textTitle[i].textContent = title_arr[i];
     textContent[i].textContent = content_arr[i];
   }
 
-  if ( !infoPage.classList.contains( 'on' ) ) {
-    infoTag.classList.toggle( 'on' );
-    infoPage.classList.toggle( 'on' );
+  infoButton[0].textContent = '만족도 조사 하기';
+  infoButton[0].setAttribute( "onclick", "window.open('https://forms.gle/dMwa7nym85tTc79x5')" );
+}
+
+/**
+ * 카테고리 클릭 시 정보창을 업데이트합니다.
+ * @param title_arr: 정보 항목
+ * @param content_arr: 항목별 내용
+ */
+function setCategoryInfo( title_arr, content_arr ) {
+  clearInfo( title_arr.length );
+
+  for( var i = 0; i < title_arr.length; i++ ) {
+    textTitle[i].textContent = title_arr[i];
+    textContent[i].textContent = content_arr[i];
   }
 
   infoButton[0].textContent = '상세 정보 보기';
@@ -497,12 +511,35 @@ function setInfo( title_arr, content_arr ) {
 }
 
 /**
+ * 건물 클릭 시 정보창을 업데이트합니다.
+ * @param model cliked building
+ */
+function setBuildingInfo( model ) {
+  clearInfo(2);
+
+  textTitle[0].innerText = "건물명";
+  textContent[0].innerText = model.name;;
+
+  textTitle[1].innerText = "주요 시설";
+  model.userData.importance_rooms.forEach( ( data ) => {
+    const p = document.createElement( 'p' );
+    p.innerText = data.facilities;
+    textContent[1].appendChild( p );
+  } )
+
+  infoButton[0].textContent = '상세 정보 보기';
+  infoButton[0].setAttribute( "onclick", "location.href='/detail'" );
+
+}
+
+/**
  * info Open
  */
 infoTag.addEventListener( 'click', function() {
   setInfo(info_help, help_content);
-  infoButton[0].textContent = '만족도 조사 하기';
-  infoButton[0].setAttribute( "onclick", "window.open('https://forms.gle/dMwa7nym85tTc79x5')" );
+
+  infoTag.classList.toggle( 'on' );
+  infoPage.classList.toggle( 'on' );
 });
 /**
  * info Close
