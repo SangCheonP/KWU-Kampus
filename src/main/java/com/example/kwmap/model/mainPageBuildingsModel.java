@@ -16,4 +16,6 @@ public class mainPageBuildingsModel {
     private Double angle;
     private Integer scale;
     private String others;
+    private Double latitude;
+    private Double longitude;
 }
