@@ -24,7 +24,7 @@ fixedHelp.addEventListener( 'click', () => {
 } );
 
 const subCategories = document.querySelectorAll( 'ul.sub-categories li a' );
-const container = document.querySelector( 'main' );
+const mapContainer = document.querySelector( 'main' );
 
 ///////////////////////////////
 ///// THREE.js from here: /////
@@ -52,9 +52,9 @@ function init() {
   // variables
 
   width = window.innerWidth;
-  // width = container.clientWidth;
+  // width = mapContainer.clientWidth;
   height = window.innerHeight;
-  // height = container.clientHeight;
+  // height = mapContainer.clientHeight;
 
   scene = new THREE.Scene();
   scene.background = new THREE.Color( 0xcccccc );
@@ -65,7 +65,7 @@ function init() {
   renderer = new THREE.WebGLRenderer( { antialias: true } );
   renderer.setPixelRatio( window.devicePixelRatio );
   renderer.setSize( width, height );
-  container.appendChild( renderer.domElement ); // where to append
+  mapContainer.appendChild( renderer.domElement ); // where to append
 
   camera = new THREE.PerspectiveCamera( 60, width / height, 1, 1000 );// 1000 );
   camera.position.set( 300, 300, 0 ); // ( 400, 200, 0 );
@@ -172,8 +172,8 @@ function init() {
   // scene.add( gridHelper );
 
   window.addEventListener( 'resize', onWindowResize );
-  container.addEventListener( 'pointermove', onPointerMove );
-  container.addEventListener( 'click', onClick );
+  mapContainer.addEventListener( 'pointermove', onPointerMove );
+  mapContainer.addEventListener( 'click', onClick );
   // window.addEventListener( 'dblclick', ( event ) => { // dev, 더블 클릭시 카메라의 위치에서 카메라 방향으로 
   //   let worldDirection = new THREE.Vector3;
   //   let worldPosition = new THREE.Vector3;
@@ -186,9 +186,16 @@ function init() {
 }
 
 // window events
-
+/**
+ * 브라우저 창 크기 변경에 따른 3d map 비율 및 렌더링 옵션을 변경합니다.
+ * `mapContainer` element 의 크기를 기준으로 합니다.
+ */
 function onWindowResize() {
-  
+
+  width = window.innerWidth;
+//  width = mapContainer.clientWidth;
+  height = window.innerHeight;
+//  height = mapContainer.clientHeight;
   camera.aspect = width / height;
   camera.updateProjectionMatrix();
   renderer.setSize( width, height );
