@@ -24,7 +24,7 @@ fixedHelp.addEventListener( 'click', () => {
 } );
 
 const subCategories = document.querySelectorAll( 'ul.sub-categories li a' );
-const main = document.querySelector( 'main' );
+const container = document.querySelector( 'main' );
 
 ///////////////////////////////
 ///// THREE.js from here: /////
@@ -52,7 +52,9 @@ function init() {
   // variables
 
   width = window.innerWidth;
+  // width = container.clientWidth;
   height = window.innerHeight;
+  // height = container.clientHeight;
 
   scene = new THREE.Scene();
   scene.background = new THREE.Color( 0xcccccc );
@@ -63,7 +65,7 @@ function init() {
   renderer = new THREE.WebGLRenderer( { antialias: true } );
   renderer.setPixelRatio( window.devicePixelRatio );
   renderer.setSize( width, height );
-  main.appendChild( renderer.domElement ); // where to append
+  container.appendChild( renderer.domElement ); // where to append
 
   camera = new THREE.PerspectiveCamera( 60, width / height, 1, 1000 );// 1000 );
   camera.position.set( 300, 300, 0 ); // ( 400, 200, 0 );
@@ -170,8 +172,8 @@ function init() {
   // scene.add( gridHelper );
 
   window.addEventListener( 'resize', onWindowResize );
-  main.addEventListener( 'pointermove', onPointerMove );
-  main.addEventListener( 'click', onClick );
+  container.addEventListener( 'pointermove', onPointerMove );
+  container.addEventListener( 'click', onClick );
   // window.addEventListener( 'dblclick', ( event ) => { // dev, 더블 클릭시 카메라의 위치에서 카메라 방향으로 
   //   let worldDirection = new THREE.Vector3;
   //   let worldPosition = new THREE.Vector3;
@@ -195,7 +197,11 @@ function onWindowResize() {
 
 function onPointerMove( event ) {
 
+  event.preventDefault();
+  let gapX = event.clientX - event.offsetX;
+  let gapY = event.clientY - event.offsetY;
   pointer.set( ( event.clientX / width ) * 2 - 1, - ( event.clientY / height ) * 2 + 1 );
+  // pointer.set(((event.clientX - gapX) / width) * 2 - 1, - ((event.clientY - gapY) / height) * 2 + 1)
   getIntersects();
 
 }
