@@ -134,21 +134,14 @@ const receivedFloorList = [
     f1,
     f2
 ];
-const receivedBgUrl = "../images/details-example.jpg";
-let receivedBgUrlArr;
 
 let rooms, prevElement, prevDesc, floors, building_code;
 let bgUrl;
-
-let infoTitle, infoContent, titleText, contentText;
-let infoTag, infoPage;
-let prevIdx = 0;
-let contentArr;
+let imgBg;
 
 init();
 
 function init() {
-
     // sessionStorage 에서 클릭한 건물/시설 정보를 저장 및 불러옵니다.
 //    sessionStorage.setItem( 'floor', 'B2' );
 //    sessionStorage.setItem( 'building_code', "08" );
@@ -164,6 +157,7 @@ function init() {
         .then( res => {
 
             let classifiedList = classifyList( res );
+            console.log(classifiedList);
             // console.log( classifiedList );
             createFloors( classifiedList );
             if ( sessionStorage.getItem( 'floor' ) ) {
@@ -184,6 +178,72 @@ function init() {
 
     // createFloors( receivedFloorList );
     // setFloorBg( receivedBgUrl );
+
+    imgBg = document.getElementsByClassName( 'imgBg' );
+
+    window.addEventListener( 'resize', setFont );
+
+}
+
+/**
+ * 윈도우 창 크기 조절하는 것에 따라 평면도 위 표기되는 폰트 (호수)의 크기 및 위치를 조정합니다.
+ *
+ * `div.imgBg` background (평면도) 의 width, height 를 구하는 방법을 아직 찾지 못해,
+ * 임의로 `main#detail > div.img-wrap > div.imgBg` 의 현재 width (또는 height) 를 구하고,
+ * 평면도 비율을 이용하여 현재 height (또는 width) 를 도출합니다.
+ *
+ * 현재 평면도의 width, height 값에 맞춰 폰트 (호수)의 크기 및 위치를 조정합니다.
+ *
+ */
+function setFont() {
+    const roomNum = document.getElementsByClassName( 'roomNum' );
+
+    const whRatio = ( 768/1200 );
+    const hwRatio = ( 1200/768 );
+    const recentRatio = ( imgBg[0].offsetHeight / imgBg[0].offsetWidth );
+
+    let mapWidth, mapHeight, addHeight, addWidth;
+    let spanWidth, spanHeight;
+
+    // 새빛관 1층 기준, 임시 위치 배열
+    let arr = [ [0.75, 0.3], [0.8, 0.7], [0.58, 0.68], [0.12, 0.63], [0.12, 0.3] ];
+
+    // `div.imgBg`의 height 가 background 의 height 보다 더 큰 경우
+    if ( recentRatio >= whRatio ) {
+        mapWidth = imgBg[0].offsetWidth;
+        mapHeight = mapWidth * whRatio;
+
+        addHeight = ( imgBg[0].offsetHeight - mapHeight ) / 2;
+
+        spanWidth = ( mapWidth * 0.1 );
+        spanHeight = ( mapHeight * 0.05 );
+
+        for( var i = 0; i < arr.length; i++ ) {
+            roomNum[i].style.width = spanWidth + 'px';
+            roomNum[i].style.height = spanHeight + 'px';
+            roomNum[i].style.left = (mapWidth * arr[i][0]) + 'px';
+            roomNum[i].style.top = (mapHeight * arr[i][1] + addHeight) + 'px';
+        }
+
+    }
+    // `div.imgBg`의 width 가 background 의 width 보다 더 큰 경우
+    else {
+        mapHeight = imgBg[0].offsetHeight;
+        mapWidth = mapHeight * hwRatio;
+
+        addWidth = ( imgBg[0].offsetWidth - mapWidth ) / 2;
+
+        spanWidth = ( mapWidth * 0.1 );
+        spanHeight = ( mapHeight * 0.05 );
+
+        for( var i = 0; i < arr.length; i++ ) {
+            roomNum[i].style.width = spanWidth + 'px';
+            roomNum[i].style.height = spanHeight + 'px';
+            roomNum[i].style.left = (mapWidth * arr[i][0] + addWidth) + 'px';
+            roomNum[i].style.top = (mapHeight * arr[i][1]) + 'px';
+        }
+    }
+
 }
 
 /**
@@ -252,12 +312,10 @@ function createFloors( classifiedList ) {
             if ( prevDesc ) { prevDesc.classList.remove( 'active' ); }
             if ( prevElement ) { prevElement.classList.remove( 'active' ); }
 
-            // Room List를 초기화하고,
+            // Room List와 평면도를 초기화하고,
             // 선택한 층에 따라 표시되는 호수(방 번호) 변경
-            while( roomList.firstChild ) {
-                roomList.removeChild( roomList.firstChild );
-            }
-
+            roomList.innerHTML = '';
+            imgBg[0].innerHTML = '';
             activateFloor( floor, i, classifiedList );
 
         } );
@@ -290,14 +348,18 @@ function setFloorBg ( bgUrl = "" ) {
  */
 function activateFloor ( floor, i, classifiedList ) {
 
-    // if문은 임의로 작성했습니다.
-    // 추가 정보 필요 유무에 따라 Room List를 구성하는 element가 달라집니다.
     for ( let j = 0; j < classifiedList[i].length; j++ ) {
 
+        // 시설 리스트 생성
+        // if문은 임의로 작성했습니다.
+        // 추가 정보 필요 유무에 따라 Room List를 구성하는 element가 달라집니다.
         if( j % 2 == 0 )
-            roomList.appendChild( addRoom( floor, i, classifiedList[i][j] ) ); // ul > li
+            roomList.appendChild( listAddRoom( classifiedList[i][j] ) ); // ul > li
         else
-            roomList.appendChild( addRoomAccordion(floor, i, classifiedList[i][j] ) ); // ul > li
+            roomList.appendChild( listAddRoomAccordion( classifiedList[i][j] ) ); // ul > li
+
+        // 평면도 상에 호수 글자 생성
+        imgBg[0].appendChild( mapAddRoom( classifiedList[i][j] ) );
     }
 
     floor.classList.add( 'active' );
@@ -325,7 +387,10 @@ function activateFloor ( floor, i, classifiedList ) {
 
     prevElement = floor;
 
-    setFloorBg( bgUrl + floor.id + '.png');
+    bgUrl = '../floor-img/' + building_code + '/' + floor.id + '.png'
+    setFloorBg( bgUrl );
+
+    setFont();
 }
 
 /**
@@ -336,7 +401,7 @@ function activateFloor ( floor, i, classifiedList ) {
  * @param roomInfo classifiedList[i][j]
  * @returns {HTMLLIElement} `li` element in rooms list
  */
-function addRoom( floor, i, roomInfo ) {
+function listAddRoom( roomInfo ) {
 
     const liRoom = document.createElement( 'li' );
     liRoom.className = 'list-group-item';
@@ -354,7 +419,7 @@ function addRoom( floor, i, roomInfo ) {
  * @param roomInfo classifiedList[i][j]
  * @returns {HTMLLIElement} `li` element in rooms list
  */
-function addRoomAccordion( floor, i, roomInfo ) {
+function listAddRoomAccordion( roomInfo ) {
 
     const accor_liRoom = document.createElement( 'li' );
     accor_liRoom.className = 'accordion-item';
@@ -381,6 +446,16 @@ function addRoomAccordion( floor, i, roomInfo ) {
     accor_liRoom.appendChild( accor_body ); // li > button + div
 
     return accor_liRoom;
+}
+
+function mapAddRoom ( roomInfo ) {
+    const div = document.createElement( 'div' );
+    div.className = 'roomNum';
+    const span = document.createElement( 'span' );
+    span.innerText = roomInfo.room_no;
+    div.appendChild( span ); // div > span
+
+    return div;
 }
 
 /**

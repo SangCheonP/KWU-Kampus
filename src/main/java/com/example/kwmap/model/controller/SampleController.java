@@ -1,8 +1,6 @@
-package com.example.kwmap.controller;
+package com.example.kwmap.model.controller;
 
-import com.example.kwmap.model.detailBuildingAllRoomsInfoModel;
-import com.example.kwmap.model.detailRoomInfoModel;
-import com.example.kwmap.model.mainPageBuildingsModel;
+import com.example.kwmap.model.*;
 import com.example.kwmap.service.SampleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -72,6 +70,24 @@ public class SampleController {
     public List<detailRoomInfoModel> showRoomsImportanceDetail(@PathVariable("building_code") String building_code, Model model) {
         System.out.println("\"/building/info/importance/{building_code}\"");
         List<detailRoomInfoModel> info = sampleService.selectRoomsImportanceDetail(building_code);
+        return info;
+    }
+
+    // 디테일 페이지에서 Building_code와 floor를 받아 해당 층의 모든 시설의 x, y 좌표를 리스트로 가져오는 함수
+    @ResponseBody
+    @RequestMapping("/detail/info/roomxy")
+    public List<detailRoomXYModel> selectAllRoomXY(Model model) {
+        System.out.println("\"/detal/info/roomxy\"");
+        List<detailRoomXYModel> info = sampleService.selectAllRoomXY();
+        return info;
+    }
+
+    // 메인 페이지에서 각 건물 모델의 카카오 api에 사용되는 위도와 경도를 가져옴
+    @ResponseBody
+    @RequestMapping("/building/info/buildingLocation/{building_code}")
+    public buildingLocationModel selectBuildingLocation(@PathVariable("building_code") String building_code){
+        System.out.println("\"/building/info/buildingLocation/{building_code}\"");
+        buildingLocationModel info = sampleService.selectBuildingLocation(building_code);
         return info;
     }
 }

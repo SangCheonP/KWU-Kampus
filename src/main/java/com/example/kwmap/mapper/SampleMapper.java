@@ -1,8 +1,6 @@
 package com.example.kwmap.mapper;
 
-import com.example.kwmap.model.detailBuildingAllRoomsInfoModel;
-import com.example.kwmap.model.detailRoomInfoModel;
-import com.example.kwmap.model.mainPageBuildingsModel;
+import com.example.kwmap.model.*;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -21,4 +19,8 @@ public interface SampleMapper {
    public List<detailBuildingAllRoomsInfoModel> selectDetailBuildingAllRoomsInfo(String building_code);
 
    public List<detailRoomInfoModel> selectRoomsImportanceDetail(String building_code);
+
+   public List<detailRoomXYModel> selectAllRoomXY();
+
+   public buildingLocationModel selectBuildingLocation(String building_code);
 }

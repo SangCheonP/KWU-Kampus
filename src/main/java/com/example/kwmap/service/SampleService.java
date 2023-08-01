@@ -1,9 +1,7 @@
 package com.example.kwmap.service;
 
 import com.example.kwmap.mapper.SampleMapper;
-import com.example.kwmap.model.detailBuildingAllRoomsInfoModel;
-import com.example.kwmap.model.detailRoomInfoModel;
-import com.example.kwmap.model.mainPageBuildingsModel;
+import com.example.kwmap.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,5 +34,13 @@ public class SampleService {
 
     public List<detailRoomInfoModel> selectRoomsImportanceDetail(String building_code){
         return SampleMapper.selectRoomsImportanceDetail(building_code);
+    }
+
+    public List<detailRoomXYModel> selectAllRoomXY(){
+        return SampleMapper.selectAllRoomXY();
+    }
+
+    public buildingLocationModel selectBuildingLocation(String building_code){
+        return SampleMapper.selectBuildingLocation(building_code);
     }
 }
