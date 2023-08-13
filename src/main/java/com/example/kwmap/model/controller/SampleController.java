@@ -90,4 +90,13 @@ public class SampleController {
         buildingLocationModel info = sampleService.selectBuildingLocation(building_code);
         return info;
     }
+
+    // main page의 아래 부분에 공지사항에 넣을 모든 정보를 List 형태로 가져옴
+    @ResponseBody
+    @RequestMapping("/mainpage/info")
+    public List<mainPageInfoModel> selectMainPageInfo() {
+        System.out.println("\"/mainpage/info\"");
+        List<mainPageInfoModel> info = sampleService.selectMainPageInfo();
+        return info;
+    }
 }

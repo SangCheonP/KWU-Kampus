@@ -43,4 +43,9 @@ public class SampleService {
     public buildingLocationModel selectBuildingLocation(String building_code){
         return SampleMapper.selectBuildingLocation(building_code);
     }
+
+    // main page의 아래 부분에 공지사항에 넣을 모든 정보를 List 형태로 가져옴
+    public List<mainPageInfoModel> selectMainPageInfo(){
+        return SampleMapper.selectMainPageInfo();
+    }
 }

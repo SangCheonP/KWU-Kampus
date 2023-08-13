@@ -44,6 +44,11 @@
         where building_code=#{building_code}
     </select>
 
+    <select id="selectMainPageInfo" resultType="com.example.kwmap.model.mainPageInfoModel">
+        select *
+        from notice_web
+    </select>
+
 <!--    <select id="showAllDataInMainPage" resultMap="mainpage">-->
 <!--        select *-->
 <!--        from main_page;-->
