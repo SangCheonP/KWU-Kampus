@@ -231,6 +231,7 @@
 
 <%--      <button id="mapChange"></button>--%>
 
+      <div id="mapContainer"></div>
       <div id="fixedHelp">
         <img class="help-icon" src="./images/icon-help-round.svg" alt="to see how to use, click here">
         <ul>
@@ -254,6 +255,21 @@
         </ul>
       </div>
     </main>
+
+    <div id="noticeContainer">
+      <div class="inner">
+        <h2>Notices</h2>
+        <ul class="notice-card-wrap">
+          <li class="notice-card">
+            <h3><a href="#">Example</a></h3>
+            <div class="notice">
+              <span>Example Card</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
   </div>
 
   <script src="./js/header.js"></script>
