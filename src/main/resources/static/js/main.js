@@ -31,7 +31,7 @@ const mapContainer = document.getElementById('mapContainer');
 ///// THREE.js from here: /////
 ///////////////////////////////
 
-let width, height, camera, controls, scene, renderer, raycaster;
+let width, height, camera, controls, scene, renderer, raycaster, headerHeight;
 let textTitle, textContent, help_content, categoty_content, info_help, info_category;
 let infoTag, infoPage, infoButton, infoClose;
 let mapChange, mapState, map2D, map3D;
@@ -52,11 +52,9 @@ animate();
 async function init() {
 
   // variables
-
-//  width = window.innerWidth;
-  width = mapContainer.clientWidth;
-//  height = window.innerHeight;
-  height = mapContainer.clientHeight;
+  headerHeight = Number(getComputedStyle(document.documentElement).getPropertyValue('--header-height').slice(0, 2));
+  width = window.innerWidth - 20;
+  height = window.innerHeight - 20 - headerHeight;
 
   scene = new THREE.Scene();
   scene.background = new THREE.Color( 0xcccccc );
@@ -128,14 +126,13 @@ async function init() {
 
   info_category = new Array('시설명', '건물명', '층수', '호수', '기타 정보');
 
-  info_help = new Array('※', 'KWU Kampus', '조작법');
-  help_content = new Array('지도 로딩이 덜 되었다면 화면 새로고침을 해주세요.',
-                                 '광운대학교 시설 정보 취합 사이트 \'KWU Kampus\'입니다. 건물 또는 카테고리를 클릭해 보세요. 해당 건물 및 시설에 대한 정보를 확인할 수 있습니다.',
-                                 '정보창: 해당 창의 우측 책갈피 클릭 //\n ' +
-                                  '카테고리 메뉴: 사이트의 우측 상단 버튼 클릭 //\n ' +
-                                  '지도 이동: 마우스 우 클릭 + 드래그 //\n ' +
-                                  '지도 회전: 마우스 좌 클릭 + 드래그 //\n ' +
-                                  '지도 확대/축소: 마우스 휠');
+  info_help = new Array('KWU Kampus', '조작법');
+  help_content = new Array('광운대학교 시설 정보 취합 사이트 \'KWU Kampus\'입니다. 건물 또는 카테고리를 클릭해 보세요. 해당 건물 및 시설에 대한 정보를 확인할 수 있습니다.',
+                           '정보창: 해당 창의 우측 책갈피 클릭 //\n ' +
+                           '카테고리 메뉴: 사이트의 우측 상단 버튼 클릭 //\n ' +
+                           '지도 이동: 마우스 우 클릭 + 드래그 //\n ' +
+                           '지도 회전: 마우스 좌 클릭 + 드래그 //\n ' +
+                           '지도 확대/축소: 마우스 휠');
   categoty_content = new Array(5);
 
   infoTag = document.getElementById('infoTag');
@@ -192,10 +189,28 @@ async function noticeInit() {
   const uniqDepts = [...new Set(depts)];
   console.log(uniqDepts);
 
-  uniqDepts.forEach(dept => {
+  uniqDepts.forEach((dept, index) => {
     // get filtered data with unique dept names
     const filtered = noticeDatas.filter(data => data.dept === dept);
-    createNotice(filtered);
+    createNoticeList(filtered, index);
+
+  });
+
+  // click events
+  const noticeLis = document.querySelectorAll('li.notice-list');
+  let activateIndex = 0;
+  noticeLis.forEach((noticeLi, index) => {
+
+    noticeLi.addEventListener('click', (e) => {
+
+      e.preventDefault();
+      let currentActiveNoticeLi = document.querySelector('li.notice-list.active');
+      currentActiveNoticeLi.classList.remove('active');
+      e.target.parentElement.classList.add('active');
+      activateNotice(activateIndex, index);
+      activateIndex = index;
+
+    });
 
   });
 
@@ -204,14 +219,13 @@ async function noticeInit() {
 // window events
 /**
  * 브라우저 창 크기 변경에 따른 3d map 비율 및 렌더링 옵션을 변경합니다.
- * `mapContainer` element 의 크기를 기준으로 합니다.
+ * 브라우저 창의 너비, 높이 및 header 영역 높이에 의해 결정됩니다.
  */
 function onWindowResize() {
 
-  width = window.innerWidth;
-//  width = mapContainer.clientWidth;
-  height = window.innerHeight;
-//  height = mapContainer.clientHeight;
+  headerHeight = Number(getComputedStyle(document.documentElement).getPropertyValue('--header-height').slice(0, 2));
+  width = window.innerWidth - 20;
+  height = window.innerHeight - 20 - headerHeight;
   camera.aspect = width / height;
   camera.updateProjectionMatrix();
   renderer.setSize( width, height );
@@ -579,46 +593,56 @@ infoClose.addEventListener( 'click', function() {
 });
 
 /**
- * 서버로 부터 받은 공지사항 목록을 필터링하여 `li.notice-card` 를 생성합니다.
- * @param { Array } filtered Filtered Array by dept of noticeDatas
+ * 각 단과대별로 필터링 된 배열을 ul element로 생성합니다.
+ * @param {Array} filtered an array of filtered notices
+ * @param {Number} index an index number to set default element as active
  */
-function createNotice(filtered) {
+function createNoticeList(filtered, index) {
 
-  const noticeContainer = document.querySelector('ul.notice-card-wrap');
+  const header = document.querySelector('ul.notice-header-wrap');
+  const list = document.querySelector('div.notice-list-wrap');
   const li = document.createElement('li');
   const h3 = document.createElement('h3');
-  const aLink1 = document.createElement('a');
 
-  li.className = 'notice-card';
-  aLink1.href = (filtered[0].site.includes(`https://chss.kw.ac.kr/`)) ? `https://chss.kw.ac.kr/` :
-                (filtered[0].site.includes(`https://ei.kw.ac.kr/`)) ? `https://ei.kw.ac.kr/` :
-                (filtered[0].site.includes(`https://biz.kw.ac.kr/`)) ? `https://biz.kw.ac.kr/` :
-                (filtered[0].site.includes(`https://ingenium.kw.ac.kr/`)) ? `https://ingenium.kw.ac.kr/` :
-                (filtered[0].site.includes(`https://npsw.kw.ac.kr/`)) ? `https://npsw.kw.ac.kr/` :
-                '#';
-  aLink1.innerText = filtered[0].dept;
-  h3.append(aLink1);
+  li.className = 'notice-list';
+  if (index === 0) { li.classList.add('active'); } // Set First Element as active
+  h3.innerText = filtered[0].dept;
   li.append(h3);
+  header.append(li);
 
   const ul = document.createElement('ul');
-  ul.className = 'notice';
+  ul.className = 'notices';
+  if (index === 0) { ul.classList.add('active'); }
 
   filtered.forEach(item => {
 
-    const noticeLi = document.createElement('li');
-    const aLink2 = document.createElement('a');
+    const noticesLi = document.createElement('li');
+    const a = document.createElement('a');
     const span = document.createElement('span');
-    aLink2.href = item.site;
-    aLink2.innerText = item.notice;
+
+    a.href = item.site;
+    a.innerText = item.notice;
     span.innerText = item.date;
-    aLink2.append(span);
-    noticeLi.append(aLink2);
-    ul.append(noticeLi);
+
+    noticesLi.append(a);
+    noticesLi.append(span);
+    ul.append(noticesLi);
 
   });
 
-  li.append(ul);
-  noticeContainer.append(li);
+  list.append(ul);
+
+}
+/**
+ * 단과대 별 공지사항들의 내용이 담긴 ul element들 중 `last`를 비활성화하고, `current`를 활성화합니다.
+ * @param {Number} last an index of activated noticeUl
+ * @param {Number} current the target index of noticeUl to activate
+ */
+function activateNotice(last, current) {
+
+  const noticesUls = document.querySelectorAll('ul.notices');
+  noticesUls[last].classList.remove('active');
+  noticesUls[current].classList.add('active');
 
 }
 
