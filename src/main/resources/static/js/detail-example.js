@@ -226,6 +226,8 @@ function setFont( i, floorInfo ) {
 
         addHeight = ( imgBg[0].offsetHeight - mapHeight ) / 2;
 
+        // 호수 갯수에 따른 밀림 현상 해결용
+        var num = 0.0;
         for( var j = 0; j < floorInfo.length; j++ ) {
 
             index = Number( ( floorInfo[j].room_no ).slice( -2 ) );
@@ -239,7 +241,7 @@ function setFont( i, floorInfo ) {
             roomNum[j].style.width = ( mapWidth * 0.1 ) + 'px';
             roomNum[j].style.height = ( mapHeight * 0.05 ) + 'px';
             roomNum[j].style.left = ( mapWidth * positionArr[index][0] ) + 'px';
-            roomNum[j].style.top = ( mapHeight * positionArr[index][1] + addHeight ) + 'px';
+            roomNum[j].style.top = ( mapHeight * (positionArr[index][1] - num++ * 0.05) + addHeight ) + 'px';
         }
 
     }
