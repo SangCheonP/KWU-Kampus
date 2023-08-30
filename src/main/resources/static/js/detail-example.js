@@ -245,7 +245,7 @@ function setFont( i, floorInfo ) {
         }
 
     }
-    // `div.imgBg`의 width 가 background 의 width 보다 더 큰 경우
+    // `div.imgBg`의 width 가 background 의 width 보다 더 큰 경우 -- 수정 필요
     else {
         mapHeight = imgBg[0].offsetHeight;
         mapWidth = mapHeight * hwRatio;
