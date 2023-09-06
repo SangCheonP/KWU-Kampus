@@ -9,9 +9,13 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+
 //@SpringBootApplication
 //public class KWmapApplication{
 //
@@ -21,7 +25,7 @@ import org.springframework.stereotype.Component;
 //
 //}
 
-
+@EnableScheduling
 @SpringBootApplication
 public class KWmapApplication extends SpringBootServletInitializer {
 
@@ -45,6 +49,7 @@ class PythonScriptRunner implements CommandLineRunner {
         executePythonScript();
     }
 
+    @Scheduled(cron = "0 0 0 * * ?")    // 매일 0시 정각에 실행
     private void executePythonScript() {
         try {
             String pythonScriptPath = "/Users/joyihan/study/KWU-Kampus/src/main/python/dbconn_Test.py";
@@ -63,7 +68,10 @@ class PythonScriptRunner implements CommandLineRunner {
             /* 파이썬에 대한 프로세스가 종료될 때까지 대기 */
             int exitCode = process.waitFor();
             if (exitCode == 0) {
-                System.out.println("Python 스크립트가 성공적으로 실행되었습니다.");
+                LocalDateTime now = LocalDateTime.now();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                String formattedDateTime = now.format(formatter);
+                System.out.println("Python 스크립트가 성공적으로 실행되었습니다. 실행 시간: " + formattedDateTime);
             } else {
                 System.err.println("Python 스크립트 실행 중 오류가 발생했습니다. 종료 코드: " + exitCode);
             }
