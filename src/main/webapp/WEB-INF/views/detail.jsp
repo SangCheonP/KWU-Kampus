@@ -21,72 +21,6 @@
 
           <h1>광운대학교<a href="/"><img src="./images/logo.png"></a></h1>
 
-          <div id="menuBtn">
-            <!-- <i class='bx bx-search' ></i> -->
-            <div class="center">
-              <div class="bar bar01"></div>
-              <div class="bar bar02"></div>
-              <div class="bar bar03"></div>
-            </div>
-          </div>
-
-          <div id="sideMenu">
-
-            <div class="category">
-              <div class="text">
-                <span>카테고리 1</span>
-                <img src="../images/icon-chevron-down.svg" alt="">
-                <div class="mask">
-                  <span></span>
-                  <img src="../images/icon-chevron-down.svg" alt="">
-                </div>
-              </div>
-              <ul class="sub-categories">
-                <li><a href="">세부 카테고리 1</a></li>
-                <li><a href="">세부 카테고리 2</a></li>
-                <li><a href="">세부 카테고리 3</a></li>
-                <li><a href="">세부 카테고리 4</a></li>
-              </ul>
-            </div>
-
-            <div class="category">
-              <div class="text">
-                <span>카테고리 2</span>
-                <img src="../images/icon-chevron-down.svg" alt="">
-                <div class="mask">
-                  <span></span>
-                  <img src="../images/icon-chevron-down.svg" alt="">
-                </div>
-              </div>
-              <ul class="sub-categories">
-                <li><a href="">세부 카테고리 1</a></li>
-                <li><a href="">세부 카테고리 2</a></li>
-                <li><a href="">세부 카테고리 3</a></li>
-                <li><a href="">세부 카테고리 4</a></li>
-                <li><a href="">세부 카테고리 5</a></li>
-                <li><a href="">세부 카테고리 6</a></li>
-                <li><a href="">세부 카테고리 7</a></li>
-              </ul>
-            </div>
-
-            <div class="category">
-              <div class="text">
-                <span>카테고리 3</span>
-                <img src="../images/icon-chevron-down.svg" alt="">
-                <div class="mask">
-                  <span></span>
-                  <img src="../images/icon-chevron-down.svg" alt="">
-                </div>
-              </div>
-              <ul class="sub-categories">
-                <li><a href="">세부 카테고리 1</a></li>
-                <li><a href="">세부 카테고리 2</a></li>
-                <li><a href="">세부 카테고리 3</a></li>
-              </ul>
-            </div>
-
-          </div>
-          <!-- side menu end -->
         </div>
         <!-- div.inner end -->
 
@@ -156,7 +90,6 @@
     </div>
 
   <script type="module" src="../js/room-position.js"></script>
-  <script src="../js/header.js"></script>
   <script type="module" src="../js/detail-example.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
 </body>

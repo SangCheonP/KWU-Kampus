@@ -3,28 +3,19 @@ import { GUI } from 'three/addons/libs/lil-gui.module.min.js';
 import { MapControls } from 'three/addons/controls/MapControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { FontLoader } from 'three/addons/loaders/FontLoader.js';
+import { EXRLoader } from 'three/addons/loaders/EXRLoader.js';
 import * as URL from './url.js'
 
 // basic javascripts
 
-const fixedHelp = document.getElementById( 'fixedHelp' );
-fixedHelp.addEventListener( 'click', () => {
-
-  if ( fixedHelp.classList.contains( 'active' ) ) {
-
-    fixedHelp.classList.remove( 'active' );
-    fixedHelp.removeAttribute( 'style' );
-    return;
-
-  }
-
-  fixedHelp.classList.add( 'active' );
-  fixedHelp.style.height = fixedHelp.querySelector( 'ul' ).clientHeight + 40 + 'px';
-
-} );
-
-const subCategories = document.querySelectorAll( 'ul.sub-categories li a' );
-// const mapContainer = document.querySelector( 'main' );
+const fixedHelp = document.getElementById('fixedHelp');
+const mapMenuBtn = document.getElementById('mapMenuBtn');
+const mapMenu = document.getElementById('mapMenu');
+const detailsOpenBtn = document.getElementById('detailsOpenBtn');
+const detailsCloseBtn = document.getElementById('detailsCloseBtn');
+const details = document.getElementById('details');
+const categories = document.getElementsByClassName('category');
+const subCategories = document.querySelectorAll('ul.sub-categories li a');
 const mapContainer = document.getElementById('mapContainer');
 
 ///////////////////////////////
@@ -45,6 +36,8 @@ const buildings = [];
 const fonts = [];
 // const arrows = [];
 
+let exrCubeRenderTarget, exrBackground;
+
 init();
 noticeInit();
 animate();
@@ -52,9 +45,7 @@ animate();
 async function init() {
 
   // variables
-  headerHeight = Number(getComputedStyle(document.documentElement).getPropertyValue('--header-height').slice(0, 2));
-  width = window.innerWidth - 20;
-  height = window.innerHeight - 20 - headerHeight;
+  updateWindowSize();
 
   scene = new THREE.Scene();
   scene.background = new THREE.Color( 0xcccccc );
@@ -67,58 +58,31 @@ async function init() {
   renderer.setSize( width, height );
   mapContainer.appendChild( renderer.domElement ); // where to append
 
+// Shadows
+//  renderer.shadowMap.enabled = true;
+//  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+// ToneMapping
+//  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+
   camera = new THREE.PerspectiveCamera( 60, width / height, 1, 1000 );// 1000 );
   camera.position.set( 300, 300, 0 ); // ( 400, 200, 0 );
 
-  // controls
+  initControls();
+  initWorldFloor();
+  initLights();
 
-  controls = new MapControls( camera, renderer.domElement );
+  // EXR EnvMap Loading
+  const pmremGenerator = new THREE.PMREMGenerator(renderer);
+  THREE.DefaultLoadingManager.onLoad = () => { pmremGenerator.dispose(); }
+  new EXRLoader().load('./textures/sky_1k.exr', texture => {
 
-  //controls.addEventListener( 'change', render ); // call this only in static scenes (i.e., if there is no animation loop)
+    texture.mapping = THREE.EquirectangularReflectionMapping;
+    exrCubeRenderTarget = pmremGenerator.fromEquirectangular(texture);
+    exrBackground = texture;
 
-  controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
-  controls.dampingFactor = 0.05;
-
-  controls.screenSpacePanning = false;
-
-  controls.minDistance = 100;
-  controls.maxDistance = 500;
-
-  controls.maxPolarAngle = Math.PI / 2;
-
-  // world floor
-
-  const planeSize = 1000; // 2000;
-  const planeTexture = new THREE.TextureLoader().load( './images/KakaoMap_KWU.png' );
-  const worldFloor = new THREE.Mesh(
-    new THREE.PlaneGeometry( planeSize, planeSize, 8, 8 ),
-    new THREE.MeshBasicMaterial( { side: THREE.FrontSide, map: planeTexture } )
-  );
-  worldFloor.rotateX( Math.PI / ( -2 ) );
-  worldFloor.rotateZ( Math.PI / 2 );
-  worldFloor.name = 'worldFloor';
-  scene.add( worldFloor );
-
-  // lights
-
-  const dirLight1 = new THREE.DirectionalLight( 0xffffff );
-  dirLight1.position.set( 10, 12, 9 );
-  dirLight1.name = 'dirLight1';
-  scene.add( dirLight1 );
-
-  const dirLight2 = new THREE.DirectionalLight( 0x222222 );
-  dirLight2.position.set( -9, -12, -10 );
-  dirLight2.name = 'dirLight2';
-  scene.add( dirLight2 );
-
-  const dirLight3 = new THREE.DirectionalLight( 0x666666 );
-  dirLight3.position.set( 13, 12, -10 );
-  dirLight3.name = 'dirLight3';
-  scene.add( dirLight3 );
-
-  const ambientLight = new THREE.AmbientLight( 0x666666 );
-  ambientLight.name = 'ambientLight';
-  scene.add( ambientLight );
+  });
+  pmremGenerator.compileEquirectangularShader();
 
   // Create Info Pannel
   textTitle = document.getElementsByClassName("infoTitle");
@@ -153,6 +117,7 @@ async function init() {
   // const gridHelper = new THREE.GridHelper( 1000, 100 );
   // scene.add( gridHelper );
 
+  // Event Listeners
   window.addEventListener( 'resize', onWindowResize );
   mapContainer.addEventListener( 'pointermove', onPointerMove );
   mapContainer.addEventListener( 'click', onClick );
@@ -164,6 +129,53 @@ async function init() {
   //   console.log( worldDirection );
   //   console.log( worldPosition );
   // } );
+
+  fixedHelp.addEventListener('click', () => {
+
+    if ( fixedHelp.classList.contains('active')) {
+
+      fixedHelp.classList.remove('active');
+      fixedHelp.removeAttribute('style');
+      return;
+
+    }
+
+    fixedHelp.classList.add('active');
+    fixedHelp.style.height = fixedHelp.querySelector('ul').clientHeight + 40 + 'px';
+
+  });
+
+  mapMenuBtn.addEventListener('click', () => {
+
+    mapMenuBtn.classList.toggle('active');
+    mapMenu.classList.toggle('active');
+
+  });
+
+  for (let category of categories) {
+
+    const text = category.querySelector('.text');
+    text.addEventListener('click', () => {
+
+      const textHeight = text.clientHeight;
+      const subCategoriesHeight = category.querySelector('.sub-categories').clientHeight;
+
+      if (category.classList.contains('on')) {
+        category.classList.remove('on');
+        category.style.height = textHeight + 'px';
+        return;
+      }
+
+      category.classList.add('on');
+      category.style.height = category.clientHeight + subCategoriesHeight + 'px';
+      return;
+
+    });
+
+  };
+
+  detailsOpenBtn.addEventListener('click', () => { details.classList.add('active'); });
+  detailsCloseBtn.addEventListener('click', () => { details.classList.remove('active'); });
 
   // GLTF Loader, load models
 
@@ -181,6 +193,7 @@ async function noticeInit() {
                             .then(res => res.json())
                             .then(res => { return res; });
   // console.log(noticeDatas);
+  if (!noticeDatas) return;
 
   // Extract dept names and remove duplicates from raw data
   const depts = [];
@@ -217,18 +230,17 @@ async function noticeInit() {
 }
 
 // window events
+
 /**
  * 브라우저 창 크기 변경에 따른 3d map 비율 및 렌더링 옵션을 변경합니다.
  * 브라우저 창의 너비, 높이 및 header 영역 높이에 의해 결정됩니다.
  */
 function onWindowResize() {
 
-  headerHeight = Number(getComputedStyle(document.documentElement).getPropertyValue('--header-height').slice(0, 2));
-  width = window.innerWidth - 20;
-  height = window.innerHeight - 20 - headerHeight;
+  updateWindowSize();
   camera.aspect = width / height;
   camera.updateProjectionMatrix();
-  renderer.setSize( width, height );
+  renderer.setSize(width, height);
   
 }
 
@@ -237,20 +249,15 @@ function onPointerMove( event ) {
   event.preventDefault();
   let gapX = event.clientX - event.offsetX;
   let gapY = event.clientY - event.offsetY;
-//  pointer.set( ( event.clientX / width ) * 2 - 1, - ( event.clientY / height ) * 2 + 1 );
   pointer.set(((event.clientX - gapX) / width) * 2 - 1, - ((event.clientY - gapY) / height) * 2 + 1)
   getIntersects();
 
 }
 
-function onClick( event ) {
+function onClick(event) {
 
-  onPointerMove( event ); // get pointer position
-  if ( INTERSECTED ) {
-
-    INTERSECTED.userData.onClick();
-
-  }
+  onPointerMove(event); // get pointer position
+  INTERSECTED && INTERSECTED.userData.onClick();
 
 }
 
@@ -261,11 +268,7 @@ function animate() {
   window.requestAnimationFrame( animate );
 
   // Let the groups generated from `createFont()` to face the camera all the time
-  fonts.forEach( ( font ) => {
-
-    font.quaternion.copy( camera.quaternion );
-
-  } );
+  fonts.forEach(font => { font.quaternion.copy(camera.quaternion); });
   controls.update(); // only required if controls.enableDamping = true, or if controls.autoRotate = true
   render();
 
@@ -273,11 +276,120 @@ function animate() {
 
 function render() {
 
-  renderer.render( scene, camera );
+  let background = scene.background;
+  let newEnvMap = exrCubeRenderTarget ? exrCubeRenderTarget.texture : null;
+
+  background = exrBackground;
+
+  buildings.forEach(building => {
+    building.traverse(n => {
+
+      if (n.isMesh) {
+        n.material.envMap = newEnvMap;
+        n.material.needsUpdate = true;
+        if (n.name === 'Window' || n.name === 'Windows') {
+          n.material.roughness = 0.1;
+          n.material.metalness = 0.6;
+          n.material.reflectivity = 1;
+        }
+      }
+
+    })
+  })
+
+  scene.background = background;
+  renderer.toneMappingExposure = 0.9;
+
+  renderer.render(scene, camera);
 
 }
 
 // custom functions
+
+/**
+ * 3D 맵이 차지할 영역의 너비 및 높이를 업데이트 합니다.
+ * header 영역이 차지하는 부분과 margin 으로 설정한 10 씩을 제외한 전체화면입니다.
+ */
+function updateWindowSize() {
+
+  headerHeight = Number(getComputedStyle(document.documentElement).getPropertyValue('--header-height').slice(0, 2));
+  width = window.innerWidth - 20;
+  height = window.innerHeight - 20 - headerHeight;
+
+}
+
+/**
+ * 3D 맵의 컨트롤을 설정합니다.
+ */
+function initControls() {
+
+  controls = new MapControls( camera, renderer.domElement );
+
+  //controls.addEventListener( 'change', render ); // call this only in static scenes (i.e., if there is no animation loop)
+
+  controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
+  controls.dampingFactor = 0.05;
+
+  controls.screenSpacePanning = false;
+
+  controls.minDistance = 100;
+  controls.maxDistance = 500;
+
+  controls.maxPolarAngle = Math.PI / 2;
+
+}
+
+/**
+ * 3D 환경의 바닥을 설정합니다.
+ */
+function initWorldFloor() {
+
+  const planeSize = 1000; // 2000;
+  const planeTexture = new THREE.TextureLoader().load('./images/KakaoMap_KWU.png');
+  const plane = new THREE.Mesh(
+    new THREE.PlaneGeometry(planeSize, planeSize, 8, 8),
+    new THREE.MeshBasicMaterial({
+      side: THREE.FrontSide,
+      map: planeTexture
+    })
+  );
+  plane.rotateX( Math.PI / ( -2 ) );
+  plane.rotateZ( Math.PI / 2 );
+  plane.name = 'worldFloor';
+  plane.castShadow = false;
+  plane.receiveShadow = true;
+  scene.add( plane );
+
+}
+
+/**
+ * 3D 빛 환경을 설정합니다.
+ */
+function initLights() {
+
+  const hemisphereLight = new THREE.HemisphereLight(0xffffff, 0.35);
+  hemisphereLight.name = 'hemisphereLight';
+  // hemisphereLight.castShadow = true;
+  scene.add(hemisphereLight);
+
+  const dirLight1 = new THREE.DirectionalLight(0xffffff, 0.3);
+  dirLight1.position.set( 10, 12, 9 );
+  dirLight1.target.position.set(0, 0, 0);
+//  dirLight1.castShadow = true;
+  dirLight1.name = 'dirLight1';
+  scene.add( dirLight1 );
+
+  const dirLight2 = new THREE.DirectionalLight(0xffffff, 0.3);
+  dirLight2.position.set( 13, 12, -10 );
+  dirLight2.target.position.set(0, 0, 0);
+  dirLight2.name = 'dirLight2';
+  scene.add( dirLight2 );
+
+  const ambientLight = new THREE.AmbientLight(0xffffff, 0.05);
+  ambientLight.name = 'ambientLight';
+  scene.add( ambientLight );
+
+}
 
 /**
  * 카테고리 클릭 시 인포 창에 관련 정보를 세팅합니다.
@@ -322,12 +434,12 @@ function createModel ( loader, data ) {
     model.rotateY( Math.PI / 180 * data.angle );
     model.scale.setScalar( data.scale );
 
-    const facilities = await fetch( URL.importance + data.building_code )
-                              .then( res => res.json() )
-                              .then( datas => {
+    const facilities = await fetch(URL.importance + data.building_code)
+                              .then(res => res.json())
+                              .then(datas => {
 
                                let result = [];
-                               datas.forEach( ( data ) => { result.push( data ); } );
+                               datas.forEach((data) => { result.push(data); });
                                return result;
 
                               });
@@ -342,7 +454,7 @@ function createModel ( loader, data ) {
       others: data.others,
 
       onPointerOver: function() {
-        for ( let child of model.children ) {
+        for (let child of model.children) {
 
           child.currentHex = child.material.emissive.getHex();
           child.material.emissive.setHex( 0xff0000 );
@@ -350,24 +462,17 @@ function createModel ( loader, data ) {
         }
       },
 
-      onPointerOut: function() {
-        for ( let child of model.children ) {
-
-          child.material.emissive.setHex( 0 );
-
-        }
-      },
+      onPointerOut: function() { for ( let child of model.children ) { child.material.emissive.setHex( 0 ); } },
 
       onClick: function() {
 
-        controls.target.copy( model.position );
+        controls.target.copy(model.position);
         controls.update();
-        console.log( model.name + ' clicked' );
-        
+        console.log(model);
         // 빌딩 클릭 시 배열에 관련 정보 세팅
         setBuildingInfo(model);
 
-        sessionStorage.setItem( 'building_code', model.userData.id );
+        sessionStorage.setItem('building_code', model.userData.id);
 
         // 임시
         categoty_content[1] = model.name;

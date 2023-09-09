@@ -25,159 +25,6 @@
           <li><a href="/detail">Detail Example</a></li>
         </ul>
         <!-- Temporary Links List end -->
-        <div id="menuBtn">
-          <!-- <i class='bx bx-search' ></i> -->
-          <div class="center">
-            <div class="bar bar01"></div>
-            <div class="bar bar02"></div>
-            <div class="bar bar03"></div>
-          </div>
-        </div>
-        <div id="sideMenu">
-          <div class="category">
-            <div class="text">
-              <span>건물</span>
-              <img src="./images/icon-chevron-down.svg" alt="">
-              <div class="mask">
-                <span></span>
-                <img src="./images/icon-chevron-down.svg" alt="">
-              </div>
-            </div>
-            <ul class="sub-categories">
-              <li><a href="" data-id="01">80주년 기념관 & 광운 스퀘어</a></li>
-              <li><a href="" data-id="17" category-id="01-0101-0">화도관</a></li>
-              <li><a href="" data-id="12" category-id="02-0102-0">옥의관</a></li>
-              <li><a href="" data-id="05" category-id="03-0201-0">비마관</a></li>
-              <li><a href="" data-id="08">새빛관</a></li>
-              <li><a href="" data-id="04">복지관</a></li>
-              <li><a href="" data-id="10">연구문화관</a></li>
-              <li><a href="" data-id="09">아이스링크</a></li>
-              <li><a href="" data-id="03">다산재</a></li>
-              <li><a href="" data-id="11">연촌재</a></li>
-              <li><a href="" data-id="14">참빛관</a></li>
-              <li><a href="" data-id="15">한울관</a></li>
-              <li><a href="" data-id="16">한천재</a></li>
-              <li><a href="" data-id="13">인터내셔널 하우스</a></li>
-              <li><a href="" data-id="02">누리관</a></li>
-              <li><a href="" data-id="06">빛솔재 A동</a></li>
-              <li><a href="" data-id="07">빛솔재 B동</a></li>
-            </ul>
-          </div>
-          <div class="category">
-            <div class="text">
-              <span>스터디</span>
-              <img src="./images/icon-chevron-down.svg" alt="">
-              <div class="mask">
-                <span></span>
-                <img src="./images/icon-chevron-down.svg" alt="">
-              </div>
-            </div>
-            <ul class="sub-categories">
-              <li><a href="" data-id="01">중앙 도서관</a></li>
-              <li><a href="" data-id="15">한울관 열람실</a></li>
-              <li><a href="" data-id="05">비마관 열람실</a></li>
-              <li><a href="" data-id="08">새빛관 로비</a></li>
-            </ul>
-          </div>
-          <div class="category">
-            <div class="text">
-              <span>학적</span>
-              <img src="./images/icon-chevron-down.svg" alt="">
-              <div class="mask">
-                <span></span>
-                <img src="./images/icon-chevron-down.svg" alt="">
-              </div>
-            </div>
-            <ul class="sub-categories">
-              <li><a href="">증명서</a></li>
-              <li><a href="">비마관 창구</a></li>
-            </ul>
-          </div>
-          <div class="category">
-            <div class="text">
-              <span>은행/ATM/우체국</span>
-              <img src="./images/icon-chevron-down.svg" alt="">
-              <div class="mask">
-                <span></span>
-                <img src="./images/icon-chevron-down.svg" alt="">
-              </div>
-            </div>
-            <ul class="sub-categories">
-              <li><a href="">은행</a></li>
-              <li><a href="">ATM</a></li>
-              <li><a href="">우체국</a></li>
-            </ul>
-          </div>
-          <div class="category">
-            <div class="text">
-              <span>휴게실</span>
-              <img src="./images/icon-chevron-down.svg" alt="">
-              <div class="mask">
-                <span></span>
-                <img src="./images/icon-chevron-down.svg" alt="">
-              </div>
-            </div>
-            <ul class="sub-categories">
-              <li><a href="">한울관 휴게실</a></li>
-              <li><a href="">한울관 여자 휴게실</a></li>
-              <li><a href="">비마관 휴게실</a></li>
-            </ul>
-          </div>
-          <div class="category">
-            <div class="text">
-              <span>흡연장</span>
-              <img src="./images/icon-chevron-down.svg" alt="">
-              <div class="mask">
-                <span></span>
-                <img src="./images/icon-chevron-down.svg" alt="">
-              </div>
-            </div>
-            <ul class="sub-categories">
-              <li><a href="">한울관 흡연장</a></li>
-              <li><a href="">비마관 흡연장</a></li>
-              <li><a href="">참빛관 흡연장</a></li>
-            </ul>
-          </div>
-          <div class="category">
-            <div class="text">
-              <span>행정기관</span>
-              <img src="./images/icon-chevron-down.svg" alt="">
-              <div class="mask">
-                <span></span>
-                <img src="./images/icon-chevron-down.svg" alt="">
-              </div>
-            </div>
-            <ul class="sub-categories">
-              <li><a href="">교육지원팀</a></li>
-            </ul>
-          </div>
-          <div class="category">
-            <div class="text">
-              <span>장애인 지원 시설</span>
-              <img src="./images/icon-chevron-down.svg" alt="">
-              <div class="mask">
-                <span></span>
-                <img src="./images/icon-chevron-down.svg" alt="">
-              </div>
-            </div>
-            <ul class="sub-categories">
-              <li><a href="">~~~</a></li>
-            </ul>
-          </div>
-          <div class="category">
-            <div class="text">
-              <span>기타 시설</span>
-              <img src="./images/icon-chevron-down.svg" alt="">
-              <div class="mask">
-                <span></span>
-                <img src="./images/icon-chevron-down.svg" alt="">
-              </div>
-            </div>
-            <ul class="sub-categories">
-              <li><a href="">자동제세동기</a></li>
-            </ul>
-          </div>
-        </div>
       </div>
 
       <div id="infoPage">
@@ -208,30 +55,151 @@
 <%--    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e3a2d67ed557e40be0dda008caab9713"></script>--%>
 
     <main class="main">
-      <div id="guiContainer">
-<%--          <div class="lil-gui allow-touch-styles root">--%>
-<%--            <div class="title" role="button" aria-expanded="true" tabindex="0">건물 정보</div>--%>
-<%--            <div class="children">--%>
-<%--              <div class="controller string1">--%>
-<%--                <div class="name" id="lil_gui_building">건물</div>--%>
-<%--                <div class="widget">--%>
-<%--                  <input type="text" aria-labelledby="lil_gui_building" value="${buildings[0].building}">--%>
-<%--                </div>--%>
-<%--              </div>--%>
-<%--              <div class="controller string2">--%>
-<%--                <div class="name" id="building_phone_num">전화번호</div>--%>
-<%--                <div class="widget">--%>
-<%--                  <input type="text" aria-labelledby="lil_gui_building_phone_num" value="${buildings[0].building_phone_num}">--%>
-<%--                </div>--%>
-<%--              </div>--%>
-<%--              <button onclick="javascript:showMainInfo()"> 버튼 </button>--%>
-<%--            </div>--%>
-<%--          </div>--%>
+<%--      <button id="mapChange"></button>--%>
+      <div id="mapContainer"></div>
+
+      <div id="mapMenuBtn">
+        <!-- <i class='bx bx-search' ></i> -->
+        <div class="center">
+          <div class="bar bar01"></div>
+          <div class="bar bar02"></div>
+          <div class="bar bar03"></div>
+        </div>
       </div>
 
-<%--      <button id="mapChange"></button>--%>
+      <div id="mapMenu">
+        <div class="category-wrap">
 
-      <div id="mapContainer"></div>
+          <div class="category">
+            <div class="text">
+              <span>건물</span>
+              <img src="./images/icon-chevron-down.svg" alt="">
+            </div>
+            <ul class="sub-categories">
+              <li><a href="" data-id="01">80주년 기념관 & 광운 스퀘어</a></li>
+              <li><a href="" data-id="17" category-id="01-0101-0">화도관</a></li>
+              <li><a href="" data-id="12" category-id="02-0102-0">옥의관</a></li>
+              <li><a href="" data-id="05" category-id="03-0201-0">비마관</a></li>
+              <li><a href="" data-id="08">새빛관</a></li>
+              <li><a href="" data-id="04">복지관</a></li>
+              <li><a href="" data-id="10">연구문화관</a></li>
+              <li><a href="" data-id="09">아이스링크</a></li>
+              <li><a href="" data-id="03">다산재</a></li>
+              <li><a href="" data-id="11">연촌재</a></li>
+              <li><a href="" data-id="14">참빛관</a></li>
+              <li><a href="" data-id="15">한울관</a></li>
+              <li><a href="" data-id="16">한천재</a></li>
+              <li><a href="" data-id="13">인터내셔널 하우스</a></li>
+              <li><a href="" data-id="02">누리관</a></li>
+              <li><a href="" data-id="06">빛솔재 A동</a></li>
+              <li><a href="" data-id="07">빛솔재 B동</a></li>
+            </ul>
+          </div>
+
+          <div class="category">
+            <div class="text">
+              <span>스터디</span>
+              <img src="./images/icon-chevron-down.svg" alt="">
+            </div>
+            <ul class="sub-categories">
+              <li><a href="" data-id="01">중앙 도서관</a></li>
+              <li><a href="" data-id="15">한울관 열람실</a></li>
+              <li><a href="" data-id="05">비마관 열람실</a></li>
+              <li><a href="" data-id="08">새빛관 로비</a></li>
+            </ul>
+          </div>
+
+          <div class="category">
+            <div class="text">
+              <span>학적</span>
+              <img src="./images/icon-chevron-down.svg" alt="">
+            </div>
+            <ul class="sub-categories">
+              <li><a href="">증명서</a></li>
+              <li><a href="">비마관 창구</a></li>
+            </ul>
+          </div>
+
+          <div class="category">
+            <div class="text">
+              <span>은행/ATM/우체국</span>
+              <img src="./images/icon-chevron-down.svg" alt="">
+            </div>
+            <ul class="sub-categories">
+              <li><a href="">은행</a></li>
+              <li><a href="">ATM</a></li>
+              <li><a href="">우체국</a></li>
+            </ul>
+          </div>
+
+          <div class="category">
+            <div class="text">
+              <span>휴게실</span>
+              <img src="./images/icon-chevron-down.svg" alt="">
+            </div>
+            <ul class="sub-categories">
+              <li><a href="">한울관 휴게실</a></li>
+              <li><a href="">한울관 여자 휴게실</a></li>
+              <li><a href="">비마관 휴게실</a></li>
+            </ul>
+          </div>
+
+          <div class="category">
+            <div class="text">
+              <span>흡연장</span>
+              <img src="./images/icon-chevron-down.svg" alt="">
+            </div>
+            <ul class="sub-categories">
+              <li><a href="">한울관 흡연장</a></li>
+              <li><a href="">비마관 흡연장</a></li>
+              <li><a href="">참빛관 흡연장</a></li>
+            </ul>
+          </div>
+
+          <div class="category">
+            <div class="text">
+              <span>행정기관</span>
+              <img src="./images/icon-chevron-down.svg" alt="">
+            </div>
+            <ul class="sub-categories">
+              <li><a href="">교육지원팀</a></li>
+            </ul>
+          </div>
+
+          <div class="category">
+            <div class="text">
+              <span>장애인 지원 시설</span>
+              <img src="./images/icon-chevron-down.svg" alt="">
+            </div>
+            <ul class="sub-categories">
+              <li><a href="">~~~</a></li>
+            </ul>
+          </div>
+
+          <div class="category">
+            <div class="text">
+              <span>기타 시설</span>
+              <img src="./images/icon-chevron-down.svg" alt="">
+            </div>
+            <ul class="sub-categories">
+              <li><a href="">자동제세동기</a></li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+
+      <div id="detailsOpenBtn">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10.707 17.707 16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z"></path></svg>
+      </div>
+
+      <div id="details">
+        <div class="details-wrap"></div>
+        <div id="detailsCloseBtn">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z"></path></svg>
+        </div>
+      </div>
+
       <div id="fixedHelp">
         <img class="help-icon" src="./images/icon-help-round.svg" alt="to see how to use, click here">
         <ul>
@@ -272,7 +240,6 @@
 
   </div>
 
-  <script src="./js/header.js"></script>
   <script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
   <script type="importmap">
     {
