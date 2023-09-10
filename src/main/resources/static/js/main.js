@@ -458,11 +458,19 @@ function createModel ( loader, data ) {
 
           child.currentHex = child.material.emissive.getHex();
           child.material.emissive.setHex( 0xff0000 );
+          mapContainer.style.cursor = 'pointer';
     
         }
       },
 
-      onPointerOut: function() { for ( let child of model.children ) { child.material.emissive.setHex( 0 ); } },
+      onPointerOut: function() {
+        for (let child of model.children) {
+
+          child.material.emissive.setHex(0);
+          mapContainer.style.cursor = 'default';
+
+        }
+      },
 
       onClick: function() {
 
