@@ -49,6 +49,12 @@
         from notice_web
     </select>
 
+    <select id="selectDetailContentInfo" resultType="com.example.kwmap.model.detailContentModel">
+        select building_code, room_code, content
+        from rooms
+        where building_code=#{building_code}
+    </select>
+
 <!--    <select id="showAllDataInMainPage" resultMap="mainpage">-->
 <!--        select *-->
 <!--        from main_page;-->

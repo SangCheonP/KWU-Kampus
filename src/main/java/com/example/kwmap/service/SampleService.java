@@ -48,4 +48,9 @@ public class SampleService {
     public List<mainPageInfoModel> selectMainPageInfo(){
         return SampleMapper.selectMainPageInfo();
     }
+
+    // 빌딩 코드를 받아 해당 빌딩의 모든 시설 추가적인 설명 내용을 리스트로 가져옴
+    public List<detailContentModel> selectDetailContentInfo(String building_code) {
+        return SampleMapper.selectDetailContentInfo(building_code);
+    }
 }

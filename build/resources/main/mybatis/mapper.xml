@@ -33,6 +33,28 @@
         where building_code=#{building_code} AND importance=TRUE;
     </select>
 
+    <select id="selectAllRoomXY" resultType="com.example.kwmap.model.detailRoomXYModel">
+        select building_code, room_no, room_no_x, room_no_y
+        from rooms
+    </select>
+
+    <select id="selectBuildingLocation" resultType="com.example.kwmap.model.buildingLocationModel">
+        select building_code, latitude, longitude
+        from buildings
+        where building_code=#{building_code}
+    </select>
+
+    <select id="selectMainPageInfo" resultType="com.example.kwmap.model.mainPageInfoModel">
+        select *
+        from notice_web
+    </select>
+
+    <select id="selectDetailContentInfo" resultType="com.example.kwmap.model.detailContentModel">
+        select building_code, room_code, content
+        from rooms
+        where building_code=#{building_code}
+    </select>
+
 <!--    <select id="showAllDataInMainPage" resultMap="mainpage">-->
 <!--        select *-->
 <!--        from main_page;-->

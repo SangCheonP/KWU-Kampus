@@ -25,4 +25,6 @@ public interface SampleMapper {
    public buildingLocationModel selectBuildingLocation(String building_code);
 
    public List<mainPageInfoModel> selectMainPageInfo();
+
+   public List<detailContentModel> selectDetailContentInfo(String building_code);
 }
