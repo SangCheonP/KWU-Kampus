@@ -43,8 +43,9 @@ def Electronic_Information():
     soup = BeautifulSoup(req.text, "html.parser")
 
     # department = str(soup.find('title').string)
-    notice = soup.select('tr.notice_tr td b a')
-    date = soup.select('tr.notice_tr td.d_dt')
+    notice = soup.select('td.d_sj.tl a')
+    date = soup.select('td.d_dt')
+
 
     count = 0
 
