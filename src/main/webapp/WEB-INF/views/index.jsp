@@ -194,7 +194,29 @@
       </div>
 
       <div id="details">
-        <div class="details-wrap"></div>
+        <div class="details-wrap">
+          <h3 id="detailBuildingTitle">건물을 선택해주세요.</h3>
+          <div class="img-wrap">
+
+          </div>
+          <div class="text-wrap">
+            <div class="fac-wrap">
+              <span>주요 시설</span>
+              <ul class="fac-list">
+                <li>주요 시설 정보가 없습니다.</li>
+              </ul>
+            </div>
+            <div class="mng-wrap">
+              <p>관리 담당 팀</p>
+              <span id="mng_team">정보가 없습니다.</span>
+              <p>연락처</p>
+              <span id="mng_num">정보가 없습니다.</span>
+            </div>
+          </div>
+          <div class="button-wrap">
+            <button><a href="/detail" id="detail_link">자세히 보기</a></button>
+          </div>
+        </div>
         <div id="detailsCloseBtn">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z"></path></svg>
         </div>

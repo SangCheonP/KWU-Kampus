@@ -17,6 +17,8 @@ const details = document.getElementById('details');
 const categories = document.getElementsByClassName('category');
 const subCategories = document.querySelectorAll('ul.sub-categories li a');
 const mapContainer = document.getElementById('mapContainer');
+const detailBuildingTitle = document.getElementById('detailBuildingTitle');
+const detail_link = document.getElementById('detail_link');
 
 ///////////////////////////////
 ///// THREE.js from here: /////
@@ -132,14 +134,11 @@ async function init() {
 
   fixedHelp.addEventListener('click', () => {
 
-    if ( fixedHelp.classList.contains('active')) {
-
+    if (fixedHelp.classList.contains('active')) {
       fixedHelp.classList.remove('active');
       fixedHelp.removeAttribute('style');
       return;
-
     }
-
     fixedHelp.classList.add('active');
     fixedHelp.style.height = fixedHelp.querySelector('ul').clientHeight + 40 + 'px';
 
@@ -176,6 +175,24 @@ async function init() {
 
   detailsOpenBtn.addEventListener('click', () => { details.classList.add('active'); });
   detailsCloseBtn.addEventListener('click', () => { details.classList.remove('active'); });
+  detail_link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const bc = sessionStorage.getItem('building_code');
+      if (!bc) {
+        alert('선택된 건물이 없습니다.'); return;
+      } else if (bc === '09') {
+        // if the selected building is IceRink(code 09)
+        location.href = URL.icerink;
+      } else if (bc === '06' || bc === '07') {
+        // if the selected building is BitSol A or B (code 07 or 08)
+        location.href = URL.dormitory;
+      } else if (bc === '13') {
+        // if the selected building is International House (code 13)
+        location.href = URL.international;
+      } else {
+        location.href = '/detail';
+      }
+    })
 
   // GLTF Loader, load models
 
@@ -478,8 +495,8 @@ function createModel ( loader, data ) {
         controls.update();
         console.log(model);
         // 빌딩 클릭 시 배열에 관련 정보 세팅
-        setBuildingInfo(model);
-
+        setDetails(model);
+        details.classList.add('active');
         sessionStorage.setItem('building_code', model.userData.id);
 
         // 임시
@@ -584,6 +601,41 @@ async function createFont( position, name ) {
   group.renderOrder = 1; // renderOrder (z-index)
   group.name = name + ' Font';
   scene.add( group );
+
+}
+
+/**
+ * 생성된 모델 정보를 토대로 관련 정보를 `details`에 입력합니다.
+ * `ul.fac-list`에 child가 있으면 모두 제거하는 작업을 포함합니다.
+ *
+ * @param {THREE.Group} model
+ */
+function setDetails(model) {
+
+  const ul = document.querySelector('ul.fac-list');
+  while (ul.hasChildNodes()) { ul.removeChild(ul.firstChild); }
+  const mng_team = document.getElementById('mng_team');
+  const mng_num = document.getElementById('mng_num');
+
+  detailBuildingTitle.innerText = model.name;
+  if (!model.userData.importance_rooms) {
+    // initializing
+    const li = document.createElement('li');
+    li.innerHTML = '주요 시설 정보가 없습니다.';
+    ul.appendChild(li);
+
+  } else {
+
+    model.userData.importance_rooms.forEach(room => {
+      const li = document.createElement('li');
+      li.innerHTML = room.facilities;
+      ul.appendChild(li);
+    })
+
+  }
+
+  mng_team.innerText = (model.userData.management_team) ? model.userData.management_team : '정보가 없습니다.';
+  mng_num.innerText = (model.userData.management_team_phone_num) ? model.userData.management_team_phone_num : '정보가 없습니다.';
 
 }
 
