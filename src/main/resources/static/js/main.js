@@ -39,6 +39,7 @@ const fonts = [];
 // const arrows = [];
 
 let exrCubeRenderTarget, exrBackground;
+let activeFacLi;
 
 init();
 noticeInit();
@@ -217,7 +218,7 @@ async function noticeInit() {
   noticeDatas.forEach(data => { depts.push(data.dept); });
 
   const uniqDepts = [...new Set(depts)];
-  console.log(uniqDepts);
+  // console.log(uniqDepts);
 
   uniqDepts.forEach((dept, index) => {
     // get filtered data with unique dept names
@@ -493,7 +494,7 @@ function createModel ( loader, data ) {
 
         controls.target.copy(model.position);
         controls.update();
-        console.log(model);
+        // console.log(model);
         // 빌딩 클릭 시 배열에 관련 정보 세팅
         setDetails(model);
         details.classList.add('active');
@@ -629,6 +630,24 @@ function setDetails(model) {
     model.userData.importance_rooms.forEach(room => {
       const li = document.createElement('li');
       li.innerHTML = room.facilities;
+      li.setAttribute('data-room', room.room_code);
+      li.setAttribute('data-floor', room.floor);
+      li.addEventListener('click', () => {
+
+        activeFacLi && activeFacLi.classList.remove('active');
+
+        if (sessionStorage.getItem('room_code') === li.getAttribute('data-room')) {
+          sessionStorage.removeItem('room_code');
+          sessionStorage.removeItem('floor');
+          return;
+        }
+
+        li.classList.add('active');
+        sessionStorage.setItem('room_code', li.getAttribute('data-room'));
+        sessionStorage.setItem('floor', li.getAttribute('data-floor'));
+        activeFacLi = li;
+
+      });
       ul.appendChild(li);
     })
 
