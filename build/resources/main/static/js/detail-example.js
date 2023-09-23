@@ -1,186 +1,133 @@
+import * as URL from './url.js'
+import * as roomPosition from './room-position.js'
+
 const floorList = document.getElementById('floors');
 const roomList = document.getElementById('rooms');
 const roomNums = document.querySelectorAll('#detail .img-wrap .roomNum');
-
-const f1 = [
-    {
-        building: "새빛관",
-        building_code: "08",
-        building_phone_num: null,
-        floor: "1F",
-        room_no: 101,
-        room_code: "0-0101-0",
-        facilities: "대강의실",
-        category: null,
-        importance: false
-    },
-    {
-        building: "새빛관",
-        building_code: "08",
-        building_phone_num: null,
-        floor: "1F",
-        room_no: 102,
-        room_code: "0-0102-0",
-        facilities: "계단강의실",
-        category: null,
-        importance: false
-    },
-    {
-        building: "새빛관",
-        building_code: "08",
-        building_phone_num: null,
-        floor: "1F",
-        room_no: 103,
-        room_code: "0-0103-0",
-        facilities: "정보융합부 실습실2",
-        category: null,
-        importance: false
-    },
-    {
-        building: "새빛관",
-        building_code: "08",
-        building_phone_num: null,
-        floor: "1F",
-        room_no: 104,
-        room_code: "0-0104-0",
-        facilities: "정보융합부 실습실1",
-        category: null,
-        importance: false
-    },
-    {
-        building: "새빛관",
-        building_code: "08",
-        building_phone_num: null,
-        floor: "1F",
-        room_no: 105,
-        room_code: "0-0105-0",
-        facilities: "코딩컨설팅룸",
-        category: null,
-        importance: false
-    },
-];
-const f2 = [
-    {
-        building: "새빛관",
-        building_code: "08",
-        building_phone_num: null,
-        floor: "2F",
-        room_no: "202",
-        room_code: "0-0202-0",
-        facilities: "강의실",
-        category: null,
-        importance: false
-    },
-    {
-        building: "새빛관",
-        building_code: "08",
-        building_phone_num: null,
-        floor: "2F",
-        room_no: "203",
-        room_code: "0-0203-0",
-        facilities: "강의실",
-        category: null,
-        importance: false
-    },
-    {
-        building: "새빛관",
-        building_code: "08",
-        building_phone_num: null,
-        floor: "2F",
-        room_no: "204",
-        room_code: "0-0204-0",
-        facilities: "강의실",
-        category: null,
-        importance: false
-    },
-    {
-        building: "새빛관",
-        building_code: "08",
-        building_phone_num: null,
-        floor: "2F",
-        room_no: "205",
-        room_code: "0-0205-0",
-        facilities: "강의실",
-        category: null,
-        importance: false
-    },
-    {
-        building: "새빛관",
-        building_code: "08",
-        building_phone_num: null,
-        floor: "2F",
-        room_no: "206",
-        room_code: "0-0206-0",
-        facilities: "강의실",
-        category: null,
-        importance: false
-    },
-    {
-        building: "새빛관",
-        building_code: "08",
-        building_phone_num: null,
-        floor: "2F",
-        room_no: "207",
-        room_code: "0-0207-0",
-        facilities: "회의실",
-        category: null,
-        importance: false
-    }
-];
-
-const receivedFloorList = [
-    f1,
-    f2
-];
-const receivedBgUrl = "../images/details-example.jpg";
-let receivedBgUrlArr;
+const roomNum = document.getElementsByClassName( 'roomNum' );
 
 let rooms, prevElement, prevDesc, floors, building_code;
 let bgUrl;
-
-let infoTitle, infoContent, titleText, contentText;
-let infoTag, infoPage;
-let prevIdx = 0;
-let contentArr;
+let imgBg;
+let mapWidth, mapHeight, addHeight, addWidth;
+const whRatio = ( 768/1200 );
+const hwRatio = ( 1200/768 );
 
 init();
 
 function init() {
-
     // sessionStorage 에서 클릭한 건물/시설 정보를 저장 및 불러옵니다.
-    sessionStorage.setItem( 'floor', 'B2' );
-    sessionStorage.setItem( 'building_code', "08" );
     building_code = sessionStorage.getItem( "building_code" );
+    if ( !building_code ) return;
 
     bgUrl = "../floor-img/" + building_code + "/";
 
-    fetch( `http://13.124.194.184:8080/detail/info/${building_code}`, {
+    fetch(URL.detail + building_code, {
         method: "GET"
-    } )
-        .then( res => res.json() )
-        .then( res => {
+    })
+    .then( res => res.json() )
+    .then( res => {
 
-            let classifiedList = classifyList( res );
-            // console.log( classifiedList );
-            createFloors( classifiedList );
-            if ( sessionStorage.getItem( 'floor' ) ) {
+      let classifiedFloors = classifyFloors( res );
+      console.log(classifiedFloors);
 
-                const floor = ( '00' + sessionStorage.getItem( 'floor' ) ).slice( -2 );
-                activateFloor( document.getElementById( floor ), 0, classifiedList );
-                sessionStorage.removeItem( 'floor' );
+      createFloors( classifiedFloors );
 
-            } else {
-                // activate 1st floor as default
-                activateFloor( document.getElementById( '01' ), 0, classifiedList );
+      // activate 1st floor as default
+      let target_floor = '1';
 
+      if ( sessionStorage.getItem( 'floor' ) ) {
+          target_floor = sessionStorage.getItem( 'floor' );
+          sessionStorage.removeItem( 'floor' );
+      }
+
+        // activateFloor의 두 번째 인자
+        // 즉, floor의 시설 정보를 담고 있는 배열의 인덱스를 계산합니다.
+      const floor = ( '00' + target_floor ).slice( -2 );
+
+      classifiedFloors.forEach( ( c, i ) => {
+            if ( c[0].floor == target_floor ) {
+                activateFloor( document.getElementById( floor ), i, classifiedFloors );
+                return false; // break
             }
+      } );
 
-            sessionStorage.removeItem( 'building_code' );
+//    sessionStorage.removeItem( 'building_code' );
 
-        } )
+    } )
 
     // createFloors( receivedFloorList );
     // setFloorBg( receivedBgUrl );
+
+    imgBg = document.getElementsByClassName( 'imgBg' );
+
+    window.addEventListener( 'resize', setFont );
+    window.addEventListener('unload', () => sessionStorage.clear());
+
+}
+
+/**
+ * 윈도우 창 크기 조절하는 것에 따라 평면도 위 표기되는 폰트 (호수)의 크기 및 위치를 조정합니다.
+ *
+ * `div.imgBg` background (평면도) 의 width, height 를 구하는 방법을 아직 찾지 못해,
+ * 임의로 `main#detail > div.img-wrap > div.imgBg` 의 현재 width (또는 height) 를 구하고,
+ * 평면도 비율을 이용하여 현재 height (또는 width) 를 도출합니다.
+ *
+ * 현재 평면도의 width, height 값에 맞춰 폰트 (호수)의 크기 및 위치를 조정합니다.
+ *
+ * @param { number } i current floor
+ * @param floorInfo classifiedFloors[i]
+ */
+function setFont( i, floorInfo ) {
+    let building = floorInfo[0].building.replaceAll(' ', '');
+    if ( building == '80주년기념관&광운스퀘어' ) building = '기념관';
+
+    let positionArr = roomPosition.position[ building ][i];
+
+    const recentRatio = ( imgBg[0].offsetHeight / imgBg[0].offsetWidth );
+    let index;
+
+    // `div.imgBg`의 height 가 background 의 height 보다 더 큰 경우
+    if ( recentRatio >= whRatio ) {
+        mapWidth = imgBg[0].offsetWidth;
+        mapHeight = mapWidth * whRatio;
+
+        addHeight = ( imgBg[0].offsetHeight - mapHeight ) / 2;
+
+        // 호수 갯수에 따른 밀림 현상 해결용
+        var num = 0.0;
+        for( var j = 0; j < floorInfo.length; j++ ) {
+
+            index = Number( ( floorInfo[j].room_no ).slice( -2 ) );
+            index--;
+
+            if( index < 0 ) {
+                roomNum[j].style.display = 'none';
+                continue;
+            }
+
+            roomNum[j].style.width = ( mapWidth * 0.1 ) + 'px';
+            roomNum[j].style.height = ( mapHeight * 0.05 ) + 'px';
+            roomNum[j].style.left = ( mapWidth * positionArr[index][0] ) + 'px';
+            roomNum[j].style.top = ( mapHeight * (positionArr[index][1] - num++ * 0.05) + addHeight ) + 'px';
+        }
+
+    }
+    // `div.imgBg`의 width 가 background 의 width 보다 더 큰 경우 -- 수정 필요
+    else {
+        mapHeight = imgBg[0].offsetHeight;
+        mapWidth = mapHeight * hwRatio;
+
+        addWidth = ( imgBg[0].offsetWidth - mapWidth ) / 2;
+
+        for( var j = 0; j < floorInfo.length; i++ ) {
+            roomNum[j].style.width = ( mapWidth * 0.1 ) + 'px';
+            roomNum[j].style.height = ( mapHeight * 0.05 ) + 'px';
+            roomNum[j].style.left = ( mapWidth * positionArr[index][0] + addWidth ) + 'px';
+            roomNum[j].style.top = ( mapHeight * positionArr[index][1] ) + 'px';
+        }
+    }
+
 }
 
 /**
@@ -198,12 +145,12 @@ function init() {
  * detail_example.html에 Floor List를 구성하는 새 element 들을 생성하고,
  * 클릭 이벤트를 설정합니다.
  *
- * @param classifiedList
+ * @param { Array } classifiedFloors
  * @result Create new elements under `ul#floors`
  */
-function createFloors( classifiedList ) {
+function createFloors( classifiedFloors ) {
 
-    for ( let i = 0; i < classifiedList.length; ++i ) {
+    for ( let i = 0; i < classifiedFloors.length; ++i ) {
 
         const liFloor = document.createElement( 'li' );
         const div = document.createElement( 'div' );
@@ -211,7 +158,7 @@ function createFloors( classifiedList ) {
 
         div.className = 'text'; // div.text
         span.className = 'floor-title'; // span.floor-title
-        span.innerText = `${classifiedList[i][0].floor}F`;
+        span.innerText = `${classifiedFloors[i][0].floor}F`;
 
         div.appendChild( span ); // div > span
         liFloor.appendChild( div ); // li > div > span
@@ -219,16 +166,16 @@ function createFloors( classifiedList ) {
         // const ul = document.createElement( 'ul' );
         // ul.setAttribute( 'id', 'rooms' ); // ul#rooms
         //
-        // for ( let j = 0; j < classifiedList[i].length; j++ ) {
+        // for ( let j = 0; j < classifiedFloors[i].length; j++ ) {
         //
         //     const liRoom = document.createElement( 'li' );
-        //     liRoom.innerText = classifiedList[i][j].room_no;
-        //     liRoom.setAttribute( 'id', classifiedList[i][j].room_code );
+        //     liRoom.innerText = classifiedFloors[i][j].room_no;
+        //     liRoom.setAttribute( 'id', classifiedFloors[i][j].room_code );
         //     ul.appendChild( liRoom ); // ul > li
         //
         // }
 
-        liFloor.setAttribute( 'id', ( '00' + classifiedList[i][0].floor ).slice( -2 ) ); // set id to its floor number
+        liFloor.setAttribute( 'id', ( '00' + classifiedFloors[i][0].floor ).slice( -2 ) ); // set id to its floor number
         // liFloor.appendChild(ul); // li > div + ul
         floorList.appendChild( liFloor );
 
@@ -238,7 +185,7 @@ function createFloors( classifiedList ) {
 //    console.log( "Floors:\n", floors );
     floors.forEach( ( floor, i ) => {
         // 1층을 Default로 보여주기 위한 설정
-        // if (i === 0) { activateFloor( floor, i, classifiedList ); }
+        // if (i === 0) { activateFloor( floor, i, classifiedFloors ); }
 
         const floorTitle = floor.querySelector( '.floor-title' );
         floorTitle.addEventListener( 'click', ( e ) => {
@@ -249,13 +196,11 @@ function createFloors( classifiedList ) {
             if ( prevDesc ) { prevDesc.classList.remove( 'active' ); }
             if ( prevElement ) { prevElement.classList.remove( 'active' ); }
 
-            // Room List를 초기화하고,
+            // Room List와 평면도를 초기화하고,
             // 선택한 층에 따라 표시되는 호수(방 번호) 변경
-            while( roomList.firstChild ) {
-                roomList.removeChild( roomList.firstChild );
-            }
-
-            activateFloor( floor, i, classifiedList );
+            roomList.innerHTML = '';
+            imgBg[0].innerHTML = '';
+            activateFloor( floor, i, classifiedFloors );
 
         } );
 
@@ -285,21 +230,25 @@ function setFloorBg ( bgUrl = "" ) {
  * @param { Element } floor `li` element in floors list
  * @param { number } i index value of the element
  */
-function activateFloor ( floor, i, classifiedList ) {
+function activateFloor ( floor, i, classifiedFloors ) {
 
-    // if문은 임의로 작성했습니다.
-    // 추가 정보 필요 유무에 따라 Room List를 구성하는 element가 달라집니다.
-    for ( let j = 0; j < classifiedList[i].length; j++ ) {
+    for ( let j = 0; j < classifiedFloors[i].length; j++ ) {
 
+        // 시설 리스트 생성
+        // if문은 임의로 작성했습니다.
+        // 추가 정보 필요 유무에 따라 Room List를 구성하는 element가 달라집니다.
         if( j % 2 == 0 )
-            roomList.appendChild( addRoom( floor, i, classifiedList[i][j] ) ); // ul > li
+            roomList.appendChild( listAddRoom( classifiedFloors[i][j] ) ); // ul > li
         else
-            roomList.appendChild( addRoomAccordion(floor, i, classifiedList[i][j] ) ); // ul > li
+            roomList.appendChild( listAddRoomAccordion( classifiedFloors[i][j] ) ); // ul > li
+
+        // 평면도 상에 호수 글자 생성
+        imgBg[0].appendChild( mapAddRoom( classifiedFloors[i][j] ) );
     }
 
     floor.classList.add( 'active' );
 
-//     const fl = classifiedList[ i ];
+//     const fl = classifiedFloors[ i ];
 //     roomNums.forEach( ( rn, j ) => {
 //
 //         rn.querySelector( 'span' ).innerText = fl[j].facilities;
@@ -322,7 +271,12 @@ function activateFloor ( floor, i, classifiedList ) {
 
     prevElement = floor;
 
-    setFloorBg( bgUrl + floor.id + '.png');
+    bgUrl = '../floor-img/' + building_code + '/' + floor.id + '.png'
+    setFloorBg( bgUrl );
+
+    // 평면도 상에 호수 글자 위치 조절
+    setFont( i, classifiedFloors[i] );
+    window.addEventListener( 'resize', function(){ setFont( i, classifiedFloors[i] ) } );
 }
 
 /**
@@ -330,10 +284,10 @@ function activateFloor ( floor, i, classifiedList ) {
  * detail_example.html에 Room List를 구성하는 새 element 를 생성합니다.
  * 별도의 정보가 필요없는 시설이므로, `li`(시설명) element 만 생성합니다.
  *
- * @param roomInfo classifiedList[i][j]
+ * @param roomInfo classifiedFloors[i][j]
  * @returns {HTMLLIElement} `li` element in rooms list
  */
-function addRoom( floor, i, roomInfo ) {
+function listAddRoom( roomInfo ) {
 
     const liRoom = document.createElement( 'li' );
     liRoom.className = 'list-group-item';
@@ -348,10 +302,10 @@ function addRoom( floor, i, roomInfo ) {
  * detail_example.html에 Room List를 구성하는 새 element 를 생성합니다.
  * 별도의 정보가 필요한 시설이므로, `button`(시설명) 과 `div`(시설정보) 가 담긴 `li` element 를 생성합니다.
  *
- * @param roomInfo classifiedList[i][j]
+ * @param roomInfo classifiedFloors[i][j]
  * @returns {HTMLLIElement} `li` element in rooms list
  */
-function addRoomAccordion( floor, i, roomInfo ) {
+function listAddRoomAccordion( roomInfo ) {
 
     const accor_liRoom = document.createElement( 'li' );
     accor_liRoom.className = 'accordion-item';
@@ -380,6 +334,16 @@ function addRoomAccordion( floor, i, roomInfo ) {
     return accor_liRoom;
 }
 
+function mapAddRoom ( roomInfo ) {
+    const div = document.createElement( 'div' );
+    div.className = 'roomNum';
+    const span = document.createElement( 'span' );
+    span.innerText = roomInfo.room_no;
+    div.appendChild( span ); // div > span
+
+    return div;
+}
+
 /**
  * 한 건물의 분류되지 않은 방 정보 리스트를 받아와서 층 별로 분류하고,
  * 정보를 층 별로 분류하고, 방 번호를 오름차순으로 정렬하여 2차 Array 형태로 리턴합니다.
@@ -389,34 +353,44 @@ function addRoomAccordion( floor, i, roomInfo ) {
  * @param { Array } res raw data(floor list) received from server
  * @returns a classified floor list
  */
-function classifyList( res ) {
+function classifyFloors( res ) {
 
-    let classifiedList = [];
+    let classifiedFloors = [];
     let floors = res.map( room => room.floor );
-    let uniqFloors = [... new Set( floors )];
-    console.log( uniqFloors );
+    let uniqFloors = [... new Set(floors.sort(compareFloors))]; // remove duplicate and sort floors[]
     uniqFloors.forEach( ( floor ) => {
 
         let floorNum, regex;
         if ( /^B+/.test( floor ) ) {
-            // if floor element starts with 'B'
-            floorNum = ( '00' + floor.substr(1, 1) ).slice( -2 );
-            regex = new RegExp( `^1-${floorNum}+` );
+            // if floor item starts with 'B'
+            floorNum = ('00' + floor.substr(1, 1)).slice(-2);
+            regex = new RegExp(`^1-${floorNum}+`);
         } else {
-            floorNum = ( '00' + floor ).slice( -2 );
-            regex = new RegExp( `^0-${floorNum}+` );
+            floorNum = ('00' + floor).slice(-2);
+            regex = new RegExp(`^0-${floorNum}+`);
         }
 
-        const classifiedFloor = res.filter( data => regex.test( data.room_code ) );
-        classifiedList.push( classifiedFloor.sort( function( a, b ) {
-            // Sort By room_no
-            if ( a.room_no > b.room_no ) return 1;
-            if ( a.room_no === b.room_no ) return 0;
-            if ( a.room_no < b.room_no ) return -1;
-
-        } ) );
+        const classifiedFloor = res.filter(data => regex.test(data.room_code));
+        classifiedFloors.push(classifiedFloor.sort(function(a, b) { return a.room_no < b.room_no ? -1 : a.room_no > b.room_no ? 1 : 0; }));
 
     } )
 
-    return classifiedList;
+    return classifiedFloors;
+}
+
+/**
+ * 건물 층 값인 문자열(B1, 10, 1, ...) 정렬을 위한 함수입니다.
+ * 문자열이 "B"(대문자)로 시작하면, B를 "-"로 바꾸어 비교합니다.
+ *
+ * @param {String} a a value of floor to compare
+ * @param {String} b a value of floor to compare
+ * @returns Compared Result for sort() function.
+ */
+function compareFloors(a, b) {
+
+  let _a, _b;
+  if (a.startsWith("B")) { _a = a.replace("B", "-") } else { _a = a }
+  if (b.startsWith("B")) { _b = b.replace("B", "-") } else { _b = b }
+  return _a - _b;
+
 }
