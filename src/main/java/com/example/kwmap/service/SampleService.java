@@ -36,10 +36,6 @@ public class SampleService {
         return SampleMapper.selectRoomsImportanceDetail(building_code);
     }
 
-    public List<detailRoomXYModel> selectAllRoomXY(){
-        return SampleMapper.selectAllRoomXY();
-    }
-
     public buildingLocationModel selectBuildingLocation(String building_code){
         return SampleMapper.selectBuildingLocation(building_code);
     }
@@ -47,10 +43,5 @@ public class SampleService {
     // main page의 아래 부분에 공지사항에 넣을 모든 정보를 List 형태로 가져옴
     public List<mainPageInfoModel> selectMainPageInfo(){
         return SampleMapper.selectMainPageInfo();
-    }
-
-    // 빌딩 코드를 받아 해당 빌딩의 모든 시설 추가적인 설명 내용을 리스트로 가져옴
-    public List<detailContentModel> selectDetailContentInfo(String building_code) {
-        return SampleMapper.selectDetailContentInfo(building_code);
     }
 }

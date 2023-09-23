@@ -20,11 +20,8 @@ public interface SampleMapper {
 
    public List<detailRoomInfoModel> selectRoomsImportanceDetail(String building_code);
 
-   public List<detailRoomXYModel> selectAllRoomXY();
 
    public buildingLocationModel selectBuildingLocation(String building_code);
 
    public List<mainPageInfoModel> selectMainPageInfo();
-
-   public List<detailContentModel> selectDetailContentInfo(String building_code);
 }

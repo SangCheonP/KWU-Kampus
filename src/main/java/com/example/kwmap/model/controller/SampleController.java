@@ -49,8 +49,8 @@ public class SampleController {
     // 한 건물의 모드 방에 대한 정보를 리스트로 반환
     @ResponseBody
     @RequestMapping("/detail/info/{building_code}")
-    public List<detailBuildingAllRoomsInfoModel> showDetail(@PathVariable("building_code") String building_code, Model model) {
-        System.out.println("\"/detail/{building_code}\"");
+    public List<detailBuildingAllRoomsInfoModel> selectDetailBuildingAllRoomsInfo(@PathVariable("building_code") String building_code) {
+        System.out.println("\"/detail/info/{building_code}\"");
         List<detailBuildingAllRoomsInfoModel> info = sampleService.selectDetailBuildingAllRoomsInfo(building_code);
         return info;
     }
@@ -73,15 +73,6 @@ public class SampleController {
         return info;
     }
 
-    // 디테일 페이지에서 Building_code와 floor를 받아 해당 층의 모든 시설의 x, y 좌표를 리스트로 가져오는 함수
-    @ResponseBody
-    @RequestMapping("/detail/info/roomxy")
-    public List<detailRoomXYModel> selectAllRoomXY(Model model) {
-        System.out.println("\"/detal/info/roomxy\"");
-        List<detailRoomXYModel> info = sampleService.selectAllRoomXY();
-        return info;
-    }
-
     // 메인 페이지에서 각 건물 모델의 카카오 api에 사용되는 위도와 경도를 가져옴
     @ResponseBody
     @RequestMapping("/building/info/buildingLocation/{building_code}")
@@ -97,15 +88,6 @@ public class SampleController {
     public List<mainPageInfoModel> selectMainPageInfo() {
         System.out.println("\"/mainpage/info\"");
         List<mainPageInfoModel> info = sampleService.selectMainPageInfo();
-        return info;
-    }
-
-    // 빌딩 코드를 받아 해당 빌딩의 모든 시설 추가적인 설명 내용을 리스트로 가져옴
-    @ResponseBody
-    @RequestMapping("/detail/info/content/{building_code}")
-    public List<detailContentModel> selectDetailContentInfo(@PathVariable("building_code") String building_code) {
-        System.out.println("\"/detail/info/content/{building_code}\"");
-        List<detailContentModel> info = sampleService.selectDetailContentInfo(building_code);
         return info;
     }
 }
