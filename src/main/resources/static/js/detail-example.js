@@ -9,7 +9,7 @@ const roomNum = document.getElementsByClassName( 'roomNum' );
 let rooms, prevElement, prevDesc, floors, building_code;
 let bgUrl;
 let imgBg;
-let mapWidth, mapHeight, addHeight, addWidth;
+let mapWidth, mapHeight, addPosition;
 const whRatio = ( 768/1200 );
 const hwRatio = ( 1200/768 );
 
@@ -85,46 +85,40 @@ function setFont( i, floorInfo ) {
     let positionArr = roomPosition.position[ building ][i];
 
     const recentRatio = ( imgBg[0].offsetHeight / imgBg[0].offsetWidth );
-    let index;
+    let index, num = 0.0;
 
     // `div.imgBg`의 height 가 background 의 height 보다 더 큰 경우
     if ( recentRatio >= whRatio ) {
         mapWidth = imgBg[0].offsetWidth;
         mapHeight = mapWidth * whRatio;
-
-        addHeight = ( imgBg[0].offsetHeight - mapHeight ) / 2;
-
-        // 호수 갯수에 따른 밀림 현상 해결용
-        var num = 0.0;
-        for( var j = 0; j < floorInfo.length; j++ ) {
-
-            index = Number( ( floorInfo[j].room_no ).slice( -2 ) );
-            index--;
-
-            if( index < 0 ) {
-                roomNum[j].style.display = 'none';
-                continue;
-            }
-
-            roomNum[j].style.width = ( mapWidth * 0.1 ) + 'px';
-            roomNum[j].style.height = ( mapHeight * 0.05 ) + 'px';
-            roomNum[j].style.left = ( mapWidth * positionArr[index][0] ) + 'px';
-            roomNum[j].style.top = ( mapHeight * (positionArr[index][1] - num++ * 0.05) + addHeight ) + 'px';
-        }
-
+        addPosition = (imgBg[0].offsetHeight - mapHeight) / 2;
     }
-    // `div.imgBg`의 width 가 background 의 width 보다 더 큰 경우 -- 수정 필요
+    // `div.imgBg`의 width 가 background 의 width 보다 더 큰 경우
     else {
         mapHeight = imgBg[0].offsetHeight;
         mapWidth = mapHeight * hwRatio;
+        addPosition = (imgBg[0].offsetWidth - mapWidth) / 2;
+    }
 
-        addWidth = ( imgBg[0].offsetWidth - mapWidth ) / 2;
+    for( var j = 0; j < floorInfo.length; j++ ) {
 
-        for( var j = 0; j < floorInfo.length; i++ ) {
-            roomNum[j].style.width = ( mapWidth * 0.1 ) + 'px';
-            roomNum[j].style.height = ( mapHeight * 0.05 ) + 'px';
-            roomNum[j].style.left = ( mapWidth * positionArr[index][0] + addWidth ) + 'px';
-            roomNum[j].style.top = ( mapHeight * positionArr[index][1] ) + 'px';
+        index = Number( ( floorInfo[j].room_no ).slice( -2 ) );
+        index--;
+
+        if( index < 0 ) {
+            roomNum[j].style.display = 'none';
+            continue;
+        }
+
+        roomNum[j].style.width = ( mapWidth * 0.1 ) + 'px';
+        roomNum[j].style.height = ( mapHeight * 0.05 ) + 'px';
+
+        if ( recentRatio >= whRatio ) {
+            roomNum[j].style.left = (mapWidth * positionArr[index][0]) + 'px';
+            roomNum[j].style.top = (mapHeight * (positionArr[index][1] - num++ * 0.05) + addPosition) + 'px';
+        } else {
+            roomNum[j].style.left = ( mapWidth * positionArr[index][0] + addPosition ) + 'px';
+            roomNum[j].style.top = ( mapHeight * (positionArr[index][1] - num++ * 0.05)) + 'px';
         }
     }
 
