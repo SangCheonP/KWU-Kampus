@@ -49,7 +49,7 @@ class PythonScriptRunner implements CommandLineRunner {
         executePythonScript();
     }
 
-    @Scheduled(cron = "0 0 0 * * ?")    // 매일 0시 정각에 실행
+    @Scheduled(cron = "0 15 21 * * ?")    // 매일 0시 정각에 실행
     private void executePythonScript() {
         try {
             String pythonScriptPath = "src/main/python/dbconn_Test.py"; //상대경로로 파일 경로 수정
