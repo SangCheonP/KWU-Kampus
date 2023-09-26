@@ -26,7 +26,7 @@
         </ul>
         <!-- Temporary Links List end -->
       </div>
-
+      <!--
       <div id="infoPage">
         <button id="infoClose">
           <div class="bar01"></div>
@@ -49,7 +49,7 @@
         <div class="infoPageTag-top"></div>
         <div class="infoPageTag-bottom"></div>
       </div>
-
+      -->
 <%--      <div id="map" style="width:1920px;height:1080px;"></div>--%>
     </header>
 <%--    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e3a2d67ed557e40be0dda008caab9713"></script>--%>

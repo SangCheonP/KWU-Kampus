@@ -87,6 +87,7 @@ async function init() {
   });
   pmremGenerator.compileEquirectangularShader();
 
+  /*
   // Create Info Pannel
   textTitle = document.getElementsByClassName("infoTitle");
   textContent = document.getElementsByClassName("infoContent");
@@ -110,7 +111,7 @@ async function init() {
   setInfo(info_help, help_content);
   infoTag.classList.toggle( 'on' );
   infoPage.classList.toggle( 'on' );
-
+  */
   map2D = mapChange = document.getElementById('map');
   // map3D = mapChange = document.getElementById('guiContainer');
   mapChange = document.getElementById('mapChange');
