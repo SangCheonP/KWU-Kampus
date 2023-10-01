@@ -46,7 +46,6 @@ def Electronic_Information():
     notice = soup.select('td.d_sj.tl a')
     date = soup.select('td.d_dt')
 
-
     count = 0
 
     for i,j in zip(notice, date):
@@ -84,8 +83,8 @@ def Business():
     soup = BeautifulSoup(req.text, "html.parser")
 
     # department = str(soup.find('title').string)
-    notice = soup.select('div.notice_list tr td b a')
-    date = soup.select('div.notice_list tr td.d_dt')
+    notice = soup.select('td.d_sj.tl a')
+    date = soup.select('td.d_dt')
 
     count = 0
 
@@ -338,14 +337,24 @@ def update():
         execute("DELETE FROM notice_web")
 
         # 테이블 PythonTable에 data를 INSERT한다.
+        print("코드 업데이트 시작")
         merge_bulk("INSERT INTO notice_web (dept, site, notice, date) VALUES (%s, %s, %s, %s)", electro_list)
+        print("eletro_list 업데이트 완료")
         merge_bulk("INSERT INTO notice_web (dept, site, notice, date) VALUES (%s, %s, %s, %s)", human_list)
+        print("human_list 업데이트 완료")
         merge_bulk("INSERT INTO notice_web (dept, site, notice, date) VALUES (%s, %s, %s, %s)", business_list)
+        print("business_list 업데이트 완료")
         merge_bulk("INSERT INTO notice_web (dept, site, notice, date) VALUES (%s, %s, %s, %s)", ingenium_list)
+        print("ingenium_list 업데이트 완료")
         merge_bulk("INSERT INTO notice_web (dept, site, notice, date) VALUES (%s, %s, %s, %s)", soft_list)
+        print("soft_list 업데이트 완료")
         merge_bulk("INSERT INTO notice_web (dept, site, notice, date) VALUES (%s, %s, %s, %s)", engin_list)
+        print("engin_list 업데이트 완료")
         merge_bulk("INSERT INTO notice_web (dept, site, notice, date) VALUES (%s, %s, %s, %s)", natural_list)
+        print("natural_list 업데이트 완료")
         merge_bulk("INSERT INTO notice_web (dept, site, notice, date) VALUES (%s, %s, %s, %s)", policy_list)
+        print("policy_list 업데이트 완료")
+        print("코드 업데이트 완료")
 
     except Exception as e:
         print(e)
@@ -354,9 +363,3 @@ def update():
         dbconn.close()
 
 update()
-
-# i=0
-# schedule.every(10).seconds.do(update)
-# while i<10:
-#   schedule.run_pending()
-#   time.sleep(1)
