@@ -197,7 +197,7 @@
         <div class="details-wrap">
           <h3 id="detailBuildingTitle">건물을 선택해주세요.</h3>
           <div class="img-wrap">
-
+            <img id="buildingImg" />
           </div>
           <div class="text-wrap">
             <div class="fac-wrap">
@@ -207,7 +207,7 @@
               </ul>
             </div>
             <div class="mng-wrap">
-              <p>관리 담당 팀</p>
+              <p>관리 담당</p>
               <span id="mng_team">정보가 없습니다.</span>
               <p>연락처</p>
               <span id="mng_num">정보가 없습니다.</span>
