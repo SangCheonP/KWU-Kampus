@@ -20,7 +20,7 @@ policy_list = []
 def Software_Convergence():
     url = "https://npsw.kw.ac.kr/site/sub.php?Tid=27&Ctnum=28&Ctid=HM28"
 
-    req = requests.get(url)
+    req = requests.get(url, verify=False)
     soup = BeautifulSoup(req.text, "html.parser")  # html에 대하여 접근할 수 있도록
 
     # department = soup.find('title').string
