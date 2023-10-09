@@ -6,7 +6,7 @@ const roomList = document.getElementById('rooms');
 const roomNums = document.querySelectorAll('#detail .img-wrap .roomNum');
 const roomNum = document.getElementsByClassName( 'roomNum' );
 
-let rooms, prevElement, prevDesc, floors, building_code;
+let rooms, prevElement, prevDesc, floors, building_code, prevRoomCode = "";
 let bgUrl;
 let imgBg;
 let mapWidth, mapHeight, addPosition;
@@ -63,14 +63,12 @@ function init() {
 
     window.addEventListener( 'resize', setFont );
     window.addEventListener('unload', () => sessionStorage.clear());
-
 }
 
 /**
  * 윈도우 창 크기 조절하는 것에 따라 평면도 위 표기되는 폰트 (호수)의 크기 및 위치를 조정합니다.
  *
- * `div.imgBg` background (평면도) 의 width, height 를 구하는 방법을 아직 찾지 못해,
- * 임의로 `main#detail > div.img-wrap > div.imgBg` 의 현재 width (또는 height) 를 구하고,
+ * `main#detail > div.img-wrap > div.imgBg` 의 현재 width (또는 height) 를 구하고,
  * 평면도 비율을 이용하여 현재 height (또는 width) 를 도출합니다.
  *
  * 현재 평면도의 width, height 값에 맞춰 폰트 (호수)의 크기 및 위치를 조정합니다.
@@ -83,7 +81,6 @@ function setFont( i, floorInfo ) {
     if ( building == '80주년기념관&광운스퀘어' ) building = '기념관';
 
     let positionArr = roomPosition.position[ building ][i];
-
     const recentRatio = ( imgBg[0].offsetHeight / imgBg[0].offsetWidth );
     let index, num = 0.0;
 
@@ -101,7 +98,6 @@ function setFont( i, floorInfo ) {
     }
 
     for( var j = 0; j < floorInfo.length; j++ ) {
-
         index = Number( ( floorInfo[j].room_no ).slice( -2 ) );
         index--;
 
@@ -121,7 +117,20 @@ function setFont( i, floorInfo ) {
             roomNum[j].style.top = ( mapHeight * (positionArr[index][1] - num++ * 0.05)) + 'px';
         }
     }
+}
 
+function activeRoom( targetCode ) {
+    // rooms = floor.querySelectorAll( '#rooms li' );
+    // rooms.forEach( ( room, idx ) => {
+    //     room.addEventListener( 'click', () => {
+    //
+    //         if ( prevDesc ) { prevDesc.classList.remove( 'active' ); }
+    //         const desc = roomNums[ idx ].querySelector( '.desc' );
+    //         desc.classList.add( 'active' );
+    //         prevDesc = desc;
+    //
+    //     })
+    // });
 }
 
 /**
@@ -229,9 +238,7 @@ function activateFloor ( floor, i, classifiedFloors ) {
     for ( let j = 0; j < classifiedFloors[i].length; j++ ) {
 
         // 시설 리스트 생성
-        // if문은 임의로 작성했습니다.
-        // 추가 정보 필요 유무에 따라 Room List를 구성하는 element가 달라집니다.
-        if( j % 2 == 0 )
+        if( !classifiedFloors[i][j].time & !classifiedFloors[i][j].url & classifiedFloors[i][j].phone_num.length <= 7 )
             roomList.appendChild( listAddRoom( classifiedFloors[i][j] ) ); // ul > li
         else
             roomList.appendChild( listAddRoomAccordion( classifiedFloors[i][j] ) ); // ul > li
@@ -251,14 +258,14 @@ function activateFloor ( floor, i, classifiedFloors ) {
 //     });
 //
 //     rooms = floor.querySelectorAll( '#rooms li' );
-// //    console.log( "activated rooms: \n", rooms );
+//     console.log( "activated rooms: \n", rooms );
 //     rooms.forEach( ( room, idx ) => {
 //         room.addEventListener( 'click', () => {
-//
-//             if ( prevDesc ) { prevDesc.classList.remove( 'active' ); }
-//             const desc = roomNums[ idx ].querySelector( '.desc' );
-//             desc.classList.add( 'active' );
-//             prevDesc = desc;
+//             console.log("!");
+//             // if ( prevDesc ) { prevDesc.classList.remove( 'active' ); }
+//             // const desc = roomNums[ idx ].querySelector( '.desc' );
+//             // desc.classList.add( 'active' );
+//             // prevDesc = desc;
 //
 //         })
 //     });
@@ -300,7 +307,7 @@ function listAddRoom( roomInfo ) {
  * @returns {HTMLLIElement} `li` element in rooms list
  */
 function listAddRoomAccordion( roomInfo ) {
-
+    // 정보를 담을 기본 틀 생성
     const accor_liRoom = document.createElement( 'li' );
     accor_liRoom.className = 'accordion-item';
 
@@ -317,11 +324,32 @@ function listAddRoomAccordion( roomInfo ) {
     accor_body.setAttribute( 'data-bs-parent', '#rooms' );
     accor_body.id = 'info-' + roomInfo.room_code;
 
+    // 상세 정보 추가
     const accor_body_text = document.createElement( 'div' );
     accor_body_text.className = 'accordion-body';
-    accor_body_text.innerText = roomInfo.room_code + ' 관련 추가 정보';
+    const content = document.createElement( 'div' );
+    content.className = 'facility-detail';
+
+    if ( roomInfo.time ) {
+        var p = document.createElement( 'p' );
+        p.innerText = '• 운영 시간: ' + roomInfo.time;
+        content.appendChild( p );
+    }
+    if ( roomInfo.phone_num.length > 7 ) {
+        var p = document.createElement( 'p' );
+        p.innerText = '• 문의처: ' + roomInfo.phone_num;
+        content.appendChild( p );
+    }
+    if ( roomInfo.url ) {
+        var a = document.createElement( 'a' );
+        a.setAttribute('target', '_blank')
+        a.innerText = '>> 홈페이지 (클릭)';
+        a.setAttribute('href', roomInfo.url)
+        content.appendChild( a );
+    }
 
     accor_liRoom.appendChild( accor_button ); // li > button
+    accor_body_text.appendChild( content ); // div > div
     accor_body.appendChild( accor_body_text ); // div > div
     accor_liRoom.appendChild( accor_body ); // li > button + div
 
