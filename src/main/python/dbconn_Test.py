@@ -2,9 +2,6 @@ from bs4 import BeautifulSoup      # 크롤링 사이트의 값을 가져오는 
 import requests
 import urllib3
 import mysql.connector
-# import re
-# import time
-# import schedule
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
@@ -39,7 +36,7 @@ def Software_Convergence():
 def Electronic_Information():
     url = "https://ei.kw.ac.kr/community/notice.php"
 
-    req = requests.get(url)
+    req = requests.get(url, verify=False)
     soup = BeautifulSoup(req.text, "html.parser")
 
     # department = str(soup.find('title').string)
@@ -59,7 +56,7 @@ def Electronic_Information():
 def Humanities_and_Social_Sciences():
     url = "https://chss.kw.ac.kr/notice/news.php"
 
-    req = requests.get(url)
+    req = requests.get(url, verify=False)
     soup = BeautifulSoup(req.text, "html.parser")
 
     # department = str(soup.find('title').string)
@@ -79,7 +76,7 @@ def Humanities_and_Social_Sciences():
 def Business():
     url = "https://biz.kw.ac.kr/community/notice.php"
 
-    req = requests.get(url)
+    req = requests.get(url, verify=False)
     soup = BeautifulSoup(req.text, "html.parser")
 
     # department = str(soup.find('title').string)
@@ -99,7 +96,7 @@ def Business():
 def Ingenium():
     url = "https://ingenium.kw.ac.kr/inform/notice.php"
 
-    req = requests.get(url)
+    req = requests.get(url, verify=False)
     soup = BeautifulSoup(req.text, "html.parser")
 
     # department = str(soup.find('title').string)
@@ -119,7 +116,7 @@ def Ingenium():
 def Engineering():
     global engin_list
 
-    req = requests.get("https://archi.kw.ac.kr/community/notice.php")
+    req = requests.get("https://archi.kw.ac.kr/community/notice.php", verify=False)
     soup = BeautifulSoup(req.text, "html.parser")
 
     # department = str(soup.find('title').string)
@@ -136,7 +133,7 @@ def Engineering():
             engin_list.append(["공과대학", "https://archi.kw.ac.kr"+href, "[건축공학과]"+text, date])
             count += 1
 
-    req = requests.get("https://chemng.kw.ac.kr/community/notice.php")
+    req = requests.get("https://chemng.kw.ac.kr/community/notice.php", verify=False)
     soup = BeautifulSoup(req.text, "html.parser")
 
     # department = str(soup.find('title').string)
@@ -153,7 +150,7 @@ def Engineering():
             engin_list.append(["공과대학", "https://chemng.kw.ac.kr/"+href, "[화학공학과]"+text, date])
             count += 1
 
-    req = requests.get("http://env.kw.ac.kr/community/notice.php")
+    req = requests.get("http://env.kw.ac.kr/community/notice.php", verify=False)
     soup = BeautifulSoup(req.text, "html.parser")
 
     # department = str(soup.find('title').string)
@@ -176,7 +173,7 @@ def Engineering():
 def Natural():
     url = "https://chem.kw.ac.kr/board/department"
 
-    req = requests.get(url)
+    req = requests.get(url, verify=False)
     soup = BeautifulSoup(req.text, "html.parser")
 
     department = str(soup.find('title').string)
@@ -192,7 +189,7 @@ def Natural():
 def Policy_Law():
     global policy_list
 
-    req = requests.get("https://kwpa.kw.ac.kr/notice/faculty.php")
+    req = requests.get("https://kwpa.kw.ac.kr/notice/faculty.php", verify=False)
     soup = BeautifulSoup(req.text, "html.parser")
 
     # department = str(soup.find('title').string)
@@ -238,15 +235,6 @@ dbconn = mysql.connector.connect(
     database="capstone",
     connection_timeout = 1000
 )
-
-# Software_Convergence()
-# Electronic_Information()
-# Humanities_and_Social_Sciences()
-# Business()
-# Ingenium()
-# Engineering()
-# Natural()
-# Policy_Law()
 
 # 검색을 할 경우 사용되는 함수.
 def select(query, bufferd=True):
