@@ -709,6 +709,18 @@ ul.notices li a:hover { text-decoration: underline; }
 /*#detail .img-wrap .roomNum:nth-child( 3 ) { left: 37%; top: 34%; }*/
 /*#detail .img-wrap .roomNum:nth-child( 4 ) { left: 17%; top: 49%; }*/
 
+.facility-detail {
+  padding: 10px 7px 10px 7px;
+}
+.facility-detail>p {
+  margin: 3px;
+}
+.facility-detail>a {
+  margin: 3px;
+  color: var(--main-color);
+  text-decoration: underline;
+  font-weight: bold;
+}
 
 @media screen and ( max-width: 1200px ) {
   /* header */
