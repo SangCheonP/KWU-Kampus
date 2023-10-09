@@ -3,6 +3,9 @@ import requests
 import urllib3
 import mysql.connector
 
+requests.packages.urllib3.util.ssl_.DEFAULT_CIPHERS += ':HIGH:!DH:!aNULL'
+
+
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 soft_list = []
@@ -17,7 +20,7 @@ policy_list = []
 def Software_Convergence():
     url = "https://npsw.kw.ac.kr/site/sub.php?Tid=27&Ctnum=28&Ctid=HM28"
 
-    req = requests.get(url, verify=False)
+    req = requests.get(url, verify=False, timeout=5, headers={"User-Agent": "Mozilla/5.0"}, stream=True)
     soup = BeautifulSoup(req.text, "html.parser")  # html에 대하여 접근할 수 있도록
 
     # department = soup.find('title').string
@@ -36,7 +39,7 @@ def Software_Convergence():
 def Electronic_Information():
     url = "https://ei.kw.ac.kr/community/notice.php"
 
-    req = requests.get(url, verify=False)
+    req = requests.get(url, verify=False, timeout=5, headers={"User-Agent": "Mozilla/5.0"}, stream=True)
     soup = BeautifulSoup(req.text, "html.parser")
 
     # department = str(soup.find('title').string)
@@ -56,7 +59,7 @@ def Electronic_Information():
 def Humanities_and_Social_Sciences():
     url = "https://chss.kw.ac.kr/notice/news.php"
 
-    req = requests.get(url, verify=False)
+    req = requests.get(url, verify=False, timeout=5, headers={"User-Agent": "Mozilla/5.0"}, stream=True)
     soup = BeautifulSoup(req.text, "html.parser")
 
     # department = str(soup.find('title').string)
@@ -76,7 +79,7 @@ def Humanities_and_Social_Sciences():
 def Business():
     url = "https://biz.kw.ac.kr/community/notice.php"
 
-    req = requests.get(url, verify=False)
+    req = requests.get(url, verify=False, timeout=5, headers={"User-Agent": "Mozilla/5.0"}, stream=True)
     soup = BeautifulSoup(req.text, "html.parser")
 
     # department = str(soup.find('title').string)
@@ -96,7 +99,7 @@ def Business():
 def Ingenium():
     url = "https://ingenium.kw.ac.kr/inform/notice.php"
 
-    req = requests.get(url, verify=False)
+    req = requests.get(url, verify=False, timeout=5, headers={"User-Agent": "Mozilla/5.0"}, stream=True)
     soup = BeautifulSoup(req.text, "html.parser")
 
     # department = str(soup.find('title').string)
@@ -116,7 +119,7 @@ def Ingenium():
 def Engineering():
     global engin_list
 
-    req = requests.get("https://archi.kw.ac.kr/community/notice.php", verify=False)
+    req = requests.get("https://archi.kw.ac.kr/community/notice.php", verify=False, timeout=5, headers={"User-Agent": "Mozilla/5.0"}, stream=True)
     soup = BeautifulSoup(req.text, "html.parser")
 
     # department = str(soup.find('title').string)
@@ -133,7 +136,7 @@ def Engineering():
             engin_list.append(["공과대학", "https://archi.kw.ac.kr"+href, "[건축공학과]"+text, date])
             count += 1
 
-    req = requests.get("https://chemng.kw.ac.kr/community/notice.php", verify=False)
+    req = requests.get("https://chemng.kw.ac.kr/community/notice.php", verify=False, timeout=5, headers={"User-Agent": "Mozilla/5.0"}, stream=True)
     soup = BeautifulSoup(req.text, "html.parser")
 
     # department = str(soup.find('title').string)
@@ -150,7 +153,7 @@ def Engineering():
             engin_list.append(["공과대학", "https://chemng.kw.ac.kr/"+href, "[화학공학과]"+text, date])
             count += 1
 
-    req = requests.get("http://env.kw.ac.kr/community/notice.php", verify=False)
+    req = requests.get("http://env.kw.ac.kr/community/notice.php", verify=False, timeout=5, headers={"User-Agent": "Mozilla/5.0"}, stream=True)
     soup = BeautifulSoup(req.text, "html.parser")
 
     # department = str(soup.find('title').string)
@@ -173,7 +176,7 @@ def Engineering():
 def Natural():
     url = "https://chem.kw.ac.kr/board/department"
 
-    req = requests.get(url, verify=False)
+    req = requests.get(url, verify=False, timeout=5, headers={"User-Agent": "Mozilla/5.0"}, stream=True)
     soup = BeautifulSoup(req.text, "html.parser")
 
     department = str(soup.find('title').string)
@@ -189,7 +192,7 @@ def Natural():
 def Policy_Law():
     global policy_list
 
-    req = requests.get("https://kwpa.kw.ac.kr/notice/faculty.php", verify=False)
+    req = requests.get("https://kwpa.kw.ac.kr/notice/faculty.php", verify=False, timeout=5, headers={"User-Agent": "Mozilla/5.0"}, stream=True)
     soup = BeautifulSoup(req.text, "html.parser")
 
     # department = str(soup.find('title').string)
