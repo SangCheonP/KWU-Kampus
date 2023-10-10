@@ -343,8 +343,8 @@ def update():
         print("engin_list 업데이트 완료")
         merge_bulk("INSERT INTO notice_web (dept, site, notice, date) VALUES (%s, %s, %s, %s)", natural_list)
         print("natural_list 업데이트 완료")
-        merge_bulk("INSERT INTO notice_web (dept, site, notice, date) VALUES (%s, %s, %s, %s)", policy_list)
-        print("policy_list 업데이트 완료")
+        # merge_bulk("INSERT INTO notice_web (dept, site, notice, date) VALUES (%s, %s, %s, %s)", policy_list)
+        # print("policy_list 업데이트 완료")
         print("코드 업데이트 완료")
 
     except Exception as e:
