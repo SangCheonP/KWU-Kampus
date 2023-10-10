@@ -229,7 +229,6 @@ def Policy_Law():
     policy_list = sorted(policy_list, key=lambda policy_list: policy_list[-1], reverse=True)
     policy_list = policy_list[:10]
 
-
 # Python과 mariaDB 연결
 dbconn = mysql.connector.connect(
     host="13.124.194.184",
