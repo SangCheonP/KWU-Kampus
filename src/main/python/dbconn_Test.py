@@ -323,7 +323,7 @@ def update():
         Ingenium()
         Engineering()
         Natural()
-        Policy_Law()
+        # Policy_Law()
         dbconn.connect()
         execute("DELETE FROM notice_web")
 
