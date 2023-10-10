@@ -209,7 +209,7 @@ def Policy_Law():
             policy_list.append(["정책법학대학", "https://kwpa.kw.ac.kr"+href, "[행정학과]"+text, date])
             count += 1
 
-    req = requests.get("https://law.kw.ac.kr/bulletin/notice.php")
+    req = requests.get("https://law.kw.ac.kr/bulletin/notice.php", verify=False, timeout=5, headers={"User-Agent": "Mozilla/5.0"}, stream=True)
     soup = BeautifulSoup(req.text, "html.parser")
 
     # department = str(soup.find('title').string)
@@ -323,7 +323,7 @@ def update():
         Ingenium()
         Engineering()
         Natural()
-        # Policy_Law()
+        Policy_Law()
         dbconn.connect()
         execute("DELETE FROM notice_web")
 
@@ -343,8 +343,8 @@ def update():
         print("engin_list 업데이트 완료")
         merge_bulk("INSERT INTO notice_web (dept, site, notice, date) VALUES (%s, %s, %s, %s)", natural_list)
         print("natural_list 업데이트 완료")
-        # merge_bulk("INSERT INTO notice_web (dept, site, notice, date) VALUES (%s, %s, %s, %s)", policy_list)
-        # print("policy_list 업데이트 완료")
+        merge_bulk("INSERT INTO notice_web (dept, site, notice, date) VALUES (%s, %s, %s, %s)", policy_list)
+        print("policy_list 업데이트 완료")
         print("코드 업데이트 완료")
 
     except Exception as e:
