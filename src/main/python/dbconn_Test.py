@@ -3,8 +3,13 @@ import requests
 import urllib3
 import mysql.connector
 
-requests.packages.urllib3.util.ssl_.DEFAULT_CIPHERS += ':HIGH:!DH:!aNULL'
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
+import time
+from datetime import datetime, timedelta
 
+requests.packages.urllib3.util.ssl_.DEFAULT_CIPHERS += ':HIGH:!DH:!aNULL'
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
@@ -17,10 +22,12 @@ engin_list = []
 natural_list = []
 policy_list = []
 
+result_list = []
+
 def Software_Convergence():
     url = "https://npsw.kw.ac.kr/site/sub.php?Tid=27&Ctnum=28&Ctid=HM28"
 
-    req = requests.get(url, verify=False, timeout=5, headers={"User-Agent": "Mozilla/5.0"}, stream=True)
+    req = requests.get(url, verify=False)
     soup = BeautifulSoup(req.text, "html.parser")  # html에 대하여 접근할 수 있도록
 
     # department = soup.find('title').string
@@ -39,7 +46,7 @@ def Software_Convergence():
 def Electronic_Information():
     url = "https://ei.kw.ac.kr/community/notice.php"
 
-    req = requests.get(url, verify=False, timeout=5, headers={"User-Agent": "Mozilla/5.0"}, stream=True)
+    req = requests.get(url)
     soup = BeautifulSoup(req.text, "html.parser")
 
     # department = str(soup.find('title').string)
@@ -59,7 +66,7 @@ def Electronic_Information():
 def Humanities_and_Social_Sciences():
     url = "https://chss.kw.ac.kr/notice/news.php"
 
-    req = requests.get(url, verify=False, timeout=5, headers={"User-Agent": "Mozilla/5.0"}, stream=True)
+    req = requests.get(url)
     soup = BeautifulSoup(req.text, "html.parser")
 
     # department = str(soup.find('title').string)
@@ -79,7 +86,7 @@ def Humanities_and_Social_Sciences():
 def Business():
     url = "https://biz.kw.ac.kr/community/notice.php"
 
-    req = requests.get(url, verify=False, timeout=5, headers={"User-Agent": "Mozilla/5.0"}, stream=True)
+    req = requests.get(url)
     soup = BeautifulSoup(req.text, "html.parser")
 
     # department = str(soup.find('title').string)
@@ -99,7 +106,7 @@ def Business():
 def Ingenium():
     url = "https://ingenium.kw.ac.kr/inform/notice.php"
 
-    req = requests.get(url, verify=False, timeout=5, headers={"User-Agent": "Mozilla/5.0"}, stream=True)
+    req = requests.get(url)
     soup = BeautifulSoup(req.text, "html.parser")
 
     # department = str(soup.find('title').string)
@@ -119,7 +126,7 @@ def Ingenium():
 def Engineering():
     global engin_list
 
-    req = requests.get("https://archi.kw.ac.kr/community/notice.php", verify=False, timeout=5, headers={"User-Agent": "Mozilla/5.0"}, stream=True)
+    req = requests.get("https://archi.kw.ac.kr/community/notice.php")
     soup = BeautifulSoup(req.text, "html.parser")
 
     # department = str(soup.find('title').string)
@@ -136,7 +143,7 @@ def Engineering():
             engin_list.append(["공과대학", "https://archi.kw.ac.kr"+href, "[건축공학과]"+text, date])
             count += 1
 
-    req = requests.get("https://chemng.kw.ac.kr/community/notice.php", verify=False, timeout=5, headers={"User-Agent": "Mozilla/5.0"}, stream=True)
+    req = requests.get("https://chemng.kw.ac.kr/community/notice.php")
     soup = BeautifulSoup(req.text, "html.parser")
 
     # department = str(soup.find('title').string)
@@ -153,7 +160,7 @@ def Engineering():
             engin_list.append(["공과대학", "https://chemng.kw.ac.kr/"+href, "[화학공학과]"+text, date])
             count += 1
 
-    req = requests.get("http://env.kw.ac.kr/community/notice.php", verify=False, timeout=5, headers={"User-Agent": "Mozilla/5.0"}, stream=True)
+    req = requests.get("http://env.kw.ac.kr/community/notice.php")
     soup = BeautifulSoup(req.text, "html.parser")
 
     # department = str(soup.find('title').string)
@@ -176,7 +183,7 @@ def Engineering():
 def Natural():
     url = "https://chem.kw.ac.kr/board/department"
 
-    req = requests.get(url, verify=False, timeout=5, headers={"User-Agent": "Mozilla/5.0"}, stream=True)
+    req = requests.get(url)
     soup = BeautifulSoup(req.text, "html.parser")
 
     department = str(soup.find('title').string)
@@ -192,7 +199,7 @@ def Natural():
 def Policy_Law():
     global policy_list
 
-    req = requests.get("https://kwpa.kw.ac.kr/notice/faculty.php", verify=False, timeout=5, headers={"User-Agent": "Mozilla/5.0"}, stream=True)
+    req = requests.get("https://kwpa.kw.ac.kr/notice/faculty.php")
     soup = BeautifulSoup(req.text, "html.parser")
 
     # department = str(soup.find('title').string)
@@ -209,7 +216,7 @@ def Policy_Law():
             policy_list.append(["정책법학대학", "https://kwpa.kw.ac.kr"+href, "[행정학과]"+text, date])
             count += 1
 
-    req = requests.get("https://law.kw.ac.kr/bulletin/notice.php", verify=False, timeout=5, headers={"User-Agent": "Mozilla/5.0"}, stream=True)
+    req = requests.get("https://law.kw.ac.kr/bulletin/notice.php")
     soup = BeautifulSoup(req.text, "html.parser")
 
     # department = str(soup.find('title').string)
@@ -229,6 +236,59 @@ def Policy_Law():
     policy_list = sorted(policy_list, key=lambda policy_list: policy_list[-1], reverse=True)
     policy_list = policy_list[:10]
 
+start = time.time()
+
+requests.packages.urllib3.util.ssl_.DEFAULT_CIPHERS += ':HIGH:!DH:!aNULL'
+
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
+def building():
+    # 현재 날짜를 가져옵니다
+    current_date = datetime.now()
+
+    # 2개월 전 날짜를 계산합니다
+    two_month_ago = current_date - timedelta(days=60)
+
+    facilities_list = ['80주년', '누리관', '다산재', '복지관', '비마관', '빛솔재', '새빛관', '아이스링크',
+                       '연구관', '문화관', '연촌재', '옥의관', '참빛관', '한울관', '한천재', '화도관']
+
+    # 웹 드라이버를 시작합니다
+    url = 'https://www.kw.ac.kr/ko/life/notice.jsp?srCategoryId=&mode=list&searchKey=3&searchVal=&x=14&y=11'
+    driver = webdriver.Chrome()
+    driver.get(url)
+
+    for facilities in facilities_list:
+        search_box = driver.find_element(By.XPATH, '//*[@id="jwxe_main_content"]/div/div/form/div/div/input[2]')
+        search_box.clear()
+        search_box.send_keys(facilities)
+        # time.sleep(0.5)  # .5초 대기
+
+        # 입력 필드 내용을 지우기
+        search_box.send_keys(Keys.RETURN)
+
+        # 약간의 대기 시간 추가
+        # time.sleep(0.5)
+
+        # 모든 항목을 찾습니다
+        list_items = driver.find_elements(By.CSS_SELECTOR, '.board-list-box > ul > li')
+
+        for item in list_items:
+            title = item.find_element(By.CSS_SELECTOR, 'div > a').text
+            href = item.find_element(By.CSS_SELECTOR, 'div > a').get_attribute('href')
+            date_str = item.find_element(By.CSS_SELECTOR, '.info').text.split('|')[2].strip()
+            # '수정일'을 '날짜'로 설정하려면 아래와 같이 수정합니다.
+            date_str = date_str.replace('수정일', '').strip()
+            date = datetime.strptime(date_str, '%Y-%m-%d')
+
+            # 날짜가 1개월 이내인 항목만 이중 리스트에 추가합니다
+            if date >= two_month_ago:
+                result_list.append([facilities, href, title, date.strftime("%Y-%m-%d")])
+
+
+
+    # 브라우저를 닫습니다
+    driver.quit()
+
 # Python과 mariaDB 연결
 dbconn = mysql.connector.connect(
     host="13.124.194.184",
@@ -237,6 +297,15 @@ dbconn = mysql.connector.connect(
     database="capstone",
     connection_timeout = 1000
 )
+
+# Software_Convergence()
+# Electronic_Information()
+# Humanities_and_Social_Sciences()
+# Business()
+# Ingenium()
+# Engineering()
+# Natural()
+# Policy_Law()
 
 # 검색을 할 경우 사용되는 함수.
 def select(query, bufferd=True):
@@ -323,8 +392,11 @@ def update():
         Engineering()
         Natural()
         Policy_Law()
+        building()
         dbconn.connect()
+
         execute("DELETE FROM notice_web")
+        execute("DELETE FROM building_notice")
 
         # 테이블 PythonTable에 data를 INSERT한다.
         print("코드 업데이트 시작")
@@ -344,6 +416,9 @@ def update():
         print("natural_list 업데이트 완료")
         merge_bulk("INSERT INTO notice_web (dept, site, notice, date) VALUES (%s, %s, %s, %s)", policy_list)
         print("policy_list 업데이트 완료")
+
+        merge_bulk("INSERT INTO building_notice (building, site, notice, date) VALUES (%s, %s, %s, %s)", result_list)
+        print("result_list 업데이트 완료")
         print("코드 업데이트 완료")
 
     except Exception as e:
@@ -353,3 +428,9 @@ def update():
         dbconn.close()
 
 update()
+
+# i=0
+# schedule.every(10).seconds.do(update)
+# while i<10:
+#   schedule.run_pending()
+#   time.sleep(1)
