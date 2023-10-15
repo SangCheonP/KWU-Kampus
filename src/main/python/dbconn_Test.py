@@ -252,7 +252,7 @@ def building():
 
     # 웹 드라이버를 시작합니다
     url = 'https://www.kw.ac.kr/ko/life/notice.jsp?srCategoryId=&mode=list&searchKey=3&searchVal=&x=14&y=11'
-    driver = webdriver.Chrome()
+    driver = webdriver.Chrome(executable_path="/usr/local/bin/chromedriver")
     driver.get(url)
 
     for facilities in facilities_list:
