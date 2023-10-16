@@ -9,6 +9,9 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options  # ChromeOptions 추가
 import time
 from datetime import datetime, timedelta
+import sys
+
+sys.path.append('/home/ubuntu/.local/lib/python3.9/site-packages')
 
 requests.packages.urllib3.util.ssl_.DEFAULT_CIPHERS += ':HIGH:!DH:!aNULL'
 
