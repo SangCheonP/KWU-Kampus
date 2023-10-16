@@ -55,7 +55,7 @@ class PythonScriptRunner implements CommandLineRunner {
             String pythonScriptPath = "/home/ubuntu/spring-github-action/src/main/python/dbconn_Test.py";
             System.out.println(System.getProperty("user.dir"));
             /* inheritIO : JVM 프로세스 스트림으로 상속 */
-            ProcessBuilder processBuilder = new ProcessBuilder("python", pythonScriptPath);
+            ProcessBuilder processBuilder = new ProcessBuilder("python3", pythonScriptPath);
             processBuilder.redirectErrorStream(true);
 
             Process process = processBuilder.start();
