@@ -6,6 +6,7 @@ import mysql.connector
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.options import Options  # ChromeOptions 추가
 import time
 from datetime import datetime, timedelta
 
@@ -241,6 +242,13 @@ start = time.time()
 requests.packages.urllib3.util.ssl_.DEFAULT_CIPHERS += ':HIGH:!DH:!aNULL'
 
 def building():
+    # ChromeOptions를 생성하고 headless 모드를 활성화합니다
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--disable-gpu")  # GPU 가속 비활성화 (Linux에서 필요한 경우)
+    chrome_options.add_argument("--no-sandbox")  # Linux에서 필요한 경우
+    chrome_options.add_argument("--disable-dev-shm-usage")  # Linux에서 필요한 경우
+
     # 현재 날짜를 가져옵니다
     current_date = datetime.now()
 
@@ -252,7 +260,7 @@ def building():
 
     # 웹 드라이버를 시작합니다
     url = 'https://www.kw.ac.kr/ko/life/notice.jsp?srCategoryId=&mode=list&searchKey=3&searchVal=&x=14&y=11'
-    driver = webdriver.Chrome()
+    driver = webdriver.Chrome(options=chrome_options)  # ChromeOptions 사용
     driver.get(url)
 
     for facilities in facilities_list:
