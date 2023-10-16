@@ -52,7 +52,8 @@ class PythonScriptRunner implements CommandLineRunner {
     @Scheduled(cron = "0 */10 * * * *")    // 매일 0시 정각에 실행
     private void executePythonScript() {
         try {
-            String pythonScriptPath = "/home/ubuntu/spring-github-action/src/main/python/dbconn_Test.py"; //절대경로로 파일 경로 수정
+            String pythonScriptPath = System.getProperty("user.dir") + "/src/main/python/dbconn_Test.py";
+            System.out.println(System.getProperty("user.dir"));
             /* inheritIO : JVM 프로세스 스트림으로 상속 */
             ProcessBuilder processBuilder = new ProcessBuilder("python3", pythonScriptPath);
             processBuilder.redirectErrorStream(true);
