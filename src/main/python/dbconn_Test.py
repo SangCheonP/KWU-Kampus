@@ -239,7 +239,7 @@ def Policy_Law():
 
 start = time.time()
 
-requests.packages.urllib3.util.ssl_.DEFAULT_CIPHERS += ':HIGH:!DH:!aNULL'
+# requests.packages.urllib3.util.ssl_.DEFAULT_CIPHERS += ':HIGH:!DH:!aNULL'
 
 def building():
     # ChromeOptions를 생성하고 headless 모드를 활성화합니다
