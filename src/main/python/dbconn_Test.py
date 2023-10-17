@@ -33,7 +33,7 @@ def Software_Convergence():
     session.mount("https://", requests.adapters.HTTPAdapter(pool_connections=100, pool_maxsize=100))
     session.verify = False  # SSL/TLS 인증서 검증 비활성화
 
-    req = requests.get(url, timeout=5, headers={"User-Agent": "Mozilla/5.0"}, stream=True)
+    req = requests.get(url, verify=False, timeout=5, headers={"User-Agent": "Mozilla/5.0"}, stream=True)
     soup = BeautifulSoup(req.text, "html.parser")  # html에 대하여 접근할 수 있도록
 
     # department = soup.find('title').string
@@ -56,7 +56,7 @@ def Electronic_Information():
     session.mount("https://", requests.adapters.HTTPAdapter(pool_connections=100, pool_maxsize=100))
     session.verify = False  # SSL/TLS 인증서 검증 비활성화
 
-    req = requests.get(url, timeout=5, headers={"User-Agent": "Mozilla/5.0"}, stream=True)
+    req = requests.get(url, verify=False, timeout=5, headers={"User-Agent": "Mozilla/5.0"}, stream=True)
     soup = BeautifulSoup(req.text, "html.parser")
 
     # department = str(soup.find('title').string)
@@ -80,7 +80,7 @@ def Humanities_and_Social_Sciences():
     session.mount("https://", requests.adapters.HTTPAdapter(pool_connections=100, pool_maxsize=100))
     session.verify = False  # SSL/TLS 인증서 검증 비활성화
 
-    req = requests.get(url, timeout=5, headers={"User-Agent": "Mozilla/5.0"}, stream=True)
+    req = requests.get(url, verify=False, timeout=5, headers={"User-Agent": "Mozilla/5.0"}, stream=True)
     soup = BeautifulSoup(req.text, "html.parser")
 
     # department = str(soup.find('title').string)
@@ -104,7 +104,7 @@ def Business():
     session.mount("https://", requests.adapters.HTTPAdapter(pool_connections=100, pool_maxsize=100))
     session.verify = False  # SSL/TLS 인증서 검증 비활성화
 
-    req = requests.get(url, timeout=5, headers={"User-Agent": "Mozilla/5.0"}, stream=True)
+    req = requests.get(url, verify=False, timeout=5, headers={"User-Agent": "Mozilla/5.0"}, stream=True)
     soup = BeautifulSoup(req.text, "html.parser")
 
     # department = str(soup.find('title').string)
@@ -128,7 +128,7 @@ def Ingenium():
     session.mount("https://", requests.adapters.HTTPAdapter(pool_connections=100, pool_maxsize=100))
     session.verify = False  # SSL/TLS 인증서 검증 비활성화
 
-    req = requests.get(url, timeout=5, headers={"User-Agent": "Mozilla/5.0"}, stream=True)
+    req = requests.get(url, verify=False, timeout=5, headers={"User-Agent": "Mozilla/5.0"}, stream=True)
     soup = BeautifulSoup(req.text, "html.parser")
 
     # department = str(soup.find('title').string)
@@ -152,7 +152,7 @@ def Engineering():
     session.mount("https://", requests.adapters.HTTPAdapter(pool_connections=100, pool_maxsize=100))
     session.verify = False  # SSL/TLS 인증서 검증 비활성화
 
-    req = requests.get("https://archi.kw.ac.kr/community/notice.php", timeout=5, headers={"User-Agent": "Mozilla/5.0"}, stream=True)
+    req = requests.get("https://archi.kw.ac.kr/community/notice.php", verify=False, timeout=5, headers={"User-Agent": "Mozilla/5.0"}, stream=True)
     soup = BeautifulSoup(req.text, "html.parser")
 
     # department = str(soup.find('title').string)
@@ -173,7 +173,7 @@ def Engineering():
     session.mount("https://", requests.adapters.HTTPAdapter(pool_connections=100, pool_maxsize=100))
     session.verify = False  # SSL/TLS 인증서 검증 비활성화
 
-    req = requests.get("https://chemng.kw.ac.kr/community/notice.php", timeout=5, headers={"User-Agent": "Mozilla/5.0"}, stream=True)
+    req = requests.get("https://chemng.kw.ac.kr/community/notice.php", verify=False, timeout=5, headers={"User-Agent": "Mozilla/5.0"}, stream=True)
     soup = BeautifulSoup(req.text, "html.parser")
 
     # department = str(soup.find('title').string)
@@ -194,7 +194,7 @@ def Engineering():
     session.mount("https://", requests.adapters.HTTPAdapter(pool_connections=100, pool_maxsize=100))
     session.verify = False  # SSL/TLS 인증서 검증 비활성화
 
-    req = requests.get("http://env.kw.ac.kr/community/notice.php", timeout=5, headers={"User-Agent": "Mozilla/5.0"}, stream=True)
+    req = requests.get("http://env.kw.ac.kr/community/notice.php", verify=False, timeout=5, headers={"User-Agent": "Mozilla/5.0"}, stream=True)
     soup = BeautifulSoup(req.text, "html.parser")
 
     # department = str(soup.find('title').string)
@@ -221,7 +221,7 @@ def Natural():
     session.mount("https://", requests.adapters.HTTPAdapter(pool_connections=100, pool_maxsize=100))
     session.verify = False  # SSL/TLS 인증서 검증 비활성화
 
-    req = requests.get(url, timeout=5, headers={"User-Agent": "Mozilla/5.0"}, stream=True)
+    req = requests.get(url, verify=False, timeout=5, headers={"User-Agent": "Mozilla/5.0"}, stream=True)
     soup = BeautifulSoup(req.text, "html.parser")
 
     department = str(soup.find('title').string)
@@ -241,7 +241,7 @@ def Policy_Law():
     session.mount("https://", requests.adapters.HTTPAdapter(pool_connections=100, pool_maxsize=100))
     session.verify = False  # SSL/TLS 인증서 검증 비활성화
 
-    req = requests.get("https://kwpa.kw.ac.kr/notice/faculty.php", timeout=5, headers={"User-Agent": "Mozilla/5.0"}, stream=True)
+    req = requests.get("https://kwpa.kw.ac.kr/notice/faculty.php", verify=False, timeout=5, headers={"User-Agent": "Mozilla/5.0"}, stream=True)
     soup = BeautifulSoup(req.text, "html.parser")
 
     # department = str(soup.find('title').string)
@@ -262,7 +262,7 @@ def Policy_Law():
     session.mount("https://", requests.adapters.HTTPAdapter(pool_connections=100, pool_maxsize=100))
     session.verify = False  # SSL/TLS 인증서 검증 비활성화
 
-    req = requests.get("https://law.kw.ac.kr/bulletin/notice.php", timeout=5, headers={"User-Agent": "Mozilla/5.0"}, stream=True)
+    req = requests.get("https://law.kw.ac.kr/bulletin/notice.php", verify=False, timeout=5, headers={"User-Agent": "Mozilla/5.0"}, stream=True)
     soup = BeautifulSoup(req.text, "html.parser")
 
     # department = str(soup.find('title').string)
