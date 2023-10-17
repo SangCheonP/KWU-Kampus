@@ -388,9 +388,9 @@ def update():
         Ingenium()
         Engineering()
         Natural()
-        Software_Convergence()
         Policy_Law()
         building()
+        Software_Convergence()
         dbconn.connect()
 
         execute("DELETE FROM notice_web")
