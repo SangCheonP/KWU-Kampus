@@ -2,6 +2,7 @@ from bs4 import BeautifulSoup      # 크롤링 사이트의 값을 가져오는 
 import requests
 import urllib3
 import mysql.connector
+import ssl
 
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
@@ -26,6 +27,10 @@ policy_list = []
 result_list = []
 
 def Software_Convergence():
+
+    context = ssl.SSLContext(ssl.PROTOCOL_TLS)
+    context.set_ciphers('DEFAULT@SECLEVEL=2')  # DH 키 크기 설정
+
     url = "https://npsw.kw.ac.kr/site/sub.php?Tid=27&Ctnum=28&Ctid=HM28"
 
     req = requests.get(url, verify=False, timeout=5, headers={"User-Agent": "Mozilla/5.0"}, stream=True)
