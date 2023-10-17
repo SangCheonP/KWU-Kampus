@@ -13,8 +13,10 @@ import time
 from datetime import datetime, timedelta
 
 # requests.packages.urllib3.util.ssl_.DEFAULT_CIPHERS += ':HIGH:!DH:!aNULL'
+
+# SSLContext를 생성하고 DH 키 크기를 설정합니다.
 context = ssl.SSLContext(ssl.PROTOCOL_TLS)
-context.set_ciphers("HIGH:!DH:!aNULL")
+context.set_ciphers('DEFAULT@SECLEVEL=1')  # DH 키 크기 설정
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
