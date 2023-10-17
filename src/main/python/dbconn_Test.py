@@ -1,9 +1,7 @@
 from bs4 import BeautifulSoup      # 크롤링 사이트의 값을 가져오는 함수
 import requests
-# from requests.packages.urllib3.util.ssl_ import DEFAULT_CIPHERS
 import urllib3
 import mysql.connector
-import ssl
 
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
@@ -12,11 +10,7 @@ from selenium.webdriver.chrome.options import Options  # ChromeOptions 추가
 import time
 from datetime import datetime, timedelta
 
-# requests.packages.urllib3.util.ssl_.DEFAULT_CIPHERS += ':HIGH:!DH:!aNULL'
-
-# SSLContext를 생성하고 DH 키 크기를 설정합니다.
-# context = ssl.SSLContext(ssl.PROTOCOL_TLS)
-# context.set_ciphers('DEFAULT@SECLEVEL=1')  # DH 키 크기 설정
+requests.packages.urllib3.util.ssl_.DEFAULT_CIPHERS += ':HIGH:!DH:!aNULL'
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
@@ -33,14 +27,6 @@ result_list = []
 
 def Software_Convergence():
     url = "https://npsw.kw.ac.kr/site/sub.php?Tid=27&Ctnum=28&Ctid=HM28"
-
-    # SSLContext를 생성하고 DH 키 크기를 설정합니다.
-    context = ssl.SSLContext(ssl.PROTOCOL_TLS)
-    context.set_ciphers('DEFAULT@SECLEVEL=1')  # DH 키 크기 설정
-
-    session = requests.Session()
-    session.mount("https://", requests.adapters.HTTPAdapter(pool_connections=100, pool_maxsize=500))
-    session.verify = False  # SSL/TLS 인증서 검증 비활성화
 
     req = requests.get(url, verify=False, timeout=5, headers={"User-Agent": "Mozilla/5.0"}, stream=True)
     soup = BeautifulSoup(req.text, "html.parser")  # html에 대하여 접근할 수 있도록
@@ -60,10 +46,6 @@ def Software_Convergence():
 
 def Electronic_Information():
     url = "https://ei.kw.ac.kr/community/notice.php"
-
-    # session = requests.Session()
-    # session.mount("https://", requests.adapters.HTTPAdapter(pool_connections=100, pool_maxsize=100))
-    # session.verify = False  # SSL/TLS 인증서 검증 비활성화
 
     req = requests.get(url, verify=False, timeout=5, headers={"User-Agent": "Mozilla/5.0"}, stream=True)
     soup = BeautifulSoup(req.text, "html.parser")
@@ -85,10 +67,6 @@ def Electronic_Information():
 def Humanities_and_Social_Sciences():
     url = "https://chss.kw.ac.kr/notice/news.php"
 
-    session = requests.Session()
-    session.mount("https://", requests.adapters.HTTPAdapter(pool_connections=100, pool_maxsize=100))
-    session.verify = False  # SSL/TLS 인증서 검증 비활성화
-
     req = requests.get(url, verify=False, timeout=5, headers={"User-Agent": "Mozilla/5.0"}, stream=True)
     soup = BeautifulSoup(req.text, "html.parser")
 
@@ -108,10 +86,6 @@ def Humanities_and_Social_Sciences():
 
 def Business():
     url = "https://biz.kw.ac.kr/community/notice.php"
-
-    session = requests.Session()
-    session.mount("https://", requests.adapters.HTTPAdapter(pool_connections=100, pool_maxsize=100))
-    session.verify = False  # SSL/TLS 인증서 검증 비활성화
 
     req = requests.get(url, verify=False, timeout=5, headers={"User-Agent": "Mozilla/5.0"}, stream=True)
     soup = BeautifulSoup(req.text, "html.parser")
@@ -133,10 +107,6 @@ def Business():
 def Ingenium():
     url = "https://ingenium.kw.ac.kr/inform/notice.php"
 
-    session = requests.Session()
-    session.mount("https://", requests.adapters.HTTPAdapter(pool_connections=100, pool_maxsize=100))
-    session.verify = False  # SSL/TLS 인증서 검증 비활성화
-
     req = requests.get(url, verify=False, timeout=5, headers={"User-Agent": "Mozilla/5.0"}, stream=True)
     soup = BeautifulSoup(req.text, "html.parser")
 
@@ -157,10 +127,6 @@ def Ingenium():
 def Engineering():
     global engin_list
 
-    session = requests.Session()
-    session.mount("https://", requests.adapters.HTTPAdapter(pool_connections=100, pool_maxsize=100))
-    session.verify = False  # SSL/TLS 인증서 검증 비활성화
-
     req = requests.get("https://archi.kw.ac.kr/community/notice.php", verify=False, timeout=5, headers={"User-Agent": "Mozilla/5.0"}, stream=True)
     soup = BeautifulSoup(req.text, "html.parser")
 
@@ -178,10 +144,6 @@ def Engineering():
             engin_list.append(["공과대학", "https://archi.kw.ac.kr"+href, "[건축공학과]"+text, date])
             count += 1
 
-    session = requests.Session()
-    session.mount("https://", requests.adapters.HTTPAdapter(pool_connections=100, pool_maxsize=100))
-    session.verify = False  # SSL/TLS 인증서 검증 비활성화
-
     req = requests.get("https://chemng.kw.ac.kr/community/notice.php", verify=False, timeout=5, headers={"User-Agent": "Mozilla/5.0"}, stream=True)
     soup = BeautifulSoup(req.text, "html.parser")
 
@@ -198,10 +160,6 @@ def Engineering():
         if count < 10:
             engin_list.append(["공과대학", "https://chemng.kw.ac.kr/"+href, "[화학공학과]"+text, date])
             count += 1
-
-    session = requests.Session()
-    session.mount("https://", requests.adapters.HTTPAdapter(pool_connections=100, pool_maxsize=100))
-    session.verify = False  # SSL/TLS 인증서 검증 비활성화
 
     req = requests.get("http://env.kw.ac.kr/community/notice.php", verify=False, timeout=5, headers={"User-Agent": "Mozilla/5.0"}, stream=True)
     soup = BeautifulSoup(req.text, "html.parser")
@@ -226,10 +184,6 @@ def Engineering():
 def Natural():
     url = "https://chem.kw.ac.kr/board/department"
 
-    session = requests.Session()
-    session.mount("https://", requests.adapters.HTTPAdapter(pool_connections=100, pool_maxsize=100))
-    session.verify = False  # SSL/TLS 인증서 검증 비활성화
-
     req = requests.get(url, verify=False, timeout=5, headers={"User-Agent": "Mozilla/5.0"}, stream=True)
     soup = BeautifulSoup(req.text, "html.parser")
 
@@ -245,10 +199,6 @@ def Natural():
 
 def Policy_Law():
     global policy_list
-
-    session = requests.Session()
-    session.mount("https://", requests.adapters.HTTPAdapter(pool_connections=100, pool_maxsize=100))
-    session.verify = False  # SSL/TLS 인증서 검증 비활성화
 
     req = requests.get("https://kwpa.kw.ac.kr/notice/faculty.php", verify=False, timeout=5, headers={"User-Agent": "Mozilla/5.0"}, stream=True)
     soup = BeautifulSoup(req.text, "html.parser")
@@ -266,10 +216,6 @@ def Policy_Law():
         if count < 10:
             policy_list.append(["정책법학대학", "https://kwpa.kw.ac.kr"+href, "[행정학과]"+text, date])
             count += 1
-
-    session = requests.Session()
-    session.mount("https://", requests.adapters.HTTPAdapter(pool_connections=100, pool_maxsize=100))
-    session.verify = False  # SSL/TLS 인증서 검증 비활성화
 
     req = requests.get("https://law.kw.ac.kr/bulletin/notice.php", verify=False, timeout=5, headers={"User-Agent": "Mozilla/5.0"}, stream=True)
     soup = BeautifulSoup(req.text, "html.parser")
@@ -292,6 +238,8 @@ def Policy_Law():
     policy_list = policy_list[:10]
 
 start = time.time()
+
+requests.packages.urllib3.util.ssl_.DEFAULT_CIPHERS += ':HIGH:!DH:!aNULL'
 
 def building():
     # ChromeOptions를 생성하고 headless 모드를 활성화합니다
@@ -442,10 +390,9 @@ def update():
         # date varchar(255))
         # """)
         # 테이블 PythonTable에 data를 초기화한다.
-
+        Software_Convergence()
         Electronic_Information()
         Humanities_and_Social_Sciences()
-        # Software_Convergence()
         Business()
         Ingenium()
         Engineering()
