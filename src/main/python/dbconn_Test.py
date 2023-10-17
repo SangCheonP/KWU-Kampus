@@ -29,7 +29,7 @@ result_list = []
 def Software_Convergence():
 
     context = ssl.SSLContext(ssl.PROTOCOL_TLS)
-    context.set_ciphers('DEFAULT@SECLEVEL=2')  # DH 키 크기 설정
+    context.set_ciphers('DEFAULT@SECLEVEL=1')  # DH 키 크기 설정
 
     url = "https://npsw.kw.ac.kr/site/sub.php?Tid=27&Ctnum=28&Ctid=HM28"
 
@@ -305,15 +305,6 @@ dbconn = mysql.connector.connect(
     connection_timeout = 1000
 )
 
-# Software_Convergence()
-# Electronic_Information()
-# Humanities_and_Social_Sciences()
-# Business()
-# Ingenium()
-# Engineering()
-# Natural()
-# Policy_Law()
-
 # 검색을 할 경우 사용되는 함수.
 def select(query, bufferd=True):
     # 전역에 선언되어 있는 connection을 가져온다.
@@ -391,13 +382,13 @@ def update():
         # date varchar(255))
         # """)
         # 테이블 PythonTable에 data를 초기화한다.
-        Software_Convergence()
         Electronic_Information()
         Humanities_and_Social_Sciences()
         Business()
         Ingenium()
         Engineering()
         Natural()
+        Software_Convergence()
         Policy_Law()
         building()
         dbconn.connect()
