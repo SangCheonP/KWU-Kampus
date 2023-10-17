@@ -15,8 +15,8 @@ from datetime import datetime, timedelta
 # requests.packages.urllib3.util.ssl_.DEFAULT_CIPHERS += ':HIGH:!DH:!aNULL'
 
 # SSLContext를 생성하고 DH 키 크기를 설정합니다.
-context = ssl.SSLContext(ssl.PROTOCOL_TLS)
-context.set_ciphers('DEFAULT@SECLEVEL=1')  # DH 키 크기 설정
+# context = ssl.SSLContext(ssl.PROTOCOL_TLS)
+# context.set_ciphers('DEFAULT@SECLEVEL=1')  # DH 키 크기 설정
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
@@ -61,9 +61,9 @@ def Software_Convergence():
 def Electronic_Information():
     url = "https://ei.kw.ac.kr/community/notice.php"
 
-    session = requests.Session()
-    session.mount("https://", requests.adapters.HTTPAdapter(pool_connections=100, pool_maxsize=100))
-    session.verify = False  # SSL/TLS 인증서 검증 비활성화
+    # session = requests.Session()
+    # session.mount("https://", requests.adapters.HTTPAdapter(pool_connections=100, pool_maxsize=100))
+    # session.verify = False  # SSL/TLS 인증서 검증 비활성화
 
     req = requests.get(url, verify=False, timeout=5, headers={"User-Agent": "Mozilla/5.0"}, stream=True)
     soup = BeautifulSoup(req.text, "html.parser")
@@ -445,7 +445,7 @@ def update():
 
         Electronic_Information()
         Humanities_and_Social_Sciences()
-        Software_Convergence()
+        # Software_Convergence()
         Business()
         Ingenium()
         Engineering()
