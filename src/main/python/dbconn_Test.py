@@ -10,7 +10,7 @@ from selenium.webdriver.chrome.options import Options  # ChromeOptions 추가
 import time
 from datetime import datetime, timedelta
 
-requests.packages.urllib3.util.ssl_.DEFAULT_CIPHERS += ':HIGH:!DH:!aNULL'
+# requests.packages.urllib3.util.ssl_.DEFAULT_CIPHERS += ':HIGH:!DH:!aNULL'
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
