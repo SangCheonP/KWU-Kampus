@@ -4,6 +4,9 @@ import urllib3
 #오류 코드 비활성화
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
+context = ssl.SSLContext(ssl.PROTOCOL_TLS)
+context.set_ciphers('DEFAULT@SECLEVEL=0')  # DH 키 크기 설정
+
 url = "https://npsw.kw.ac.kr/site/sub.php?Tid=27&Ctnum=28&Ctid=HM28"
 
 #사이트 url 획득
