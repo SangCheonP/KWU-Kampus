@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup      # 크롤링 사이트의 값을 가져오는 함수
 import requests
+from requests.packages.urllib3.util.ssl_ import DEFAULT_CIPHERS
 import urllib3
 import mysql.connector
 
@@ -10,7 +11,7 @@ from selenium.webdriver.chrome.options import Options  # ChromeOptions 추가
 import time
 from datetime import datetime, timedelta
 
-# requests.packages.urllib3.util.ssl_.DEFAULT_CIPHERS += ':HIGH:!DH:!aNULL'
+requests.packages.urllib3.util.ssl_.DEFAULT_CIPHERS += ':HIGH:!DH:!aNULL'
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
@@ -239,7 +240,7 @@ def Policy_Law():
 
 start = time.time()
 
-# requests.packages.urllib3.util.ssl_.DEFAULT_CIPHERS += ':HIGH:!DH:!aNULL'
+requests.packages.urllib3.util.ssl_.DEFAULT_CIPHERS += ':HIGH:!DH:!aNULL'
 
 def building():
     # ChromeOptions를 생성하고 headless 모드를 활성화합니다
