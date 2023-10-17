@@ -12,6 +12,8 @@ import time
 from datetime import datetime, timedelta
 
 # requests.packages.urllib3.util.ssl_.DEFAULT_CIPHERS += ':HIGH:!DH:!aNULL'
+context = ssl.SSLContext(ssl.PROTOCOL_TLS)
+context.set_ciphers("HIGH:!DH:!aNULL")
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
