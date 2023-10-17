@@ -34,6 +34,10 @@ result_list = []
 def Software_Convergence():
     url = "https://npsw.kw.ac.kr/site/sub.php?Tid=27&Ctnum=28&Ctid=HM28"
 
+    # SSLContext를 생성하고 DH 키 크기를 설정합니다.
+    context = ssl.SSLContext(ssl.PROTOCOL_TLS)
+    context.set_ciphers('DEFAULT@SECLEVEL=1')  # DH 키 크기 설정
+
     session = requests.Session()
     session.mount("https://", requests.adapters.HTTPAdapter(pool_connections=100, pool_maxsize=500))
     session.verify = False  # SSL/TLS 인증서 검증 비활성화
