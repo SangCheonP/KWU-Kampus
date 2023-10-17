@@ -50,16 +50,15 @@ class PythonScriptRunner implements CommandLineRunner {
         executePythonScript();
     }
 
-    @Scheduled(cron = "0 */10 * * * *")
+    @Scheduled(cron = "0 0 0 * * ?")
     private void executePythonScript() {
         try {
-            String pythonScriptPath = "/home/ubuntu/spring-github-action/src/main/python/dbconn_Test.py";
+            String pythonScriptPath = "src/main/python/dbconn_Test.py";
             System.out.println(System.getProperty("user.dir"));
             /* inheritIO : JVM 프로세스 스트림으로 상속 */
             ProcessBuilder processBuilder = new ProcessBuilder("python3", pythonScriptPath);
-            Map<String, String> environment = processBuilder.environment();
-//            environment.put("PATH", "/usr/local/bin:/usr/bin:/bin"); // Python 경로에 맞게 설정
-            environment.put("PYTHONPATH", "/home/ubuntu/.local/lib/python3.9/site-packages"); // 모듈 경로에 맞게 설정
+//            Map<String, String> environment = processBuilder.environment();
+//            environment.put("PYTHONPATH", "/home/ubuntu/.local/lib/python3.9/site-packages"); // 모듈 경로에 맞게 설정
             processBuilder.redirectErrorStream(true);
 
             Process process = processBuilder.start();
