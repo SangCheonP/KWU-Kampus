@@ -391,6 +391,7 @@ def update():
         # date varchar(255))
         # """)
         # 테이블 PythonTable에 data를 초기화한다.
+        Software_Convergence()
         Electronic_Information()
         Humanities_and_Social_Sciences()
         Business()
@@ -399,7 +400,6 @@ def update():
         Natural()
         Policy_Law()
         building()
-        Software_Convergence()
         dbconn.connect()
 
         execute("DELETE FROM notice_web")
