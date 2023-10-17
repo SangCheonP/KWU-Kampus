@@ -3,6 +3,7 @@ import requests
 # from requests.packages.urllib3.util.ssl_ import DEFAULT_CIPHERS
 import urllib3
 import mysql.connector
+import ssl
 
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
