@@ -441,7 +441,7 @@ def update():
         Engineering()
         Natural()
         Policy_Law()
-        Software_Convergence()
+        # Software_Convergence()
         building()
         dbconn.connect()
 
