@@ -27,27 +27,36 @@ policy_list = []
 result_list = []
 
 def Software_Convergence():
+    # ChromeOptions를 생성하고 headless 모드를 활성화합니다
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--disable-gpu")  # GPU 가속 비활성화 (Linux에서 필요한 경우)
+    chrome_options.add_argument("--no-sandbox")  # Linux에서 필요한 경우
+    chrome_options.add_argument("--disable-dev-shm-usage")  # Linux에서 필요한 경우
 
-    context = ssl.SSLContext(ssl.PROTOCOL_TLS)
-    context.set_ciphers('DEFAULT@SECLEVEL=1')  # DH 키 크기 설정
+    start = time.time()
 
-    url = "https://npsw.kw.ac.kr/site/sub.php?Tid=27&Ctnum=28&Ctid=HM28"
+    # requests.packages.urllib3.util.ssl_.DEFAULT_CIPHERS += ':HIGH:!DH:!aNULL'
 
-    req = requests.get(url, verify=False, timeout=5, headers={"User-Agent": "Mozilla/5.0"}, stream=True)
-    soup = BeautifulSoup(req.text, "html.parser")  # html에 대하여 접근할 수 있도록
+    # 웹 드라이버를 시작합니다
+    url = 'https://npsw.kw.ac.kr/site/sub.php?Tid=27&Ctnum=28&Ctid=HM28'
+    driver = webdriver.Chrome(options=chrome_options)  # ChromeOptions 사용
+    driver.get(url)
 
-    # department = soup.find('title').string
-    notice = soup.select('div.tbl_notice a')
-    date = soup.select('div.tbl_notice tbody tr td:nth-of-type(5)')
+    # 지정된 CSS 선택자를 사용하여 요소를 찾습니다
+    titles = driver.find_elements(By.CSS_SELECTOR, "div.tbl_notice tbody td.left a")
+    dates = driver.find_elements(By.CSS_SELECTOR, "div.tbl_notice tbody td:nth-child(5)")
+    links = driver.find_elements(By.CSS_SELECTOR, "div.tbl_notice tbody td.left a")
 
-    count = 0
+    # 찾은 요소를 반복하고 텍스트와 링크를 추출합니다
+    for title, date, link in zip(titles, dates, links):
+        link_url = link.get_attribute("href")
+        title_text = title.text
+        date_text = date.text.replace('/', '-')  # '/'를 '-'로 변경
+        soft_list.append(["소프트웨어융합대학", link_url, title_text, date_text])
 
-    for i,j in zip(notice, date):
-        href = str(i.attrs['href']).lstrip(".")
-        text = str(i.string)
-        date = str(j.text).replace("/", "-")
-        if count < 10:
-            soft_list.append(["소프트웨어융합대학", "https://npsw.kw.ac.kr/site"+href, text, date])
+    # 웹 드라이버를 닫습니다
+    driver.quit()
 
 def Electronic_Information():
     url = "https://ei.kw.ac.kr/community/notice.php"
