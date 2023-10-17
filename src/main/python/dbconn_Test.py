@@ -30,7 +30,7 @@ def Software_Convergence():
     url = "https://npsw.kw.ac.kr/site/sub.php?Tid=27&Ctnum=28&Ctid=HM28"
 
     session = requests.Session()
-    session.mount("https://", requests.adapters.HTTPAdapter(pool_connections=100, pool_maxsize=100))
+    session.mount("https://", requests.adapters.HTTPAdapter(pool_connections=100, pool_maxsize=500))
     session.verify = False  # SSL/TLS 인증서 검증 비활성화
 
     req = requests.get(url, verify=False, timeout=5, headers={"User-Agent": "Mozilla/5.0"}, stream=True)
