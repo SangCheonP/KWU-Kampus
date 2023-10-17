@@ -445,8 +445,8 @@ def update():
 
         Electronic_Information()
         Humanities_and_Social_Sciences()
-        Business()
         Software_Convergence()
+        Business()
         Ingenium()
         Engineering()
         Natural()
