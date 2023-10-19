@@ -46,7 +46,7 @@ public class SampleService {
         return SampleMapper.selectMainPageInfo();
     }
 
-    public List<mainPageNoticeModel> selectMainPageNotice(String building_code){
-        return SampleMapper.selectMainPageNotice(building_code);
+    public List<mainPageNoticeModel> selectMainPageNotice(){
+        return SampleMapper.selectMainPageNotice();
     }
 }

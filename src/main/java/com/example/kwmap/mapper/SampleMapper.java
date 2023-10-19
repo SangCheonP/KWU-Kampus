@@ -26,5 +26,5 @@ public interface SampleMapper {
 
    public List<mainPageInfoModel> selectMainPageInfo();
 
-   public List<mainPageNoticeModel> selectMainPageNotice(String building_code);
+   public List<mainPageNoticeModel> selectMainPageNotice();
 }

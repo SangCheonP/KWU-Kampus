@@ -93,10 +93,10 @@ public class SampleController {
 
     // main page의 각 건물별 공지사항에 넣을 모든 정보를 List 형태로 가져옴
     @ResponseBody
-    @RequestMapping("/mainpage/notice/{building_code}")
-    public List<mainPageNoticeModel> selectMainPageNotice(@PathVariable("building_code") String building_code) {
-        System.out.println("\"/mainpage/notice/{building_code}\"");
-        List<mainPageNoticeModel> info = sampleService.selectMainPageNotice(building_code);
+    @RequestMapping("/mainpage/notice")
+    public List<mainPageNoticeModel> selectMainPageNotice() {
+        System.out.println("\"/mainpage/notice\"");
+        List<mainPageNoticeModel> info = sampleService.selectMainPageNotice();
         return info;
     }
 }
