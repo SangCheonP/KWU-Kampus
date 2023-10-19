@@ -4,6 +4,7 @@ import com.example.kwmap.mapper.SampleMapper;
 import com.example.kwmap.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -43,5 +44,9 @@ public class SampleService {
     // main page의 아래 부분에 공지사항에 넣을 모든 정보를 List 형태로 가져옴
     public List<mainPageInfoModel> selectMainPageInfo(){
         return SampleMapper.selectMainPageInfo();
+    }
+
+    public List<mainPageNoticeModel> selectMainPageNotice(String building_code){
+        return SampleMapper.selectMainPageNotice(building_code);
     }
 }

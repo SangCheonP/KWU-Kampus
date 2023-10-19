@@ -2,6 +2,7 @@ package com.example.kwmap.mapper;
 
 import com.example.kwmap.model.*;
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -24,4 +25,6 @@ public interface SampleMapper {
    public buildingLocationModel selectBuildingLocation(String building_code);
 
    public List<mainPageInfoModel> selectMainPageInfo();
+
+   public List<mainPageNoticeModel> selectMainPageNotice(String building_code);
 }
