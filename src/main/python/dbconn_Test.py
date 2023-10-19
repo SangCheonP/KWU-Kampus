@@ -267,16 +267,18 @@ def building():
 
     facilities_list = ['80주년', '누리관', '다산재', '복지관', '비마관', '빛솔재', '새빛관', '아이스링크',
                        '연구관', '문화관', '연촌재', '옥의관', '참빛관', '한울관', '한천재', '화도관']
+    facilities_code = ["01", "02", "03", "04", "05", "06", "08", "09",
+                       "10", "10", "11", "12", "14", "15", "16", "17"]
 
     # 웹 드라이버를 시작합니다
     url = 'https://www.kw.ac.kr/ko/life/notice.jsp?srCategoryId=&mode=list&searchKey=3&searchVal=&x=14&y=11'
     driver = webdriver.Chrome(options=chrome_options)  # ChromeOptions 사용
     driver.get(url)
 
-    for facilities in facilities_list:
+    for facilities in zip(facilities_list, facilities_code):
         search_box = driver.find_element(By.XPATH, '//*[@id="jwxe_main_content"]/div/div/form/div/div/input[2]')
         search_box.clear()
-        search_box.send_keys(facilities)
+        search_box.send_keys(facilities[0])
         # time.sleep(0.5)  # .5초 대기
 
         # 입력 필드 내용을 지우기
@@ -298,7 +300,7 @@ def building():
 
             # 날짜가 1개월 이내인 항목만 이중 리스트에 추가합니다
             if date >= two_month_ago:
-                result_list.append([facilities, href, title, date.strftime("%Y-%m-%d")])
+                result_list.append([facilities[0], facilities[1], href, title, date.strftime("%Y-%m-%d")])
 
 
 
@@ -424,7 +426,7 @@ def update():
         merge_bulk("INSERT INTO notice_web (dept, site, notice, date) VALUES (%s, %s, %s, %s)", policy_list)
         print("policy_list 업데이트 완료")
 
-        merge_bulk("INSERT INTO building_notice (building, site, notice, date) VALUES (%s, %s, %s, %s)", result_list)
+        merge_bulk("INSERT INTO building_notice (building, building_code, site, notice, date) VALUES (%s, %s, %s, %s, %s)", result_list)
         print("result_list 업데이트 완료")
         print("코드 업데이트 완료")
 
@@ -435,9 +437,3 @@ def update():
         dbconn.close()
 
 update()
-
-# i=0
-# schedule.every(10).seconds.do(update)
-# while i<10:
-#   schedule.run_pending()
-#   time.sleep(1)
