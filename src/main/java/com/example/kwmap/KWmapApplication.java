@@ -40,6 +40,7 @@ public class KWmapApplication extends SpringBootServletInitializer {
     }
 
 }
+
 @Component
 class PythonScriptRunner implements CommandLineRunner {
 
@@ -49,7 +50,7 @@ class PythonScriptRunner implements CommandLineRunner {
         executePythonScript();
     }
 
-    @Scheduled(cron = "0 */5 * * * *")
+    @Scheduled(cron = "0 0 0 * * ?")
     private void executePythonScript() {
         try {
             String pythonScriptPath = "/home/ubuntu/spring-github-action/src/main/python/dbconn_Test.py";
