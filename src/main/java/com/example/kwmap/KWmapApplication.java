@@ -50,7 +50,7 @@ class PythonScriptRunner implements CommandLineRunner {
         executePythonScript();
     }
 
-    @Scheduled(cron = "0 0 0 * * ?")
+    @Scheduled(cron = "0 35 21 * * ?")
     private void executePythonScript() {
         try {
             String pythonScriptPath = "src/main/python/dbconn_Test.py";
