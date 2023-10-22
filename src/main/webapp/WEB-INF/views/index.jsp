@@ -197,20 +197,28 @@
         <div class="details-wrap">
           <h3 id="detailBuildingTitle">건물을 선택해주세요.</h3>
           <div class="img-wrap">
-            <img id="buildingImg" />
+            <img id="buildingImg" alt="건물 이미지가 없습니다."/>
           </div>
           <div class="text-wrap">
-            <div class="fac-wrap">
-              <span>주요 시설</span>
+            <div class="left-wrap">
+              <p class="detail-heading">주요 시설</p>
               <ul class="fac-list">
                 <li>주요 시설 정보가 없습니다.</li>
               </ul>
             </div>
-            <div class="mng-wrap">
-              <p>관리 담당</p>
-              <span id="mng_team">정보가 없습니다.</span>
-              <p>연락처</p>
-              <span id="mng_num">정보가 없습니다.</span>
+            <div class="right-wrap">
+              <div class="notice-wrap">
+                <p class="detail-heading">공지사항</p>
+                <ul class="detail-notice-list">
+                  <li>공지사항이 없습니다.</li>
+                </ul>
+              </div>
+              <%-- <div class="mng-wrap">
+                <p>관리 담당</p>
+                <span id="mng_team">정보가 없습니다.</span>
+                <p>연락처</p>
+                <span id="mng_num">정보가 없습니다.</span>
+              </div> --%>
             </div>
           </div>
           <div class="button-wrap">
