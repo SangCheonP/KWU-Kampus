@@ -26,7 +26,7 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 # 현재 날짜를 가져옵니다
 current_date = datetime.now()
 
-# 2개월 전 날짜를 계산합니다
+# 2개월 전 날짜를 계산
 two_month_ago = current_date - timedelta(days=60)
 
 professor_list = ['electronic01', 'electronic02', 'electronic03', 'electronic04', 'electronic05', 'electronic06', 'electronic07',
