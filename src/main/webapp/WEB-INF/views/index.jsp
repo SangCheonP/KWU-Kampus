@@ -20,10 +20,10 @@
       <div class="inner">
         <h1>광운대학교<a href="/"><img src="./images/logo.png"></a></h1>
         <!-- Temporary Links List -->
-        <ul class="temp-links">
+        <!-- <ul class="temp-links">
           <li>Temporary Links</li>
           <li><a href="/detail">Detail Example</a></li>
-        </ul>
+        </ul> -->
         <!-- Temporary Links List end -->
       </div>
       <!--

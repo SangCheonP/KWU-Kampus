@@ -35,6 +35,7 @@ const pointer = new THREE.Vector2(); // mouse cursor position tracking
 let intersects = []; // list to find which building is selected
 let INTERSECTED = undefined; // stores which building is selected
 
+const gltfLoader = new GLTFLoader();
 const buildings = [];
 const fonts = [];
 // const arrows = [];
@@ -70,7 +71,7 @@ async function init() {
 // ToneMapping
 //  renderer.toneMapping = THREE.ACESFilmicToneMapping;
 
-  camera = new THREE.PerspectiveCamera( 60, width / height, 1, 1000 );// 1000 );
+  camera = new THREE.PerspectiveCamera( 60, width / height, 0.5, 1000 );// 1000 );
   camera.position.set( 300, 300, 0 ); // ( 400, 200, 0 );
 
   initControls();
@@ -200,11 +201,10 @@ async function init() {
 
   // GLTF Loader, load models
 
-    const gltfLoader = new GLTFLoader();
     const datas = await fetch(URL.buildings, { method: "GET" })
                         .then(res => res.json())
                         .then(res => { return res; });
-    datas.forEach(data => { createModel(gltfLoader, data); });
+    datas.forEach(data => { createModel(data); });
 
 }
 
@@ -364,30 +364,44 @@ function initControls() {
   controls.minDistance = 100;
   controls.maxDistance = 500;
 
-  controls.maxPolarAngle = Math.PI / 2;
+  controls.maxPolarAngle = Math.PI / 9 * 4;
 
 }
 
 /**
  * 3D 환경의 바닥을 설정합니다.
+ *
+ * 추가 및 수정: 실제 고도를 반영한 지형 모델을 불러온 후, material을 변경하고 scene 에 추가합니다.
  */
 function initWorldFloor() {
 
-  const planeSize = 1000; // 2000;
+  // const planeSize = 1000; // 2000;
+  // load terrain model
   const planeTexture = new THREE.TextureLoader().load('./images/KakaoMap_KWU.png');
-  const plane = new THREE.Mesh(
-    new THREE.PlaneGeometry(planeSize, planeSize, 8, 8),
-    new THREE.MeshBasicMaterial({
-      side: THREE.FrontSide,
-      map: planeTexture
-    })
-  );
-  plane.rotateX( Math.PI / ( -2 ) );
-  plane.rotateZ( Math.PI / 2 );
-  plane.name = 'worldFloor';
-  plane.castShadow = false;
-  plane.receiveShadow = true;
-  scene.add( plane );
+  gltfLoader.load('./models/Terrain.gltf', async (gltf) => {
+    let terrain = new THREE.Object3D();
+    terrain = await gltf.scene.children[0];
+    terrain.rotateZ(Math.PI / 2);
+    terrain.children[0].material = new THREE.MeshBasicMaterial({ map: planeTexture });
+    terrain.castShadow = true;
+    terrain.receiveShadow = true;
+    scene.add(terrain);
+
+  });
+
+//  const plane = new THREE.Mesh(
+//    new THREE.PlaneGeometry(planeSize, planeSize, 8, 8),
+//    new THREE.MeshBasicMaterial({
+//      side: THREE.FrontSide,
+//      map: planeTexture
+//    })
+//  );
+//  plane.rotateX( Math.PI / ( -2 ) );
+//  plane.rotateZ( Math.PI / 2 );
+//  plane.name = 'worldFloor';
+//  plane.castShadow = false;
+//  plane.receiveShadow = true;
+//  scene.add( plane );
 
 }
 
@@ -446,13 +460,12 @@ subCategories.forEach( ( subCategory ) => {
  * 
  * `loader` 를 사용해 `building.modelPath` 에 있는 모델을 불러옵니다.   
  * 모델의 위치, 회전시킬 각도, 크기 조정을 위한 스케일을 설정하여 `scene` 및 `buildings` 리스트에 추가하고, `createFont()` 에 `position` 을 전달합니다.
- * @param { GLTFLoader } loader `GLTFLoader` used in this file.
  * @param { object } data Item stored in `receivedData` list, an object containing informations of each buildings.
  */
-function createModel ( loader, data ) {
+function createModel (data) {
 
   if ( !data.model_path ) { console.error( 'model_path not found' ); }
-  loader.load( data.model_path, async ( gltf ) => {
+  gltfLoader.load( data.model_path, async ( gltf ) => {
 
     const model = await gltf.scene;
     if ( !model ) {
