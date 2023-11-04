@@ -62,7 +62,6 @@ function init() {
     imgBg = document.getElementsByClassName( 'imgBg' );
 
     window.addEventListener( 'resize', setFont );
-    window.addEventListener('unload', () => sessionStorage.clear());
 }
 
 /**

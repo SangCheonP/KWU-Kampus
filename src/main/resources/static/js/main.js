@@ -126,6 +126,7 @@ async function init() {
 
   // Event Listeners
   window.addEventListener( 'resize', onWindowResize );
+  window.addEventListener('load', () => { sessionStorage.clear(); });
   mapContainer.addEventListener( 'pointermove', onPointerMove );
   mapContainer.addEventListener( 'click', onClick );
   // window.addEventListener( 'dblclick', ( event ) => { // dev, 더블 클릭시 카메라의 위치에서 카메라 방향으로 
