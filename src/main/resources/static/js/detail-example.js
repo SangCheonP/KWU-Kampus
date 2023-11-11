@@ -1,19 +1,18 @@
 import * as URL from './url.js'
-import {floorNum, roomPosition} from "./room-position.js"
+import { floorNum, roomPosition } from "./room-position.js"
 
-const floorList = document.getElementById('floors');
-let classifiedFloors;
-const roomNum = document.getElementsByClassName( 'roomNum' );
+let classifiedFloors = [];
 
 let prevFloor;
-let  prevElement, prevDesc, building_code, prevRoomCode = "";
-let prevSpan;
-let bgUrl;
+let prevElement, prevDesc, prevRoom, building_code, prevRoomCode = "";
 let mapWidth, mapHeight, addPosition;
 const whRatio = ( 768/1200 );
 const hwRatio = ( 1200/768 );
 
 init();
+
+//window.addEventListener( 'resize', function(){ setFont(index) } ); // TODO
+//waiting_click_floor();
 
 function init() {
 
@@ -26,20 +25,197 @@ function init() {
     })
     .then( res => res.json() )
     .then( res => {
-        classifiedFloors = classifyFloors( res );
+
+        classifyFloors( res );
         createFloors();
 
         // activate 1st floor as default
-        let target_floor = '1';
+        let target_floor = '01';
         if ( sessionStorage.getItem( 'floor' ) ) {
             target_floor = sessionStorage.getItem( 'floor' );
+            target_floor = ( '00' + target_floor ).slice( -2 );
             sessionStorage.removeItem( 'floor' );
         }
+        let active_index = floorNum[building_code].findIndex( i => i == target_floor );
 
-        let floor = ( '00' + target_floor ).slice( -2 );
-        let index = floorNum[building_code].findIndex( i => i == floor );
-        activateFloor( document.getElementById( floor ), index );
+        activateFloor( target_floor );
+
     } )
+
+}
+
+/**
+ * 한 건물의 분류되지 않은 방 정보 리스트를 받아와서 층 별로 분류하고,
+ * 정보를 층 별로 분류하고, 방 번호를 오름차순으로 정렬하여 2차 Array 형태로 리턴합니다.
+ *
+ * `room_code`에 regular expression 을 적용해 검색하여 분류합니다.
+ *
+ * @param { Array } res raw data(floor list) received from server
+ */
+function classifyFloors( res ) {
+
+    let floors = res.map( room => room.floor );
+    let uniqFloors = [... new Set(floors.sort(compareFloors))]; // remove duplicate and sort floors[]
+    uniqFloors.forEach( floor  => {
+
+        let floorNum, regex;
+        if ( /^B+/.test( floor ) ) {
+            // if floor item starts with 'B'
+            floorNum = ('00' + floor.substr(1, 1)).slice(-2);
+            regex = new RegExp(`^1-${floorNum}+`);
+        } else {
+            floorNum = ('00' + floor).slice(-2);
+            regex = new RegExp(`^0-${floorNum}+`);
+        }
+
+        const classifiedFloor = res.filter(data => regex.test(data['room_code']));
+        classifiedFloors.push(classifiedFloor.sort(function(a, b) { return a['room_no'] < b['room_no'] ? -1 : a['room_no'] > b['room_no'] ? 1 : 0; }));
+
+    } )
+
+}
+
+/**
+ * 건물 층 값인 문자열(B1, 10, 1, ...) 정렬을 위한 함수입니다.
+ * 문자열이 "B"(대문자)로 시작하면, B를 "-"로 바꾸어 비교합니다.
+ *
+ * @param {String} a a value of floor to compare
+ * @param {String} b a value of floor to compare
+ * @returns Compared Result for sort() function.
+ */
+function compareFloors(a, b) {
+
+    let _a, _b;
+    if (a.startsWith("B")) { _a = a.replace("B", "-") } else { _a = a }
+    if (b.startsWith("B")) { _b = b.replace("B", "-") } else { _b = b }
+    return _a - _b;
+
+}
+
+/**
+ * 건물에 대한 정보 중 총 층(floor)수를 받아와서
+ * detail_example.html에 Floor List를 구성하는 새 element 들을 생성하고,
+ * 클릭 이벤트를 설정합니다.
+ */
+function createFloors() {
+
+    const floorList = document.getElementById('floors');
+    classifiedFloors.forEach( floor => {
+
+        let target_floor = floor[0].floor;
+
+        const liFloor = document.createElement( 'li' );
+        const div = document.createElement( 'div' );
+        const span = document.createElement( 'span' );
+
+        div.className = 'text'; // div.text
+        span.className = 'floor-title'; // span.floor-title
+        span.innerText = `${target_floor}F`;
+        liFloor.setAttribute( 'id', ( '00' + target_floor ).slice( -2 ) ); // set id to its floor number
+
+        div.appendChild( span ); // div > span
+        liFloor.appendChild( div ); // li > div > span
+        floorList.appendChild( liFloor );
+
+    });
+
+}
+
+/**
+ * `ul#floors` element 아래의 `li` element 들 중에서, i 번째 요소를 활성화합니다.
+ *
+ * 활성화는 다음과 같은 작업을 포함합니다.
+ *
+ * * `roomNums` 요소 내의 `span`(방 번호)과 `.desc p`(해당 방 설명)의 innerText 변경
+ * * `rooms` 에 클릭 이벤트 설정
+ * * `prevElement`에 현재 선택된 `floor` 저장
+ * @param { Element } floor `li` element in floors list
+ * @param { number } i index value of the element
+ */
+function activateFloor ( target_floor ) {
+
+    let active_floor = document.getElementById( target_floor );
+    if ( prevElement ) { prevElement.classList.remove( 'active' ); }
+    prevElement = active_floor;
+    active_floor.classList.add( 'active' );
+
+    setFloorBg( `../floor-img/${building_code}/${target_floor}.png` );
+
+    let roomList = document.getElementById( 'rooms' );
+    let imgBg = document.getElementsByClassName( 'imgBg' )[0];
+    roomList.innerHTML = '';
+    imgBg.innerHTML = '';
+
+    let active_index = floorNum[building_code].findIndex( i => i == target_floor );
+    let room_infos = classifiedFloors[active_index];
+    room_infos.forEach( roomInfo => {
+
+        // 시설 리스트 생성
+        if( !roomInfo.time & !roomInfo.url & roomInfo['phone_num'].length <= 7 )
+            roomList.appendChild( listAddRoom( roomInfo ) ); // ul > li
+        else
+            roomList.appendChild( listAddRoomAccordion( roomInfo ) ); // ul > li
+
+        // 평면도 상에 호수 글자 생성
+        imgBg.appendChild( mapAddRoom( roomInfo ) );
+
+    })
+
+    setFont( active_index );
+    waitingClickFloor();
+    waitingClickRoom();
+
+}
+
+/**
+ * `main#detail > div.img-wrap > div.imgBg` 의 background url을 `bgUrl`로 설정합니다.
+ * @param { string } bgUrl url string of the background image
+ */
+function setFloorBg ( bgUrl = "" ) {
+
+    const target = document.querySelector( '#detail .img-wrap .imgBg' );
+    target.style.background = `url(${ bgUrl }) no-repeat center center / contain`;
+
+}
+
+/**
+ * 건물에 대한 정보 중 총 층(floor)수와 호(room)수를 받아와서
+ * detail_example.html에 Floor List를 구성하는 새 element 들을 생성하고,
+ * 클릭 이벤트를 설정합니다.
+ *
+ * @param { number } floorCount the integer number of floors
+ * @param { number } roomCount the integer number of rooms in each floors
+ * @result Create new elements under `ul#floors`
+ */
+
+function waitingClickFloor() {
+
+    let floors = document.querySelectorAll( '.floor-title' );
+    floors.forEach( ( floor, i ) => {
+
+        floor.addEventListener( 'click', ( e ) => {
+            e.preventDefault();
+            activateFloor( ( '00' + classifiedFloors[i][0].floor ).slice( -2 ) );
+        } );
+
+    } );
+
+}
+
+function waitingClickRoom() {
+
+    let rooms = document.querySelectorAll( '#rooms>li' );
+    let roomNum= document.getElementsByClassName( 'roomNum' );
+    rooms.forEach( ( room, idx ) => {
+
+        room.addEventListener( 'click', () => {
+            if ( prevRoom ) { prevRoom.classList.remove( 'active' ); }
+            const span = roomNum[ idx ].querySelector( 'span' );
+            span.classList.add( 'active' );
+            prevRoom = span;
+        })
+
+    });
 
 }
 
@@ -54,6 +230,7 @@ function init() {
  * @param { number } i current floor
  */
 function setFont( i ) {
+    let roomNum = document.getElementsByClassName( 'roomNum' );
     let floorInfo = classifiedFloors[i];
 
     let building = floorInfo[0]['building'];
@@ -100,144 +277,6 @@ function setFont( i ) {
     }
 }
 
-function activeRoom( targetCode ) {
-    // rooms = floor.querySelectorAll( '#rooms li' );
-    // rooms.forEach( ( room, idx ) => {
-    //     room.addEventListener( 'click', () => {
-    //
-    //         if ( prevDesc ) { prevDesc.classList.remove( 'active' ); }
-    //         const desc = roomNums[ idx ].querySelector( '.desc' );
-    //         desc.classList.add( 'active' );
-    //         prevDesc = desc;
-    //
-    //     })
-    // });
-}
-
-/**
- * 건물에 대한 정보 중 총 층(floor)수와 호(room)수를 받아와서
- * detail_example.html에 Floor List를 구성하는 새 element 들을 생성하고,
- * 클릭 이벤트를 설정합니다.
- *
- * @param { number } floorCount the integer number of floors
- * @param { number } roomCount the integer number of rooms in each floors
- * @result Create new elements under `ul#floors`
- */
-/**
- * 07/07 수정 사항입니다.
- * 건물에 대한 정보 중 총 층(floor)수를 받아와서
- * detail_example.html에 Floor List를 구성하는 새 element 들을 생성하고,
- * 클릭 이벤트를 설정합니다.
- *
- * @result Create new elements under `ul#floors`
- */
-function createFloors() {
-
-    for ( let i = 0; i < classifiedFloors.length; ++i ) {
-
-        const liFloor = document.createElement( 'li' );
-        const div = document.createElement( 'div' );
-        const span = document.createElement( 'span' );
-
-        div.className = 'text'; // div.text
-        span.className = 'floor-title'; // span.floor-title
-        span.innerText = `${classifiedFloors[i][0].floor}F`;
-
-        div.appendChild( span ); // div > span
-        liFloor.appendChild( div ); // li > div > span
-
-        liFloor.setAttribute( 'id', ( '00' + classifiedFloors[i][0].floor ).slice( -2 ) ); // set id to its floor number
-        floorList.appendChild( liFloor );
-
-    }
-
-}
-
-function waiting_click_floor() {
-    let floors = document.querySelectorAll( '#floors>li' );
-    floors.forEach( ( floor, i ) => {
-
-        const floorTitle = floor.querySelector( '.floor-title' );
-        floorTitle.addEventListener( 'click', ( e ) => {
-
-            e.preventDefault();
-
-            if ( prevDesc ) { prevDesc.classList.remove( 'active' ); }
-            if ( prevElement ) { prevElement.classList.remove( 'active' ); }
-
-            activateFloor( floor, i );
-
-        } );
-
-    } );
-}
-
-/**
- * `main#detail > div.img-wrap > div.imgBg` 의 background url을 `bgUrl`로 설정합니다.
- * @param { string } bgUrl url string of the background image
- */
-function setFloorBg ( bgUrl = "" ) {
-
-    const target = document.querySelector( '#detail .img-wrap .imgBg' );
-    target.style.background = `url(${ bgUrl }) no-repeat center center / contain`;
-
-}
-
-/**
- * `ul#floors` element 아래의 `li` element 들 중에서, i 번째 요소를 활성화합니다.
- *
- * 활성화는 다음과 같은 작업을 포함합니다.
- *
- * * `roomNums` 요소 내의 `span`(방 번호)과 `.desc p`(해당 방 설명)의 innerText 변경
- * * `rooms` 에 클릭 이벤트 설정
- * * `prevElement`에 현재 선택된 `floor` 저장
- * @param { Element } floor `li` element in floors list
- * @param { number } i index value of the element
- */
-function activateFloor ( floor, i ) {
-
-    let roomList = document.getElementById('rooms');
-    let imgBg = document.getElementsByClassName( 'imgBg' )[0];
-
-    roomList.innerHTML = '';
-    imgBg.innerHTML = '';
-
-    for ( let j = 0; j < classifiedFloors[i].length; j++ ) {
-
-        // 시설 리스트 생성
-        if( !classifiedFloors[i][j].time & !classifiedFloors[i][j].url & classifiedFloors[i][j]['phone_num'].length <= 7 )
-            roomList.appendChild( listAddRoom( classifiedFloors[i][j] ) ); // ul > li
-        else
-            roomList.appendChild( listAddRoomAccordion( classifiedFloors[i][j] ) ); // ul > li
-
-        // 평면도 상에 호수 글자 생성
-        imgBg.appendChild( mapAddRoom( classifiedFloors[i][j] ) );
-    }
-
-    floor.classList.add( 'active' );
-
-    let rooms = document.querySelectorAll( '#rooms>li' );
-    rooms.forEach( ( room, idx ) => {
-        room.addEventListener( 'click', () => {
-            if ( prevSpan ) { prevSpan.classList.remove( 'active' ); }
-            const span = roomNum[ idx ].querySelector( 'span' );
-            span.classList.add( 'active' );
-            prevSpan = span;
-        })
-    });
-
-    prevElement = floor;
-
-    bgUrl = '../floor-img/' + building_code + '/' + floor.id + '.png'
-    setFloorBg( bgUrl );
-
-    // 평면도 상에 호수 글자 위치 조절
-
-    setFont(i);
-    window.addEventListener( 'resize', function(){ setFont(i) } ); // TODO
-
-    waiting_click_floor();
-}
 
 /**
  * i 층의 호(room)수를 받아와서
@@ -323,55 +362,4 @@ function mapAddRoom ( roomInfo ) {
     div.appendChild( span ); // div > span
 
     return div;
-}
-
-/**
- * 한 건물의 분류되지 않은 방 정보 리스트를 받아와서 층 별로 분류하고,
- * 정보를 층 별로 분류하고, 방 번호를 오름차순으로 정렬하여 2차 Array 형태로 리턴합니다.
- *
- * `room_code`에 regular expression 을 적용해 검색하여 분류합니다.
- *
- * @param { Array } res raw data(floor list) received from server
- * @returns a classified floor list
- */
-function classifyFloors( res ) {
-
-    let classifiedFloors = [];
-    let floors = res.map( room => room.floor );
-    let uniqFloors = [... new Set(floors.sort(compareFloors))]; // remove duplicate and sort floors[]
-    uniqFloors.forEach( ( floor ) => {
-
-        let floorNum, regex;
-        if ( /^B+/.test( floor ) ) {
-            // if floor item starts with 'B'
-            floorNum = ('00' + floor.substr(1, 1)).slice(-2);
-            regex = new RegExp(`^1-${floorNum}+`);
-        } else {
-            floorNum = ('00' + floor).slice(-2);
-            regex = new RegExp(`^0-${floorNum}+`);
-        }
-
-        const classifiedFloor = res.filter(data => regex.test(data['room_code']));
-        classifiedFloors.push(classifiedFloor.sort(function(a, b) { return a['room_no'] < b['room_no'] ? -1 : a['room_no'] > b['room_no'] ? 1 : 0; }));
-
-    } )
-
-    return classifiedFloors;
-}
-
-/**
- * 건물 층 값인 문자열(B1, 10, 1, ...) 정렬을 위한 함수입니다.
- * 문자열이 "B"(대문자)로 시작하면, B를 "-"로 바꾸어 비교합니다.
- *
- * @param {String} a a value of floor to compare
- * @param {String} b a value of floor to compare
- * @returns Compared Result for sort() function.
- */
-function compareFloors(a, b) {
-
-  let _a, _b;
-  if (a.startsWith("B")) { _a = a.replace("B", "-") } else { _a = a }
-  if (b.startsWith("B")) { _b = b.replace("B", "-") } else { _b = b }
-  return _a - _b;
-
 }
