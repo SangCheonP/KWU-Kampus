@@ -19,24 +19,24 @@ function init() {
     fetch(URL.detail + building_code, {
         method: "GET"
     })
-    .then( res => res.json() )
-    .then( res => {
+        .then( res => res.json() )
+        .then( res => {
 
-        classifyFloors( res );
-        createFloors();
+            classifyFloors( res );
+            createFloors();
 
-        // activate 1st floor as default
-        let target_floor = '01';
-        if ( sessionStorage.getItem( 'floor' ) ) {
-            target_floor = sessionStorage.getItem( 'floor' );
-            target_floor = ( '00' + target_floor ).slice( -2 );
-            sessionStorage.removeItem( 'floor' );
-        }
-        let active_index = floorNum[building_code].findIndex( i => i == target_floor );
+            // activate 1st floor as default
+            let target_floor = '01';
+            if ( sessionStorage.getItem( 'floor' ) ) {
+                target_floor = sessionStorage.getItem( 'floor' );
+                target_floor = ( '00' + target_floor ).slice( -2 );
+                sessionStorage.removeItem( 'floor' );
+            }
+            let active_index = floorNum[building_code].findIndex( i => i == target_floor );
 
-        main_loop( target_floor );
+            main_loop( target_floor );
 
-    } )
+        } )
 
 }
 
@@ -158,7 +158,7 @@ function activateFloor ( target_floor ) {
     room_infos.forEach( roomInfo => {
 
         // 시설 리스트 생성
-        if( !roomInfo.time & !roomInfo.url & roomInfo['phone_num'].length <= 7 )
+        if( !roomInfo.time & !roomInfo.url & !roomInfo['phone_num'])
             roomList.appendChild( listAddRoom( roomInfo ) ); // ul > li
         else
             roomList.appendChild( listAddRoomAccordion( roomInfo ) ); // ul > li
@@ -343,7 +343,7 @@ function listAddRoomAccordion( roomInfo ) {
         p.innerText = '• 운영 시간: ' + roomInfo.time;
         content.appendChild( p );
     }
-    if ( roomInfo['phone_num'].length > 7 ) {
+    if ( roomInfo['phone_num'] ) {
         let p = document.createElement( 'p' );
         p.innerText = '• 문의처: ' + roomInfo['phone_num'];
         content.appendChild( p );
