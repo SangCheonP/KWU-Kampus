@@ -3,7 +3,6 @@ import { floorNum, roomPosition } from "./room-position.js"
 
 let classifiedFloors = [];
 
-let prevFloor;
 let prevElement, prevRoom, building_code = "";
 let mapWidth, mapHeight, addPosition;
 const whRatio = ( 768/1200 );
