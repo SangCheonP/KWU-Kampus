@@ -4,15 +4,12 @@ import { floorNum, roomPosition } from "./room-position.js"
 let classifiedFloors = [];
 
 let prevFloor;
-let prevElement, prevDesc, prevRoom, building_code, prevRoomCode = "";
+let prevElement, prevRoom, building_code = "";
 let mapWidth, mapHeight, addPosition;
 const whRatio = ( 768/1200 );
 const hwRatio = ( 1200/768 );
 
 init();
-
-//window.addEventListener( 'resize', function(){ setFont(index) } ); // TODO
-//waiting_click_floor();
 
 function init() {
 
@@ -38,7 +35,7 @@ function init() {
         }
         let active_index = floorNum[building_code].findIndex( i => i == target_floor );
 
-        activateFloor( target_floor );
+        main_loop( target_floor );
 
     } )
 
@@ -121,6 +118,14 @@ function createFloors() {
 
 }
 
+function main_loop( target_floor ) {
+    let active_index = activateFloor( target_floor );
+    setFont( active_index );
+    waitingClickFloor();
+    waitingClickRoom();
+    window.addEventListener( 'resize', function(){ setFont( active_index ) } );
+}
+
 /**
  * `ul#floors` element 아래의 `li` element 들 중에서, i 번째 요소를 활성화합니다.
  *
@@ -138,6 +143,9 @@ function activateFloor ( target_floor ) {
     if ( prevElement ) { prevElement.classList.remove( 'active' ); }
     prevElement = active_floor;
     active_floor.classList.add( 'active' );
+
+    if ( prevRoom ) { prevRoom.classList.remove( 'active' ); }
+    prevRoom = "";
 
     setFloorBg( `../floor-img/${building_code}/${target_floor}.png` );
 
@@ -161,9 +169,7 @@ function activateFloor ( target_floor ) {
 
     })
 
-    setFont( active_index );
-    waitingClickFloor();
-    waitingClickRoom();
+    return active_index;
 
 }
 
@@ -178,6 +184,70 @@ function setFloorBg ( bgUrl = "" ) {
 
 }
 
+function mapAddRoom ( roomInfo ) {
+    const div = document.createElement( 'div' );
+    div.className = 'roomNum';
+    const span = document.createElement( 'span' );
+    span.innerText = roomInfo['room_no'];
+    div.appendChild( span ); // div > span
+
+    return div;
+}
+
+/**
+ * 윈도우 창 크기 조절하는 것에 따라 평면도 위 표기되는 폰트 (호수)의 크기 및 위치를 조정합니다.
+ *
+ * `main#detail > div.img-wrap > div.imgBg` 의 현재 width (또는 height) 를 구하고,
+ * 평면도 비율을 이용하여 현재 height (또는 width) 를 도출합니다.
+ *
+ * 현재 평면도의 width, height 값에 맞춰 폰트 (호수)의 크기 및 위치를 조정합니다.
+ *
+ * @param { number } i current floor
+ */
+function setFont( active_index ) {
+
+    let imgBg = document.getElementsByClassName( 'imgBg' )[0];
+    const recentRatio = ( imgBg.offsetHeight / imgBg.offsetWidth );
+
+    // `div.imgBg`의 height 가 background 의 height 보다 더 큰 경우
+    if ( recentRatio >= whRatio ) {
+        mapWidth = imgBg.offsetWidth;
+        mapHeight = mapWidth * whRatio;
+        addPosition = (imgBg.offsetHeight - mapHeight) / 2;
+    }
+    // `div.imgBg`의 width 가 background 의 width 보다 더 큰 경우
+    else {
+        mapHeight = imgBg.offsetHeight;
+        mapWidth = mapHeight * hwRatio;
+        addPosition = (imgBg.offsetWidth - mapWidth) / 2;
+    }
+
+    let index, num = 0.0;
+    let room_infos = classifiedFloors[ active_index ];
+    let positionArr = roomPosition[ building_code ][ active_index ];
+    let roomNum = document.getElementsByClassName( 'roomNum' );
+    room_infos.forEach( ( room, idx ) => {
+        index = Number( room['room_no'].slice( -2 ) );
+        index--;
+
+        if( index < 0 ) {
+            roomNum[idx].style.display = 'none';
+        }
+        else {
+            roomNum[idx].style.width = (mapWidth * 0.1) + 'px';
+            roomNum[idx].style.height = (mapHeight * 0.05) + 'px';
+
+            if (recentRatio >= whRatio) {
+                roomNum[idx].style.left = (mapWidth * positionArr[index][0]) + 'px';
+                roomNum[idx].style.top = (mapHeight * (positionArr[index][1] - num++ * 0.05) + addPosition) + 'px';
+            } else {
+                roomNum[idx].style.left = (mapWidth * positionArr[index][0] + addPosition) + 'px';
+                roomNum[idx].style.top = (mapHeight * (positionArr[index][1] - num++ * 0.05)) + 'px';
+            }
+        }
+    })
+}
+
 /**
  * 건물에 대한 정보 중 총 층(floor)수와 호(room)수를 받아와서
  * detail_example.html에 Floor List를 구성하는 새 element 들을 생성하고,
@@ -187,7 +257,6 @@ function setFloorBg ( bgUrl = "" ) {
  * @param { number } roomCount the integer number of rooms in each floors
  * @result Create new elements under `ul#floors`
  */
-
 function waitingClickFloor() {
 
     let floors = document.querySelectorAll( '.floor-title' );
@@ -195,7 +264,7 @@ function waitingClickFloor() {
 
         floor.addEventListener( 'click', ( e ) => {
             e.preventDefault();
-            activateFloor( ( '00' + classifiedFloors[i][0].floor ).slice( -2 ) );
+            main_loop( ( '00' + classifiedFloors[i][0].floor ).slice( -2 ) );
         } );
 
     } );
@@ -218,65 +287,6 @@ function waitingClickRoom() {
     });
 
 }
-
-/**
- * 윈도우 창 크기 조절하는 것에 따라 평면도 위 표기되는 폰트 (호수)의 크기 및 위치를 조정합니다.
- *
- * `main#detail > div.img-wrap > div.imgBg` 의 현재 width (또는 height) 를 구하고,
- * 평면도 비율을 이용하여 현재 height (또는 width) 를 도출합니다.
- *
- * 현재 평면도의 width, height 값에 맞춰 폰트 (호수)의 크기 및 위치를 조정합니다.
- *
- * @param { number } i current floor
- */
-function setFont( i ) {
-    let roomNum = document.getElementsByClassName( 'roomNum' );
-    let floorInfo = classifiedFloors[i];
-
-    let building = floorInfo[0]['building'];
-    building = building.replaceAll(' ', '');
-    if ( building == '80주년기념관&광운스퀘어' ) building = '기념관';
-
-    let imgBg = document.getElementsByClassName( 'imgBg' )[0];
-    const recentRatio = ( imgBg.offsetHeight / imgBg.offsetWidth );
-    let index, num = 0.0;
-
-    // `div.imgBg`의 height 가 background 의 height 보다 더 큰 경우
-    if ( recentRatio >= whRatio ) {
-        mapWidth = imgBg.offsetWidth;
-        mapHeight = mapWidth * whRatio;
-        addPosition = (imgBg.offsetHeight - mapHeight) / 2;
-    }
-    // `div.imgBg`의 width 가 background 의 width 보다 더 큰 경우
-    else {
-        mapHeight = imgBg.offsetHeight;
-        mapWidth = mapHeight * hwRatio;
-        addPosition = (imgBg.offsetWidth - mapWidth) / 2;
-    }
-
-    let positionArr = roomPosition[ building ][i];
-    for( let j = 0; j < floorInfo.length; j++ ) {
-        index = Number( ( floorInfo[j]['room_no'] ).slice( -2 ) );
-        index--;
-
-        if( index < 0 ) {
-            roomNum[j].style.display = 'none';
-            continue;
-        }
-
-        roomNum[j].style.width = ( mapWidth * 0.1 ) + 'px';
-        roomNum[j].style.height = ( mapHeight * 0.05 ) + 'px';
-
-        if ( recentRatio >= whRatio ) {
-            roomNum[j].style.left = (mapWidth * positionArr[index][0]) + 'px';
-            roomNum[j].style.top = (mapHeight * (positionArr[index][1] - num++ * 0.05) + addPosition) + 'px';
-        } else {
-            roomNum[j].style.left = ( mapWidth * positionArr[index][0] + addPosition ) + 'px';
-            roomNum[j].style.top = ( mapHeight * (positionArr[index][1] - num++ * 0.05)) + 'px';
-        }
-    }
-}
-
 
 /**
  * i 층의 호(room)수를 받아와서
@@ -305,6 +315,7 @@ function listAddRoom( roomInfo ) {
  * @returns {HTMLLIElement} `li` element in rooms list
  */
 function listAddRoomAccordion( roomInfo ) {
+
     // 정보를 담을 기본 틀 생성
     const accor_liRoom = document.createElement( 'li' );
     accor_liRoom.className = 'accordion-item';
@@ -352,14 +363,5 @@ function listAddRoomAccordion( roomInfo ) {
     accor_liRoom.appendChild( accor_body ); // li > button + div
 
     return accor_liRoom;
-}
 
-function mapAddRoom ( roomInfo ) {
-    const div = document.createElement( 'div' );
-    div.className = 'roomNum';
-    const span = document.createElement( 'span' );
-    span.innerText = roomInfo['room_no'];
-    div.appendChild( span ); // div > span
-
-    return div;
 }
