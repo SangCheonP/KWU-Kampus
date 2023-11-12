@@ -225,6 +225,7 @@ function setFont( active_index ) {
     let room_infos = classifiedFloors[ active_index ];
     let positionArr = roomPosition[ building_code ][ active_index ];
     let roomNum = document.getElementsByClassName( 'roomNum' );
+
     room_infos.forEach( ( room, idx ) => {
         index = Number( room['room_no'].slice( -2 ) );
         index--;
