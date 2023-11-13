@@ -1,10 +1,15 @@
 import * as URL from './url.js'
 import { floorNum, roomPosition } from "./room-position.js"
 
+let classifiedFloors = [];
+
 let prevElement, prevRoom, building_code = "";
 let mapWidth, mapHeight, addPosition;
 const whRatio = ( 768/1200 );
 const hwRatio = ( 1200/768 );
+
+let wait = true;
+let floors;
 
 init();
 
@@ -20,9 +25,8 @@ function init() {
         .then( res => res.json() )
         .then( res => {
 
-            let classifiedFloors = classifyFloors( res );
-            console.log(classifiedFloors);
-            createFloors( classifiedFloors );
+            classifyFloors( res );
+            createFloors();
 
             // activate 1st floor as default
             let target_floor = '01';
@@ -33,7 +37,9 @@ function init() {
             }
             let active_index = floorNum[building_code].findIndex( i => i == target_floor );
 
-            main_loop( classifiedFloors, target_floor );
+            activateFloor( target_floor );
+            floors = document.querySelectorAll( '.floor-title' );
+            waitingClickFloor();
 
         } )
 
@@ -49,7 +55,6 @@ function init() {
  */
 function classifyFloors( res ) {
 
-    let classifiedFloors = [];
     let floors = res.map( room => room.floor );
     let uniqFloors = [... new Set(floors.sort(compareFloors))]; // remove duplicate and sort floors[]
     uniqFloors.forEach( floor  => {
@@ -68,8 +73,6 @@ function classifyFloors( res ) {
         classifiedFloors.push(classifiedFloor.sort(function(a, b) { return a['room_no'] < b['room_no'] ? -1 : a['room_no'] > b['room_no'] ? 1 : 0; }));
 
     } )
-
-    return classifiedFloors;
 
 }
 
@@ -95,7 +98,7 @@ function compareFloors(a, b) {
  * detail_example.html에 Floor List를 구성하는 새 element 들을 생성하고,
  * 클릭 이벤트를 설정합니다.
  */
-function createFloors( classifiedFloors ) {
+function createFloors() {
 
     const floorList = document.getElementById('floors');
     classifiedFloors.forEach( floor => {
@@ -119,12 +122,18 @@ function createFloors( classifiedFloors ) {
 
 }
 
-function main_loop( classifiedFloors, target_floor ) {
-    let active_index = activateFloor( classifiedFloors, target_floor );
-    setFont( classifiedFloors, active_index );
-    waitingClickFloor( classifiedFloors );
-    waitingClickRoom();
-    window.addEventListener( 'resize', function(){ setFont( classifiedFloors, active_index ) } );
+
+function waitingClickFloor() {
+    floors.forEach( ( floor, i ) => {
+
+        floor.addEventListener( 'click', ( e ) => {
+            e.preventDefault();
+            activateFloor (( '00' + classifiedFloors[i][0].floor ).slice( -2 ));
+
+        } );
+
+    } );
+
 }
 
 /**
@@ -138,7 +147,7 @@ function main_loop( classifiedFloors, target_floor ) {
  * @param { Element } floor `li` element in floors list
  * @param { number } i index value of the element
  */
-function activateFloor ( classifiedFloors, target_floor ) {
+function activateFloor ( target_floor ) {
 
     let active_floor = document.getElementById( target_floor );
     if ( prevElement ) { prevElement.classList.remove( 'active' ); }
@@ -156,7 +165,6 @@ function activateFloor ( classifiedFloors, target_floor ) {
     imgBg.innerHTML = '';
 
     let active_index = floorNum[building_code].findIndex( i => i == target_floor );
-    console.log(floorNum[building_code], building_code);
     let room_infos = classifiedFloors[active_index];
     room_infos.forEach( roomInfo => {
 
@@ -171,7 +179,10 @@ function activateFloor ( classifiedFloors, target_floor ) {
 
     })
 
-    return active_index;
+    setFont( active_index );
+
+    window.addEventListener( 'resize', function(){ setFont( active_index ); } );
+    waitingClickRoom();
 
 }
 
@@ -206,7 +217,7 @@ function mapAddRoom ( roomInfo ) {
  *
  * @param { number } i current floor
  */
-function setFont( classifiedFloors, active_index ) {
+function setFont( active_index ) {
 
     let imgBg = document.getElementsByClassName( 'imgBg' )[0];
     const recentRatio = ( imgBg.offsetHeight / imgBg.offsetWidth );
@@ -236,6 +247,7 @@ function setFont( classifiedFloors, active_index ) {
             roomNum[idx].style.display = 'none';
         }
         else {
+            roomNum[idx].style.display = 'block';
             roomNum[idx].style.width = (mapWidth * 0.1) + 'px';
             roomNum[idx].style.height = (mapHeight * 0.05) + 'px';
 
@@ -259,20 +271,7 @@ function setFont( classifiedFloors, active_index ) {
  * @param { number } roomCount the integer number of rooms in each floors
  * @result Create new elements under `ul#floors`
  */
-function waitingClickFloor( classifiedFloors ) {
 
-    let floors = document.querySelectorAll( '.floor-title' );
-    floors.forEach( ( floor, i ) => {
-
-        floor.addEventListener( 'click', ( e ) => {
-            e.preventDefault();
-            main_loop( classifiedFloors, ( '00' + classifiedFloors[i][0].floor ).slice( -2 ) );
-            return false;
-        } );
-
-    } );
-
-}
 
 function waitingClickRoom() {
 
