@@ -475,6 +475,7 @@ function createModel (data) {
         setDetails(model);
         details.classList.add('active');
         sessionStorage.setItem('building_code', model.userData.id);
+        sessionStorage.setItem('building_name', model.name);
 
         // 임시
         categoty_content[1] = model.name;

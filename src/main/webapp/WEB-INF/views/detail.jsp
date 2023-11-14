@@ -52,7 +52,6 @@
           </div>
 
           <div class="img-wrap">
-            <div class="navbar"></div>
             <div class="imgBg">
 <%--              <div class="roomNum">--%>
 <%--                <div class="desc">--%>

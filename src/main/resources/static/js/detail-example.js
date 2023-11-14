@@ -3,7 +3,7 @@ import { floorNum, roomPosition } from "./room-position.js"
 
 let classifiedFloors = [];
 
-let prevElement, prevRoom, building_code = "";
+let prevElement, prevRoom, building_code, building_name = "";
 let mapWidth, mapHeight, addPosition;
 const whRatio = ( 768/1200 );
 const hwRatio = ( 1200/768 );
@@ -18,6 +18,13 @@ function init() {
     // sessionStorage 에서 클릭한 건물/시설 정보를 저장 및 불러옵니다.
     building_code = sessionStorage.getItem( "building_code" );
     if ( !building_code ) return;
+
+    building_name = sessionStorage.getItem( "building_name" );
+    let inner = document.getElementsByClassName( 'inner' )[0];
+    const detail_title = document.createElement( 'div' );
+    detail_title.className = 'detail-title';
+    detail_title.innerText = building_name;
+    inner.appendChild( detail_title );
 
     fetch(URL.detail + building_code, {
         method: "GET"
@@ -121,7 +128,6 @@ function createFloors() {
     });
 
 }
-
 
 function waitingClickFloor() {
     floors.forEach( ( floor, i ) => {
