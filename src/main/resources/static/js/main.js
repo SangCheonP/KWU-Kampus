@@ -26,10 +26,8 @@ let detailNoticeDatas;
 ///////////////////////////////
 
 let width, height, camera, controls, scene, renderer, raycaster, headerHeight;
-let textTitle, textContent, help_content, categoty_content, info_help, info_category;
-let infoTag, infoPage, infoButton, infoClose;
+let categoty_content;
 let mapChange, mapState, map2D, map3D;
-let container, options, map;
 
 const pointer = new THREE.Vector2(); // mouse cursor position tracking
 let intersects = []; // list to find which building is selected
@@ -90,31 +88,6 @@ async function init() {
   });
   pmremGenerator.compileEquirectangularShader();
 
-  /*
-  // Create Info Pannel
-  textTitle = document.getElementsByClassName("infoTitle");
-  textContent = document.getElementsByClassName("infoContent");
-
-  info_category = new Array('시설명', '건물명', '층수', '호수', '기타 정보');
-
-  info_help = new Array('KWU Kampus', '조작법');
-  help_content = new Array('광운대학교 시설 정보 취합 사이트 \'KWU Kampus\'입니다. 건물 또는 카테고리를 클릭해 보세요. 해당 건물 및 시설에 대한 정보를 확인할 수 있습니다.',
-                           '정보창: 해당 창의 우측 책갈피 클릭 //\n ' +
-                           '카테고리 메뉴: 사이트의 우측 상단 버튼 클릭 //\n ' +
-                           '지도 이동: 마우스 우 클릭 + 드래그 //\n ' +
-                           '지도 회전: 마우스 좌 클릭 + 드래그 //\n ' +
-                           '지도 확대/축소: 마우스 휠');
-  categoty_content = new Array(5);
-
-  infoTag = document.getElementById('infoTag');
-  infoPage = document.getElementById('infoPage');
-  infoButton = document.getElementsByClassName('infoButton');
-  infoClose =  document.getElementById('infoClose');
-
-  setInfo(info_help, help_content);
-  infoTag.classList.toggle( 'on' );
-  infoPage.classList.toggle( 'on' );
-  */
   map2D = mapChange = document.getElementById('map');
   // map3D = mapChange = document.getElementById('guiContainer');
   mapChange = document.getElementById('mapChange');
@@ -126,7 +99,6 @@ async function init() {
 
   // Event Listeners
   window.addEventListener( 'resize', onWindowResize );
-  window.addEventListener('load', () => { sessionStorage.clear(); });
   mapContainer.addEventListener( 'pointermove', onPointerMove );
   mapContainer.addEventListener( 'click', onClick );
   // window.addEventListener( 'dblclick', ( event ) => { // dev, 더블 클릭시 카메라의 위치에서 카메라 방향으로 
@@ -436,27 +408,6 @@ function initLights() {
 }
 
 /**
- * 카테고리 클릭 시 인포 창에 관련 정보를 세팅합니다.
- */
-subCategories.forEach( ( subCategory ) => {
-  subCategory.addEventListener( 'click', function() {
-    // 00-0000-0: 건물번호-호실-추가번호
-    var c_id = this.getAttribute('category-id');
-    categoty_content[0] = this.text;
-    // categoty_content[1] = c_id;
-    // 하단 수정 필요
-    categoty_content[2] = '';
-    categoty_content[3] = '';
-    categoty_content[4] = '';
-    // categoty_content[2] = c_id.substr(0, 2);
-    // categoty_content[3] = c_id.substr(3, 4);
-    // categoty_content[4] = c_id.substr(8, 1);
-
-    setCategoryInfo( info_category, categoty_content );
-  });
-});
-
-/**
  * 건물의 모델링을 불러와 `scene`에 추가하고, `buildings` 리스트에 저장 및 `subCategories`의 이벤트 리스너를 설정합니다.
  * 
  * `loader` 를 사용해 `building.modelPath` 에 있는 모델을 불러옵니다.   
@@ -560,8 +511,6 @@ function createModel (data) {
           }
           mapMenuBtn.classList.remove('active');
           mapMenu.classList.remove('active');
-
-          // setCategoryInfo( info_category, categoty_content );
       
         });
 
@@ -773,99 +722,6 @@ function getIntersects() {
 }
 
 /**
- * 정보창에 새로운 값을 업데이트하기 전, 초기화합니다.
- * @param len 정보창에 들어갈 내용 개수
- */
-function clearInfo( len = 0 ) {
-
-  for( var i = 0; i < len; i++ ) {
-    textTitle[i].textContent = '';
-    textContent[i].textContent = '';
-
-    textTitle[i].style.display = 'block';
-    textContent[i].style.display = 'block';
-  }
-
-  for( var i = len; i < textTitle.length; i++ ) {
-    textTitle[i].style.display = 'none';
-    textContent[i].style.display = 'none';
-  }
-}
-
-/**
- * 정보 요약창을 생성합니다.
- * @param title_arr: 정보 항목
- * @param content_arr: 항목별 내용
- */
-function setInfo( title_arr, content_arr ) {
-  clearInfo( title_arr.length );
-
-  for( var i = 0; i < title_arr.length; i++ ) {
-    textTitle[i].textContent = title_arr[i];
-    textContent[i].textContent = content_arr[i];
-  }
-
-  infoButton[0].textContent = '만족도 조사 하기';
-  infoButton[0].setAttribute( "onclick", "window.open('https://forms.gle/dMwa7nym85tTc79x5')" );
-}
-
-/**
- * 카테고리 클릭 시 정보창을 업데이트합니다.
- * @param title_arr: 정보 항목
- * @param content_arr: 항목별 내용
- */
-function setCategoryInfo( title_arr, content_arr ) {
-  clearInfo( title_arr.length );
-
-  for( var i = 0; i < title_arr.length; i++ ) {
-    textTitle[i].textContent = title_arr[i];
-    textContent[i].textContent = content_arr[i];
-  }
-
-  infoButton[0].textContent = '상세 정보 보기';
-  infoButton[0].setAttribute( "onclick", "location.href='/detail'" );
-}
-
-/**
- * 건물 클릭 시 정보창을 업데이트합니다.
- * @param model cliked building
- */
-function setBuildingInfo( model ) {
-  clearInfo(2);
-
-  textTitle[0].innerText = "건물명";
-  textContent[0].innerText = model.name;;
-
-  textTitle[1].innerText = "주요 시설";
-  model.userData.importance_rooms.forEach( ( data ) => {
-    const p = document.createElement( 'p' );
-    p.innerText = data.facilities;
-    textContent[1].appendChild( p );
-  } )
-
-  infoButton[0].textContent = '상세 정보 보기';
-  infoButton[0].setAttribute( "onclick", "location.href='/detail'" );
-
-}
-
-/**
- * info Open
- */
-infoTag.addEventListener( 'click', function() {
-  setInfo(info_help, help_content);
-
-  infoTag.classList.toggle( 'on' );
-  infoPage.classList.toggle( 'on' );
-});
-/**
- * info Close
- */
-infoClose.addEventListener( 'click', function() {
-  infoPage.classList.remove( 'on' );
-  infoTag.classList.remove( 'on' );
-});
-
-/**
  * 각 단과대별로 필터링 된 배열을 ul element로 생성합니다.
  * @param {Array} filtered an array of filtered notices
  * @param {Number} index an index number to set default element as active
@@ -918,37 +774,3 @@ function activateNotice(last, current) {
   noticesUls[current].classList.add('active');
 
 }
-
-/**
- * 버튼 클릭 시, 2D <-> 3D 지도를 전환합니다.
- * 2D 지도를 보일 땐 카카오맵을 로드하고,
- * 3D 지도를 보일 땐 카카오맵의 display 값을 none으로 설정합니다.
- */
-// mapChange.addEventListener( 'click', function() {
-//
-//   if( mapState == '2D' ) {
-//     map2D.style.display = 'block';
-//     // map3D.style.display = 'none';
-//     load2Dmap();
-//     mapState = '3D';
-//   }
-//   else if ( mapState == '3D' ) {
-//     // animate();
-//     map2D.style.display = 'none';
-//     // map3D.style.display = 'block';
-//     mapState = '2D';
-//   }
-// });
-
-/**
- * 카카오맵을 load 하기 위해 값을 설정합니다.
- */
-// function load2Dmap() {
-//   container = document.getElementById( 'map' ); //지도를 담을 영역의 DOM 레퍼런스
-//   options = { //지도를 생성할 때 필요한 기본 옵션
-//     center: new kakao.maps.LatLng( 33.450701, 126.570667 ), //지도의 중심좌표.
-//     level: 3 //지도의 레벨(확대, 축소 정도)
-//   };
-//
-//   map = new kakao.maps.Map( container, options ); //지도 생성 및 객체 리턴
-// }
