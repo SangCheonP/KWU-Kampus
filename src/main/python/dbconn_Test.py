@@ -312,20 +312,6 @@ list4 = []
 list5 = []
 list6 = []
 
-for index, value in enumerate(result_list):
-    if index < 10:
-        list1.append(value)
-    elif index < 20:
-        list2.append(value)
-    elif index < 30:
-        list3.append(value)
-    elif index < 40:
-        list4.append(value)
-    elif index < 50:
-        list5.append(value)
-    else:
-        list6.append(value)
-
 # Python과 mariaDB 연결
 dbconn = mysql.connector.connect(
     host="13.124.194.184",
@@ -421,6 +407,20 @@ def update():
         Natural()
         Policy_Law()
         building()
+        for index, value in enumerate(result_list):
+            if index < 10:
+                list1.append(value)
+            elif index < 20:
+                list2.append(value)
+            elif index < 30:
+                list3.append(value)
+            elif index < 40:
+                list4.append(value)
+            elif index < 50:
+                list5.append(value)
+            else:
+                list6.append(value)
+
         dbconn.connect()
 
         execute("DELETE FROM notice_web")
