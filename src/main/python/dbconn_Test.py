@@ -302,10 +302,29 @@ def building():
             if date >= two_month_ago:
                 result_list.append([facilities[0], facilities[1], href, title, date.strftime("%Y-%m-%d")])
 
-
-
     # 브라우저를 닫습니다
     driver.quit()
+
+list1 = []
+list2 = []
+list3 = []
+list4 = []
+list5 = []
+list6 = []
+
+for index, value in enumerate(result_list):
+    if index < 10:
+        list1.append(value)
+    elif index < 20:
+        list2.append(value)
+    elif index < 30:
+        list3.append(value)
+    elif index < 40:
+        list4.append(value)
+    elif index < 50:
+        list5.append(value)
+    else:
+        list6.append(value)
 
 # Python과 mariaDB 연결
 dbconn = mysql.connector.connect(
@@ -426,7 +445,13 @@ def update():
         merge_bulk("INSERT INTO notice_web (dept, site, notice, date) VALUES (%s, %s, %s, %s)", policy_list)
         print("policy_list 업데이트 완료")
 
-        merge_bulk("INSERT INTO building_notice (building, building_code, site, notice, date) VALUES (%s, %s, %s, %s, %s)", result_list)
+        # merge_bulk("INSERT INTO building_notice (building, building_code, site, notice, date) VALUES (%s, %s, %s, %s, %s)", result_list)
+        merge_bulk("INSERT INTO building_notice (building, building_code, site, notice, date) VALUES (%s, %s, %s, %s, %s)", list6)
+        merge_bulk("INSERT INTO building_notice (building, building_code, site, notice, date) VALUES (%s, %s, %s, %s, %s)", list2)
+        merge_bulk("INSERT INTO building_notice (building, building_code, site, notice, date) VALUES (%s, %s, %s, %s, %s)", list3)
+        merge_bulk("INSERT INTO building_notice (building, building_code, site, notice, date) VALUES (%s, %s, %s, %s, %s)", list4)
+        merge_bulk("INSERT INTO building_notice (building, building_code, site, notice, date) VALUES (%s, %s, %s, %s, %s)", list5)
+        merge_bulk("INSERT INTO building_notice (building, building_code, site, notice, date) VALUES (%s, %s, %s, %s, %s)", list1)
         print("result_list 업데이트 완료")
         print("코드 업데이트 완료")
 
