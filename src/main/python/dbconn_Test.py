@@ -452,7 +452,7 @@ def update():
         merge_bulk("INSERT INTO building_notice (building, building_code, site, notice, date) VALUES (%s, %s, %s, %s, %s)", list4)
         merge_bulk("INSERT INTO building_notice (building, building_code, site, notice, date) VALUES (%s, %s, %s, %s, %s)", list5)
         merge_bulk("INSERT INTO building_notice (building, building_code, site, notice, date) VALUES (%s, %s, %s, %s, %s)", list1)
-        print("result_list 업데이트 완료")
+        print("result_lists 업데이트 완료")
         print("코드 업데이트 완료")
 
     except Exception as e:
