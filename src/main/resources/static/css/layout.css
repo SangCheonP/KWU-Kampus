@@ -5,9 +5,22 @@
   --header-height: 80px;
 
   --font-size: clamp(0.5rem, 1.2vw, 1.5rem);
-  --title-font-size: clamp(1rem, 1.2vw, 3rem);
+  --title-font-size: clamp(1rem, 1.4vw, 3rem);
   --image-width: 1200px;
   --image-height: 768px;
+}
+
+@font-face {
+  font-family: 'iceHimchan-Rg';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-2@1.0/iceHimchan-Rg.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Dovemayo_gothic';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.1/Dovemayo_gothic.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
 }
 
 @media screen and (max-width: 1200px) {
@@ -177,12 +190,12 @@ header ul.temp-links li a { text-decoration: underline; }
   cursor: pointer;
 }
 .category:hover .text { cursor: pointer; color: var( --main-color ); }
-.category .text span { font-size: 24px; font-weight: 600; }
+.category .text span { font-size: 27px; font-weight: 600; font-family: 'Dovemayo_gothic'; }
 .category .text>img { transition: transform .3s ease; }
 .category.on .text>img { transform: rotate( 180deg ); transition: transform .3s ease; }
 .category .sub-categories { height: auto; background: #ddd; border-radius: 10px; }
 .sub-categories>li { width: 100%; padding: 0.5em 1em; }
-.sub-categories>li>a { display: block; width: 100%; font-size: 16px; }
+.sub-categories>li>a { display: block; width: 100%; font-size: 18px; font-family: 'Dovemayo_gothic'; }
 .sub-categories>li>a:hover { text-decoration: underline; }
 @media screen and (max-width: 720px) {
   #mapMenu { width: calc(100% - 40px); }
@@ -235,10 +248,11 @@ header ul.temp-links li a { text-decoration: underline; }
 #scrollDown span {
   display: none;
   height: 100%;
-  padding-right: 1em;
+  padding-right: 1.3em;
   color: #333;
-  font-size: 24px;
+  font-size: 28px;
   line-height: 60px;
+  font-family: 'Dovemayo_gothic';
 }
 #scrollDown:hover span { display: block; }
 @media screen and (max-width: 1024px) {
@@ -276,7 +290,8 @@ header ul.temp-links li a { text-decoration: underline; }
   margin-bottom: 20px;
   border-bottom: 2px solid #aaa;
   text-align: center;
-  font-size: 24px;
+  font-size: 28px;
+  font-family: 'Dovemayo_gothic';
 }
 .details-wrap .img-wrap {
   width: 100%; height: 50%;
@@ -296,11 +311,13 @@ header ul.temp-links li a { text-decoration: underline; }
 }
 .text-wrap .left-wrap { width: 100%; height: 100%; padding: 10px; }
 p.detail-heading {
+  font-family: 'Dovemayo_gothic';
   display: inline-block;
   height: 26px;
   margin-bottom: 4px;
   font-size: 20px;
   font-weight: bold;
+  text-width: 500;
   border-bottom: 2px solid var(--main-color);
 }
 ul.fac-list,
@@ -320,6 +337,7 @@ ul.detail-notice-list li {
   margin: 5px;
   border-radius: 5px;
   cursor: pointer;
+  font-family: 'Dovemayo_gothic';
 }
 ul.fac-list li:hover,
 ul.detail-notice-list li:hover { background: #bbb; }
@@ -340,12 +358,14 @@ ul.detail-notice-list li a {
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  font-size: 14px;
+  font-size: 16px;
+  font-family: 'Dovemayo_gothic';
 }
 ul.detail-notice-list li span.date {
   display: block;
   text-align: end;
-  font-size: 12px;
+  font-size: 14px;
+  font-family: 'Dovemayo_gothic';
 }
 .right-wrap .mng-wrap {
   display: flex; flex-direction: column;
@@ -367,10 +387,11 @@ ul.detail-notice-list li span.date {
   border: none;
   border-radius: 200px;
   background: var(--main-color);
-  font-size: 20px;
+  font-size: 24px;
   color: #fff;
   cursor: pointer;
 }
+.button-wrap button a { font-family: 'Dovemayo_gothic'; }
 .button-wrap button:hover { background: var(--main-dark); }
 .button-wrap button:active { background: var(--main-color); }
 #detail_link { display: block; width: 100%; height: 100%; }
@@ -419,7 +440,7 @@ ul.detail-notice-list li span.date {
 
 /* notice start */
 #noticeContainer { position: relative; width: 100%; height: 100%; isolation: isolate; }
-#noticeContainer h2 { margin: 40px 0; font-size: 44px; font-weight: 700; }
+#noticeContainer h2 { margin: 40px 0; font-size: 44px; font-weight: 700; font-family: 'Dovemayo_gothic'; }
 
 ul.notice-header-wrap {
   position: relative;
@@ -438,9 +459,11 @@ li.notice-list h3 {
   background: #fff;
   border-bottom: 2px solid var(--main-color);
   color: #333;
-  font-size: 20px;
+  font-size: 24px;
+  font-weight: 600;
   text-align: center;
   cursor: pointer;
+  font-family: 'Dovemayo_gothic';
 }
 li.notice-list:hover h3,
 li.notice-list.active h3 { border-top-left-radius: 10px; border-top-right-radius: 10px; }
@@ -455,6 +478,8 @@ ul.notices li {
   width: 100%; height: 100%;
   padding: 10px 20px;
 }
+ul.notices li a { font-family: 'Dovemayo_gothic'; font-size: 20px; }
+ul.notices li span { font-family: 'Dovemayo_gothic'; }
 ul.notices li a:hover { text-decoration: underline; }
 @media screen and (max-width: 1024px) {
   li.notice-list h3 { font-size: 18px; }
@@ -493,7 +518,8 @@ ul.notices li a:hover { text-decoration: underline; }
 .detail-title {
   color: white;
   font-size: var( --title-font-size );
-  font-weight: 400;
+  font-weight: 500;
+  font-family: 'Dovemayo_gothic';
 }
 
 #floors {
@@ -510,10 +536,11 @@ ul.notices li a:hover { text-decoration: underline; }
   display: block;
   /*margin-bottom: 10px;*/
   border-bottom: 2px solid #ccc;
-  font-size: 30px;
+  font-size: 32px;
   font-weight: 600;
   text-indent: 0.5em;
   cursor: pointer;
+  font-family: 'Dovemayo_gothic';
 }
 #floors li.active span.floor-title {
   background: var( --main-color );
@@ -534,10 +561,11 @@ ul.notices li a:hover { text-decoration: underline; }
   padding: 5px 10px;
   /*margin-bottom: 10px;*/
   /*border-radius: 5px;*/
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 18px;
+  font-weight: 500;
   text-align: left;
   line-height: 1.4;
+  font-family: 'Dovemayo_gothic';
 
   background-color: rgba(0, 0, 0, 0);
   border-bottom: 2px solid #ccc;
@@ -549,19 +577,21 @@ ul.notices li a:hover { text-decoration: underline; }
   padding: 0px 0px;
   /*margin-bottom: 10px;*/
   /*border-radius: 5px;*/
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 18px;
+  font-weight: 500;
   text-align: left;
   line-height: 1.4;
+  font-family: 'Dovemayo_gothic';
 
   background-color: rgba(0, 0, 0, 0);
 }
 #rooms>li>div>div {
   width: 100%; height: auto;
   padding: 10px;
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 100;
   background-color: #FFF;
+  font-family: 'Dovemayo_gothic';
 }
 
 /* img-wrap */
@@ -596,13 +626,17 @@ ul.notices li a:hover { text-decoration: underline; }
   height: calc( var( --image-height ) * 0.5);
   /*background: blue;*/
 }
-.roomNum span { 
+.roomNum span {
+  font-family: iceHimchan-Rg;
   display: block;
   width: 100%; height: 100%;
   /*color: #fff;*/
   /*background: #c03b3b;*/
   color: #000;
   font-size: var( --font-size );
+  padding-left: 4.5%;
+  padding-top: 1%;
+  text-shadow:1px 1px 1px white;
 }
 .roomNum span.active {
   color: red;
@@ -618,12 +652,15 @@ ul.notices li a:hover { text-decoration: underline; }
 }
 .facility-detail>p {
   margin: 3px;
+  font-weight: 500;
+  font-family: 'Dovemayo_gothic';
 }
 .facility-detail>a {
   margin: 3px;
+  font-weight: 500;
   color: var(--main-color);
   text-decoration: underline;
-  font-weight: bold;
+  font-family: 'Dovemayo_gothic';
 }
 
 @media screen and ( max-width: 1200px ) {

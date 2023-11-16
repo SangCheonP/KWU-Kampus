@@ -42,7 +42,6 @@ function init() {
                 target_floor = ( '00' + target_floor ).slice( -2 );
                 sessionStorage.removeItem( 'floor' );
             }
-            let active_index = floorNum[building_code].findIndex( i => i == target_floor );
 
             activateFloor( target_floor );
             floors = document.querySelectorAll( '.floor-title' );
